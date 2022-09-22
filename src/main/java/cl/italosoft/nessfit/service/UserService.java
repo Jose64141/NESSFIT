@@ -1,6 +1,5 @@
 package cl.italosoft.nessfit.service;
 
-
 import cl.italosoft.nessfit.model.User;
 
 import java.util.List;
