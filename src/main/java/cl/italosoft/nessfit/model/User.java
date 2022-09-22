@@ -17,10 +17,7 @@ public class User implements Serializable
     private String password;
     private int phoneNumber;
     private String email;
-    /**
-     * True: Enabled, False: Disabled
-     */
-    private boolean status;
+    private boolean isEnabled;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id",referencedColumnName = "id")
@@ -134,22 +131,14 @@ public class User implements Serializable
         this.email = email;
     }
 
-    /**
-     * Gets the user status
-     * @return Current user status
-     */
-    public boolean isStatus()
+    public boolean isEnabled()
     {
-        return status;
+        return isEnabled;
     }
 
-    /**
-     * Set the user status
-     * @param status New user status
-     */
-    public void setStatus(boolean status)
+    public void setEnabled(boolean enabled)
     {
-        this.status = status;
+        isEnabled = enabled;
     }
 
     /**
