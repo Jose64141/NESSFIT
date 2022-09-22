@@ -1,8 +1,6 @@
 package cl.italosoft.nessfit.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Model for User Entity
@@ -22,5 +20,8 @@ public class User
      * True: Enabled, False: Disabled
      */
     private boolean status;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id",referencedColumnName = "id")
     private Role role;
 }
