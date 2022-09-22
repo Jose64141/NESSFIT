@@ -1,6 +1,4 @@
 package cl.italosoft.nessfit.model;
 
-public class User
-{
-
+public class Role {
 }
