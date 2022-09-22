@@ -48,7 +48,7 @@ public class User implements Serializable
     }
 
     /**
-     * Empty Constructor, initialize all attributes as null, int as -1 and boolean as false
+     * Empty Constructor, initialize String as null, int as -1 and boolean as false
      */
     public User()
     {

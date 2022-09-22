@@ -17,6 +17,26 @@ public class Role implements Serializable
     private String name;
 
     /**
+     * Full constructor
+     * @param id Id of role
+     * @param name Name of role
+     */
+    public Role(int id, String name)
+    {
+        this.id = id;
+        this.name = name;
+    }
+
+    /**
+     * Empty constructor, initialize String as null or int as -1
+     */
+    public Role()
+    {
+        this.id = -1;
+        this.name = null;
+    }
+
+    /**
      * Gets the role id
      * @return Current role id
      */
