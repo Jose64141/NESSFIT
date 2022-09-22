@@ -24,6 +24,45 @@ public class User implements Serializable
     private Role role;
 
     /**
+     * Full Constructor
+     * @param rut Rut of user
+     * @param name Name of user
+     * @param lastName Last name of user
+     * @param password Password of user
+     * @param phoneNumber Phone number of user
+     * @param email Email  of user
+     * @param isEnabled Enables status of user
+     * @param role Role of user
+     */
+    public User(String rut, String name, String lastName, String password, int phoneNumber,
+                String email, boolean isEnabled, Role role)
+    {
+        this.rut = rut;
+        this.name = name;
+        this.lastName = lastName;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.isEnabled = isEnabled;
+        this.role = role;
+    }
+
+    /**
+     * Empty Constructor, initialize all attributes as null, int as -1 and boolean as false
+     */
+    public User()
+    {
+        this.rut = null;
+        this.name = null;
+        this.lastName = null;
+        this.password = null;
+        this.phoneNumber = -1;
+        this.email = null;
+        this.isEnabled = false;
+        this.role = null;
+    }
+
+    /**
      * Gets the user rut
      * @return Current user rut
      */
