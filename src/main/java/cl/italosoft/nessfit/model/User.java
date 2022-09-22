@@ -1,13 +1,14 @@
 package cl.italosoft.nessfit.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Model for User Entity
  */
 @Entity
 @Table(name = "users")
-public class User
+public class User implements Serializable
 {
     @Id
     private String rut;
