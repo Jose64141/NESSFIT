@@ -14,7 +14,7 @@ public class UserController
 
     @Autowired
     private UserService userService;
-    @GetMapping("/name")
+    @GetMapping("/save")
     public String save()
     {
         Role role = new Role(1);
