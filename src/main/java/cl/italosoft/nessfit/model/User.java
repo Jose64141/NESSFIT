@@ -146,7 +146,7 @@ public class User implements Serializable
      */
     public void setEnabled(boolean isEnabled)
     {
-        isEnabled = isEnabled;
+        this.isEnabled = isEnabled;
     }
 
     /**
