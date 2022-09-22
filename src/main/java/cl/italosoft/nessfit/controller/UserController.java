@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UserController
 {
-    /*
+
     @Autowired
     private UserService userService;
     @GetMapping("/name")
@@ -20,9 +20,10 @@ public class UserController
         Role role = new Role(1);
         User user = new User("rutTest","nameTest",
                 "lastNameTest","123",123,"a@a.com",true,role);
+        this.userService.save(user);
         return "save";
-    }
-    */
+    } 
+
 
 
 }
