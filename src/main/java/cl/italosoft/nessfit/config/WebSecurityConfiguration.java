@@ -48,10 +48,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
                 // Busca al usuario por el parámetro rut en la base de datos
-                .usersByUsernameQuery("select rut, password, estado from usuarios where rut=?")
+                .usersByUsernameQuery("select rut, password, is_enabled from users where rut=?")
                 // Busca el rol asociado al rut
                 .authoritiesByUsernameQuery(
-                        "select u.rut, r.nombre from usuarios u inner join roles r on u.id_rol = r.id where u.rut=?");
+                        "select u.rut, r.name from users u inner join roles r on u.id_rol = r.id where u.rut=?");
     }
 
     /**
@@ -70,7 +70,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                 // Todas las demás URLs de la Aplicación requieren autenticación
                 .anyRequest().authenticated()
                 // El formulario de Login redirecciona a la url /login
-                .and().formLogin().loginPage("/login").usernameParameter("rut").passwordParameter("contrasena")
+                .and().formLogin().loginPage("/login").usernameParameter("rut").passwordParameter("password")
                 // Si las credenciales son válidas, utiliza el manejador de autenticación
                 .successHandler(new AuthenticationSuccessHandler() {
 
