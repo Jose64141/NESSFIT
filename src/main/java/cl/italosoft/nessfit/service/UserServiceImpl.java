@@ -1,11 +1,18 @@
 package cl.italosoft.nessfit.service;
 
 import cl.italosoft.nessfit.model.User;
+import cl.italosoft.nessfit.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService
 {
+    @Autowired
+    private UserRepository userRepository;
+
     /**
      * Saves a given user record.
      * @param user the user to save.
@@ -13,7 +20,7 @@ public class UserServiceImpl implements UserService
     @Override
     public void save(User user)
     {
-
+        userRepository.save(user);
     }
 
     /**
@@ -23,7 +30,7 @@ public class UserServiceImpl implements UserService
     @Override
     public void delete(String userRut)
     {
-
+        userRepository.deleteById(userRut);
     }
 
     /**
@@ -33,6 +40,6 @@ public class UserServiceImpl implements UserService
     @Override
     public List<User> list()
     {
-        return null;
+        return userRepository.findAll();
     }
 }
