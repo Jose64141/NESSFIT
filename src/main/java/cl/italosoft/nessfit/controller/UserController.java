@@ -17,11 +17,12 @@ public class UserController
     @GetMapping("/name")
     public String save()
     {
-        Role role = new Role("A",1);
+        Role role = new Role(1);
         User user = new User("rutTest","nameTest",
-                "lastNameTest","123",123,"a@a.com",true,);
+                "lastNameTest","123",123,"a@a.com",true,role);
         return "save";
     }
-     */
+    */
+
 
 }
