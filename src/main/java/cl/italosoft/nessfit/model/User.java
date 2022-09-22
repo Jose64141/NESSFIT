@@ -13,10 +13,13 @@ public class User implements Serializable
     @Id
     private String rut;
     private String name;
+    @Column(name = "last_name")
     private String lastName;
     private String password;
+    @Column(name = "phone_number")
     private int phoneNumber;
     private String email;
+    @Column(name = "is_enabled")
     private boolean isEnabled;
 
     @ManyToOne(fetch = FetchType.EAGER)
