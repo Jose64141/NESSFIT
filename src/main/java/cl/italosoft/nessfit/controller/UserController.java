@@ -14,14 +14,20 @@ public class UserController
 
     @Autowired
     private UserService userService;
-    @GetMapping("/save")
-    public String save()
+    @GetMapping("/saveTestUser")
+    public String saveTestUser()
     {
         Role role = new Role(1);
         User user = new User("rutTest","nameTest",
                 "lastNameTest","123",123,"a@a.com",true,role);
         this.userService.save(user);
-        return "save";
+        return "saveTestUser";
+    }
+
+    @GetMapping("/login")
+    public String login()
+    {
+        return "login";
     }
 
 
