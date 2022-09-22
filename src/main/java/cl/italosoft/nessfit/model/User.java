@@ -15,5 +15,5 @@ public class User
      * True: Enabled, False: Disabled
      */
     private boolean status;
-    
+
 }
