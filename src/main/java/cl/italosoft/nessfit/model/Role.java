@@ -37,6 +37,16 @@ public class Role implements Serializable
     }
 
     /**
+     * Constructor, initialize name as null
+     * @param id Id of role
+     */
+    public Role(int id)
+    {
+        this.id = id;
+        this.name = null;
+    }
+
+    /**
      * Gets the role id
      * @return Current role id
      */
