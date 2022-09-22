@@ -131,14 +131,22 @@ public class User implements Serializable
         this.email = email;
     }
 
+    /**
+     * Gets the user enabled status
+     * @return user enabled status
+     */
     public boolean isEnabled()
     {
         return isEnabled;
     }
 
-    public void setEnabled(boolean enabled)
+    /**
+     * Sets the user enabled status
+     * @param isEnabled New enabled status
+     */
+    public void setEnabled(boolean isEnabled)
     {
-        isEnabled = enabled;
+        isEnabled = isEnabled;
     }
 
     /**
