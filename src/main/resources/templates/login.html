@@ -16,6 +16,9 @@
         <div th:if="${param.novalido}" class="alert alert-danger" role="alert">
             <label>RUT o contraseña inválida.</label>
         </div>
+        <div th:if="${param.noautorizado}" class="alert alert-danger" role="alert">
+            <label>Este usuario ha sido inhabilitado.</label>
+        </div>
         <div th:if="${param.logout}" class="notice">
             <label>Has cerrado sesión.</label>
         </div>
