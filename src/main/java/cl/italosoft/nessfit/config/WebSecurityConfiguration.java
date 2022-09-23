@@ -43,7 +43,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
      * Configura el usuario y el rol para acceder al sistema
      */
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception
+    {
         auth.jdbcAuthentication().dataSource(dataSource)
                 // Busca al usuario por el parámetro rut en la base de datos
                 .usersByUsernameQuery("select rut, password, is_enabled from users where rut=?")
@@ -56,7 +57,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
      * Configura el filter Chain para acceso a las rutas
      */
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception
+    {
         http.formLogin(form -> form.loginPage("/login").permitAll());
         http.authorizeRequests()
                 // Los recursos estáticos no requieren autenticación
@@ -75,7 +77,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                                        Authentication authentication) throws IOException, ServletException {
+                                                        Authentication authentication) throws IOException, ServletException
+                    {
                         // Tiempo máximo de sesión
                         request.getSession().setMaxInactiveInterval(30);
                         // Si la autenticación fue exitosa redirecciona a /home
