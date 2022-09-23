@@ -73,8 +73,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                 // El formulario de Login redirecciona a la url /login
                 .and().formLogin().loginPage("/login").usernameParameter("rut").passwordParameter("password")
                 // Si las credenciales son válidas, utiliza el manejador de autenticación
-                .successHandler(new AuthenticationSuccessHandler() {
-
+                .successHandler(new AuthenticationSuccessHandler()
+                {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                                         Authentication authentication) throws IOException, ServletException
@@ -93,20 +93,22 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                         // Si el fallo es una instancia de la excepción BadCredential agrega el flag
                         // novalido
                         if (exception instanceof BadCredentialsException) {
-                            super.setDefaultFailureUrl("/login?novalido");
+                            super.setDefaultFailureUrl("/login?invalid");
                             // Si el fallo es una instancia de la excepción Disable agrega el flag
                             // noautorizado
-                        } else if (exception instanceof DisabledException) {
-                            super.setDefaultFailureUrl("/login?noautorizado");
+                        } else if (exception instanceof DisabledException)
+                        {
+                            super.setDefaultFailureUrl("/login?unauthorized");
                         }
                         super.onAuthenticationFailure(request, response, exception);
                     }
                     // Si algun Match de url falla utiliza el manejador de excepciones
-                }).and().exceptionHandling().accessDeniedHandler(new AccessDeniedHandler() {
-
+                }).and().exceptionHandling().accessDeniedHandler(new AccessDeniedHandler()
+                {
                     @Override
                     public void handle(HttpServletRequest request, HttpServletResponse response,
-                                       AccessDeniedException accessDeniedException) throws IOException, ServletException {
+                                       AccessDeniedException accessDeniedException) throws IOException, ServletException
+                    {
                         // Cualquiera sea el fallo redirecciona a /home
                         response.sendRedirect("/home");
                     }

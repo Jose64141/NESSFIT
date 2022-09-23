@@ -13,11 +13,11 @@
     <img class = "nessfit_logo" th:src="@{/images/nessfit-logo.png}" alt = "Nessfit logo">
     <div class="center">
         <h1>Iniciar sesión</h1>
-        <div th:if="${param.novalido}" class="alert alert-danger" role="alert">
+        <div th:if="${param.invalid}" class="alert alert-danger" role="alert">
             <label>RUT o contraseña inválida.</label>
         </div>
-        <div th:if="${param.noautorizado}" class="alert alert-danger" role="alert">
-            <label>Este usuario ha sido inhabilitado.</label>
+        <div th:if="${param.unauthorized}" class="alert alert-danger" role="alert">
+            <label>Usuario deshabilitado. Contacte al administrador</label>
         </div>
         <div th:if="${param.logout}" class="notice">
             <label>Has cerrado sesión.</label>
