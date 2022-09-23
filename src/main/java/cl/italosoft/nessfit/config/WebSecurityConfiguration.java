@@ -50,7 +50,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                 .usersByUsernameQuery("select rut, password, is_enabled from users where rut=?")
                 // Busca el rol asociado al rut
                 .authoritiesByUsernameQuery(
-                        "select u.rut, r.name from users u inner join roles r on u.role_id = r.id where u.rut=?");
+                        "select u.rut, r.name from users u inner join roles r on u.role_id = r.id where u.rut=?")
+                .rolePrefix("ROLE_");
     }
 
     /**
