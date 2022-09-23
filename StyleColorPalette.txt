@@ -2,4 +2,4 @@
 #20c67a verde oscuro
 #3f880 verde gris azul
 #9dc09d verde milico
-#fef6cd rosado palido
+#fef6cd beige
