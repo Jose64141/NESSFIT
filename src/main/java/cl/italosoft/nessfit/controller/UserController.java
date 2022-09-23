@@ -25,11 +25,7 @@ public class UserController
         return "saveTestUser";
     }
 
-    @GetMapping("/login")
-    public String login()
-    {
-        return "login";
-    }
+
 
 
 
