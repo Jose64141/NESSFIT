@@ -17,6 +17,7 @@ public class UserController
     @GetMapping("/saveTestUser")
     public String saveTestUser()
     {
+
         Role role = new Role(1);
         User user = new User("rutTest","nameTest",
                 "lastNameTest","123",123,"a@a.com",true,role);

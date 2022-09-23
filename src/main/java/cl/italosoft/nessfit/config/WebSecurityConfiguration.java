@@ -33,13 +33,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     @Autowired
     private DataSource dataSource;
 
-    /**
-     * Bean para encriptar contraseñas con BCrypt
-     */
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
+
+
+
+
 
     /**
      * Configura el usuario y el rol para acceder al sistema
@@ -51,7 +49,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                 .usersByUsernameQuery("select rut, password, is_enabled from users where rut=?")
                 // Busca el rol asociado al rut
                 .authoritiesByUsernameQuery(
-                        "select u.rut, r.name from users u inner join roles r on u.id_rol = r.id where u.rut=?");
+                        "select u.rut, r.name from users u inner join roles r on u.role_id = r.id where u.rut=?");
     }
 
     /**
@@ -59,6 +57,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.formLogin(form -> form.loginPage("/login").permitAll());
         http.authorizeRequests()
                 // Los recursos estáticos no requieren autenticación
                 .antMatchers("/build/**", "/css/**", "/images/**", "/js/**", "/vendors/**").permitAll()
