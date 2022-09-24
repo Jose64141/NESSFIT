@@ -16,12 +16,14 @@ public class UserController
     @GetMapping("/saveTestUser")
     public String saveTestUser()
     {
-        Role role = new Role(1);
-        String passwordEncrypted = "$2a$10$AlDCdNSTduYSr7GlE4uMyegCrhdDZAHhUqXeRzckAq5LyeoqELmkG";
-        User user = new User("17977139K","Antonio",
-                "Barraza",passwordEncrypted,913121312
-                ,"antonio.barraza.guzman@gmail.com",true,role);
+        /*
+        Role role = new Role(3);
+        String passwordEncrypted = "$2a$10$iER9Ma0CbfVYoQz6RBfrMec6mYxiz.dFdU/QBELxrs5fQq15jjAkq";
+        User user = new User("103661455","Mauricio",
+                "Araya",passwordEncrypted,56210646
+                ,"mdaraya@gmail.com",false,role);
         this.userService.save(user);
+        */
         return "a";
     }
 
