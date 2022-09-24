@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService
     @Override
     public User find(String userRut)
     {
-        java.util.Optional<User>  user = this.userRepository.findById(userRut);
+        java.util.Optional<User> user = this.userRepository.findById(userRut);
         return user.orElse(null);
     }
 
