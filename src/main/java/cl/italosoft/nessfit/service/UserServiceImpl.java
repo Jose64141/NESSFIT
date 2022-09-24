@@ -14,6 +14,18 @@ public class UserServiceImpl implements UserService
     private UserRepository userRepository;
 
     /**
+     * Find a user by their rut
+     *
+     * @param userRut the id of the record to find.
+     * @return User if exists, null if not
+     */
+    @Override
+    public User find(String userRut)
+    {
+        return this.userRepository.findById(userRut).get();
+    }
+
+    /**
      * Saves a given user record.
      * @param user the user to save.
      */

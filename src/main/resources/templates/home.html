@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -44,7 +45,12 @@
 
     <div class = "welcome_labels">
         <h1>Bienvenido</h1>
-        <h3>PLACEHOLDER</h3>
+        <h2>
+            <ol>
+                <li th:text="${name}"></li>
+            </ol>
+        </h2>
+        <h3>¿Que desea hacer?</h3>
     </div>
     <div class="buttons">
         <a th:href="@{/home}"><button>Arrendar</button></a>

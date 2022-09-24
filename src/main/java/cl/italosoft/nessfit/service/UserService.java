@@ -9,6 +9,13 @@ import java.util.List;
  */
 public interface UserService
 {
+    /**
+     * Find a user by their rut
+     * @param userRut the id of the record to find.
+     * @return User if exists, null if not
+     */
+    public User find(String userRut);
+
 
     /**
      * Saves a given user record.
