@@ -13,7 +13,7 @@ public class HomeController
     {
         if (request.isUserInRole("ADMINISTRADOR")) return "home";
         else if (request.isUserInRole("ADMINISTRATIVO")) return "home";
-        else if (request.isUserInRole("CLIENTE")) return "home";
+        else if (request.isUserInRole("CLIENTE")) return "cliente/home";
         else return "login";
     }
 

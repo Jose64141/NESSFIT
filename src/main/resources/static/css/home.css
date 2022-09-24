@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+*
+{
+    /* margin: 0;
+    padding: 0;
+    box-sizing: border-box; */
+    font-family: "Poppins", sans-serif;
+}
+.navbar-toggler
+{
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+}
+.welcome_labels
+{
+    margin-top: 0;
+    margin-left: 150px;
+    margin-bottom: 5em;
+}
+
+h1
+{
+    font-size:50px
+}
+
+.buttons
+{
+    object-position: center;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+a
+{
+    margin: 5px auto;
+}
+
+button
+{
+    width: 300px;
+    height: 100px;
+    padding: 2em;
+    border-radius: 5px;
+    border-style: none;
+    border: 0;
+    margin: 5px auto;
+
+    background-color: #3f8880;
+    font-size: 18px;
+}
