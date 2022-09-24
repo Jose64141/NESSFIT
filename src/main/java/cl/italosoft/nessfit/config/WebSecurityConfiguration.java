@@ -33,11 +33,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     @Autowired
     private DataSource dataSource;
 
-
-
-
-
-
+    /**
+     * Bean para encriptar contraseñas con BCrypt
+     */
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder()
+    {
+        return new BCryptPasswordEncoder();
+    }
 
     /**
      * Configura el usuario y el rol para acceder al sistema

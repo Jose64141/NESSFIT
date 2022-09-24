@@ -16,12 +16,13 @@ public class UserController
     @GetMapping("/saveTestUser")
     public String saveTestUser()
     {
-
         Role role = new Role(1);
-        User user = new User("rutTest","nameTest",
-                "lastNameTest","123",123,"a@a.com",true,role);
+        String passwordEncrypted = "$2a$10$AlDCdNSTduYSr7GlE4uMyegCrhdDZAHhUqXeRzckAq5LyeoqELmkG";
+        User user = new User("17977139K","Antonio",
+                "Barraza",passwordEncrypted,913121312
+                ,"antonio.barraza.guzman@gmail.com",true,role);
         this.userService.save(user);
-        return "saveTestUser";
+        return "a";
     }
 
 

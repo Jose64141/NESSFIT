@@ -1,5 +1,6 @@
 package cl.italosoft.nessfit.controller;
 
+import cl.italosoft.nessfit.model.User;
 import cl.italosoft.nessfit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +18,9 @@ public class HomeController
     @GetMapping("/home")
     public String home(HttpServletRequest request, Model model)
     {
-        model.addAttribute("name",
-                this.userService.find(request.getRemoteUser()).getName().strip());
+        User user = this.userService.find(request.getRemoteUser());
+        model.addAttribute("name", user.getName().strip());
+        model.addAttribute("lastName", user.getLastName().strip());
         if (request.isUserInRole("ADMINISTRADOR")) return "home";
         else if (request.isUserInRole("ADMINISTRATIVO")) return "home";
         else if (request.isUserInRole("CLIENTE")) return "cliente/home";
