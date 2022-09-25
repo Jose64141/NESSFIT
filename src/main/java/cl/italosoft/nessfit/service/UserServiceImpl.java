@@ -37,6 +37,13 @@ public class UserServiceImpl implements UserService
     }
 
     /**
+     * Saves a given user record and flushes the change instantly.
+     * @param user the user to save.
+     */
+    @Override
+    public void saveAndFlush(User user) { userRepository.saveAndFlush(user); }
+
+    /**
      * Deletes a user record.
      * @param userRut the id of the record to delete.
      */
@@ -55,4 +62,10 @@ public class UserServiceImpl implements UserService
     {
         return userRepository.findAll();
     }
+
+    /**
+     * Flushes all the changes to the database.
+     */
+    @Override
+    public void flush() { userRepository.flush(); }
 }
