@@ -7,21 +7,24 @@
 }
 body
 {
+
+}
+
+.login-body
+{
     margin: 0;
     padding: 0;
     background-color: #20c67a;
-    height: 100vh;
     overflow: hidden;
+    height: 100vh;
 }
 
 .nessfit_logo
 {
-    position: relative;
+    margin: 0;
+    padding: 0;
     width: 350px;
     height: 350px;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .center{

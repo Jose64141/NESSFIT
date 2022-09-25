@@ -14,10 +14,12 @@
 
     <nav class="navbar fixed-top ">
         <div class="container-fluid">
-            <button class="navbar-toggler position-absolute top-50 end-0 border border-0 m-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <button class="navbar-toggler position-absolute top-50 end-0 border border-0 m-3 p-2" type="button"
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title mt-3" id="offcanvasNavbarLabel">NESSFIT</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -47,15 +49,16 @@
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info"
-                    type="button" role="tab" aria-controls="nav-info" aria-selected="true">Home</button>
+                    type="button" role="tab" aria-controls="nav-info" aria-selected="true">Información</button>
 
             <button class="nav-link" id="nav-password-tab" data-bs-toggle="tab" data-bs-target="#nav-password"
-                    type="button" role="tab" aria-controls="nav-password" aria-selected="false">Profile</button>
+                    type="button" role="tab" aria-controls="nav-password" aria-selected="false">Contraseña</button>
         </div>
     </nav>
 
     <div class="tab-content m-5" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab" tabindex="0">
+        <div class="tab-pane fade show active" id="nav-info" role="tabpanel"
+             aria-labelledby="nav-info-tab" tabindex="0">
             <h3 th:text="'RUT: '+${rut}"></h3>
             <!--- bla --->
         </div>
@@ -71,26 +74,31 @@
                 </div>
                 <div class="mb-3">
                     <label for="verifyNewPassword" class="col-form-label">Confirmar contraseña nueva:</label>
-                    <input type="password" class="form-control" id="verifyNewPassword" name="verifyNewPassword" required>
+                    <input type="password" class="form-control" id="verifyNewPassword"
+                           name="verifyNewPassword" required>
                 </div>
 
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#confirmModal">
                     Aplicar
                 </button>
 
 
-                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="confirmModalLabel">Confirmar</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <p>¿Está seguro de realizar los cambios?</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
                                 <button type="sumbit" class="btn btn-primary">Aplicar</button>
                             </div>
                         </div>
