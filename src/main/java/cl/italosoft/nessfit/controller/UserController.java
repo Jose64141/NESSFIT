@@ -6,7 +6,10 @@ import cl.italosoft.nessfit.model.User;
 import cl.italosoft.nessfit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class UserController
@@ -27,7 +30,15 @@ public class UserController
         return "a";
     }
 
-
+    @GetMapping("/config")
+    public String config(HttpServletRequest request, Model model)
+    {
+        User user = this.userService.find(request.getRemoteUser());
+        model.addAttribute("rut", user.getRut().strip());
+        model.addAttribute("name", user.getName().strip());
+        model.addAttribute("lastName", user.getLastName().strip());
+        return "config";
+    }
 
 
 
