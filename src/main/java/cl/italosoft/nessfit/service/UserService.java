@@ -24,6 +24,12 @@ public interface UserService
     public void save(User user);
 
     /**
+     * Saves a given user record and flushes the change instantly.
+     * @param user the user to save.
+     */
+    public void saveAndFlush(User user);
+
+    /**
      * Deletes a user record.
      * @param userRut the id of the record to delete.
      */
@@ -34,4 +40,9 @@ public interface UserService
      * @return a list containing the records.
      */
     public List<User> list();
+
+    /**
+     * Flushes all the changes to the database.
+     */
+    public void flush();
 }
