@@ -18,10 +18,10 @@ body
 h1
 {
     text-align: center;
-    /*margin-left: 150px;*/
-    margin-bottom: 1em;
+    margin-top: -125px;
+    margin-bottom: 0.5em;
     color: #000000;
-    font-size:100px;
+    font-size:90px;
 }
 h2
 {
@@ -30,4 +30,9 @@ h2
 h3
 {
     font-size: 30px;
+}
+
+.nav-link
+{
+    color: #000000;
 }
