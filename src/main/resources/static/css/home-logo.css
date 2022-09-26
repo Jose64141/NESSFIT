@@ -1,0 +1,19 @@
+.home-logo-container
+{
+    margin: 0 3vh;
+    padding: 0;
+    position: absolute;
+    top: 10vh;
+    right: 0;
+    width: 35px;
+    height: 35px;
+}
+
+
+.home-logo
+{
+    margin: 0;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+}
