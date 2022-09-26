@@ -11,9 +11,13 @@
     <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
 <body>
-    <a th:href="@{/home}">
-    <img class = "nessfit_logo_home" th:src="@{/images/nessfit-logo.png}" alt = "Nessfit logo">
-    </a>
+
+    <div class="nessfit-logo-container">
+        <a th:href="@{/home}">
+            <img class = "nessfit-logo-home" th:src="@{/images/nessfit-logo.png}" alt = "Nessfit logo">
+        </a>
+    </div>
+
 <nav class="navbar fixed-top ">
     <div class="container-fluid">
         <button class="navbar-toggler position-absolute top-50 end-0 border border-0 m-3 p-2" type="button"
