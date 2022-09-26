@@ -84,7 +84,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                                                         Authentication authentication) throws IOException, ServletException
                     {
                         // Tiempo máximo de sesión
-                        request.getSession().setMaxInactiveInterval(30);
+                        request.getSession().setMaxInactiveInterval(3000);
                         // Si la autenticación fue exitosa redirecciona a /home
                         response.sendRedirect("/home");
                     }
