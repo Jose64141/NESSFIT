@@ -34,7 +34,7 @@ public class UserController
         return "a";
     }
 
-    @GetMapping("/config")
+    @GetMapping("/account-settings")
     public String config(HttpServletRequest request, Model model)
     {
         User user = this.userService.find(request.getRemoteUser());
@@ -46,7 +46,7 @@ public class UserController
         return "account-settings";
     }
 
-    @PostMapping("/config/{operation}")
+    @PostMapping("/account-settings/{operation}")
     public String configChange(HttpServletRequest request, Model model, @PathVariable String operation, @RequestBody MultiValueMap<String, String> formBody) //https://stackoverflow.com/a/55338584
     {
         // do this, do that or just give an error
