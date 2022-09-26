@@ -8,18 +8,21 @@
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/login-nessfit-logo.css}">
     <link rel="stylesheet" th:href="@{/css/account-settings.css}">
-    <link rel="stylesheet" th:href="@{/css/home-logo.css}">
+    <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
 </head>
 <body>
 <div class="nessfit-logo-container">
 <a th:href="@{/home}">
     <img class = "nessfit-logo-home" th:src="@{/images/nessfit-logo.png}" alt = "Nessfit logo">
 </a>
-<div class="home-logo-container">
-    <a th:href="@{/home}">
-        <img class="home-logo" th:src="@{images/home-logo.png}" alt="Home logo">
-    </a>
-</div>
+    <div class="shortcuts-logo-container">
+        <a th:href="@{/home}">
+            <img class="logos" th:src="@{images/home-logo.png}" alt="Home logo">
+        </a>
+        <a th:href="@{/account-settings}">
+            <img class="logos" th:src="@{images/settings-logo.png}" alt="Settings logo">
+        </a>
+    </div>
 </div>
 
     <nav class="navbar fixed-top ">

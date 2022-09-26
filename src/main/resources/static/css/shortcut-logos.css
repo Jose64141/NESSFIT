@@ -1,4 +1,4 @@
-.home-logo-container
+.shortcuts-logo-container
 {
     margin: 0 3vh;
     padding: 0;
@@ -10,9 +10,9 @@
 }
 
 
-.home-logo
+.logos
 {
-    margin: 0;
+    margin: 1vh 0;
     padding: 0;
     width: 35px;
     height: 35px;
