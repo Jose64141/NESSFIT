@@ -1,7 +1,6 @@
 package cl.italosoft.nessfit.controller;
 
 
-import cl.italosoft.nessfit.model.Role;
 import cl.italosoft.nessfit.model.User;
 import cl.italosoft.nessfit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ public class UserController
         model.addAttribute("lastName", user.getLastName().strip());
         model.addAttribute("email",user.getEmail().strip());
         model.addAttribute("phoneNumber",user.getPhoneNumber());
-        return "config";
+        return "account-settings";
     }
 
     @PostMapping("/config/{operation}")
