@@ -42,6 +42,8 @@ public class UserController
         model.addAttribute("rut", user.getRut().strip());
         model.addAttribute("name", user.getName().strip());
         model.addAttribute("lastName", user.getLastName().strip());
+        model.addAttribute("email",user.getEmail().strip());
+        model.addAttribute("phoneNumber",user.getPhoneNumber());
         return "config";
     }
 
