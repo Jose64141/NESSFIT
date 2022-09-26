@@ -10,7 +10,7 @@ body
 }
 .navbar-toggler
 {
-    margin-left: 10px;
+    margin-left: 0;
     width: 50px;
     height: 50px;
 }
@@ -18,10 +18,10 @@ body
 h1
 {
     text-align: center;
-    margin-top: -125px;
-    margin-bottom: 0.5em;
     color: #000000;
     font-size:90px;
+    padding: 0;
+    margin: 0;
 }
 h2
 {
@@ -35,4 +35,10 @@ h3
 .nav-link
 {
     color: #000000;
+}
+
+
+.nav
+{
+    margin-top: 100px;
 }
