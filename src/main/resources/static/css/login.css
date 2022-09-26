@@ -29,6 +29,7 @@ body
 }
 
 .center{
+    margin: auto;
     width: 400px;
     background: white;
     border-radius: 10px;
