@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>NESSFIT | Configuración de Cuenta</title>
@@ -38,7 +41,47 @@
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" sec:authorize="hasRole('ADMINISTRADOR')">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Agregar Administrativos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Administrar Usuarios</a>
+                        </li>
+                        <li class="nav-item mt-5">
+                            <a class="nav-link" th:href="@{/config}">Configuración de cuenta</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Cerrar Sesión</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" sec:authorize="hasRole('ADMINISTRATIVO')">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Agregar Recintos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Agregar Cliente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Administrar Recintos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Administrar Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Administrar Solicitudes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Estadísticas</a>
+                        </li>
+                        <li class="nav-item mt-5">
+                            <a class="nav-link" th:href="@{/config}">Configuración de cuenta</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Cerrar Sesión</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" sec:authorize="hasRole('CLIENTE')">
                         <li class="nav-item">
                             <a class="nav-link" href="#">Arrendar</a>
                         </li>
