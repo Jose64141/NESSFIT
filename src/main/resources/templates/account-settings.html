@@ -116,28 +116,40 @@
     </nav>
 
     <div class="tab-content m-5" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-info" role="tabpanel"
-             aria-labelledby="nav-info-tab" tabindex="0">
-            <!-- RUT -->
-            <div class="text-logo-container">
-            <img class = "attribute-logo" th:src="@{/images/rut-logo.png}" alt = "RUT Logo">
-            <h3 class= "attribute-text" th:text="'RUT: '+${rut}"></h3>
-            </div>
-            <!-- Name -->
-            <div class="text-logo-container">
-            <img class = "attribute-logo" th:src="@{/images/name-logo.png}" alt = "Name Logo">
-            <h3 class= "attribute-text" th:text="' Nombre: '+${name}+' '+${lastName}"></h3>
-            </div>
-            <!-- Email -->
-            <div class="text-logo-container">
-            <img class = "attribute-logo" th:src="@{/images/email-logo.png}" alt = "Email Logo">
-            <h3 class= "attribute-text" th:text="' Correo: '+${email}"></h3>
-            </div>
-            <!-- Number -->
-            <div class="text-logo-container">
-            <img class = "attribute-logo" th:src="@{/images/whatsapp-logo.png}" alt = "Whatsapp Logo">
-            <h3 class= "attribute-text" th:text="' Número: +56 9 '+${phoneNumber}"></h3></div>
+
+    <div class="tab-pane fade show active" id="nav-info" role="tabpanel"  aria-labelledby="nav-info-tab" tabindex="0">
+    <div class="user-info">
+        <div class="input-item">
+        <img class = "attribute-logo" th:src="@{/images/name-logo.png}" alt = "Cambio de nombre">
+        <label>Nombre Completo</label>
+        <label class="input-box">
+            <input  class="information-form-control"  name="new-name" th:value="${name}+' '+${lastName}" required>
+        </label>
         </div>
+        <div class="input-item">
+            <img class = "attribute-logo" th:src="@{/images/email-logo.png}" alt = "Cambio de correo electronico">
+            <label>Correo electrónico</label>
+            <label class="input-box">
+                <input  class="information-form-control"  name="new-email" th:value="${email}" required>
+            </label>
+        </div>
+        <div class="input-item">
+            <img class = "attribute-logo" th:src="@{/images/whatsapp-logo.png}" alt = "Cambio de numero">
+            <label>Teléfono móvil</label>
+            <label class="input-box">
+                <input  class="information-form-control"  name="new-email" th:value="${phoneNumber}" required>
+            </label>
+        </div>
+        <div class="input-item">
+            <img class = "attribute-logo" th:src="@{/images/.png}" alt = "Cambio de correo electronico">
+            <label>Correo electrónico</label>
+            <label class="input-box">
+                <input  class="information-form-control"  name="new-email" th:value="${email}" required>
+            </label>
+        </div>
+    </div>
+
+    </div>
 
 
 
