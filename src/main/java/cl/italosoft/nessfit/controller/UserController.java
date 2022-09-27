@@ -68,11 +68,13 @@ public class UserController
                 if(!newPassword.equals(confirmNewPassword)) // change value on html
                 {
                     // send error
+                    attr.addFlashAttribute("errorMsg","Las contraseñas no coinciden.");
                     break;
                 }
                 if (newPassword.length() < 10 || 15 < newPassword.length())
                 {
                     // send error
+                    attr.addFlashAttribute("errorMsg","El largo de la contraseña debe estar entre 10 y 15 caracteres.");
                     break;
                 }
 
