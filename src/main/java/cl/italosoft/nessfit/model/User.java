@@ -13,18 +13,19 @@ import java.io.Serializable;
 @Table(name = "users")
 public class User implements Serializable
 {
-    @Rut
+    //@Rut
     @NotBlank
     @Id
     private String rut;
-    @Min(2)
+    //@Min(2)
     private String name;
-    @Min(2)
+    //@Min(2)
     @Column(name = "last_name")
     private String lastName;
     @NotBlank()
     private String password;
-    @Size(min = 8, max = 8)
+    //@Min(8)
+    //@Max(8)
     @Column(name = "phone_number")
     private int phoneNumber;
     @NotBlank()

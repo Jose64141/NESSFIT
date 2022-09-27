@@ -12,7 +12,8 @@ class RutValidator implements ConstraintValidator<Rut, String>
      * @return Whether is valid or not.
      */
     @Override
-    public boolean isValid(String rut, ConstraintValidatorContext context) {
+    public boolean isValid(String rut, ConstraintValidatorContext context)
+    {
         int checkDigit = 0;
         char originalCheckDigitChar = rut.charAt(rut.length()-1);
         int[] serie = {2,3,4,5,6,7};

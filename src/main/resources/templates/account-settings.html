@@ -107,18 +107,21 @@
 
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info"
+            <button class="nav-link" th:classappend="not (${showPassword} ?: false) ? ' active'" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info"
                     type="button" role="tab" aria-controls="nav-info" aria-selected="true">Información</button>
 
-            <button class="nav-link" id="nav-password-tab" data-bs-toggle="tab" data-bs-target="#nav-password"
+            <button class="nav-link" th:classappend="(${showPassword} ?: false) ? ' active'" id="nav-password-tab" data-bs-toggle="tab" data-bs-target="#nav-password"
                     type="button" role="tab" aria-controls="nav-password" aria-selected="false">Contraseña</button>
         </div>
     </nav>
 
     <div class="tab-content m-5" id="nav-tabContent">
 
-    <div class="tab-pane fade show active" id="nav-info" role="tabpanel"  aria-labelledby="nav-info-tab" tabindex="0">
+    <div class="tab-pane fade" th:classappend="not (${showPassword} ?: false) ? ' show active'" id="nav-info" role="tabpanel"  aria-labelledby="nav-info-tab" tabindex="0">
     <div class="user-info">
+        <div th:if="${infoErrorMsg} ne null" class="alert alert-danger" role="alert">
+            <label th:text="${infoErrorMsg}"></label>
+        </div>
         <div class="input-item">
         <img class = "attribute-logo" th:src="@{/images/name-logo.png}" alt = "Cambio de nombre">
         <label>Nombre Completo</label>
@@ -153,7 +156,10 @@
 
 
 
-        <div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab" tabindex="0">
+        <div class="tab-pane fade" th:classappend="(${showPassword} ?: false) ? ' show active'" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab" tabindex="0">
+            <div th:if="${passwordErrorMsg} ne null" class="alert alert-danger" role="alert">
+                <label th:text="${passwordErrorMsg}"></label>
+            </div>
             <form th:action="@{/account-settings/change-password}" method="post">
                 <div class="mb-3">
                     <label for="actualPassword" class="col-form-label">Contraseña actual:</label>
