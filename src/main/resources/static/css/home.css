@@ -17,6 +17,7 @@ body
 
 .container
 {
+    height: 100vh;
     position: absolute;
     margin: auto;
     padding: 0;
@@ -28,7 +29,7 @@ body
 .labels
 {
     text-align: center;
-    margin-bottom: 3em;
+    margin: 5vh 0 5vh;
     color: #000000;
 }
 
@@ -36,19 +37,19 @@ h1
 {
     margin: 0;
     padding: 0;
-    font-size:100px;
+    font-size: 8vw;
 }
 h2
 {
     margin: 0;
     padding: 0;
-    font-size: 50px;
+    font-size: 4vw;
 }
 h3
 {
     margin: 0;
     padding: 0;
-    font-size: 30px;
+    font-size: 2vw;
 }
 
 
@@ -59,6 +60,11 @@ h3
     display: grid;
     align-items: center;
     grid-template-columns: repeat(2, 1fr);
+}
+
+.administrativo-buttons
+{
+    grid-template-columns: repeat(3, 1fr);
 }
 
 
@@ -72,8 +78,8 @@ a
 
 button
 {
-    width: 200px;
-    height: 200px;
+    width: 170px;
+    height: 170px;
     padding: 0;
     border-radius: 5px;
     border: 1px solid #000;

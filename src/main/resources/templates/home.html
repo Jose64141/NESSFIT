@@ -108,28 +108,59 @@
         <h3>¿Qué desea hacer?</h3>
     </div>
     <div class="buttons" sec:authorize="hasRole('ADMINISTRADOR')">
-        <a th:href="@{/home}"><button>Agregar Administrativos</button></a>
-        <a th:href="@{/home}"><button>Administrar Usuarios</button></a>
+        <a th:href="@{/home}">
+            <button>Agregar Administrativos
+                <img class="button-logo" th:src="@{images/add-user-logo.png}" alt="Agregar administrativos"></button>
+            </button>
+        </a>
+        <a th:href="@{/home}">
+            <button>Administrar Usuarios
+                <img class="button-logo" th:src="@{images/manage-users-logo.png}" alt="Administrar usuarios">
+            </button>
+        </a>
     </div>
 
-    <div class="buttons" sec:authorize="hasRole('ADMINISTRATIVO')">
-        <a th:href="@{/home}"><button>Agregar Recinto</button></a>
-        <a th:href="@{/home}"><button>Agregar Cliente</button></a>
-        <a th:href="@{/home}"><button>Administrar Recintos</button></a>
-        <a th:href="@{/home}"><button>Administrar Clientes</button></a>
-        <a th:href="@{/home}"><button>Administrar Solicitudes</button></a>
-        <a th:href="@{/home}"><button>Estadísticas</button></a>
+    <div class="buttons administrativo-buttons"  sec:authorize="hasRole('ADMINISTRATIVO')">
+        <a th:href="@{/home}">
+            <button>Agregar Recinto
+                <img class="button-logo" th:src="@{images/add-place-logo.png}" alt="Agregar recito">
+            </button>
+        </a>
+        <a th:href="@{/home}">
+            <button>Agregar Cliente
+                <img class="button-logo" th:src="@{images/add-user-logo.png}" alt="Agregar cliente"></button>
+        </a>
+        <a th:href="@{/home}">
+            <button>Administrar Recintos
+                <img class="button-logo" th:src="@{images/manage-places-logo.png}" alt="Administrar recintos">
+            </button>
+        </a>
+        <a th:href="@{/home}">
+            <button>Administrar Clientes
+                <img class="button-logo" th:src="@{images/manage-users-logo.png}" alt="Administrar clientes">
+            </button>
+        </a>
+        <a th:href="@{/home}">
+            <button>Administrar Solicitudes
+                <img class="button-logo" th:src="@{images/manage-requests-logo.png}" alt="Administrar solicitudes">
+            </button>
+        </a>
+        <a th:href="@{/home}">
+            <button>Estadísticas
+                <img class="button-logo" th:src="@{images/manage-requests-logo.png}" alt="Estadísticas">
+            </button>
+        </a>
     </div>
 
     <div class="buttons" sec:authorize="hasRole('CLIENTE')">
         <a class="button-container" th:href="@{/home}">
             <button>Arrendar
-                <img class="button-logo" th:src="@{images/rent-logo.png}" alt="Rent a service logo">
+                <img class="button-logo" th:src="@{images/rent-logo.png}" alt="Arendar recinto">
             </button>
         </a>
         <a class="button-container" th:href="@{/home}">
             <button>Mis solicitudes
-                <img class="button-logo" th:src="@{images/quote-request-logo.png}" alt="My Requests logo">
+                <img class="button-logo" th:src="@{images/quote-request-logo.png}" alt="Mis solicitudes">
             </button>
         </a>
     </div>
