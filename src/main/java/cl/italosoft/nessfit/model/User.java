@@ -1,6 +1,9 @@
 package cl.italosoft.nessfit.model;
 
+import cl.italosoft.nessfit.util.Rut;
+
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
@@ -10,14 +13,22 @@ import java.io.Serializable;
 @Table(name = "users")
 public class User implements Serializable
 {
+    @Rut
+    @NotBlank
     @Id
     private String rut;
+    @Min(2)
     private String name;
+    @Min(2)
     @Column(name = "last_name")
     private String lastName;
+    @NotBlank()
     private String password;
+    @Size(min = 8, max = 8)
     @Column(name = "phone_number")
     private int phoneNumber;
+    @NotBlank()
+    @Email
     private String email;
     @Column(name = "is_enabled")
     private boolean isEnabled;

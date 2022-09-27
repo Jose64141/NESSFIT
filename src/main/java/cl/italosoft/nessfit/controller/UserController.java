@@ -61,10 +61,16 @@ public class UserController
                 {
                     // send error // change active tab
                     attr.addFlashAttribute("errorMsg","La contraseña actual es incorrecta.");
-
                     break;
                 }
-                if(!formBody.getFirst("newPassword").equals(formBody.getFirst("confirmNewPassword"))) // change value on html
+                String newPassword = formBody.getFirst("newPassword");
+                String confirmNewPassword = formBody.getFirst("confirmNewPassword");
+                if(!newPassword.equals(confirmNewPassword)) // change value on html
+                {
+                    // send error
+                    break;
+                }
+                if (newPassword.length() < 10 || 15 < newPassword.length())
                 {
                     // send error
                     break;

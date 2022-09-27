@@ -1,14 +1,18 @@
 package cl.italosoft.nessfit.util;
 
-public class Validator
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+class RutValidator implements ConstraintValidator<Rut, String>
 {
     /**
      * Verifies if a RUT is valid.
      * @param rut must have the check digit on it last position.
+     * @param context is the validator context.
      * @return Whether is valid or not.
      */
-    public static boolean rutValidator(String rut)
-    {
+    @Override
+    public boolean isValid(String rut, ConstraintValidatorContext context) {
         int checkDigit = 0;
         char originalCheckDigitChar = rut.charAt(rut.length()-1);
         int[] serie = {2,3,4,5,6,7};
@@ -25,10 +29,11 @@ public class Validator
         checkDigit = 11 - checkDigit;
         char checkDigitChar = switch (checkDigit)
                 {
-            case 11 -> '0';
-            case 10 -> 'K';
-            default -> (char) (checkDigit + '0');
-        };
+                    case 11 -> '0';
+                    case 10 -> 'K';
+                    default -> (char) (checkDigit + '0');
+                };
         return checkDigitChar == originalCheckDigitChar;
     }
 }
+
