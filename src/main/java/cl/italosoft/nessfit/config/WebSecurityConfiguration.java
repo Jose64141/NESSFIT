@@ -42,6 +42,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
         return new BCryptPasswordEncoder();
     }
 
+
+
     /**
      * Configura el usuario y el rol para acceder al sistema
      */
@@ -63,7 +65,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        http.formLogin(form -> form.loginPage("/login").permitAll());
+        http.formLogin(form -> form.loginPage("/login").permitAll()).logout();
         http.authorizeRequests()
                 // Los recursos estáticos no requieren autenticación
                 .antMatchers("/build/**", "/css/**", "/images/**", "/js/**", "/vendors/**").permitAll()
