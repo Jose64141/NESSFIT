@@ -68,12 +68,13 @@ public class UserController
         switch (operation)
         {
             case "change-password":
+                attr.addFlashAttribute("showPassword", true);
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
                 if(!passwordEncoder.matches(formBody.getFirst("actualPassword"), user.getPassword()))
                 {
                     // send error // change active tab
-                    attr.addFlashAttribute("errorMsg","La contraseña actual es incorrecta.");
+                    attr.addFlashAttribute("passwordErrorMsg","La contraseña actual es incorrecta.");
                     break;
                 }
                 String newPassword = formBody.getFirst("newPassword");
@@ -81,28 +82,31 @@ public class UserController
                 if(!newPassword.equals(confirmNewPassword)) // change value on html
                 {
                     // send error
-                    attr.addFlashAttribute("errorMsg","Las contraseñas no coinciden.");
+                    attr.addFlashAttribute("passwordErrorMsg","Las contraseñas no coinciden.");
                     break;
                 }
                 if (newPassword.length() < 10 || 15 < newPassword.length())
                 {
                     // send error
-                    attr.addFlashAttribute("errorMsg","El largo de la contraseña debe estar entre 10 y 15 caracteres.");
+                    attr.addFlashAttribute("passwordErrorMsg","El largo de la contraseña debe estar entre 10 y 15 caracteres.");
                     break;
                 }
 
                 String newPasswordHash = passwordEncoder.encode(formBody.getFirst("newPassword"));
                 user.setPassword(newPasswordHash);
                 userService.saveAndFlush(user);
+
                 // logout, redirect, and notify passwd change
-                break;
+                attr.addFlashAttribute("passwordChanged","Su contraseña se ha cambiado exitosamente.");
+                return "redirect:/login";
             case "change-data":
+                attr.addFlashAttribute("showPassword", false);
                 // validate email
             default:
                 // check how to send error a
                 break;
         }
-        return config(request, model);
+        return "redirect:/account-settings";
     }
 
 }
