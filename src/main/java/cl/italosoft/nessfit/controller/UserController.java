@@ -25,19 +25,7 @@ public class UserController
 {
     @Autowired
     private UserService userService;
-    @GetMapping("/saveTestUser")
-    public String saveTestUser()
-    {
-        /*
-        Role role = new Role(3);
-        String passwordEncrypted = "$2a$10$iER9Ma0CbfVYoQz6RBfrMec6mYxiz.dFdU/QBELxrs5fQq15jjAkq";
-        User user = new User("103661455","Mauricio",
-                "Araya",passwordEncrypted,56210646
-                ,"mdaraya@gmail.com",false,role);
-        this.userService.save(user);
-        */
-        return "a";
-    }
+    
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response)
@@ -70,8 +58,9 @@ public class UserController
             case "change-password":
                 attr.addFlashAttribute("showPassword", true);
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                String actualPassword = formBody.getFirst("actualPassword");
 
-                if(!passwordEncoder.matches(formBody.getFirst("actualPassword"), user.getPassword()))
+                if(!passwordEncoder.matches(actualPassword, user.getPassword()))
                 {
                     // send error // change active tab
                     attr.addFlashAttribute("passwordErrorMsg","La contraseña actual es incorrecta.");
@@ -79,24 +68,25 @@ public class UserController
                 }
                 String newPassword = formBody.getFirst("newPassword");
                 String confirmNewPassword = formBody.getFirst("confirmNewPassword");
-                if(!newPassword.equals(confirmNewPassword)) // change value on html
+                if(newPassword.equals(actualPassword))
                 {
-                    // send error
+                    attr.addFlashAttribute("passwordErrorMsg","La contraseña nueva debe ser distinta a la actual.");
+                    break;
+                }
+                if(!newPassword.equals(confirmNewPassword))
+                {
                     attr.addFlashAttribute("passwordErrorMsg","Las contraseñas no coinciden.");
                     break;
                 }
                 if (newPassword.length() < 10 || 15 < newPassword.length())
                 {
-                    // send error
                     attr.addFlashAttribute("passwordErrorMsg","El largo de la contraseña debe estar entre 10 y 15 caracteres.");
                     break;
                 }
-
                 String newPasswordHash = passwordEncoder.encode(formBody.getFirst("newPassword"));
                 user.setPassword(newPasswordHash);
                 userService.saveAndFlush(user);
 
-                // logout, redirect, and notify passwd change
                 attr.addFlashAttribute("passwordChanged","Su contraseña se ha cambiado exitosamente.");
                 return "redirect:/login";
             case "change-data":
