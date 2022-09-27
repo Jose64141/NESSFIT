@@ -92,8 +92,11 @@
             <img class = "attribute-logo" th:src="@{/images/whatsapp-logo.png}" alt = "Whatsapp Logo">
             <h3 class= "attribute-text" th:text="' Número: +56 9 '+${phoneNumber}"></h3></div>
         </div>
+
+
+
         <div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab" tabindex="0">
-            <form th:action="@{/config/change-password}" method="post">
+            <form th:action="@{/account-settings/change-password}" method="post">
                 <div class="mb-3">
                     <label for="actualPassword" class="col-form-label">Contraseña actual:</label>
                     <input type="password" class="form-control" id="actualPassword" name="actualPassword" required>
@@ -134,7 +137,6 @@
                         </div>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>

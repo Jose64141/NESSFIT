@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -47,7 +48,7 @@ public class UserController
     }
 
     @PostMapping("/account-settings/{operation}")
-    public String configChange(HttpServletRequest request, Model model, @PathVariable String operation, @RequestBody MultiValueMap<String, String> formBody) //https://stackoverflow.com/a/55338584
+    public String configChange(HttpServletRequest request, Model model, @PathVariable String operation, @RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr) //https://stackoverflow.com/a/55338584
     {
         // do this, do that or just give an error
         User user = this.userService.find(request.getRemoteUser());
@@ -58,7 +59,9 @@ public class UserController
 
                 if(!passwordEncoder.matches(formBody.getFirst("actualPassword"), user.getPassword()))
                 {
-                    // send error
+                    // send error // change active tab
+                    attr.addFlashAttribute("errorMsg","La contraseña actual es incorrecta.");
+
                     break;
                 }
                 if(!formBody.getFirst("newPassword").equals(formBody.getFirst("confirmNewPassword"))) // change value on html
@@ -70,6 +73,7 @@ public class UserController
                 String newPasswordHash = passwordEncoder.encode(formBody.getFirst("newPassword"));
                 user.setPassword(newPasswordHash);
                 userService.saveAndFlush(user);
+                // logout, redirect, and notify passwd change
                 break;
             case "change-data":
                 // validate email
