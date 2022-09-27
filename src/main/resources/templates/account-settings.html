@@ -126,28 +126,28 @@
         <img class = "attribute-logo" th:src="@{/images/name-logo.png}" alt = "Cambio de nombre">
         <label>Nombre Completo</label>
         <label class="input-box">
-            <input  class="information-form-control"  name="new-name" th:value="${name}+' '+${lastName}" required>
+            <input  class="information-form-control"  name="new-name" th:value="${name}+' '+${lastName}" required disabled>
         </label>
         </div>
         <div class="input-item">
             <img class = "attribute-logo" th:src="@{/images/email-logo.png}" alt = "Cambio de correo electronico">
             <label>Correo electrónico</label>
             <label class="input-box">
-                <input  class="information-form-control"  name="new-email" th:value="${email}" required>
+                <input  class="information-form-control"  name="new-email" th:value="${email}" required disabled>
             </label>
         </div>
         <div class="input-item">
             <img class = "attribute-logo" th:src="@{/images/whatsapp-logo.png}" alt = "Cambio de numero">
             <label>Teléfono móvil</label>
             <label class="input-box">
-                <input  class="information-form-control"  name="new-email" th:value="${phoneNumber}" required>
+                <input  class="information-form-control"  name="new-email" th:value="${phoneNumber}" required disabled>
             </label>
         </div>
         <div class="input-item">
             <img class = "attribute-logo" th:src="@{/images/email-logo.png}" alt = "Cambio de correo electronico">
             <label>Correo electrónico</label>
             <label class="input-box">
-                <input  class="information-form-control"  name="new-email" th:value="${email}" required>
+                <input  class="information-form-control"  name="new-email" th:value="${email}" required disabled>
             </label>
         </div>
     </div>
