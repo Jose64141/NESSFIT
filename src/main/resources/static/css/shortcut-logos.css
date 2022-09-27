@@ -17,3 +17,9 @@
     width: 35px;
     height: 35px;
 }
+
+.logos:hover
+{
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
