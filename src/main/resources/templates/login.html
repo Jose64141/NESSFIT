@@ -15,6 +15,9 @@
     <img class = "nessfit-logo" th:src="@{/images/nessfit-logo.png}" alt = "Nessfit logo">
     <div class="center">
         <h1>Iniciar sesión</h1>
+        <div class="notice" th:if="${passwordChanged} ne null">
+            <label th:text="${passwordChanged}"></label>
+        </div>
         <div th:if="${param.invalid}" class="alert alert-danger" role="alert">
             <label>RUT o contraseña inválida.</label>
         </div>
