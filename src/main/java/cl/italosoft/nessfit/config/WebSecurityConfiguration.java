@@ -68,7 +68,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
         http.formLogin(form -> form.loginPage("/login").permitAll()).logout();
         http.authorizeRequests()
                 // Los recursos estáticos no requieren autenticación
-                .antMatchers("/build/**", "/css/**", "/images/**", "/js/**", "/vendors/**").permitAll()
+                .antMatchers("/build/**", "/css/**", "/images/**", "/js/**", "/vendors/**","/credits").permitAll()
                 // Las vistas públicas no requieren autenticación
                 .antMatchers("/login**").anonymous()
                 // Las vistas con el subdominio administrador quedan protegidas al ROL

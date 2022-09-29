@@ -14,5 +14,11 @@ public class LoginController
         return "login";
     }
 
+    @GetMapping("/credits")
+    public String credits()
+    {
+        return "credits";
+    }
+
 
 }
