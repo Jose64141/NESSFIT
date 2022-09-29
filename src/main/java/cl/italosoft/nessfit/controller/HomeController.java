@@ -28,4 +28,9 @@ public class HomeController
         return "home";
     }
 
+    @GetMapping("/")
+    public String rootPage()
+    {
+        return "redirect:/home";
+    }
 }
