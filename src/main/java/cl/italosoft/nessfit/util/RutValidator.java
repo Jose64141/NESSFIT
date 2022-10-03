@@ -1,19 +1,27 @@
 package cl.italosoft.nessfit.util;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import cl.italosoft.nessfit.model.User;
 
-class RutValidator implements ConstraintValidator<Rut, String>
+import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+@Component
+public class RutValidator implements Validator
 {
-    /**
-     * Verifies if a RUT is valid.
-     * @param rut must have the check digit on it last position.
-     * @param context is the validator context.
-     * @return Whether is valid or not.
-     */
     @Override
-    public boolean isValid(String rut, ConstraintValidatorContext context)
+    public boolean supports(Class<?> clazz)
     {
+        return User.class.isAssignableFrom(clazz);
+    }
+
+
+    @Override
+    public void validate(Object target, Errors errors)
+    {
+        User user = (User) target;
+        String rut = user.getRut();
+
         int checkDigit = 0;
         char originalCheckDigitChar = rut.charAt(rut.length()-1);
         int[] serie = {2,3,4,5,6,7};
@@ -34,7 +42,9 @@ class RutValidator implements ConstraintValidator<Rut, String>
                     case 10 -> 'K';
                     default -> (char) (checkDigit + '0');
                 };
-        return checkDigitChar == originalCheckDigitChar;
+        if (checkDigitChar == originalCheckDigitChar)
+            return;
+        errors.rejectValue("rut", null, "Invalid RUT");
     }
 }
 

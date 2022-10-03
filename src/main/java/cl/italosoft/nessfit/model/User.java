@@ -1,10 +1,8 @@
 package cl.italosoft.nessfit.model;
 
-import cl.italosoft.nessfit.util.Rut;
-
+import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.io.Serializable;
 
 /**
  * Model for User Entity
@@ -18,14 +16,18 @@ public class User implements Serializable
     @Id
     private String rut;
     //@Min(2)
-    private String name;
+    @Size(min = 3, message = "Short name")
+    String name;
     //@Min(2)
+    @Size(min = 3, message = "Short name")
     @Column(name = "last_name")
     private String lastName;
     @NotBlank()
     private String password;
     //@Min(8)
     //@Max(8)
+    @Min(value = 100000000, message = "Invalid number")
+    @Max(value = 999999999, message = "Invalid number")
     @Column(name = "phone_number")
     private int phoneNumber;
     @NotBlank()
