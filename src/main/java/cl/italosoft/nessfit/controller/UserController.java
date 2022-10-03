@@ -49,7 +49,7 @@ public class UserController
     }
 
     @PostMapping("/account-settings/{operation}")
-    public String configChange(HttpServletRequest request, Model model, @PathVariable String operation, @RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr) //https://stackoverflow.com/a/55338584
+    public String configChange(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable String operation, @RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr) //https://stackoverflow.com/a/55338584
     {
         // do this, do that or just give an error
         User user = this.userService.find(request.getRemoteUser());
@@ -88,6 +88,11 @@ public class UserController
                 userService.saveAndFlush(user);
 
                 attr.addFlashAttribute("passwordChanged","Su contraseña se ha cambiado exitosamente.");
+
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                if( authentication != null)
+                    new SecurityContextLogoutHandler().logout(request, response, authentication);
+
                 return "redirect:/login";
             case "change-data":
                 attr.addFlashAttribute("showPassword", false);
