@@ -125,21 +125,28 @@
         </div>
         <div class="input-item">
         <img class = "attribute-logo" th:src="@{/images/name-logo.png}" alt = "Cambio de nombre">
-        <label>Nombre Completo</label>
+        <label>Nombre(s)</label>
         <label class="input-box">
-            <input  class="information-form-control"  name="new-name" th:value="${name}+' '+${lastName}" required disabled>
+            <input  class="information-form-control"  name="new-name" th:value="${name}" required disabled>
         </label>
         </div>
         <div class="input-item">
-            <img class = "attribute-logo" th:src="@{/images/email-logo.png}" alt = "Cambio de correo electronico">
-            <label>Correo electrónico</label>
+            <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}" alt = "Cambio de correo electronico">
+            <label>Apellido Paterno</label>
             <label class="input-box">
-                <input  class="information-form-control"  name="new-email" th:value="${email}" required disabled>
+                <input  class="information-form-control"  name="new-email" th:value="${lastName}" required disabled>
             </label>
         </div>
         <div class="input-item">
-            <img class = "attribute-logo" th:src="@{/images/whatsapp-logo.png}" alt = "Cambio de numero">
-            <label>Teléfono móvil</label>
+            <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}" alt = "Cambio de correo electronico">
+            <label>Apellido Materno</label>
+            <label class="input-box">
+                <input  class="information-form-control"  name="new-email" th:value="${lastName}" required disabled>
+            </label>
+        </div>
+        <div class="input-item">
+            <img class = "attribute-logo" th:src="@{/images/phone-icon.png}" alt = "Cambio de numero">
+            <label>Número de teléfono</label>
             <label class="input-box">
                 <input  class="information-form-control"  name="new-email" th:value="${phoneNumber}" required disabled>
             </label>
