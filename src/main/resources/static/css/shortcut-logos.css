@@ -1,10 +1,10 @@
 .shortcuts-logo-container
 {
+    position: absolute;
     margin: 0 3vh;
     padding: 0;
-    position: absolute;
     top: 10vh;
-    right: 0;
+    left: 0;
     width: 35px;
     height: 35px;
 }
