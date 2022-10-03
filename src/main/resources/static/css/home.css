@@ -17,45 +17,57 @@ body
 
 .container
 {
-    height: 100vh;
-    position: absolute;
-    margin: auto;
     padding: 0;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
 }
 
 .labels
 {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
     text-align: center;
-    margin: 5vh 0 5vh;
+    margin: auto;
     color: #000000;
 }
 
 h1
 {
-    margin: 0;
+    font-size: 4em;
     padding: 0;
-    font-size: 8vw;
+    margin: 0;
 }
+
 h2
 {
-    margin: 0;
+    font-size: 2em;
     padding: 0;
-    font-size: 4vw;
+    margin: 0;
 }
+
 h3
 {
-    margin: 0;
+    font-size: 1em;
     padding: 0;
-    font-size: 2vw;
+    margin: 0;
 }
 
 
 
 .buttons
 {
+    position: relative;
+    margin: auto;
+    top: 25%;
+    bottom: 0;
+    left: 0;
+    right: 0;
     object-position: center;
     display: grid;
     align-items: center;

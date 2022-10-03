@@ -9,9 +9,9 @@
 
 .nessfit-logo-container
 {
-    position: absolute;
-    height: 10vh;
-    width: 10vh;
+    position: fixed;
+    height: 80px;
+    width: 80px;
     margin: 20px 20px 0 0;
     padding: 0;
     right: 0;
