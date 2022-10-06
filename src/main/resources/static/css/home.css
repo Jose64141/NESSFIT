@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+*
+{
+    font-family: "Poppins", sans-serif;
+}
+
+body
+{
+    background-color: #fef6cd;
+}
+.navbar-toggler
+{
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.container
+{
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.labels
+{
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+    color: #000000;
+}
+
+h1
+{
+    font-size: 4em;
+    padding: 0;
+    margin: 0;
+}
+
+h2
+{
+    font-size: 2em;
+    padding: 0;
+    margin: 0;
+}
+
+h3
+{
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.buttons
+{
+    position: relative;
+    margin: auto;
+    top: 25%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    object-position: center;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.administrativo-buttons
+{
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
+
+a
+{
+    padding: 0;
+    margin: 5px auto;
+    position: relative;
+}
+
+button
+{
+    width: 170px;
+    height: 170px;
+    padding: 0;
+    border-radius: 5px;
+    border: 2px solid #000;
+    margin: 5px auto;
+    background-color: #20c67a;
+    font-size: 18px;
+}
+
+button:hover
+{
+    background-color: #28e890;
+}
+
+.button-logo
+{
+    position: relative;
+    display: block;
+    top: 1vh;
+    margin: auto;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+}
