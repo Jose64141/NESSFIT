@@ -129,39 +129,42 @@
                         </div>
 
                         <form th:action="@{/account-settings/change-data}" th:object="${user}" method="post">
+
+                            <input class="information-form-control" type="hidden" th:field="*{rut}" th:value="${user.rut}" readonly>
+
                             <div class="input-item">
                                 <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
                                 <label>Nombre(s)</label>
                                 <label class="input-box">
-                                    <input class="information-form-control" name="new-name" th:value="${user.name}" required>
+                                    <input class="information-form-control" th:field="*{name}" th:value="${user.name}" required>
                                 </label>
                             </div>
                             <div class="input-item">
                                 <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
                                 <label>Apellido Paterno</label>
                                 <label class="input-box">
-                                    <input class="information-form-control" name="new-last-name1" th:value="${user.firstLastName}" required>
+                                    <input class="information-form-control" th:field="*{firstLastName}" th:value="${user.firstLastName}" required>
                                 </label>
                             </div>
                             <div class="input-item">
                                 <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
                                 <label>Apellido Materno</label>
                                 <label class="input-box">
-                                    <input class="information-form-control" name="new-last-name2" th:value="${user.secondLastName}" required>
+                                    <input class="information-form-control" th:field="*{secondLastName}" th:value="${user.secondLastName}" required>
                                 </label>
                             </div>
                             <div class="input-item">
                                 <img class = "attribute-logo" th:src="@{/images/phone-icon.png}">
                                 <label>Número de teléfono</label>
                                 <label class="input-box">
-                                    <input class="information-form-control" name="new-number" th:value="${user.phoneNumber}" required>
+                                    <input class="information-form-control" th:field="*{phoneNumber}" th:value="${user.phoneNumber}" required>
                                 </label>
                             </div>
                             <div class="input-item">
                                 <img class = "attribute-logo" th:src="@{/images/email-logo.png}">
                                 <label>Correo electrónico</label>
                                 <label class="input-box">
-                                    <input class="information-form-control" name="new-email" th:value="${user.email}" required>
+                                    <input class="information-form-control" th:field="*{email}" th:value="${user.email}" required>
                                 </label>
                             </div>
 
