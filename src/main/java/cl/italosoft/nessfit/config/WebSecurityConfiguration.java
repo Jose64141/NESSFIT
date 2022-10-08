@@ -59,6 +59,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                 .rolePrefix("ROLE_");
     }
 
+
+
+
     /**
      * Configura el filter Chain para acceso a las rutas
      */
@@ -74,6 +77,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                 // Las vistas con el subdominio administrador quedan protegidas al ROL
                 // administrador
                 .antMatchers("/administrador/**").hasAuthority("ADMINISTRADOR")
+                // Las vistas con el subdominio administrativo quedan protegidas al ROL
+                // administrativo
+                .antMatchers("/administrativo/**").hasAuthority("ADMINISTRATIVO")
+                // Las vistas con el subdominio cliente quedan protegidas al ROL
+                // cliente
+                .antMatchers("/cliente/**").hasAuthority("CLIENTE")
+                // Las vistas con el subdominio administrativo quedan protegidas al ROL
+                // administrativo
                 // Todas las demás URLs de la Aplicación requieren autenticación
                 .anyRequest().authenticated()
                 // El formulario de Login redirecciona a la url /login
