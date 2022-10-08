@@ -42,9 +42,10 @@ public class UserController
         User user = this.userService.find(request.getRemoteUser());
         model.addAttribute("rut", user.getRut().strip());
         model.addAttribute("name", user.getName().strip());
-        model.addAttribute("lastName", user.getLastName().strip());
+        model.addAttribute("lastName", user.getFirstLastName().strip());
         model.addAttribute("email",user.getEmail().strip());
         model.addAttribute("phoneNumber",user.getPhoneNumber());
+        model.addAttribute("user",user);
         return "account-settings";
     }
 
@@ -98,7 +99,6 @@ public class UserController
                 attr.addFlashAttribute("showPassword", false);
                 // validate email
             default:
-                // check how to send error a
                 break;
         }
         return "redirect:/account-settings";

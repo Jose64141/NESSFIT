@@ -16,22 +16,23 @@ public class User implements Serializable
     @Id
     private String rut;
     //@Min(2)
-    @Size(min = 3, message = "Short name")
+    @Size(min = 3, message = "Los nombres deben tener más de 2 caracteres.")
     String name;
     //@Min(2)
-    @Size(min = 3, message = "Short name")
-    @Column(name = "last_name")
-    private String lastName;
-    @NotBlank()
+    @Size(min = 3, message = "El apellido debe tener más de 2 caracteres.")
+    @Column(name = "first_last_name")
+    private String firstLastName;
+    @Size(min = 3, message = "El apellido debe tener más de 2 caracteres.")
+    @Column(name = "second_last_name")
+    private String secondLastName;
+
     private String password;
-    //@Min(8)
-    //@Max(8)
-    @Min(value = 100000000, message = "Invalid number")
-    @Max(value = 999999999, message = "Invalid number")
+    @Min(value = 100000000, message = "El teléfono móvil ingresado no es válido.")
+    @Max(value = 999999999, message = "El teléfono móvil ingresado no es válido.")
     @Column(name = "phone_number")
     private int phoneNumber;
-    @NotBlank()
-    @Email
+    @NotBlank
+    @Email(message = "Su correo electrónico no es válido.")
     private String email;
     @Column(name = "is_enabled")
     private boolean isEnabled;
@@ -44,19 +45,21 @@ public class User implements Serializable
      * Full Constructor
      * @param rut Rut of user
      * @param name Name of user
-     * @param lastName Last name of user
+     * @param firstLastName First last name of user
+     * @param secondLastName Second last name of user
      * @param password Password of user
      * @param phoneNumber Phone number of user
      * @param email Email  of user
      * @param isEnabled Enables status of user
      * @param role Role of user
      */
-    public User(String rut, String name, String lastName, String password, int phoneNumber,
+    public User(String rut, String name, String firstLastName, String secondLastName, String password, int phoneNumber,
                 String email, boolean isEnabled, Role role)
     {
         this.rut = rut;
         this.name = name;
-        this.lastName = lastName;
+        this.firstLastName = firstLastName;
+        this.secondLastName = secondLastName;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -71,7 +74,8 @@ public class User implements Serializable
     {
         this.rut = null;
         this.name = null;
-        this.lastName = null;
+        this.firstLastName = null;
+        this.secondLastName = null;
         this.password = null;
         this.phoneNumber = -1;
         this.email = null;
@@ -116,21 +120,39 @@ public class User implements Serializable
     }
 
     /**
-     * Gets the user lastname
-     * @return Current user lastname
+     * Gets the user first last name
+     * @return Current user last name
      */
-    public String getLastName()
+    public String getFirstLastName()
     {
-        return lastName;
+        return firstLastName;
     }
 
     /**
-     * Sets the user lastname
-     * @param lastName New lastname for user
+     * Gets the user second last name
+     * @return Current user last name
      */
-    public void setLastName(String lastName)
+    public String getSecondLastName()
     {
-        this.lastName = lastName;
+        return secondLastName;
+    }
+
+    /**
+     * Sets the user first last name
+     * @param firstLastName New last name for user
+     */
+    public void setFirstLastName(String firstLastName)
+    {
+        this.firstLastName = firstLastName;
+    }
+
+    /**
+     * Sets the user second last name
+     * @param secondLastName New last name for user
+     */
+    public void setSecondLastName(String secondLastName)
+    {
+        this.secondLastName = secondLastName;
     }
 
     /**
