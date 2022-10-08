@@ -53,9 +53,23 @@ h2
 
 h3
 {
-    font-size: 1em;
+    font-size: 1.5em;
     padding: 0;
-    margin: 0;
+    margin: 20vh auto 1vh;
+}
+
+.nessfit-description-container
+{
+    position: absolute;
+    display: block;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #20c67a;
+    height: 40px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
 }
 
 
@@ -63,23 +77,12 @@ h3
 .buttons
 {
     position: relative;
+    padding: 0;
     margin: auto;
-    top: 25%;
-    bottom: 0;
-    left: 0;
-    right: 0;
     object-position: center;
     display: grid;
     align-items: center;
-    grid-template-columns: repeat(2, 1fr);
 }
-
-.administrativo-buttons
-{
-    grid-template-columns: repeat(3, 1fr);
-}
-
-
 
 a
 {
@@ -90,12 +93,12 @@ a
 
 button
 {
-    width: 170px;
-    height: 170px;
+    width: 300px;
+    height: 80px;
     padding: 0;
     border-radius: 5px;
     border: 2px solid #000;
-    margin: 5px auto;
+    margin: 0 auto;
     background-color: #20c67a;
     font-size: 18px;
 }
@@ -108,10 +111,14 @@ button:hover
 .button-logo
 {
     position: relative;
-    display: block;
-    top: 1vh;
-    margin: auto;
+    display: grid;
+    margin: 0 auto;
     padding: 0;
     width: 35px;
     height: 35px;
+}
+
+.administrativo-buttons
+{
+
 }
