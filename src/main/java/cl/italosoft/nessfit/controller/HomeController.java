@@ -21,10 +21,6 @@ public class HomeController
         User user = this.userService.find(request.getRemoteUser());
         model.addAttribute("name", user.getName().strip());
         model.addAttribute("lastName", user.getFirstLastName().strip());
-        /*if (request.isUserInRole("ADMINISTRADOR")) return "home";
-        else if (request.isUserInRole("ADMINISTRATIVO")) return "home";
-        else if (request.isUserInRole("CLIENTE")) return "cliente/home";
-        else return "login";*/
         return "home";
     }
 

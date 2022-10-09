@@ -12,6 +12,7 @@
     <link rel="stylesheet" th:href="@{/css/home.css}">
     <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
     <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
+    <link rel="stylesheet" th:href="@{/css/background-font-style.css}">
 </head>
 <body>
 <div class="nessfit-logo-container">
@@ -48,7 +49,7 @@
                         <a class="nav-link" href="#">Agregar Administrativos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Administrar Usuarios</a>
+                        <a class="nav-link" th:href="@{/administrador/manage-clients}">Administrar Usuarios</a>
                     </li>
                     <li class="nav-item mt-5">
                         <a class="nav-link" th:href="@{/account-settings}">Configuración de cuenta</a>
@@ -70,7 +71,7 @@
                         <a class="nav-link" href="#">Administrar Recintos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Administrar Clientes</a>
+                        <a class="nav-link" th:href="@{/administrativo/manage-clients}">Administrar Clientes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Administrar Solicitudes</a>
@@ -105,26 +106,28 @@
         </div>
     </div>
 </nav>
+
 <div class="container">
     <div class = "labels">
         <h1>Bienvenido</h1>
         <h2 th:text="${name}+' '+${lastName}" ></h2>
-        <h3>¿Qué desea hacer?</h3>
     </div>
-    <div class="buttons" sec:authorize="hasRole('ADMINISTRADOR')">
+    <div class="buttons" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">
+        <h3>¿Qué desea hacer?</h3>
         <a th:href="@{/home}">
             <button>Agregar Administrativos
                 <img class="button-logo" th:src="@{images/add-user-logo.png}" alt="Agregar administrativos"></button>
             </button>
         </a>
-        <a th:href="@{/home}">
+        <a th:href="@{/administrador/manage-clients}">
             <button>Administrar Usuarios
                 <img class="button-logo" th:src="@{images/manage-users-logo.png}" alt="Administrar usuarios">
             </button>
         </a>
     </div>
 
-    <div class="buttons administrativo-buttons"  sec:authorize="hasRole('ADMINISTRATIVO')">
+    <div class="buttons administrativo-buttons"  sec:authorize="hasRole('ROLE_ADMINISTRATIVO')">
+        <h3>¿Qué desea hacer?</h3>
         <a th:href="@{/home}">
             <button>Agregar Recinto
                 <img class="button-logo" th:src="@{images/add-place-logo.png}" alt="Agregar recito">
@@ -139,7 +142,7 @@
                 <img class="button-logo" th:src="@{images/manage-places-logo.png}" alt="Administrar recintos">
             </button>
         </a>
-        <a th:href="@{/home}">
+        <a th:href="@{/administrativo/manage-clients}">
             <button>Administrar Clientes
                 <img class="button-logo" th:src="@{images/manage-users-logo.png}" alt="Administrar clientes">
             </button>
@@ -151,12 +154,13 @@
         </a>
         <a th:href="@{/home}">
             <button>Estadísticas
-                <img class="button-logo" th:src="@{images/manage-requests-logo.png}" alt="Estadísticas">
+                <img class="button-logo" th:src="@{images/statistics-logo.png}" alt="Estadísticas">
             </button>
         </a>
     </div>
 
-    <div class="buttons" sec:authorize="hasRole('CLIENTE')">
+    <div class="buttons" sec:authorize="hasRole('ROLE_CLIENTE')">
+        <h3>¿Qué desea hacer?</h3>
         <a class="button-container" th:href="@{/home}">
             <button>Arrendar
                 <img class="button-logo" th:src="@{images/rent-logo.png}" alt="Arendar recinto">
@@ -169,8 +173,14 @@
         </a>
     </div>
 </div>
+<!--
+<div class = "nessfit-description-container">
+    <div class="nessfit-text-desription">Nessfit® Arriendo de Espacios Deportivos</div>
+</div>-->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
 </body>
 </html>

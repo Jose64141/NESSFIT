@@ -1,0 +1,96 @@
+.navbar-toggler
+{
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.input-container
+{
+    box-sizing: border-box;
+    background-color: #20c67a;
+    border: 2px solid #000;
+    border-radius: 5px;
+    width: 800px;
+    height: 500px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    justify-content: space-between;
+    flex-direction: column;;
+    display: flex;
+}
+
+.user-search-container
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    margin: auto;
+    height: 130px;
+    width: 600px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.rut-input
+{
+    display: inline;
+    padding: 0;
+    margin: 0 0 0 10px;
+}
+
+.form-container
+{
+    margin: 10px 0 0 0;
+    height: 100px;
+}
+
+.search-submit-button
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    padding: 0;
+}
+h1
+{
+    font-size: 3em;
+    padding: 0;
+    margin: 5px 0 0 0;
+    text-align: center;
+}
+
+.search-button
+{
+    /* Color fondo*/
+    background-color: #fff;
+    /* Color letras*/
+    --bs-btn-color: #000000;
+    /* Color borde*/
+    --bs-btn-border-color: #000000;
+    /* Color OnMouseOver*/
+    --bs-btn-hover-color: #000000;
+    /* Color fondo OnMouseOver*/
+    --bs-btn-hover-bg: #fef6cd;
+    /* Color borde OnMouseOver*/
+    --bs-btn-hover-border-color: #000000;
+    /* Color Sombra una vez clickeado*/
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    /* Color Color de las letras mientras está siendo clickeado*/
+    --bs-btn-active-color: #fff;
+    /* Color fondo mientras está siendo clickeado*/
+    --bs-btn-active-bg: #d3cfbb;
+    /* Color borde mientras está siendo clickeado*/
+    --bs-btn-active-border-color: #b4b2a6;
+}

@@ -59,6 +59,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                 .rolePrefix("ROLE_");
     }
 
+
+
+
     /**
      * Configura el filter Chain para acceso a las rutas
      */

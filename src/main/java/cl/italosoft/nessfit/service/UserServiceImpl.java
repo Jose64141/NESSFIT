@@ -27,6 +27,19 @@ public class UserServiceImpl implements UserService
     }
 
     /**
+     * Find a user by their rut and role
+     *
+     * @param userRut the id of the record tro find
+     * @param role    the role of the user to find
+     * @return User if exists, null if not
+     */
+    @Override
+    public User find(String userRut, int role)
+    {
+        return this.userRepository.findByRutAndRole_id(userRut,role);
+    }
+
+    /**
      * Saves a given user record.
      * @param user the user to save.
      */
