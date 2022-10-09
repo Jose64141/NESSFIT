@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
@@ -29,18 +30,20 @@ public class AdministrativoController
     private RutValidator rutValidator;
     
     @InitBinder("user")
-    public void initBinder(WebDataBinder binder) {
+    public void initBinder(WebDataBinder binder)
+    {
         binder.addValidators(rutValidator);
     }
 	
     @GetMapping("/administrativo/add-client")
-    public String addClient()
+    public String addClient(Model model)
     {
+        model.addAttribute("user", new User());
     	return "administrativo/add-client";
     }
     
     @PostMapping("/administrativo/add-client")
-    public String addClient(@Valid User newUser, RedirectAttributes attr, BindingResult result)
+    public String addClient(Model model, @Valid User newUser, BindingResult result, RedirectAttributes attr)
     {
     	if(result.hasErrors())
         {
@@ -80,9 +83,10 @@ public class AdministrativoController
                         break;
                 }
             }
-            attr.addFlashAttribute("infoErrorMsg",errorMsg);
-            return "administrativo/add-client";
+            attr.addFlashAttribute("errorMsg",errorMsg);
+            return "redirect:/administrativo/add-client";
         }
+
     	newUser.setRut(newUser.getRut().toUpperCase());
     	newUser.setEnabled(true);
     	Role role = new Role(3);
@@ -91,9 +95,9 @@ public class AdministrativoController
     	String newPasswordHash = passwordEncoder.encode(newUser.getRut());
         newUser.setPassword(newPasswordHash);
         userService.saveAndFlush(newUser);
-        attr.addFlashAttribute("infoSuccessMsg","El cliente se añadio con éxito. ");
-    	return "administrativo/add-client";
-    	
+
+        attr.addFlashAttribute("successMsg","El cliente se añadió con éxito. ");
+        return "redirect:/administrativo/add-client";
     }
     
 }
