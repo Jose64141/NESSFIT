@@ -21,6 +21,12 @@ public class RutValidator implements Validator
         User user = (User) target;
         String rut = user.getRut();
 
+        if(rut == null)
+        {
+            errors.rejectValue("rut", null, "Invalid RUT");
+            return;
+        }
+
         int checkDigit = 0;
         char originalCheckDigitChar = rut.charAt(rut.length()-1);
         int[] serie = {2,3,4,5,6,7};

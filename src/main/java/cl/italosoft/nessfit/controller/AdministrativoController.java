@@ -128,6 +128,14 @@ public class AdministrativoController
         }
 
     	newUser.setRut(newUser.getRut().toUpperCase());
+
+        User user = this.userService.findByRutOrEmail(newUser.getRut(), newUser.getEmail());
+        if(user != null)
+        {
+            attr.addFlashAttribute("errorMsg","El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.");
+            return "redirect:/administrativo/add-client";
+        }
+
     	newUser.setEnabled(true);
     	Role role = new Role(3);
     	newUser.setRole(role);

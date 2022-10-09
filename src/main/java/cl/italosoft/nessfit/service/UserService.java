@@ -18,11 +18,19 @@ public interface UserService
 
     /**
      * Find a user by their rut and role
-     * @param userRut the id of the record tro find
+     * @param userRut the id of the record to find
      * @param role the role of the user to find
      * @return User if exists, null if not
      */
     public User find(String userRut,int role);
+
+    /**
+     * Find a user by their email
+     * @param userRut the id of the record tro find
+     * @param userEmail the email of the record to find
+     * @return User if exists, null if not
+     */
+    public User findByRutOrEmail(String userRut,String userEmail);
 
 
     /**
