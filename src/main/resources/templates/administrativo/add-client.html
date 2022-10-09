@@ -46,26 +46,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" sec:authorize="hasRole('ADMINISTRADOR')">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Agregar Administrativos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Administrar Usuarios</a>
-                            </li>
-                            <li class="nav-item mt-5">
-                                <a class="nav-link" th:href="@{/account-settings}">Configuración de cuenta</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Cerrar Sesión</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" sec:authorize="hasRole('ADMINISTRATIVO')">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Agregar Recintos</a>
                             </li>
                             <li class="nav-item mt-6">
-                                <a class="nav-link" href="@{/add-client}">Agregar Cliente</a>
+                                <a class="nav-link" href="@{/administrativo/add-client}">Agregar Cliente</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Administrar Recintos</a>
@@ -86,125 +72,78 @@
                                 <a class="nav-link" href="#">Cerrar Sesión</a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" sec:authorize="hasRole('CLIENTE')">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Arrendar</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Mis Solicitudes</a>
-                            </li>
-                            <li class="nav-item mt-5">
-                                <a class="nav-link" th:href="@{/account-settings}">Configuración de cuenta</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Cerrar Sesión</a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
         </nav>
 
+        <form th:action="@{/administrativo/add-client}" th:object="${user}" method="post">
+            <div class="input-item">
+                <label>RUT (Ej: 10123123K)</label>
+                <label class="input-box">
+                    <input class="information-form-control" th:field="*{rut}" required>
+                </label>
+            </div>
+            <div class="input-item">
+                <label>Nombre(s)</label>
+                <label class="input-box">
+                    <input class="information-form-control" th:field="*{name}" required>
+                </label>
+            </div>
+            <div class="input-item">
+                <label>Apellido Paterno</label>
+                <label class="input-box">
+                    <input class="information-form-control" th:field="*{firstLastName}" required>
+                </label>
+            </div>
+            <div class="input-item">
+                <label>Apellido Materno</label>
+                <label class="input-box">
+                    <input class="information-form-control" th:field="*{secondLastName}" required>
+                </label>
+            </div>
+            <div class="input-item">
+                <label>Número de teléfono</label>
+                <label class="input-box">
+                    <input class="information-form-control" th:field="*{phoneNumber}" required>
+                </label>
+            </div>
+            <div class="input-item">
+                <label>Correo electrónico</label>
+                <label class="input-box">
+                    <input class="information-form-control" th:field="*{email}" required>
+                </label>
+            </div>
 
-        
+            <div class="position-absolute bottom-0 end-0">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#dataConfirmModal">
+                    Enviar
+                </button>
+            </div>
 
-            <div class="tab-content m-6" id="nav-tabContent">
-
-                        <form th:action="@{/add-client}" th:object="${user}" method="post">
-
-                            <input class="information-form-control" type="hidden" th:field="*{rut}" th:value="${user.rut}" readonly>
-
-                            <div class="input-item">
-                                <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
-                                <label>Rut</label>
-                                <label class="input-box">
-                                    <input class="information-form-control" th:field="*{name}" th:value="${user.name}" required>
-                                </label>
-                            </div>
-                            <div class="input-item">
-                                <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
-                                <label>Nombre(s)</label>
-                                <label class="input-box">
-                                    <input class="information-form-control" th:field="*{name}" th:value="${user.name}" required>
-                                </label>
-                            </div>
-                            <div class="input-item">
-                                <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
-                                <label>Apellido Paterno</label>
-                                <label class="input-box">
-                                    <input class="information-form-control" th:field="*{firstLastName}" th:value="${user.firstLastName}" required>
-                                </label>
-                            </div>
-                            <div class="input-item">
-                                <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
-                                <label>Apellido Materno</label>
-                                <label class="input-box">
-                                    <input class="information-form-control" th:field="*{secondLastName}" th:value="${user.secondLastName}" required>
-                                </label>
-                            </div>
-                            <div class="input-item">
-                                <img class = "attribute-logo" th:src="@{/images/phone-icon.png}">
-                                <label>Número de teléfono</label>
-                                <label class="input-box">
-                                    <input class="information-form-control" th:field="*{phoneNumber}" th:value="${user.phoneNumber}" required>
-                                </label>
-                            </div>
-                            <div class="input-item">
-                                <img class = "attribute-logo" th:src="@{/images/email-logo.png}">
-                                <label>Correo electrónico</label>
-                                <label class="input-box">
-                                    <input class="information-form-control" th:field="*{email}" th:value="${user.email}" required>
-                                </label>
-                            </div>
-                            <div class="input-item">
-                                <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
-                                <label>Contraseña</label>
-                                <label class="input-box">
-                                    <input class="information-form-control" th:field="*{name}" th:value="${user.name}" required>
-                                </label>
-                            </div>
-                            <div class="input-item">
-                                <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
-                                <label>Repetir Contraseña</label>
-                                <label class="input-box">
-                                    <input class="information-form-control" th:field="*{name}" th:value="${user.name}" required>
-                                </label>
-                            </div>
-
-                            <div class="position-absolute bottom-0 end-0">
-                                <a th:href="@{/account-settings}" class="btn btn-secondary">
-                                    Revertir
-                                </a>
-
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#dataConfirmModal">
-                                    Aplicar
-                                </button>
-                            </div>
-
-                            <div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="dataConfirmModalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="dataConfirmModalLabel">Confirmar</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>¿Está seguro de realizar los cambios?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancelar</button>
-                                            <button type="submit" class="btn btn-primary">Aplicar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </form>
+            <div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="dataConfirmModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="dataConfirmModalLabel">Confirmar</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Está seguro?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Aplicar</button>
+                        </div>
                     </div>
+                </div>
+            </div>
+
+        </form>
 
                 
 
