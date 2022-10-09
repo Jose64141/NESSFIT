@@ -119,7 +119,8 @@
     <button type="submit" class="btn btn-primary">Buscar</button>
   </div>
   <div  class="user-search-container">
-    <p th:if="${RUT} ne null" class="initial-message" th:text="${name}">Nombre:</p>
+    <p th:if="${RUT} ne null" class="initial-message" th:text="'Nombre Completo: '+${name}+' '+${firstLastName}
+    +' '+${firstLastName}"></p>
     <p th:unless="${RUT} ne null" class="initial-message">No ha seleccionado ningún usuario</p>
   </div>
 </div>

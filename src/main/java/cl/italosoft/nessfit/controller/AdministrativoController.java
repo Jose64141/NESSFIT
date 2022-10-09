@@ -14,13 +14,13 @@ public class AdministrativoController
 {
     @Autowired
     private UserService userService;
-    
+
     @GetMapping("/administrativo/manage-clients")
     public String manageUsers(HttpServletRequest request, @RequestParam(required = false) String rut, Model model)
     {
         if(rut != null)
         {
-            User user = this.userService.find(rut);
+            User user = this.userService.find(rut,3);
             if(user != null)
             {
                 System.out.println(user.getName());

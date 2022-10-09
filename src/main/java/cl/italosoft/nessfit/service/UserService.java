@@ -16,6 +16,14 @@ public interface UserService
      */
     public User find(String userRut);
 
+    /**
+     * Find a user by their rut and role
+     * @param userRut the id of the record tro find
+     * @param role the role of the user to find
+     * @return User if exists, null if not
+     */
+    public User find(String userRut,int role);
+
 
     /**
      * Saves a given user record.
