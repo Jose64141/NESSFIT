@@ -23,13 +23,13 @@
         </div>
         <div class="shortcuts-logo-container">
             <a th:href="@{/home}">
-                <img class="logos" th:src="@{images/home-logo.png}" alt="Inicio">
+                <img class="logos" th:src="@{~/images/home-logo.png}" alt="Inicio">
             </a>
             <a th:href="@{/account-settings}">
-                <img class="logos" th:src="@{images/settings-logo.png}" alt="Configuración de cuenta">
+                <img class="logos" th:src="@{~/images/settings-logo.png}" alt="Configuración de cuenta">
             </a>
             <a th:href="@{/logout}">
-                <img class="logos" th:src="@{images/logout-logo.png}" alt="Cerrar sesión">
+                <img class="logos" th:src="@{~/images/logout-logo.png}" alt="Cerrar sesión">
             </a>
         </div>
         <h1>Agregar Cliente</h1>
@@ -51,7 +51,7 @@
                                 <a class="nav-link" href="#">Agregar Recintos</a>
                             </li>
                             <li class="nav-item mt-6">
-                                <a class="nav-link" href="@{/administrativo/add-client}">Agregar Cliente</a>
+                                <a class="nav-link" th:href="@{/administrativo/add-client}">Agregar Cliente</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Administrar Recintos</a>
@@ -78,79 +78,80 @@
         </nav>
 
         <div class="form-container">
-            <div th:if="${errorMsg} ne null" class="alert alert-danger" role="alert">
-                <label th:text="${errorMsg}"></label>
-            </div>
-            <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
-                <label th:text="${successMsg}"></label>
-            </div>
-            <form th:action="@{/administrativo/add-client}" th:object="${user}" method="post">
-                <div class="input-item">
-                    <label>RUT (Ej: 10123123K)</label>
-                    <label class="input-box">
-                        <input class="information-form-control" type="text" th:field="*{rut}" required>
-                    </label>
+            <div class="m-5">
+                <div th:if="${errorMsg} ne null" class="alert alert-danger" role="alert">
+                    <label th:text="${errorMsg}"></label>
                 </div>
-                <div class="input-item">
-                    <label>Nombre(s)</label>
-                    <label class="input-box">
-                        <input class="information-form-control" type="text" th:field="*{name}" required>
-                    </label>
+                <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
+                    <label th:text="${successMsg}"></label>
                 </div>
-                <div class="input-item">
-                    <label>Apellido Paterno</label>
-                    <label class="input-box">
-                        <input class="information-form-control" type="text" th:field="*{firstLastName}" required>
-                    </label>
-                </div>
-                <div class="input-item">
-                    <label>Apellido Materno</label>
-                    <label class="input-box">
-                        <input class="information-form-control" type="text" th:field="*{secondLastName}" required>
-                    </label>
-                </div>
-                <div class="input-item">
-                    <label>Número de teléfono</label>
-                    <label class="input-box">
-                        <input class="information-form-control" type="tel" pattern="\d*" id="phoneNumber" name="phoneNumber" required>
-                    </label>
-                </div>
-                <div class="input-item">
-                    <label>Correo electrónico</label>
-                    <label class="input-box">
-                        <input class="information-form-control" type="email" th:field="*{email}" required>
-                    </label>
-                </div>
+                <form th:action="@{/administrativo/add-client}" th:object="${user}" method="post">
+                    <div class="input-item">
+                        <label>RUT (Ej: 10123123K)</label>
+                        <label class="input-box">
+                            <input class="information-form-control" type="text" th:field="*{rut}" required>
+                        </label>
+                    </div>
+                    <div class="input-item">
+                        <label>Nombre(s)</label>
+                        <label class="input-box">
+                            <input class="information-form-control" type="text" th:field="*{name}" required>
+                        </label>
+                    </div>
+                    <div class="input-item">
+                        <label>Apellido Paterno</label>
+                        <label class="input-box">
+                            <input class="information-form-control" type="text" th:field="*{firstLastName}" required>
+                        </label>
+                    </div>
+                    <div class="input-item">
+                        <label>Apellido Materno</label>
+                        <label class="input-box">
+                            <input class="information-form-control" type="text" th:field="*{secondLastName}" required>
+                        </label>
+                    </div>
+                    <div class="input-item">
+                        <label>Número de teléfono</label>
+                        <label class="input-box">
+                            <input class="information-form-control" type="tel" pattern="\d*" id="phoneNumber" name="phoneNumber" required>
+                        </label>
+                    </div>
+                    <div class="input-item">
+                        <label>Correo electrónico</label>
+                        <label class="input-box">
+                            <input class="information-form-control" type="email" th:field="*{email}" required>
+                        </label>
+                    </div>
 
-                <div class="position-absolute bottom-0 end-0">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#dataConfirmModal">
-                        Enviar
-                    </button>
-                </div>
+                    <div class="position-absolute bottom-0 end-0 m-5">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#dataConfirmModal">
+                            Enviar
+                        </button>
+                    </div>
 
-                <div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="dataConfirmModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="dataConfirmModalLabel">Confirmar</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>¿Está seguro?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Aplicar</button>
+                    <div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="dataConfirmModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="dataConfirmModalLabel">Confirmar</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>¿Está seguro?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Aplicar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-            </form>
+                </form>
+            </div>
         </div>
                 
 
