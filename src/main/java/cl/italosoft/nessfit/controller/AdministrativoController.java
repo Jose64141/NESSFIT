@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class AdministrativoController
 {
-    @GetMapping("/administrativo/manage-users")
+    @GetMapping("/administrativo/manage-clients")
     public String manageUsers(HttpServletRequest request)
     {
         return "/administrativo/manage-clients";
