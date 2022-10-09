@@ -30,8 +30,8 @@ public class AdministradorController
                 {
                     model.addAttribute("RUT",rut);
                     model.addAttribute("name",user.getName());
-                    model.addAttribute("firstLastName",user.getLastName());
-                    model.addAttribute("secondLastName",user.getLastName());
+                    model.addAttribute("firstLastName",user.getFirstLastName());
+                    model.addAttribute("secondLastName",user.getSecondLastName());
                     model.addAttribute("isEnabled",user.isEnabled() ? "Habilitado" : "Deshabilitado");
                     model.addAttribute("actionName",user.isEnabled() ? "Deshabilitar" : "Habilitar");
                 }
