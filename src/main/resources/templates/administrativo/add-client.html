@@ -87,9 +87,9 @@
                 </div>
                 <form th:action="@{/administrativo/add-client}" th:object="${user}" method="post">
                     <div class="input-item">
-                        <label>RUT (Ej: 10123123K)</label>
+                        <label>RUT</label>
                         <label class="input-box">
-                            <input class="information-form-control" type="text" th:field="*{rut}" required>
+                            <input class="information-form-control" type="text" th:field="*{rut}" placeholder="10123123K" required>
                         </label>
                     </div>
                     <div class="input-item">
@@ -113,7 +113,7 @@
                     <div class="input-item">
                         <label>Número de teléfono</label>
                         <label class="input-box">
-                            <input class="information-form-control" type="tel" pattern="\d*" id="phoneNumber" name="phoneNumber" required>
+                            <input class="information-form-control" type="tel" pattern="\d*" id="phoneNumber" name="phoneNumber" placeholder="912345678" required>
                         </label>
                     </div>
                     <div class="input-item">
