@@ -5,8 +5,6 @@
     height: 50px;
 }
 
-
-
 .input-container
 {
     box-sizing: border-box;
@@ -36,30 +34,39 @@
     bottom: 0;
     padding: 0;
     margin: auto;
-    height: 200px;
+    height: 130px;
     width: 600px;
     border-radius: 5px;
     border: 1px solid #000000;
-    background-color: #ffffff;;
-}
-
-
-.rut-input
-{
-    padding: 0;
-    margin: 3px 0 0 10px;
-}
-
-.initial-message
-{
+    background-color: #ffffff;
     text-align: center;
 }
 
-.submit-button
+.rut-input
 {
-    justify-content: flex-end;
-    display: flex;
+    display: inline;
+    padding: 0;
+    margin: 0 0 0 10px;
+}
+
+.form-container
+{
+    margin: 10px 0 0 0;
+    height: 100px;
+}
+
+.search-submit-button
+{
+    position: absolute;
+    top: 0;
+    right: 0;
     margin: 10px;
+    padding: 0;
+}
+
+.change-status-submit-button
+{
+
 }
 
 h1
@@ -93,6 +100,3 @@ h1
     /* Color borde mientras está siendo clickeado*/
     --bs-btn-active-border-color: #b4b2a6;
 }
-
-
-

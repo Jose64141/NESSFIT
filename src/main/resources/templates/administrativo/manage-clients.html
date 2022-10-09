@@ -107,25 +107,41 @@
 </nav>
 
 <h1>Administrar Clientes</h1>
-
-<form th:action="@{/administrativo/manage-clients}">
 <div class="input-container">
+
+  <div  class="user-search-container">
+      <div th:if="${RUT} ne null">
+        <p th:text="'Nombre Completo: '+${name}+' '+${firstLastName}
+      +' '+${firstLastName}"></p>
+        <p th:text="'Estado: ' +${isEnabled}">
+        </p>
+        <form th:action="@{/administrativo/manage-clients} " method="post" class="form-container">
+          <input type="hidden" name="rut" th:value="${RUT}" />
+          <div class="change-status-submit-button">
+            <button type="submit"  class="btn btn-primary" th:text="${actionName}"></button>
+          </div>
+        </form>
+
+      </div>
+      <div th:unless="${RUT} ne null">
+        <p  class="initial-message" th:text="${nullMessage}"></p>
+      </div>
+  </div>
+<form class="form-container" th:action="@{/administrativo/manage-clients}">
   <div class="rut-input">
     <label>Ingrese RUT del cliente a buscar
-      <input name="rut" type="text" placeholder="RUT (Ej: 20123123K)">
+      <input th:if="${RUT} ne null" name="rut" type="text" placeholder="RUT (Ej: 20123123K)" th:value="${RUT}">
+      <input th:unless="${RUT} ne null" name="rut" type="text" placeholder="RUT (Ej: 20123123K)">
     </label>
   </div>
-  <div class="submit-button">
+  <div class="search-submit-button">
     <button type="submit" class="btn btn-primary">Buscar</button>
   </div>
-  <div  class="user-search-container">
-    <p th:if="${RUT} ne null" class="initial-message" th:text="'Nombre Completo: '+${name}+' '+${firstLastName}
-    +' '+${firstLastName}"></p>
-    <p th:unless="${RUT} ne null" class="initial-message">No ha seleccionado ningún usuario</p>
-  </div>
-</div>
 </form>
 
+
+
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous">
