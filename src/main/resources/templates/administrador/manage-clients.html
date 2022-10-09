@@ -3,9 +3,9 @@
       xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>NESSFIT | Habilitar/Deshabilitar clientes</title>
-    <link rel="icon" th:href="@{/images/nessfit-logo.png}">
+  <meta charset="UTF-8">
+  <title>NESSFIT | Habilitar/Deshabilitar clientes</title>
+  <link rel="icon" th:href="@{/images/nessfit-logo.png}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   <link rel="stylesheet" th:href="@{/css/login-nessfit-logo.css}">
@@ -45,26 +45,12 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-
           <li class="nav-item">
-            <a class="nav-link" href="#">Agregar Recintos</a>
+            <a class="nav-link" href="#">Agregar Administrativos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Agregar Cliente</a>
+            <a class="nav-link" th:href="@{/administrador/manage-clients}">Administrar Usuarios</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Administrar Recintos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/administrativo/manage-clients}">Administrar Clientes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Administrar Solicitudes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Estadísticas</a>
-          </li>
-
           <li class="nav-item mt-5">
             <a class="nav-link" th:href="@{/account-settings}">Configuración de cuenta</a>
           </li>
@@ -81,56 +67,56 @@
 <div class="input-container">
 
   <div  class="user-search-container">
-      <div th:if="${RUT} ne null">
-        <p th:text="'Nombre Completo: '+${name}+' '+${firstLastName}
+    <div th:if="${RUT} ne null">
+      <p th:text="'Nombre Completo: '+${name}+' '+${firstLastName}
       +' '+${firstLastName}"></p>
-        <p th:text="'Estado: ' +${isEnabled}">
-        </p>
-        <form th:action="@{/administrativo/manage-clients} " method="post" class="form-container">
-          <input type="hidden" name="rut" th:value="${RUT}" />
-          <div class="change-status-submit-button">
-            <button type="button"  class="btn btn-primary enable-disable" th:text="${actionName}" data-bs-toggle="modal"
-                    data-bs-target="#confirmModal"></button>
-          </div>
-          <!-- MODAL -->
-          <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
-               aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="confirmModalLabel">Confirmar</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"
-                          aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <p>¿Está seguro de realizar los cambios?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary"
-                          data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" class="btn btn-primary">Aplicar</button>
-                </div>
+      <p th:text="'Estado: ' +${isEnabled}">
+      </p>
+      <form th:action="@{/administrador/manage-clients} " method="post" class="form-container">
+        <input type="hidden" name="rut" th:value="${RUT}" />
+        <div class="change-status-submit-button">
+          <button type="button"  class="btn btn-primary enable-disable" th:text="${actionName}" data-bs-toggle="modal"
+                  data-bs-target="#confirmModal"></button>
+        </div>
+        <!-- MODAL -->
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirmar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>¿Está seguro de realizar los cambios?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Aplicar</button>
               </div>
             </div>
           </div>
-        </form>
+        </div>
+      </form>
 
-      </div>
-      <div th:unless="${RUT} ne null">
-        <p  class="initial-message" th:text="${nullMessage}"></p>
-      </div>
+    </div>
+    <div th:unless="${RUT} ne null">
+      <p  class="initial-message" th:text="${nullMessage}"></p>
+    </div>
   </div>
-<form class="form-container" th:action="@{/administrativo/manage-clients}">
-  <div class="rut-input">
-    <label>Ingrese RUT del cliente a buscar
-      <input th:if="${RUT} ne null" name="rut" type="text" placeholder="RUT (Ej: 20123123K)" th:value="${RUT}">
-      <input th:unless="${RUT} ne null" name="rut" type="text" placeholder="RUT (Ej: 20123123K)">
-    </label>
-  </div>
-  <div class="search-submit-button">
-    <button type="submit" class="btn search-button">Buscar</button>
-  </div>
-</form>
+  <form class="form-container" th:action="@{/administrador/manage-clients}">
+    <div class="rut-input">
+      <label>Ingrese RUT del cliente a buscar
+        <input th:if="${RUT} ne null" name="rut" type="text" placeholder="RUT (Ej: 20123123K)" th:value="${RUT}">
+        <input th:unless="${RUT} ne null" name="rut" type="text" placeholder="RUT (Ej: 20123123K)">
+      </label>
+    </div>
+    <div class="search-submit-button">
+      <button type="submit" class="btn search-button">Buscar</button>
+    </div>
+  </form>
 
 
 

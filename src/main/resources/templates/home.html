@@ -49,7 +49,7 @@
                         <a class="nav-link" href="#">Agregar Administrativos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Administrar Usuarios</a>
+                        <a class="nav-link" th:href="@{/administrador/manage-clients}">Administrar Usuarios</a>
                     </li>
                     <li class="nav-item mt-5">
                         <a class="nav-link" th:href="@{/account-settings}">Configuración de cuenta</a>
@@ -119,7 +119,7 @@
                 <img class="button-logo" th:src="@{images/add-user-logo.png}" alt="Agregar administrativos"></button>
             </button>
         </a>
-        <a th:href="@{/home}">
+        <a th:href="@{/administrador/manage-clients}">
             <button>Administrar Usuarios
                 <img class="button-logo" th:src="@{images/manage-users-logo.png}" alt="Administrar usuarios">
             </button>
