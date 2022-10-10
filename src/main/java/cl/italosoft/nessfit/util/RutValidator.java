@@ -15,18 +15,23 @@ public class RutValidator implements Validator
         return User.class.isAssignableFrom(clazz);
     }
 
-
     @Override
     public void validate(Object target, Errors errors)
     {
         User user = (User) target;
         String rut = user.getRut();
 
+        if(rut == null)
+        {
+            errors.rejectValue("rut", null, "Invalid RUT");
+            return;
+        }
+
         int checkDigit = 0;
         char originalCheckDigitChar = rut.charAt(rut.length()-1);
         int[] serie = {2,3,4,5,6,7};
         int seriePositionCounter = 0;
-        for(int i = rut.length()-1 ; i>=0; i--)
+        for(int i = rut.length()-2 ; i>=0; i--)
         {
             if (seriePositionCounter == 6) seriePositionCounter = 0;
             int number = rut.charAt(i) - '0';
