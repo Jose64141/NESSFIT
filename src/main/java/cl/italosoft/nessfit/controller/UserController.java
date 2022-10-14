@@ -48,11 +48,6 @@ public class UserController
     public String config(HttpServletRequest request, Model model)
     {
         User user = this.userService.find(request.getRemoteUser());
-        model.addAttribute("rut", user.getRut().strip());
-        model.addAttribute("name", user.getName().strip());
-        model.addAttribute("lastName", user.getFirstLastName().strip());
-        model.addAttribute("email",user.getEmail().strip());
-        model.addAttribute("phoneNumber",user.getPhoneNumber());
         model.addAttribute("user",user);
         return "account-settings";
     }

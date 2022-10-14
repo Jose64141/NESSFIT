@@ -110,7 +110,7 @@
 <div class="container">
     <div class = "labels">
         <h1>Bienvenido</h1>
-        <h2 th:text="${name}+' '+${lastName}" ></h2>
+        <h2 th:text="${name}+' '+${firstLastName}+' '+${secondLastName}" ></h2>
     </div>
     <div class="buttons" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">
         <h3>¿Qué desea hacer?</h3>
