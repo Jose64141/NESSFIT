@@ -69,7 +69,7 @@
   <div  class="user-search-container">
     <div th:if="${RUT} ne null">
       <p th:text="'Nombre Completo: '+${name}+' '+${firstLastName}
-      +' '+${firstLastName}"></p>
+      +' '+${secondLastName}"></p>
       <p th:text="'Estado: ' +${isEnabled}">
       </p>
       <form th:action="@{/administrador/manage-clients} " method="post" class="form-container">
