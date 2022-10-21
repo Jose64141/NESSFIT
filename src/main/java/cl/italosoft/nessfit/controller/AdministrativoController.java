@@ -76,9 +76,11 @@ public class AdministrativoController
     }
 	
     @GetMapping("/administrativo/add-client")
-    public String addClient(Model model)
+    public String addClient(Model model, User newUser)
     {
-        model.addAttribute("user", new User());
+        if(newUser == null)
+            newUser = new User();
+        model.addAttribute("user", newUser);
     	return "administrativo/add-client";
     }
     
