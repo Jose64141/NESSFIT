@@ -5,31 +5,26 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 /**
- * Model for SportsFacility Entity
+ * Model for DeportiveCenter Entity
  */
 @Entity
 @Table(name = "deportive_centers")
 public class DeportiveCenter implements Serializable
 {
-    //@Name
     @NotBlank
     @Id
     private String name;
-    //@Address
     @NotBlank
-    private String address;     
-    //@Type
+    private String address;
     @NotBlank
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id",referencedColumnName = "id")
     private Type type;
-    //@Cost
     @NotBlank
-    @Min(value = 999, message = "El costo por dia ingresado no es válido. Tiene que ser mayor o igual a 1000")
+    @Min(value = 1000, message = "El costo por dia ingresado no es válido. Tiene que ser mayor o igual a 1000")
     @Max(value = 999999999, message = "El costo por dia ingresado no es válido.")
     @Column(name = "cost_per_day")
     private int costPerDay;
-    //@Status
     @NotBlank
     @Column(name = "is_enabled")
     private boolean isEnabled;
@@ -66,8 +61,8 @@ public class DeportiveCenter implements Serializable
     }
 
     /**
-     * Gets the sportsfacilityname
-     * @return Current sportsfacilityname
+     * Gets the deportive center name
+     * @return Current deportive center name
      */
     public String getName()
     {
@@ -75,8 +70,8 @@ public class DeportiveCenter implements Serializable
     }
 
     /**
-     * Sets the sportsfacilityname
-     * @param name New name for sportsfacility
+     * Sets the deportive center name
+     * @param name New name for the deportive center
      */
     public void setName(String name)
     {
@@ -84,8 +79,8 @@ public class DeportiveCenter implements Serializable
     }
 
     /**
-     * Gets the sportsfacilityaddress
-     * @return Current sportsfacilityaddress
+     * Gets the deportive center address
+     * @return Current deportive center address
      */
     public String getAddress()
     {
@@ -93,8 +88,8 @@ public class DeportiveCenter implements Serializable
     }
 
     /**
-     * Sets the sportsfacilityaddress
-     * @param address New address for sportsfacility
+     * Sets the deportive center address
+     * @param address New address for the deportive center
      */
     public void setAddress(String address)
     {
@@ -102,8 +97,8 @@ public class DeportiveCenter implements Serializable
     }
 
     /**
-     * Gets the sportsfacility type
-     * @return sportsfacility type
+     * Gets the deportive center type
+     * @return The deportive center type
      */
     public Type getType()
     {
@@ -111,8 +106,8 @@ public class DeportiveCenter implements Serializable
     }
 
     /**
-     * Sets the sportsfacility type
-     * @param type New sportsfacility type
+     * Sets the deportive center type
+     * @param type New deportive center type
      */
     public void setType(Type type)
     {
