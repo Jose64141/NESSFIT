@@ -3,13 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <meta charset="UTF-8">
-        <title>NESSFIT | Editar datos</title>
-        <link rel="icon" th:href="@{/images/nessfit-logo.png}">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-        <link rel="stylesheet" th:href="@{/css/login-nessfit-logo.css}">
+    <head th:replace="fragments/common :: head('Editar Datos', ~{::link})">
         <link rel="stylesheet" th:href="@{/css/account-settings.css}">
         <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
         <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
@@ -17,95 +11,11 @@
     </head>
 
     <body>
-        <div class="nessfit-logo-container">
-            <a th:href="@{/home}">
-                <img class = "nessfit-logo-home" th:src="@{/images/nessfit-logo.png}" alt = "Nessfit logo">
-            </a>
-        </div>
-        <div class="shortcuts-logo-container">
-            <a th:href="@{/home}">
-                <img class="logos" th:src="@{images/home-logo.png}" alt="Inicio">
-            </a>
-            <a th:href="@{/account-settings}">
-                <img class="logos" th:src="@{images/settings-logo.png}" alt="Editar datos">
-            </a>
-            <a th:href="@{/logout}">
-                <img class="logos" th:src="@{images/logout-logo.png}" alt="Cerrar sesión">
-            </a>
-        </div>
-        <h1>Editar Datos</h1>
-        <nav class="navbar fixed-top ">
-            <div class="container-fluid">
-                <button class="navbar-toggler position-absolute top-50 start-0 border border-0 m-3 p-2" type="button"
-                        data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
-                     aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title mt-3" id="offcanvasNavbarLabel">NESSFIT</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" sec:authorize="hasRole('ADMINISTRADOR')">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Agregar Administrativos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/administrador/manage-clients}">Administrar Usuarios</a>
-                            </li>
-                            <li class="nav-item mt-5">
-                                <a class="nav-link" th:href="@{/account-settings}">Editar datos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/logout}">Cerrar Sesión</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" sec:authorize="hasRole('ADMINISTRATIVO')">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Agregar Recintos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/administrativo/add-client}">Agregar Cliente</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Administrar Recintos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/administrativo/manage-clients}">Administrar Clientes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Administrar Solicitudes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Estadísticas</a>
-                            </li>
-                            <li class="nav-item mt-5">
-                                <a class="nav-link" th:href="@{/account-settings}">Editar datos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/logout}">Cerrar Sesión</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" sec:authorize="hasRole('CLIENTE')">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Arrendar</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Mis Solicitudes</a>
-                            </li>
-                            <li class="nav-item mt-5">
-                                <a class="nav-link" th:href="@{/account-settings}">Editar datos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/logout}">Cerrar Sesión</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <nav th:replace="~{fragments/navigation::navbar}"></nav>
 
+        <div th:replace="~{fragments/navigation::shortcuts}"></div>
+
+        <h1>Editar Datos</h1>
 
         <div class="form-container">
             <nav>
@@ -257,8 +167,6 @@
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-            crossorigin="anonymous"></script>
+        <div th:replace="fragments/common :: common-body"></div>
     </body>
 </html>
