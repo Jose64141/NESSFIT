@@ -8,8 +8,8 @@ import javax.validation.constraints.*;
  * Model for SportsFacility Entity
  */
 @Entity
-@Table(name = "sportsfacilitys")
-public class SportsFacility implements Serializable
+@Table(name = "deportive_centers")
+public class DeportiveCenter implements Serializable
 {
     //@Name
     @NotBlank
@@ -25,43 +25,43 @@ public class SportsFacility implements Serializable
     private Type type;
     //@Cost
     @NotBlank
-    @Min(value = 1000, message = "El costo por dia ingresado no es válido. Tiene que ser mayor o igual a 1000")
+    @Min(value = 999, message = "El costo por dia ingresado no es válido. Tiene que ser mayor o igual a 1000")
     @Max(value = 999999999, message = "El costo por dia ingresado no es válido.")
-    @Column(name = "cost_day")
-    private int cost;
+    @Column(name = "cost_per_day")
+    private int costPerDay;
     //@Status
     @NotBlank
-    @Column(name = "status")
-    private boolean status;
+    @Column(name = "is_enabled")
+    private boolean isEnabled;
 
     /**
      * Full Constructor
-     * @param name Name of sportsfacility
-     * @param address Address of sportsfacility
-     * @param type Type of sportsfacility
-     * @param cost Cost of sportsfacility
-     * @param status Status status of sportsfacility
+     * @param name Name of DeportiveCenter
+     * @param address Address of DeportiveCenter
+     * @param type Type of DeportiveCenter
+     * @param costPerDay Cost of DeportiveCenter
+     * @param isEnabled if DeportiveCenter is enabled
      */
-    public SportsFacility(String name, String address, Type type, int cost, boolean status)
+    public DeportiveCenter(String name, String address, Type type, int costPerDay, boolean isEnabled)
     {
         this.name = name;
         this.address = address;
         this.type = type;
-        this.cost = cost;
-        this.status = status;
+        this.costPerDay = costPerDay;
+        this.isEnabled = isEnabled;
 
     }
 
     /**
      * Empty Constructor, initialize String as null, int as -1 and boolean as false
      */
-    public SportsFacility()
+    public DeportiveCenter()
     {
         this.name = null;
         this.address = null;
         this.type = null;
-        this.cost = -1;
-        this.status = false;
+        this.costPerDay = -1;
+        this.isEnabled = false;
 
     }
 
@@ -112,7 +112,7 @@ public class SportsFacility implements Serializable
 
     /**
      * Sets the sportsfacility type
-     * @param tyoe New sportsfacility type
+     * @param type New sportsfacility type
      */
     public void setType(Type type)
     {
@@ -120,39 +120,40 @@ public class SportsFacility implements Serializable
     }
 
     /**
-     * Gets the sportsfacility phone number
-     * @return Current sportsfacility phone number
+     * Gets the cost per day
+     * @return Integer with cost per day
      */
-    public int getCost()
+    public int getCostPerDay()
     {
-        return cost;
+        return costPerDay;
     }
 
     /**
-     * Sets the sportsfacility cost for day
-     * @param cost New sportsfacility cost for day
+     * Sets the cost per day
+     * @param costPerDay new cost per day
      */
-    public void setCost(int cost)
+    public void setCostPerDay(int costPerDay)
     {
-        this.cost = cost;
+        this.costPerDay = costPerDay;
     }
 
     /**
-     * Gets the sportsfacility enabled status
-     * @return sportsfacility enabled status
+     * Gets the enabled status
+     * @return True if its enabled, False is not
      */
-    public boolean Status()
+    public boolean isEnabled()
     {
-        return status;
+        return isEnabled;
     }
 
     /**
-     * Sets the sportsfacility enabled status
-     * @param status New enabled status
+     * Sets the enabled status
+     * @param enabled new enabled status
      */
-    public void setStatus(boolean status)
+    public void setEnabled(boolean enabled)
     {
-        this.status = status;
+        isEnabled = enabled;
     }
+
 }
 

@@ -1,7 +1,7 @@
 package cl.italosoft.nessfit.service;
 
 
-import cl.italosoft.nessfit.model.SportsFacility;
+import cl.italosoft.nessfit.model.DeportiveCenter;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface SportsFacilityService
      * @param SportsFacilityname the id of the record to find.
      * @return SportsFacility if exists, null if not
      */
-    public SportsFacility find(String SportsFacilityName);
+    public DeportiveCenter find(String SportsFacilityName);
 
     /**
      * Find a sportsfacility by their SportsFacilityName and type
@@ -23,7 +23,7 @@ public interface SportsFacilityService
      * @param type the type of the sportsfacility to find
      * @return SportsFacility if exists, null if not
      */
-    public SportsFacility find(String SportsFacilityName,int type);
+    public DeportiveCenter find(String SportsFacilityName, int type);
 
     /**
      * Find a sportsfacility by their address
@@ -31,20 +31,20 @@ public interface SportsFacilityService
      * @param address the address of the record to find
      * @return SportsFacility if exists, null if not
      */
-    public SportsFacility findByNameOrAddress(String SportsFacilityName,String address);
+    public DeportiveCenter findByNameOrAddress(String SportsFacilityName, String address);
 
 
     /**
      * Saves a given sportsfacility record.
      * @param sportsfacility the sportsfacility to save.
      */
-    public void save(SportsFacility sportsfacility);
+    public void save(DeportiveCenter sportsfacility);
 
     /**
      * Saves a given sportsfacility record and flushes the change instantly.
      * @param sportsfacility the sportsfacility to save.
      */
-    public void saveAndFlush(SportsFacility sportsfacility);
+    public void saveAndFlush(DeportiveCenter sportsfacility);
 
     /**
      * Deletes a sportsfacility record.
@@ -56,7 +56,7 @@ public interface SportsFacilityService
      * Returns all sportsfacility records.
      * @return a list containing the records.
      */
-    public List<SportsFacility> list();
+    public List<DeportiveCenter> list();
 
     /**
      * Flushes all the changes to the database.

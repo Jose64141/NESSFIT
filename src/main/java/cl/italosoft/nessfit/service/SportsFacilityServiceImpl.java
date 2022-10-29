@@ -1,6 +1,6 @@
 package cl.italosoft.nessfit.service;
 
-import cl.italosoft.nessfit.model.SportsFacility;
+import cl.italosoft.nessfit.model.DeportiveCenter;
 import cl.italosoft.nessfit.repository.SportsFacilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +20,9 @@ public class SportsFacilityServiceImpl implements SportsFacilityService
      * @return SportsFacility if exists, null if not
      */
     @Override
-    public SportsFacility find(String SportsFacilityName)
+    public DeportiveCenter find(String SportsFacilityName)
     {
-        java.util.Optional<SportsFacility> sportsfacility = this.sportsfacilityRepository.findById(SportsFacilityName);
+        java.util.Optional<DeportiveCenter> sportsfacility = this.sportsfacilityRepository.findById(SportsFacilityName);
         return sportsfacility.orElse(null);
     }
 
@@ -34,7 +34,7 @@ public class SportsFacilityServiceImpl implements SportsFacilityService
      * @return SportsFacility if exists, null if not
      */
     @Override
-    public SportsFacility find(String SportsFacilityName, int type)
+    public DeportiveCenter find(String SportsFacilityName, int type)
     {
         return this.sportsfacilityRepository.findByNameAndType_id(SportsFacilityName,type);
     }
@@ -46,7 +46,7 @@ public class SportsFacilityServiceImpl implements SportsFacilityService
      * @return SportsFacility if exists, null if not
      */
     @Override
-    public SportsFacility findByNameOrAddress(String SportsFacilityName,String address) {
+    public DeportiveCenter findByNameOrAddress(String SportsFacilityName, String address) {
         return this.sportsfacilityRepository.findByNameOrAddress(SportsFacilityName, address);
     }
 
@@ -55,7 +55,7 @@ public class SportsFacilityServiceImpl implements SportsFacilityService
      * @param sportsfacility the sportsfacility to save.
      */
     @Override
-    public void save(SportsFacility sportsfacility)
+    public void save(DeportiveCenter sportsfacility)
     {
     	sportsfacilityRepository.save(sportsfacility);
     }
@@ -65,7 +65,7 @@ public class SportsFacilityServiceImpl implements SportsFacilityService
      * @param sportsfacility the sportsfacility to save.
      */
     @Override
-    public void saveAndFlush(SportsFacility sportsfacility) { sportsfacilityRepository.saveAndFlush(sportsfacility); }
+    public void saveAndFlush(DeportiveCenter sportsfacility) { sportsfacilityRepository.saveAndFlush(sportsfacility); }
 
     /**
      * Deletes a sportsfacility record.
@@ -82,7 +82,7 @@ public class SportsFacilityServiceImpl implements SportsFacilityService
      * @return a list containing the records.
      */
     @Override
-    public List<SportsFacility> list()
+    public List<DeportiveCenter> list()
     {
         return sportsfacilityRepository.findAll();
     }

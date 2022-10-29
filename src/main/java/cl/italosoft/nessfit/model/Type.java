@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Model for Type Entity
  */
 @Entity
-@Table(name = "types")
+@Table(name = "deportive_center_types")
 public class Type implements Serializable
 {
     @Id
@@ -18,7 +18,7 @@ public class Type implements Serializable
 
     /**
      * Full constructor
-     * @param id Id of type
+     * @param id Identification of type
      * @param name Name of type
      */
     public Type(int id, String name)
@@ -38,7 +38,7 @@ public class Type implements Serializable
 
     /**
      * Constructor, initialize name as null
-     * @param id Id of type
+     * @param id Identification of type
      */
     public Type(int id)
     {
