@@ -3,9 +3,11 @@ package cl.italosoft.nessfit.service;
 import cl.italosoft.nessfit.model.RentRequest;
 import cl.italosoft.nessfit.repository.RentRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RentRequestServiceImpl implements RentRequestService
 {
     @Autowired

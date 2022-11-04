@@ -2,7 +2,7 @@ package cl.italosoft.nessfit.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date; //https://www.javatpoint.com/java-sql-date
 import java.util.List;
 
 /**
