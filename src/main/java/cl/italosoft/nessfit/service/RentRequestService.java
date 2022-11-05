@@ -2,12 +2,15 @@ package cl.italosoft.nessfit.service;
 
 import cl.italosoft.nessfit.model.RentRequest;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
  * Interface for the RentRequest Service
  */
-public interface RentRequestService
+public interface
+
+RentRequestService
 {
     /**
      * Find a rent request by its id
@@ -46,13 +49,15 @@ public interface RentRequestService
      */
     public List<RentRequest> listByUser(String userRut);
 
+
+    public List<RentRequest> listByDeportiveCenter(String deportiveCenterName);
     /**
-     * Returns all rent request records associated to the given deportive center.
+     * Returns all dates of rent request records associated to the given deportive center, in the next 7 days from current date.
      *
      * @param deportiveCenterName The deportive center name.
      * @return a list containing the records.
      */
-    public List<RentRequest> listByDeportiveCenter(String deportiveCenterName);
+    public List<Date> listDeportiveCenterDates(String deportiveCenterName);
 
     /**
      * Flushes all the changes to the database.

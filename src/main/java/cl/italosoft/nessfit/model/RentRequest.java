@@ -1,5 +1,7 @@
 package cl.italosoft.nessfit.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date; //https://www.javatpoint.com/java-sql-date
@@ -25,6 +27,8 @@ public class RentRequest implements Serializable
     private String status;
     @Column(name="total_price")
     private int totalPrice;
+    @Column(name="request_date")
+    private Date requestDate;
 
     @ElementCollection
     @CollectionTable
@@ -33,6 +37,7 @@ public class RentRequest implements Serializable
         joinColumns=@JoinColumn(name="rent_id", referencedColumnName="id")
     )
     @Column(name="date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private List<Date> dates; // Based on https://en.wikibooks.org/wiki/Java_Persistence/ElementCollection
 
     /**
@@ -43,13 +48,14 @@ public class RentRequest implements Serializable
      * @param totalPrice The total price of the request
      * @param dates List of dates the center is requested
      */
-    public RentRequest(User user, DeportiveCenter deportiveCenter, String status, int totalPrice, List<Date> dates)
+    public RentRequest(User user, DeportiveCenter deportiveCenter, String status, int totalPrice, List<Date> dates, Date requestDate)
     {
         this.user = user;
         this.deportiveCenter = deportiveCenter;
         this.status = status;
         this.totalPrice = totalPrice;
         this.dates = dates;
+        this.requestDate = requestDate;
     }
 
     /**
@@ -62,6 +68,7 @@ public class RentRequest implements Serializable
         this.status = null;
         this.totalPrice = -1;
         this.dates = null;
+        this.requestDate = null;
     }
 
     /**
@@ -143,6 +150,23 @@ public class RentRequest implements Serializable
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+    /**
+     * Gets the date the request was made
+     * @return The date
+     */
+    public Date getRequestDate() {
+        return requestDate;
+    }
+
+    /**
+     * Sets the date the request was made
+     * @param requestDate The new request date
+     */
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
+    }
+
 
     /**
      * Gets the list of dates of the request

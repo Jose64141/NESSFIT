@@ -1,9 +1,10 @@
 package cl.italosoft.nessfit.repository;
 
 import cl.italosoft.nessfit.model.RentRequest;
-import cl.italosoft.nessfit.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -12,5 +13,11 @@ import java.util.List;
 public interface RentRequestRepository extends JpaRepository<RentRequest, Integer>
 {
     List<RentRequest> findByUser_Rut(String userRut);
-    List<RentRequest> findByDeportive_Center_Name(String deportiveCenterName);
+    List<RentRequest> findByDeportiveCenter(String deportiveCenterName);
+
+    @Query(value = "SELECT rd.date " +
+            "FROM rent_requests r INNER JOIN rent_dates rd ON r.id = rd.rent_id " +
+            "WHERE rd.date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL 7 DAY " +
+            "AND r.deportive_center_name = ?1", nativeQuery = true)
+    List<Date> findDeportiveCenterDates(String deportiveCenterName);
 }

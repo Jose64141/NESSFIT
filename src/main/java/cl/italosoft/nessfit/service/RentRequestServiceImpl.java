@@ -5,6 +5,7 @@ import cl.italosoft.nessfit.repository.RentRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -65,7 +66,16 @@ public class RentRequestServiceImpl implements RentRequestService
      * @return a list containing the records.
      */
     @Override
-    public List<RentRequest> listByDeportiveCenter(String deportiveCenterName) { return this.rentRequestRepository.findByDeportive_Center_Name(deportiveCenterName); }
+    public List<RentRequest> listByDeportiveCenter(String deportiveCenterName) { return this.rentRequestRepository.findByDeportiveCenter(deportiveCenterName); }
+
+    /**
+     * Returns all dates of rent request records associated to the given deportive center, in the next 7 days from current date.
+     *
+     * @param deportiveCenterName The deportive center name.
+     * @return a list containing the records.
+     */
+    @Override
+    public List<Date> listDeportiveCenterDates(String deportiveCenterName) { return this.rentRequestRepository.findDeportiveCenterDates(deportiveCenterName); }
 
     /**
      * Flushes all the changes to the database.

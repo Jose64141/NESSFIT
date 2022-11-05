@@ -86,6 +86,13 @@ public class DeportiveCenterServiceImpl implements DeportiveCenterService
     }
 
     /**
+     * Returns all DeportiveCenter records which are enabled.
+     * @return a list containing the records.
+     */
+    @Override
+    public List<DeportiveCenter> listEnabled(){return deportiveCenterRepository.findByIsEnabledTrue();}
+
+    /**
      * Flushes all the changes to the database.
      */
     @Override

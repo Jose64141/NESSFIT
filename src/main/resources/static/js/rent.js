@@ -23,28 +23,25 @@ function dateButton(event)
 }
 function confirmButton(event)
 {
-    var pricePerDay = parseInt(document.getElementById("price").value.replace("$",""));
+    var pricePerDay = parseInt(document.getElementById("price").textContent);
     var days = 0;
     selectedDates.forEach( (item) => { if(item) { days++;} })
-    var totalPrice = "$" + toString(days*pricePerDay);
+    var totalPrice = days*pricePerDay;
     document.getElementById("total").value = totalPrice;
-    document.getElementById("confirm-total").value = totalPrice;
+    document.getElementById("confirm-total").textContent = "$" + totalPrice.toString();
     var datesForm = "";
-    allDates.forEach( (item, index) =>
+    var count = 0;
+    for(var i = 0; i < allDates.length; i++)
     {
-        if(selectedDates[index])
+        if(selectedDates[i])
         {
+            var date = allDates.item(i);
             var dateEntry = "";
-            if(index != 0){ dateEntry = "," }
-            dateEntry.concat(item.value);
-            datesForm.concat(dateEntry);
+            if(count != 0){ dateEntry = "," }
+            dateEntry += date.textContent;
+            datesForm += dateEntry;
+            count++;
         }
-    })
+    }
     document.getElementById("dates").value = datesForm;
 }
-
-for (let button of document.getElementsByClassName("date-button"))
-{
-    button.onclick = dateButton;
-}
-document.getElementById("send-button").onclick = confirmButton;

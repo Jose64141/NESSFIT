@@ -59,6 +59,12 @@ public interface DeportiveCenterService
     public List<DeportiveCenter> list();
 
     /**
+     * Returns all DeportiveCenter records which are enabled.
+     * @return a list containing the records.
+     */
+    public List<DeportiveCenter> listEnabled();
+
+    /**
      * Flushes all the changes to the database.
      */
     public void flush();

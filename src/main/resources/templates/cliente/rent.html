@@ -63,40 +63,43 @@
       </div>
     </nav>
 
-    <script th:href="@{/js/rent.js}"></script>
+    <script th:src="@{/js/rent.js}"></script>
     <h1>Arrendar</h1>
 
     <div class="center-selection-container">
       <th:block th:each="center : ${centers}">
-        <a th:href="@{/cliente/rent(id=${center.name})}" th:class="${param.id == center.name}? selection">
-          <p th:text="${center.name}"> <span th:text="${center.type.name}"></span> </p>
+        <a th:href="@{/cliente/rent(id=${center.name})}" th:class="${param.id == center.name}? 'selection'">
+          <p> <span th:text="${center.name}"></span> <span>       </span> <span th:text="${center.type.name}"></span> </p>
         </a>
       </th:block>
     </div>
 
     <div class="form-container" th:if="${selection ne null}">
       <h2 th:text="${selection.name}"></h2>
-      <p>Costo Diario: <span th:text="${selection.costPerDay}"></span></p>
+      <p>Costo Diario: $<span th:text="${selection.costPerDay}" id="price"></span></p>
       <p>Dirección: <span th:text="${selection.address}"></span></p>
         <h3>Seleccione los días que quiere arrendar</h3>
         <table>
-          <tr th:each="date : ${dates}">
-            <th class="date-label" th:id="'date'+${dateStat.index}" th:text="${date}"></th>
+          <tr>
+            <th:block th:each="date : ${dates}">
+              <th class="date-label" th:id="'date'+${dateStat.index}" th:text="${#dates.format(date, 'dd/MM/yyyy')}"></th>
+            </th:block>
           </tr>
-          <tr th:each="date : ${avaliable}">
-            <td class="date-button" th:if="${date}" th:id="${dateStat.index}"></td>
-            <td th:unless="${date}"></td>
-            </input>
+          <tr>
+            <th:block th:each="date : ${avaliable}">
+              <td class="date-button" onclick="dateButton(event)" th:if="${date}" th:id="${dateStat.index}">□</td>
+              <td class="unavailable-date"th:unless="${date}">X</td>
+            </th:block>
           </tr>
         </table>
-      <form>
+      <form th:action="@{/cliente/rent}" method="post">
         <input type="hidden" name="center" id="center" th:value="${selection.name}">
         <input type="hidden" name="dates" id="dates" value="">
         <input type="hidden" name="total" id="total" value="">
 
-        <div class="position-absolute bottom-0 end-0 m-5" id="send-button">
+        <div class="position-absolute bottom-0 end-0 m-5" id="send-button" style="display: none">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                  data-bs-target="#dataConfirmModal">
+                  data-bs-target="#dataConfirmModal" onclick="confirmButton()">
             Enviar
           </button>
         </div>
@@ -112,7 +115,7 @@
               </div>
               <div class="modal-body">
                 <p>¿Está seguro?</p>
-                <p>El monto total es <span class="confirm-total"></span></p>
+                <p>El monto total es <span id="confirm-total"></span></p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"
@@ -125,7 +128,7 @@
 
       </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/n pm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
             crossorigin="anonymous">
     </script>
