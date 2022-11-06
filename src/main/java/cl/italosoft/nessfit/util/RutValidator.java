@@ -26,7 +26,7 @@ public class RutValidator implements Validator
         String rut = user.getRut().toUpperCase();
         if(rut == null || !checkFormat(rut))
         {
-            errors.rejectValue("rut", null, "RUT inválido");
+            errors.rejectValue("rut", null, "El RUT es inválido.");
             return;
         }
 
@@ -38,7 +38,7 @@ public class RutValidator implements Validator
 
         if (checkDigitChar == originalCheckDigitChar)
             return;
-        errors.rejectValue("rut", null, "RUT inválido");
+        errors.rejectValue("rut", null, "El RUT es inválido.");
     }
 
     public boolean checkFormat(String rut)
