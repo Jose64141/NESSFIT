@@ -100,3 +100,8 @@ button:hover
     width: 35px;
     height: 35px;
 }
+
+.administrativo-buttons h3
+{
+    margin: 8vh auto 1vh;
+}

@@ -76,64 +76,27 @@ public class AdministrativoController
     }
 	
     @GetMapping("/administrativo/add-client")
-    public String addClient(Model model)
+    public String addClient(Model model, User newUser)
     {
-        model.addAttribute("user", new User());
+        if(newUser == null)
+            newUser = new User();
+        model.addAttribute("user", newUser);
     	return "administrativo/add-client";
     }
     
     @PostMapping("/administrativo/add-client")
     public String addClient(Model model, @Valid User newUser, BindingResult result, RedirectAttributes attr)
     {
-    	if(result.hasErrors())
-        {
-            StringBuffer errorMsg = new StringBuffer();
-            Boolean[] msgInserted = {false, false, false, false};
-            for (FieldError error: result.getFieldErrors())
-            {
-                switch (error.getField())
-                {
-                    case "name", "firstLastName", "secondLastName":
-                        if(!msgInserted[0])
-                        {
-                            errorMsg.append("Los nombres o apellidos deben tener más de 2 caracteres. ");
-                            msgInserted[0] = true;
-                        }
-                        break;
-                    case "phoneNumber":
-                        if(!msgInserted[1])
-                        {
-                            errorMsg.append("El teléfono móvil ingresado no es válido. ");
-                            msgInserted[1] = true;
-                        }
-                        break;
-                    case "email":
-                        if(!msgInserted[2])
-                        {
-                            errorMsg.append("Su correo electrónico no es válido. ");
-                            msgInserted[2] = true;
-                        }
-                        break;
-                    case "rut":
-                        if(!msgInserted[3])
-                        {
-                            errorMsg.append("RUT inválido. ");
-                            msgInserted[3] = true;
-                        }
-                        break;
-                }
-            }
-            attr.addFlashAttribute("errorMsg",errorMsg);
-            return "redirect:/administrativo/add-client";
-        }
-
     	newUser.setRut(newUser.getRut().toUpperCase());
 
         User user = this.userService.findByRutOrEmail(newUser.getRut(), newUser.getEmail());
         if(user != null)
         {
-            attr.addFlashAttribute("errorMsg","El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.");
-            return "redirect:/administrativo/add-client";
+            result.rejectValue("rut",null,"El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.");
+        }
+        if(result.hasErrors())
+        {
+            return "administrativo/add-client";
         }
 
     	newUser.setEnabled(true);

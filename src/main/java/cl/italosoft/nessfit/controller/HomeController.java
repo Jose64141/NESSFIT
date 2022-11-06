@@ -20,7 +20,8 @@ public class HomeController
     {
         User user = this.userService.find(request.getRemoteUser());
         model.addAttribute("name", user.getName().strip());
-        model.addAttribute("lastName", user.getFirstLastName().strip());
+        model.addAttribute("firstLastName", user.getFirstLastName().strip());
+        model.addAttribute("secondLastName", user.getSecondLastName().strip());
         return "home";
     }
 

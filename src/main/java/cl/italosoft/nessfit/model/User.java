@@ -19,10 +19,10 @@ public class User implements Serializable
     @Size(min = 3, message = "Los nombres deben tener más de 2 caracteres.")
     String name;
     //@Min(2)
-    @Size(min = 3, message = "El apellido debe tener más de 2 caracteres.")
+    @Size(min = 3, message = "El apellido paterno debe tener más de 2 caracteres.")
     @Column(name = "first_last_name")
     private String firstLastName;
-    @Size(min = 3, message = "El apellido debe tener más de 2 caracteres.")
+    @Size(min = 3, message = "El apellido materno debe tener más de 2 caracteres.")
     @Column(name = "second_last_name")
     private String secondLastName;
 
@@ -30,9 +30,9 @@ public class User implements Serializable
     @Min(value = 100000000, message = "El teléfono móvil ingresado no es válido.")
     @Max(value = 999999999, message = "El teléfono móvil ingresado no es válido.")
     @Column(name = "phone_number")
-    private int phoneNumber;
+    private Integer phoneNumber;
     @NotBlank
-    @Email(message = "Su correo electrónico no es válido.")
+    @Email(message = "El correo electrónico no es válido.")
     private String email;
     @Column(name = "is_enabled")
     private boolean isEnabled;
@@ -53,7 +53,7 @@ public class User implements Serializable
      * @param isEnabled Enables status of user
      * @param role Role of user
      */
-    public User(String rut, String name, String firstLastName, String secondLastName, String password, int phoneNumber,
+    public User(String rut, String name, String firstLastName, String secondLastName, String password, Integer phoneNumber,
                 String email, boolean isEnabled, Role role)
     {
         this.rut = rut;
@@ -77,7 +77,7 @@ public class User implements Serializable
         this.firstLastName = null;
         this.secondLastName = null;
         this.password = null;
-        this.phoneNumber = -1;
+        this.phoneNumber = null;
         this.email = null;
         this.isEnabled = false;
         this.role = null;
@@ -177,7 +177,7 @@ public class User implements Serializable
      * Gets the user phone number
      * @return Current user phone number
      */
-    public int getPhoneNumber()
+    public Integer getPhoneNumber()
     {
         return phoneNumber;
     }
@@ -186,7 +186,7 @@ public class User implements Serializable
      * Sets the user phone number
      * @param phoneNumber New user phone number
      */
-    public void setPhoneNumber(int phoneNumber)
+    public void setPhoneNumber(Integer phoneNumber)
     {
         this.phoneNumber = phoneNumber;
     }
