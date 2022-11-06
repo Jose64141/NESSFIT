@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="es">
-<head>
-    <meta charset="utf-8">
-    <title>NESSFIT | Iniciar Sesión</title>
+<head th:replace="fragments/common :: head('Iniciar Sesión', ~{::link})">
     <link rel="icon" th:href="@{/images/nessfit-logo.png}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/login.css}">
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
-    <link rel="stylesheet" th:href="@{/css/login-nessfit-logo.css}">
 </head>
 <body>
 <div class="container">
