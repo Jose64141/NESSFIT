@@ -102,37 +102,7 @@ public class UserController
                 attr.addFlashAttribute("showPassword", false);
                 if(result.hasErrors())
                 {
-                    StringBuffer errorMsg = new StringBuffer();
-                    Boolean[] msgInserted = {false, false, false};
-                    for (FieldError error: result.getFieldErrors())
-                    {
-                        switch (error.getField())
-                        {
-                            case "name", "firstLastName", "secondLastName":
-                                if(!msgInserted[0])
-                                {
-                                    errorMsg.append("Los nombres o apellidos deben tener más de 2 caracteres. ");
-                                    msgInserted[0] = true;
-                                }
-                                break;
-                            case "phoneNumber":
-                                if(!msgInserted[1])
-                                {
-                                    errorMsg.append("El teléfono móvil ingresado no es válido. ");
-                                    msgInserted[1] = true;
-                                }
-                                break;
-                            case "email":
-                                if(!msgInserted[2])
-                                {
-                                    errorMsg.append("Su correo electrónico no es válido. ");
-                                    msgInserted[2] = true;
-                                }
-                                break;
-                        }
-                    }
-                    attr.addFlashAttribute("infoErrorMsg",errorMsg);
-                    break;
+                    return "account-settings";
                 }
                 user.setName(newInfo.getName().strip());
                 user.setFirstLastName(newInfo.getFirstLastName().strip());

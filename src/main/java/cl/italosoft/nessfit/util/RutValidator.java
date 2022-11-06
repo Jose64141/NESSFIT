@@ -23,13 +23,13 @@ public class RutValidator implements Validator
     public void validate(Object target, Errors errors)
     {
         User user = (User) target;
-        String rut = user.getRut().toUpperCase();
+        String rut = user.getRut();
         if(rut == null || !checkFormat(rut))
         {
             errors.rejectValue("rut", null, "El RUT es inválido.");
             return;
         }
-
+        rut = rut.toUpperCase();
         int rutLenght = rut.length();
         char originalCheckDigitChar = rut.charAt(rutLenght-1);
         char checkDigitChar = 0;
