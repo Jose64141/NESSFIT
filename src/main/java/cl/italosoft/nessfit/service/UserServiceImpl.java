@@ -3,6 +3,8 @@ package cl.italosoft.nessfit.service;
 import cl.italosoft.nessfit.model.User;
 import cl.italosoft.nessfit.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,6 +50,18 @@ public class UserServiceImpl implements UserService
     @Override
     public User findByRutOrEmail(String userRut,String userEmail) {
         return this.userRepository.findByRutOrEmail(userRut, userEmail);
+    }
+
+    /**
+     * List or find a user by their rut and role
+     * @param userRut the id of the record to find
+     * @param page    the pagination information
+     * @param role    the role id of users to find
+     * @return Page with the records
+     */
+    @Override
+    public Page<User> findByRutWithRole(String userRut, Pageable page, int role) {
+        return this.userRepository.findByRutContainingAndRole_idOrderByIs_enabledDesc(userRut,role,page);
     }
 
     /**
