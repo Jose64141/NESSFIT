@@ -28,7 +28,7 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <th:block sec:authorize="hasRole('ADMINISTRADOR')">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Agregar Administrativos</a>
+                                    <a class="nav-link" th:href="@{/administrador/add-administrative}">Agregar Administrativos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" th:href="@{/administrador/manage-clients}">Administrar Usuarios</a>
