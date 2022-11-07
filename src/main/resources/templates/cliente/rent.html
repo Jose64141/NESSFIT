@@ -26,14 +26,17 @@
         <label th:text="${successMsg}"></label>
       </div>
 
-      <p th:if="${centers.size() == 0}">No hay centros disponibles.</p>
-      <div class="center-selection-container me-5 w-25 start-0">
-        <th:block th:each="center : ${centers}">
-          <a class="center-entry link-dark" th:href="@{/cliente/rent(id=${center.name})}" th:classappend="${(param.id ne null) ? (param.id[0] == center.name) : false}? 'selection'">
-            <div class="center-name" th:text="${center.name}"></div>
-            <div class="center-type" th:text="${center.type.name}"></div>
-          </a>
-        </th:block>
+      <h3 th:if="${centers.size() == 0}">No hay centros disponibles</h3>
+      <div th:if="${centers.size() ne 0}" class="me-5 w-25 start-0">
+        <h2>Por favor, seleccione un centro</h2>
+        <div class="center-selection-container">
+          <th:block th:each="center : ${centers}">
+            <a class="center-entry link-dark" th:href="@{/cliente/rent(id=${center.name})}" th:classappend="${(param.id ne null) ? (param.id[0] == center.name) : false}? 'selection'">
+              <div class="center-name" th:text="${center.name}"></div>
+              <div class="center-type" th:text="${center.type.name}"></div>
+            </a>
+          </th:block>
+        </div>
       </div>
 
       <div class="form-container ms-5 w-auto" th:if="${selection ne null}">
@@ -66,7 +69,7 @@
       <input type="hidden" name="dates" id="dates" value="">
       <input type="hidden" name="total" id="total" value="">
 
-      <div class="position-absolute bottom-0 end-0 m-5" id="send-button">
+      <div class="send-button position-absolute bottom-0 end-0 m-5" id="send-button">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#dataConfirmModal" onclick="confirmButton()">
           Enviar

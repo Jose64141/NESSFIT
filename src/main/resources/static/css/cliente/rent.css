@@ -120,6 +120,11 @@ h1
 {
     position: absolute;
     border: solid #282828;
+    background-color: white;
+    height: 50vh;
+    width: 30%;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 .center-entry
@@ -144,6 +149,7 @@ h1
 {
     position: absolute;
     left: 30%;
+    top: 0;
 }
 
 .input-box
@@ -159,7 +165,7 @@ h1
     padding: 0;
 }
 
-.submit-button
+.send-button
 {
     display: none;
 }
