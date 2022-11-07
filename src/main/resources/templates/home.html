@@ -114,7 +114,7 @@
     </div>
     <div class="buttons" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">
         <h3>¿Qué desea hacer?</h3>
-        <a th:href="@{/home}">
+        <a class="nav-link" th:href="@{/administrador/add-administrative}">
             <button>Agregar Administrativos
                 <img class="button-logo" th:src="@{images/add-user-logo.png}" alt="Agregar administrativos"></button>
             </button>
