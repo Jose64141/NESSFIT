@@ -7,12 +7,13 @@ function dateButton(event)
     selectedDates[buttonNumber] = !selectedDates[buttonNumber];
     if(selectedDates[buttonNumber])
     {
-        event.currentTarget.className = "activated"
+        // https://www.delftstack.com/howto/javascript/change-the-class-of-an-element-with-javascript/#:~:text=Change%20the%20Class%20of%20an%20HTML%20Element%20With,Been%20Used%20in%20an%20Element%20in%20JavaScript%20
+        event.currentTarget.firstElementChild.className = "btn btn-primary h-100 w-100";
         document.getElementById("send-button").style.display = "block";
     }
     else
     {
-        event.currentTarget.className = "deactivated"
+        event.currentTarget.firstElementChild.className = "btn btn-light h-100 w-100";
         for (const date of selectedDates)
         {
             if(date) return;

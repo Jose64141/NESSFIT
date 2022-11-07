@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -80,7 +81,7 @@ public class ClienteController
     }
 
     @PostMapping("/cliente/rent")
-    public String rent(HttpServletRequest request, Model model, @RequestBody MultiValueMap<String, String> formBody)
+    public String rent(HttpServletRequest request, Model model, @RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr)
     {
         User user = this.userService.find(request.getRemoteUser());
         DeportiveCenter deportiveCenter = this.deportiveCenterService.find(formBody.getFirst("center"));
@@ -104,7 +105,8 @@ public class ClienteController
         }
         catch (Exception e)
         {
-            return "cliente/rent"; //give error?
+            attr.addFlashAttribute("errorMsg","Ha habido un error al procesar la solicitud.");
+            return "redirect:/cliente/rent";
         }
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -116,6 +118,7 @@ public class ClienteController
         RentRequest rentRequest = new RentRequest(user, deportiveCenter, "PENDIENTE", total, dates, date);
         this.rentRequestService.saveAndFlush(rentRequest);
 
-        return "cliente/rent"; //check where to redirect
+        attr.addFlashAttribute("successMsg","La solicitud se ha procesado con éxito.");
+        return "redirect:/cliente/rent";
     }
 }

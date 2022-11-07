@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+*
+{
+    font-family: "Poppins", sans-serif;
+}
+
+body
+{
+    background-color: #fef6cd;
+}
+.navbar-toggler
+{
+    margin-left: 0;
+    width: 50px;
+    height: 50px;
+}
+
+h1
+{
+    text-align: center;
+    margin: 15px auto 0;
+    padding: 0;
+
+}
+
+.nav-link
+{
+    color: #000000;
+}
+
+.attribute-logo
+{
+    width: 5vh;
+    height: 5vh;
+    padding: 0;
+    margin: auto;
+    position: relative;
+    bottom: 0.5vh;
+    display: inline-block;
+}
+.attribute-text
+{
+    padding: 0;
+    margin: 1vh 1vw;
+    display: inline-block;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active
+{
+    background-color: #20c67a;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active
+{
+    color: #000;
+}
+
+.btn
+{
+    margin: 4px;
+}
+
+.btn-primary
+{
+    background-color: #20c67a;
+}
+
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #20c67a;
+    --bs-btn-border-color: #282828;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #147c4c;
+    --bs-btn-hover-border-color: #147c4c;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #20c67a;
+    --bs-btn-active-border-color: #20c67a;
+}
+
+.btn-secondary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #fd2222;
+    --bs-btn-border-color: #ff0000;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #980000;
+    --bs-btn-hover-border-color: #980000;
+    --bs-btn-focus-shadow-rgb: 130,138,145;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #565e64;
+    --bs-btn-active-border-color: #51585e;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.btn-secondary
+{
+    --bs-btn-border-color: #282828;
+}
+
+.btn-light {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #f8f9fa;
+    --bs-btn-border-color: #282828;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #d3d4d5;
+    --bs-btn-hover-border-color: #d3d4d5;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #c6c7c8;
+    --bs-btn-active-border-color: #c6c7c8;
+}
+
+.content
+{
+    position: relative;
+    margin-left: 100px;
+}
+
+.center-selection-container
+{
+    position: absolute;
+    border: solid #282828;
+}
+
+.center-entry
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: white;
+    padding: 20px;
+    text-decoration:none;
+}
+.center-type
+{
+    text-align: right;
+}
+
+.selection
+{
+    background-color: aliceblue;
+}
+
+.form-container
+{
+    position: absolute;
+    left: 30%;
+}
+
+.input-box
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.input-item
+{
+    margin: 2vh 0;
+    padding: 0;
+}
+
+.submit-button
+{
+    display: none;
+}
+
+th
+{
+    width: 100px;
+}
+td
+{
+    width: 100px;
+    height: 200px;
+}
