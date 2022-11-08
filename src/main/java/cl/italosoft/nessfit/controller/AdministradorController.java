@@ -106,7 +106,7 @@ public class AdministradorController
         }
 
         newUser.setEnabled(true);
-        Role role = new Role(3);
+        Role role = new Role(2);
         newUser.setRole(role);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String newPasswordHash = passwordEncoder.encode(newUser.getRut());

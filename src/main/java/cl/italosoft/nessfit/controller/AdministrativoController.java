@@ -37,7 +37,7 @@ public class AdministrativoController
     {
         binder.addValidators(rutValidator);
     }
-    
+
     @GetMapping("/administrativo/manage-clients")
     public String manageUsers(HttpServletRequest request, @RequestParam(required = false) String rut, Model model)
     {
