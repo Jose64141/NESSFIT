@@ -80,75 +80,39 @@ public class AdministradorController
     }
 
     @GetMapping("/administrador/add-administrative")
-    public String addAdministrative(Model model)
+    public String addAdministrative(Model model, User newUser)
     {
-        model.addAttribute("user", new User());
+        if(newUser == null)
+            newUser = new User();
+        model.addAttribute("user", newUser);
         return "administrador/add-administrative";
     }
 
     @PostMapping("/administrador/add-administrative")
     public String addAdministrative(Model model, @Valid User newUser, BindingResult result, RedirectAttributes attr)
     {
-        if(result.hasErrors())
-        {
-            StringBuffer errorMsg = new StringBuffer();
-            Boolean[] msgInserted = {false, false, false, false};
-            for (FieldError error: result.getFieldErrors())
-            {
-                switch (error.getField())
-                {
-                    case "name", "firstLastName", "secondLastName":
-                        if(!msgInserted[0])
-                        {
-                            errorMsg.append("Los nombres o apellidos deben tener más de 2 caracteres. ");
-                            msgInserted[0] = true;
-                        }
-                        break;
-                    case "phoneNumber":
-                        if(!msgInserted[1])
-                        {
-                            errorMsg.append("El teléfono móvil ingresado no es válido. ");
-                            msgInserted[1] = true;
-                        }
-                        break;
-                    case "email":
-                        if(!msgInserted[2])
-                        {
-                            errorMsg.append("Su correo electrónico no es válido. ");
-                            msgInserted[2] = true;
-                        }
-                        break;
-                    case "rut":
-                        if(!msgInserted[3])
-                        {
-                            errorMsg.append("RUT inválido. ");
-                            msgInserted[3] = true;
-                        }
-                        break;
-                }
-            }
-            attr.addFlashAttribute("errorMsg",errorMsg);
-            return "redirect:/administrador/add-administrative";
-        }
-
         newUser.setRut(newUser.getRut().toUpperCase());
 
         User user = this.userService.findByRutOrEmail(newUser.getRut(), newUser.getEmail());
         if(user != null)
         {
-            attr.addFlashAttribute("errorMsg","El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.");
-            return "redirect:/administrador/add-administrative";
+            result.rejectValue("rut",null,"El RUT y/o correo electrónico ya existen " +
+                    "en el sistema. Intente iniciar sesión.");
+        }
+        if(result.hasErrors())
+        {
+            return "administrador/add-administrative";
         }
 
         newUser.setEnabled(true);
-        Role role = new Role(2);
+        Role role = new Role(3);
         newUser.setRole(role);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String newPasswordHash = passwordEncoder.encode(newUser.getRut());
         newUser.setPassword(newPasswordHash);
         userService.saveAndFlush(newUser);
 
-        attr.addFlashAttribute("successMsg","El Administrativo se añadió con éxito. ");
+        attr.addFlashAttribute("successMsg","El administrativo se añadió con éxito. ");
         return "redirect:/administrador/add-administrative";
     }
 
