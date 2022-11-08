@@ -61,7 +61,10 @@ public class UserServiceImpl implements UserService
      */
     @Override
     public Page<User> findByRutWithRole(String userRut, Pageable page, int role) {
-        return this.userRepository.findByRutContainingAndRoleIdOrderByIsEnabledDesc(userRut,role,page);
+        if(userRut != null)
+            return this.userRepository.findByRutContainingAndRoleIdOrderByIsEnabledDesc(userRut,role,page);
+        else
+            return this.userRepository.findByRoleIdOrderByIsEnabledDesc(role,page);
     }
 
     /**
