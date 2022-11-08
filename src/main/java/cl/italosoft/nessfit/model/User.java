@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
 public class User implements Serializable
 {
     //@Rut
-    @NotBlank
+    @NotBlank(message = "Este campo es obligatorio.")
     @Id
     private String rut;
     //@Min(2)
@@ -27,11 +27,12 @@ public class User implements Serializable
     private String secondLastName;
 
     private String password;
+    @NotNull(message = "Este campo es obligatorio.")
     @Min(value = 100000000, message = "El teléfono móvil ingresado no es válido.")
     @Max(value = 999999999, message = "El teléfono móvil ingresado no es válido.")
     @Column(name = "phone_number")
     private Integer phoneNumber;
-    @NotBlank
+    @NotBlank(message = "Este campo es obligatorio.")
     @Email(message = "El correo electrónico no es válido.")
     private String email;
     @Column(name = "is_enabled")
