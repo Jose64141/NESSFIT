@@ -8,6 +8,7 @@ body
 {
     background-color: #fef6cd;
 }
+
 .navbar-toggler
 {
     margin-left: 0;
@@ -17,10 +18,12 @@ body
 
 h1
 {
+    position: absolute;
+    right: 0;
+    left: 0;
     text-align: center;
-    margin: 15px auto 0;
+    margin: 15px;
     padding: 0;
-
 }
 
 .nav-link
@@ -38,6 +41,7 @@ h1
     bottom: 0.5vh;
     display: inline-block;
 }
+
 .attribute-text
 {
     padding: 0;
@@ -54,21 +58,6 @@ h1
 {
     color: #000;
 }
-
-.form-container
-{
-    position: absolute;
-    top:4vh;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 700px;
-    height: 800px;
-    border: 3px solid #000;
-    border-radius: 10px;
-}
-
 
 .information-form-control
 {
@@ -102,17 +91,38 @@ h1
     padding: 0;
 }
 
-.m-5 {
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+.form-section
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.mb-3
+.form-container
 {
-    margin: 4vh 0;
-    padding: 0;
+    background-color: #20c67a;
+    width: 700px;
+    height: fit-content;
+    border: 3px solid #000;
+    border-radius: 10px;
+}
+
+.button-container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin: 30px 0 0 0;
+    width: 700px;
+    height: 50px;
+}
+
+.btn-send, .btn-revert
+{
+    border: solid 1px #000 ;
+    margin: 0;
+    width: 80px;
+    z-index: 100;
 }

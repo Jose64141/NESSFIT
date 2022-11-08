@@ -71,20 +71,8 @@ h1
     background-color: #20c67a;
 }
 
-.btn-primary {
-    --bs-btn-color: #fff;
-    --bs-btn-bg: #20c67a;
-    --bs-btn-border-color: #282828;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #147c4c;
-    --bs-btn-hover-border-color: #147c4c;
-    --bs-btn-focus-shadow-rgb: 49,132,253;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #20c67a;
-    --bs-btn-active-border-color: #20c67a;
-}
-
-.btn-secondary {
+.btn-secondary
+{
     --bs-btn-color: #fff;
     --bs-btn-bg: #fd2222;
     --bs-btn-border-color: #ff0000;
