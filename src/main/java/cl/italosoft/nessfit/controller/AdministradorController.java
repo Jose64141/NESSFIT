@@ -116,5 +116,10 @@ public class AdministradorController
         return "redirect:/administrador/add-administrative";
     }
 
+    @GetMapping("/administrador/manage-administrative")
+    public String manageAdministrative()
+    {
+        return "administrador/manage-administrative";
+    }
 
 }
