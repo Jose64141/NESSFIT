@@ -21,7 +21,8 @@
     <div th:replace="~{fragments/navigation::shortcuts}"></div>
 
     <h1>Agregar Administrativo</h1>
-
+    <section class="main-section">
+    <section class="form-section">
     <div class="form-container">
       <div class="m-5">
         <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
@@ -71,10 +72,6 @@
             </label>
           </div>
 
-          <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
-                  data-bs-target="#dataConfirmModal">
-            Enviar
-          </button>
 
           <div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="dataConfirmModalLabel"
                aria-hidden="true">
@@ -99,6 +96,11 @@
         </form>
       </div>
     </div>
+    <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
+            data-bs-target="#dataConfirmModal">
+      Enviar
+    </button>
+    </section>
 
     <div th:replace="fragments/common :: common-body"></div>
 
