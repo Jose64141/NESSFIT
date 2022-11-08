@@ -5,6 +5,7 @@ import cl.italosoft.nessfit.model.User;
 import cl.italosoft.nessfit.service.UserService;
 import cl.italosoft.nessfit.util.RutValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -117,8 +118,9 @@ public class AdministradorController
     }
 
     @GetMapping("/administrador/manage-administrative")
-    public String manageAdministrative()
+    public String manageAdministrative(Model model, Pageable page, @RequestParam(required = false) String rut)
     {
+        model.addAttribute("users", userService.findByRutWithRole(rut, page, 2));
         return "administrador/manage-administrative";
     }
 
