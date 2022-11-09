@@ -86,6 +86,11 @@ public class ClienteController
         User user = this.userService.find(request.getRemoteUser());
         DeportiveCenter deportiveCenter = this.deportiveCenterService.find(formBody.getFirst("center"));
 
+        if(user == null || deportiveCenter == null)
+        {
+            attr.addFlashAttribute("errorMsg","Ha habido un error al procesar la solicitud.");
+            return "redirect:/cliente/rent";
+        }
         String[] datesStr = formBody.getFirst("dates").split(",");
         List<Date> dates = new ArrayList<>();
 
