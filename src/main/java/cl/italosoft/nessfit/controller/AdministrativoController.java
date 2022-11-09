@@ -1,7 +1,9 @@
 package cl.italosoft.nessfit.controller;
 
+import cl.italosoft.nessfit.model.DeportiveCenter;
 import cl.italosoft.nessfit.model.Role;
 import cl.italosoft.nessfit.model.User;
+import cl.italosoft.nessfit.service.DeportiveCenterService;
 import cl.italosoft.nessfit.service.UserService;
 import cl.italosoft.nessfit.util.RutValidator;
 
@@ -28,6 +30,9 @@ public class AdministrativoController
 {
 	@Autowired
     private UserService userService;
+	
+	@Autowired
+	private DeportiveCenterService deportiveCenterService;
 
     @Autowired
     private RutValidator rutValidator;
@@ -109,6 +114,29 @@ public class AdministrativoController
 
       attr.addFlashAttribute("successMsg","El cliente se añadió con éxito. ");
       return "redirect:/administrativo/add-client";
+    }
+
+    
+    public String addDeportiveCenter(Model model, @Valid DeportiveCenter newDeportiveCenter, BindingResult result, RedirectAttributes attr) 
+    {	
+    	newDeportiveCenter.setName(newDeportiveCenter.getName().toUpperCase());
+    	
+    	DeportiveCenter deportiveCenter =  this.deportiveCenterService.findByNameOrAddress(newDeportiveCenter.getName(), newDeportiveCenter.getAddress());
+    	if(deportiveCenter != null) 
+    	{
+    		result.rejectValue("name", null, "El nombre y/o dirección ya existen en el sistema.");
+    	}    	
+    	if(result.hasErrors()) 
+    	{
+    		return "administrativo/add-deportive-center";
+    	}
+    	
+    	newDeportiveCenter.setEnabled(true);
+    
+    	
+    	
+    	
+    	return "redirect:/administrativo/add-deportive-center";
     }
     
 }
