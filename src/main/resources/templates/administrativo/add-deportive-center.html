@@ -99,28 +99,40 @@
                         </label>
                     </div>
                     <div class="input-item">
-                        <label>Tipo</label>
-                        <label class="input-box">
-                            <input class="information-form-control" type="text" th:field="*{type}" required>
-                        </label>
+                        <label for="tipoSelected">Tipo</label>
+                       <select name="tipoSelected" id="tipoSelected">
+                       		<option>cancha</option>
+                       		<option>gimnasio</option>
+                       		<option>piscina</option>
+                       		<option>quincho</option>
+                       		<option>estadio</option>
+                       </select>
                     </div>
                     <div class="input-item">
                         <label>Costo de arriendo (por día)</label>
                         <label class="input-box">
                             <input class="information-form-control" type="number" th:field="*{costPerDay}" required>
-                        </label>
+                       
                     </div>
                     <div class="input-item">
-                        <label>Estado</label>
-                        <label class="input-box">
-                            <input class="information-form-control" type="checkbox" th:field= "*{isEnabled}" required> Habilitado
+                        <label for="estadoSelected">Estado</label>
+                        <select name="estadoSelected" id="estadoSelected">
+                        	<option>habilitado</option>
+                        	<option>deshabilitado</option>
+                        </select>
                         </label>
                     </div>
 
                     <div class="position-absolute bottom-0 end-0 m-5">
+                    
+                    	<button type="reset" class="btn btn-primary" > 
+                    		Cancelar
+                    	</button>
+                    	
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#dataConfirmModal">
                             Enviar
+                            
                         </button>
                     </div>
 
