@@ -32,7 +32,7 @@
           <label>RUT</label>
           <label class="input-box">
             <input class="information-form-control" type="text" th:field="*{rut}" placeholder="10123123K" th:errorclass="border-danger">
-            <div th:if="${#fields.hasErrors('rut')}" th:errorclass="text-danger" th:errors="*{rut}"></div>
+            <div th:if="${#fields.hasErrors('rut')}" th:class="${#fields.hasErrors('rut')}? 'text-danger'" th:text="${#fields.errors('rut')[0]}"></div>
           </label>
         </div>
         <div class="input-item">
