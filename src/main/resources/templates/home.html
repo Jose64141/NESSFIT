@@ -20,9 +20,14 @@
             </div>
             <div class="buttons" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">
                 <h3>¿Qué desea hacer?</h3>
+                <a th:href="@{/administrador/manage-administrative}">
+                    <button>Editar Administrativos
+                        <img class="button-logo" th:src="@{images/manage-users-logo.png}" alt="Editar administrativos">
+                    </button>
+                </a>
                 <a th:href="@{/administrador/add-administrative}">
                     <button>Agregar Administrativos
-                        <img class="button-logo" th:src="@{images/add-user-logo.png}" alt="Agregar administrativos"></button>
+                        <img class="button-logo" th:src="@{images/add-user-logo.png}" alt="Agregar administrativos">
                     </button>
                 </a>
                 <a th:href="@{/administrador/manage-clients}">
