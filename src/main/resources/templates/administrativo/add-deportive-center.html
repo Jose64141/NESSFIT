@@ -10,9 +10,11 @@
     </head>
 
     <body>
-          <nav th:replace="~{fragments/navigation::navbar}"></nav>
+        <nav th:replace="~{fragments/navigation::navbar}"></nav>
 
-        <div th:replace="~{fragments/navigation::shortcuts}"></div>>
+        <div th:replace="~{fragments/navigation::shortcuts}"></div>
+
+        <div th:replace="~{fragments/common::common-body}"></div>
 
         <h1>Registrar una instalación deportiva</h1>
         
@@ -21,7 +23,7 @@
                 <div th:if="${succesMsg} ne null" class="alert alert-success" role="alert">
                     <label th:text="${successMsg}"></label>
                 </div>
-                <form th:action="@{/administrativo/add-deportive-center}" th:object="${deportive_centers}" method="post">
+                <form th:action="@{/administrativo/add-deportive-center}" th:object="${deportiveCenter}" method="post">
                     <div class="input-item">
                         <label>Nombre de la instalación</label>
                         <label class="input-box">
@@ -38,26 +40,23 @@
                     </div>
                     <div class="input-item">
                         <label>Tipo</label>
-                       <select th:field="*{tipo}">
-                       		<option th:value="cancha" >cancha</option>
-                       		<option th:value="gimnasio" >gimnasio</option>
-                       		<option th:value="piscina" >piscina</option>
-                       		<option th:value="quincho" >quincho</option>
-                       		<option th:value="estadio" >estadio</option>
+                       <select th:field="*{type.id}">
+                       		<option value="0">Cancha</option>
+                       		<option value="1">Gimnasio</option>
+                       		<option value="2">Piscina</option>
+                       		<option value="3">Quincho</option>
+                       		<option value="4">Estadio</option>
                        </select>
                     </div>
                     <div class="input-item">
                         <label>Costo de arriendo (por día)</label>
                         <label class="input-box">
                             <input class="information-form-control" type="number" th:field="*{costPerDay}" required>
-                       
+                            <div th:if="${#fields.hasErrors('costPerDay')}" th:errorclass="text-danger" th:errors="*{address}"></div>
+                        </label>
                     </div>
                     <div class="input-item">
-                        <label>Estado</label>
-                        <select th:field="*{isEnabled}">
-                        	<option th:value="true">habilitado</option>
-                        	<option th:value="false">deshabilitado</option>
-                        </select>
+                        <input type="checkbox" th:field="*{isEnabled}">Estado</input>
                         </label>
                     </div>
 
@@ -97,11 +96,5 @@
                 </form>
             </div>
         </div>
-                
-
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-            crossorigin="anonymous"></script>
     </body>
 </html>

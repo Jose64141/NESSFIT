@@ -120,30 +120,31 @@ public class AdministrativoController
     @GetMapping("/administrativo/add-deportive-center")
     public String addDeportiveCenter(Model model, DeportiveCenter newDeportiveCenter) 
     {
-    	if(newDeportiveCenter == null) 
-    		newDeportiveCenter = new DeportiveCenter();
-    	model.addAttribute("deportive_centers",newDeportiveCenter);
+    	if(newDeportiveCenter == null)
+        {
+            newDeportiveCenter = new DeportiveCenter();
+            newDeportiveCenter.setType(new Type());
+        }
+
+    	model.addAttribute("deportiveCenter",newDeportiveCenter);
      	return "administrativo/add-deportive-center";
-    		
-    	
     }
     
     @PostMapping("/administrativo/add-deportive-center")
-    public String addDeportiveCenter(Model model,DeportiveCenter newDeportiveCenter, BindingResult result, RedirectAttributes attr) 
+    public String addDeportiveCenter(Model model,@Valid DeportiveCenter newDeportiveCenter, BindingResult result, RedirectAttributes attr)
     {	
     	newDeportiveCenter.setName(newDeportiveCenter.getName().toUpperCase());
     	
-    	DeportiveCenter deportiveCenter =  this.deportiveCenterService.findByNameOrAddress(newDeportiveCenter.getName(), newDeportiveCenter.getAddress());
+    	DeportiveCenter deportiveCenter =  this.deportiveCenterService.find(newDeportiveCenter.getName());
     	if(deportiveCenter != null) 
     	{
-    		result.rejectValue("name", null, "El nombre y/o dirección ya existen en el sistema.");
+    		result.rejectValue("name", null, "El nombre ingresado ya existe en el sistema.");
     	}    	
     	if(result.hasErrors()) 
     	{
     		return "administrativo/add-deportive-center";
     	}
-    	
-    	newDeportiveCenter.setEnabled(true);
+
     	attr.addFlashAttribute("successMsg", "El centro deportivo se añadió con éxito.");
     	return "redirect:/administrativo/add-deportive-center";
     }
