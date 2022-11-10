@@ -125,4 +125,36 @@ public class AdministradorController
         return "administrador/manage-administrative";
     }
 
+    @GetMapping("/administrador/edit-administrative")
+    public String editAdministrative(Model model, @RequestParam String rut)
+    {
+        User user = this.userService.find(rut);
+        if(user == null || (user.getRole().getId() != 2))
+        {
+            return "redirect:/administrador/manage-administrative";
+        }
+        model.addAttribute("user",user);
+        return "administrador/edit-administrative";
+    }
+
+    @PostMapping("/administrador/edit-administrative")
+    public String editAdministrative(Model model, @Valid User user, BindingResult result, RedirectAttributes attr)
+    {
+
+        if(result.hasErrors())
+        {
+            return "administrador/edit-administrative";
+        }
+        String rut = user.getRut();
+        User completeUser = userService.find(rut);
+        completeUser.setName(user.getName().strip());
+        completeUser.setFirstLastName(user.getFirstLastName().strip());
+        completeUser.setSecondLastName(user.getSecondLastName().strip());
+        completeUser.setPhoneNumber(user.getPhoneNumber());
+        completeUser.setEmail(user.getEmail().strip());
+        userService.saveAndFlush(completeUser);
+        attr.addFlashAttribute("infoSuccessMsg","Los cambios se han realizado con éxito.");
+
+        return "redirect:/administrador/edit-administrative?rut="+rut;
+    }
 }
