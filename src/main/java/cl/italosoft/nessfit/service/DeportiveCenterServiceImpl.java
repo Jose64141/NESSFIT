@@ -3,6 +3,8 @@ package cl.italosoft.nessfit.service;
 import cl.italosoft.nessfit.model.DeportiveCenter;
 import cl.italosoft.nessfit.repository.DeportiveCenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -84,6 +86,14 @@ public class DeportiveCenterServiceImpl implements DeportiveCenterService
     {
         return deportiveCenterRepository.findAll();
     }
+
+    /**
+     * Returns all DeportiveCenter records.
+     * @param page the pagination information
+     * @return page containing the records.
+     */
+    @Override
+    public Page<DeportiveCenter> list(Pageable page){ return deportiveCenterRepository.findAll(page);}
 
     /**
      * Flushes all the changes to the database.

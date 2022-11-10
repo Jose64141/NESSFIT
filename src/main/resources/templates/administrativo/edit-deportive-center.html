@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/common :: head('Editar Recinto', ~{::link})">
+    <link rel="stylesheet" th:href="@{/css/administrativo/add-deportive-center.css}">
+    <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
+    <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
+</head>
+
+<body>
+<nav th:replace="~{fragments/navigation::navbar}"></nav>
+
+<div th:replace="~{fragments/navigation::shortcuts}"></div>
+
+<div th:replace="~{fragments/common::common-body}"></div>
+
+<h1>Editar Recinto</h1>
+
+<div class="form-container">
+    <div class="m-5">
+        <div th:if="${succesMsg} ne null" class="alert alert-success" role="alert">
+            <label th:text="${successMsg}"></label>
+        </div>
+        <form th:action="@{/administrativo/edit-deportive-center}" th:object="${deportiveCenter}" method="post">
+            <div class="input-item">
+                <label>Nombre de la instalación</label>
+                <label class="input-box">
+                    <input class="information-form-control" type="text" th:field="*{name}" readonly>
+                    <div th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}"></div>
+                </label>
+            </div>
+            <div class="input-item">
+                <label>Dirección</label>
+                <label class="input-box">
+                    <input class="information-form-control" type="text" th:field="*{address}" required>
+                    <div th:if="${#fields.hasErrors('address')}" th:errorclass="text-danger" th:errors="*{address}"></div>
+                </label>
+            </div>
+            <div class="input-item">
+                <label>Tipo</label>
+                <br>
+                <select th:field="*{type.id}">
+                    <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.name}"></option>
+                </select>
+            </div>
+            <div class="input-item">
+                <label>Costo de arriendo (por día)</label>
+                <label class="input-box">
+                    <input class="information-form-control" type="text" inputmode="numeric" pattern="\d*"
+                           th:field="*{costPerDay}" required>
+                    <div th:if="${#fields.hasErrors('costPerDay')}" th:errorclass="text-danger" th:errors="*{address}"></div>
+                </label>
+            </div>
+            <div class="input-item">
+                <label>Estado</label>
+                <label class="input-box">
+                    <select th:field="*{isEnabled}">
+                        <option th:value="true">Operativo</option>
+                        <option th:value="false">Inoperativo</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="position-absolute bottom-0 end-0 m-5">
+
+                <a href="/home"><button type="button" class="btn btn-primary">Cancelar</button></a>
+
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#dataConfirmModal">
+                    Enviar
+
+                </button>
+            </div>
+
+            <div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="dataConfirmModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="dataConfirmModalLabel">Confirmar</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Está seguro?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Aplicar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

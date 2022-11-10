@@ -2,6 +2,8 @@ package cl.italosoft.nessfit.service;
 
 
 import cl.italosoft.nessfit.model.DeportiveCenter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -57,6 +59,13 @@ public interface DeportiveCenterService
      * @return a list containing the records.
      */
     public List<DeportiveCenter> list();
+
+    /**
+     * Returns all DeportiveCenter records.
+     * @param page the pagination information
+     * @return page containing the records.
+     */
+    public Page<DeportiveCenter> list(Pageable page);
 
     /**
      * Flushes all the changes to the database.

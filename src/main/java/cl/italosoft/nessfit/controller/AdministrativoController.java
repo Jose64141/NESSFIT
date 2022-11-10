@@ -12,6 +12,8 @@ import cl.italosoft.nessfit.util.RutValidator;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -155,5 +157,50 @@ public class AdministrativoController
     	attr.addFlashAttribute("successMsg", "El centro deportivo se añadió con éxito.");
     	return "redirect:/administrativo/add-deportive-center";
     }
-    
+
+    @GetMapping("/administrativo/manage-deportive-centers")
+    public String manageDeportiveCenter(Model model, @PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String rut)
+    {
+        model.addAttribute("centers", deportiveCenterService.list(page));
+        return "administrativo/manage-deportive-centers";
+    }
+
+    @GetMapping("/administrativo/edit-deportive-center")
+    public String editDeportiveCenter(Model model, @RequestParam String name)
+    {
+        DeportiveCenter deportiveCenter = this.deportiveCenterService.find(name);
+        model.addAttribute("types", typeService.list());
+        if(deportiveCenter == null)
+        {
+            return "redirect:/administrativo/manage-deportive-centers";
+        }
+        model.addAttribute("deportiveCenter",deportiveCenter);
+        return "administrativo/edit-deportive-center";
+    }
+
+    @PostMapping("/administrativo/edit-deportive-center")
+    public String editDeportiveCenter(Model model, @Valid DeportiveCenter deportiveCenter, BindingResult result, RedirectAttributes attr)
+    {
+        model.addAttribute("types", typeService.list());
+
+        if(result.hasErrors())
+        {
+            return "administrativo/edit-deportive-center";
+        }
+        String name = deportiveCenter.getName();
+        DeportiveCenter completeCenter = deportiveCenterService.find(name);
+        if(completeCenter == null)
+        {
+            attr.addFlashAttribute("infoErrorMsg","Ha habido un problema.");
+            return "redirect:/administrativo/manage-deportive-centers";
+        }
+        completeCenter.setAddress(deportiveCenter.getAddress().toUpperCase().strip());
+        completeCenter.setType(deportiveCenter.getType());
+        completeCenter.setIsEnabled(deportiveCenter.getIsEnabled());
+        completeCenter.setCostPerDay(deportiveCenter.getCostPerDay());
+        deportiveCenterService.saveAndFlush(completeCenter);
+        attr.addFlashAttribute("infoSuccessMsg","Los cambios se han realizado con éxito.");
+
+        return "redirect:/administrativo/edit-deportive-center?name="+name;
+    }
 }
