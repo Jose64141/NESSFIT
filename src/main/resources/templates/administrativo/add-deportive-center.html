@@ -40,23 +40,26 @@
                     </div>
                     <div class="input-item">
                         <label>Tipo</label>
-                       <select th:field="*{type.id}">
-                       		<option value="0">Cancha</option>
-                       		<option value="1">Gimnasio</option>
-                       		<option value="2">Piscina</option>
-                       		<option value="3">Quincho</option>
-                       		<option value="4">Estadio</option>
-                       </select>
+                        <br>
+                        <select th:field="*{type.id}">
+                       		<option th:each="type : ${types}" th:value="${type.id}" th:text="${type.name}"></option>
+                        </select>
                     </div>
                     <div class="input-item">
                         <label>Costo de arriendo (por día)</label>
                         <label class="input-box">
-                            <input class="information-form-control" type="number" th:field="*{costPerDay}" required>
+                            <input class="information-form-control" type="text" inputmode="numeric" pattern="\d*"
+                                   th:field="*{costPerDay}" required>
                             <div th:if="${#fields.hasErrors('costPerDay')}" th:errorclass="text-danger" th:errors="*{address}"></div>
                         </label>
                     </div>
                     <div class="input-item">
-                        <input type="checkbox" th:field="*{isEnabled}">Estado</input>
+                        <label>Estado</label>
+                        <label class="input-box">
+                        <select th:field="*{isEnabled}">
+                            <option th:value="true">Operativo</option>
+                            <option th:value="false">Inoperativo</option>
+                        </select>
                         </label>
                     </div>
 

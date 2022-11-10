@@ -5,6 +5,7 @@ import cl.italosoft.nessfit.model.Role;
 import cl.italosoft.nessfit.model.Type;
 import cl.italosoft.nessfit.model.User;
 import cl.italosoft.nessfit.service.DeportiveCenterService;
+import cl.italosoft.nessfit.service.TypeService;
 import cl.italosoft.nessfit.service.UserService;
 import cl.italosoft.nessfit.util.RutValidator;
 
@@ -34,6 +35,9 @@ public class AdministrativoController
 	
 	@Autowired
 	private DeportiveCenterService deportiveCenterService;
+
+    @Autowired
+    private TypeService typeService;
 
     @Autowired
     private RutValidator rutValidator;
@@ -127,13 +131,15 @@ public class AdministrativoController
         }
 
     	model.addAttribute("deportiveCenter",newDeportiveCenter);
+        model.addAttribute("types", typeService.list());
      	return "administrativo/add-deportive-center";
     }
     
     @PostMapping("/administrativo/add-deportive-center")
     public String addDeportiveCenter(Model model,@Valid DeportiveCenter newDeportiveCenter, BindingResult result, RedirectAttributes attr)
     {	
-    	newDeportiveCenter.setName(newDeportiveCenter.getName().toUpperCase());
+    	newDeportiveCenter.setName(newDeportiveCenter.getName().toUpperCase().strip());
+        newDeportiveCenter.setAddress(newDeportiveCenter.getAddress().toUpperCase().strip());
     	
     	DeportiveCenter deportiveCenter =  this.deportiveCenterService.find(newDeportiveCenter.getName());
     	if(deportiveCenter != null) 
@@ -145,6 +151,7 @@ public class AdministrativoController
     		return "administrativo/add-deportive-center";
     	}
 
+        deportiveCenterService.saveAndFlush(newDeportiveCenter);
     	attr.addFlashAttribute("successMsg", "El centro deportivo se añadió con éxito.");
     	return "redirect:/administrativo/add-deportive-center";
     }
