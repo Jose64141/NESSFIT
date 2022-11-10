@@ -2,6 +2,7 @@ package cl.italosoft.nessfit.controller;
 
 import cl.italosoft.nessfit.model.DeportiveCenter;
 import cl.italosoft.nessfit.model.Role;
+import cl.italosoft.nessfit.model.Type;
 import cl.italosoft.nessfit.model.User;
 import cl.italosoft.nessfit.service.DeportiveCenterService;
 import cl.italosoft.nessfit.service.UserService;
@@ -116,8 +117,19 @@ public class AdministrativoController
       return "redirect:/administrativo/add-client";
     }
 
+    @GetMapping("/administrativo/add-deportive-center")
+    public String addDeportiveCenter(Model model, DeportiveCenter newDeportiveCenter) 
+    {
+    	if(newDeportiveCenter == null) 
+    		newDeportiveCenter = new DeportiveCenter();
+    	model.addAttribute("deportive_centers",newDeportiveCenter);
+     	return "administrativo/add-deportive-center";
+    		
+    	
+    }
     
-    public String addDeportiveCenter(Model model, @Valid DeportiveCenter newDeportiveCenter, BindingResult result, RedirectAttributes attr) 
+    @PostMapping("/administrativo/add-deportive-center")
+    public String addDeportiveCenter(Model model,DeportiveCenter newDeportiveCenter, BindingResult result, RedirectAttributes attr) 
     {	
     	newDeportiveCenter.setName(newDeportiveCenter.getName().toUpperCase());
     	
@@ -132,10 +144,7 @@ public class AdministrativoController
     	}
     	
     	newDeportiveCenter.setEnabled(true);
-    
-    	
-    	
-    	
+    	attr.addFlashAttribute("successMsg", "El centro deportivo se añadió con éxito.");
     	return "redirect:/administrativo/add-deportive-center";
     }
     
