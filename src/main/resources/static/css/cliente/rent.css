@@ -97,13 +97,14 @@ h1
     --bs-btn-border-color: #282828;
 }
 
-.btn-light {
-    --bs-btn-color: #fff;
+.btn-light
+{
+    --bs-btn-color: #000000;
     --bs-btn-bg: #f8f9fa;
     --bs-btn-border-color: #282828;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #d3d4d5;
-    --bs-btn-hover-border-color: #d3d4d5;
+    --bs-btn-hover-color: #000000;
+    --bs-btn-hover-bg: #27e78f;
+    --bs-btn-hover-border-color: #1bb26d;
     --bs-btn-focus-shadow-rgb: 49,132,253;
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg: #c6c7c8;
@@ -178,4 +179,10 @@ td
 {
     width: 100px;
     height: 200px;
+}
+
+.available-icon
+{
+    height: 30px;
+    width: 30px;
 }

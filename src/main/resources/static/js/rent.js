@@ -38,7 +38,7 @@ function confirmButton(event)
         {
             var date = allDates.item(i);
             var dateEntry = "";
-            if(count != 0){ dateEntry = "," }
+            if(count !== 0){ dateEntry = "," }
             dateEntry += date.textContent;
             datesForm += dateEntry;
             count++;

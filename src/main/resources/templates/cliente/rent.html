@@ -53,7 +53,9 @@
           <tr class="ms-3 me-3">
             <th:block th:each="date : ${avaliable}">
               <td class="date-button" onclick="dateButton(event)" th:if="${date}" th:id="${dateStat.index}">
-                <button type="button" class="btn btn-light h-100 w-100">‎</button>
+                <button type="button" class="btn btn-light h-100 w-100">‎
+                  <img class = "available-icon" th:src="@{/images/available-icon.png}" alt = "Disponible">
+                </button>
               </td>
               <td class="unavailable-date"th:unless="${date}">
                 <button type="button" class="btn btn-danger h-100 w-100" disabled>X</button>
