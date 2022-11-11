@@ -12,4 +12,5 @@ public interface DeportiveCenterRepository extends JpaRepository<DeportiveCenter
 {
 	DeportiveCenter findByNameAndType_id(String name, int type_id);
 	DeportiveCenter findByNameOrAddress(String name, String address);
+	Page<DeportiveCenter> findByNameContaining(String name, Pageable page);
 }

@@ -35,6 +35,13 @@ public interface DeportiveCenterService
      */
     public DeportiveCenter findByNameOrAddress(String deportiveCenterName, String address);
 
+    /**
+     * Lists all deportive centers or find a record by its name.
+     * @param name  the id of the record to find
+     * @param page the pagination information
+     * @return page containing the records.
+     */
+    public Page<DeportiveCenter> findByName(String name, Pageable page);
 
     /**
      * Saves a given DeportiveCenter record.
@@ -59,13 +66,6 @@ public interface DeportiveCenterService
      * @return a list containing the records.
      */
     public List<DeportiveCenter> list();
-
-    /**
-     * Returns all DeportiveCenter records.
-     * @param page the pagination information
-     * @return page containing the records.
-     */
-    public Page<DeportiveCenter> list(Pageable page);
 
     /**
      * Flushes all the changes to the database.

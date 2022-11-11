@@ -51,6 +51,21 @@ public class DeportiveCenterServiceImpl implements DeportiveCenterService
     }
 
     /**
+     * Lists all deportive centers or find a record by its name.
+     * @param name  the id of the record to find
+     * @param page the pagination information
+     * @return page containing the records.
+     */
+    @Override
+    public Page<DeportiveCenter> findByName(String name, Pageable page)
+    {
+        if(name != null)
+            return this.deportiveCenterRepository.findByNameContaining(name, page);
+        else
+            return deportiveCenterRepository.findAll(page);
+    }
+
+    /**
      * Saves a given DeportiveCenter record.
      * @param deportiveCenter the record to save.
      */
@@ -87,13 +102,6 @@ public class DeportiveCenterServiceImpl implements DeportiveCenterService
         return deportiveCenterRepository.findAll();
     }
 
-    /**
-     * Returns all DeportiveCenter records.
-     * @param page the pagination information
-     * @return page containing the records.
-     */
-    @Override
-    public Page<DeportiveCenter> list(Pageable page){ return deportiveCenterRepository.findAll(page);}
 
     /**
      * Flushes all the changes to the database.

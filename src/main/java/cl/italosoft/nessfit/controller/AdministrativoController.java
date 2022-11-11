@@ -160,9 +160,9 @@ public class AdministrativoController
     }
 
     @GetMapping("/administrativo/manage-deportive-centers")
-    public String manageDeportiveCenter(Model model, @PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String rut)
+    public String manageDeportiveCenter(Model model, @PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String name)
     {
-        model.addAttribute("centers", deportiveCenterService.list(page));
+        model.addAttribute("centers", deportiveCenterService.findByName(name, page));
         return "administrativo/manage-deportive-centers";
     }
 
