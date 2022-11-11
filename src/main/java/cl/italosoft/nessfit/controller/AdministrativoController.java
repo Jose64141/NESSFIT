@@ -146,15 +146,16 @@ public class AdministrativoController
     	DeportiveCenter deportiveCenter =  this.deportiveCenterService.find(newDeportiveCenter.getName());
     	if(deportiveCenter != null) 
     	{
-    		result.rejectValue("name", null, "El nombre ingresado ya existe en el sistema.");
+            result.rejectValue("name", null, "El nombre ingresado ya existe en el sistema.");
     	}    	
     	if(result.hasErrors()) 
     	{
-    		return "administrativo/add-deportive-center";
+            model.addAttribute("types", typeService.list());
+            return "administrativo/add-deportive-center";
     	}
 
         deportiveCenterService.saveAndFlush(newDeportiveCenter);
-    	attr.addFlashAttribute("successMsg", "El centro deportivo se añadió con éxito.");
+    	attr.addFlashAttribute("successMsg", "El recinto se añadió con éxito.");
     	return "redirect:/administrativo/add-deportive-center";
     }
 
@@ -191,7 +192,7 @@ public class AdministrativoController
         DeportiveCenter completeCenter = deportiveCenterService.find(name);
         if(completeCenter == null)
         {
-            attr.addFlashAttribute("infoErrorMsg","Ha habido un problema.");
+            attr.addFlashAttribute("errorMsg","Ha habido un problema.");
             return "redirect:/administrativo/manage-deportive-centers";
         }
         completeCenter.setAddress(deportiveCenter.getAddress().toUpperCase().strip());
@@ -199,7 +200,7 @@ public class AdministrativoController
         completeCenter.setIsEnabled(deportiveCenter.getIsEnabled());
         completeCenter.setCostPerDay(deportiveCenter.getCostPerDay());
         deportiveCenterService.saveAndFlush(completeCenter);
-        attr.addFlashAttribute("infoSuccessMsg","Los cambios se han realizado con éxito.");
+        attr.addFlashAttribute("successMsg","Los cambios se han realizado con éxito.");
 
         return "redirect:/administrativo/edit-deportive-center?name="+name;
     }

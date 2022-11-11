@@ -20,7 +20,7 @@
 
 <div class="form-container">
     <div class="m-5">
-        <div th:if="${succesMsg} ne null" class="alert alert-success" role="alert">
+        <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
             <label th:text="${successMsg}"></label>
         </div>
         <form th:action="@{/administrativo/edit-deportive-center}" th:object="${deportiveCenter}" method="post">
@@ -34,8 +34,9 @@
             <div class="input-item">
                 <label>Dirección</label>
                 <label class="input-box">
-                    <input class="information-form-control" type="text" th:field="*{address}" required>
-                    <div th:if="${#fields.hasErrors('address')}" th:errorclass="text-danger" th:errors="*{address}"></div>
+                    <input class="information-form-control" type="text" th:field="*{address}">
+                    <div th:if="${#fields.hasErrors('address')}" th:errorclass="text-danger" th:errors="*{address}">
+                    </div>
                 </label>
             </div>
             <div class="input-item">
@@ -49,8 +50,9 @@
                 <label>Costo de arriendo (por día)</label>
                 <label class="input-box">
                     <input class="information-form-control" type="text" inputmode="numeric" pattern="\d*"
-                           th:field="*{costPerDay}" required>
-                    <div th:if="${#fields.hasErrors('costPerDay')}" th:errorclass="text-danger" th:errors="*{address}"></div>
+                           th:field="*{costPerDay}">
+                    <div th:if="${#fields.hasErrors('costPerDay')}" th:errorclass="text-danger" th:errors="*{address}">
+                    </div>
                 </label>
             </div>
             <div class="input-item">
@@ -65,13 +67,13 @@
 
             <div class="position-absolute bottom-0 end-0 m-5">
 
-                <a href="/home"><button type="button" class="btn btn-primary">Cancelar</button></a>
-
+                <a th:href="@{/administrativo/manage-deportive-centers}">
+                    <button type="button" class="btn btn-primary">Cancelar</button>
+                </a>
 
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#dataConfirmModal">
                     Enviar
-
                 </button>
             </div>
 

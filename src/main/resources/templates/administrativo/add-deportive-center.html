@@ -20,21 +20,24 @@
         
         <div class="form-container">
             <div class="m-5">
-                <div th:if="${succesMsg} ne null" class="alert alert-success" role="alert">
+                <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
                     <label th:text="${successMsg}"></label>
+                </div>
+                <div th:if="${errorMsg} ne null" class="alert alert-warning" role="alert">
+                    <label th:text="${errorMsg}"></label>
                 </div>
                 <form th:action="@{/administrativo/add-deportive-center}" th:object="${deportiveCenter}" method="post">
                     <div class="input-item">
                         <label>Nombre de la instalación</label>
                         <label class="input-box">
-                            <input class="information-form-control" type="text" th:field="*{name}" required>
+                            <input class="information-form-control" type="text" th:field="*{name}">
                             <div th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}"></div>
                         </label>
                     </div>
                     <div class="input-item">
                         <label>Dirección</label>
                         <label class="input-box">
-                            <input class="information-form-control" type="text" th:field="*{address}" required>
+                            <input class="information-form-control" type="text" th:field="*{address}">
                             <div th:if="${#fields.hasErrors('address')}" th:errorclass="text-danger" th:errors="*{address}"></div>
                         </label>
                     </div>
@@ -49,8 +52,8 @@
                         <label>Costo de arriendo (por día)</label>
                         <label class="input-box">
                             <input class="information-form-control" type="text" inputmode="numeric" pattern="\d*"
-                                   th:field="*{costPerDay}" required>
-                            <div th:if="${#fields.hasErrors('costPerDay')}" th:errorclass="text-danger" th:errors="*{address}"></div>
+                                   th:field="*{costPerDay}">
+                            <div th:if="${#fields.hasErrors('costPerDay')}" th:errorclass="text-danger" th:errors="*{costPerDay}"></div>
                         </label>
                     </div>
                     <div class="input-item">

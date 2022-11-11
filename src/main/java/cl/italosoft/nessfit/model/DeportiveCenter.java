@@ -11,15 +11,15 @@ import javax.validation.constraints.*;
 @Table(name = "deportive_centers")
 public class DeportiveCenter implements Serializable
 {
-    @NotBlank
+    @NotBlank(message = "Este campo es obligatorio.")
     @Id
     private String name;
-    @NotBlank
+    @NotBlank(message = "Este campo es obligatorio.")
     private String address;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id",referencedColumnName = "id")
     private Type type;
-    @NotNull
+    @NotNull(message = "Este campo es obligatorio.")
     @Min(value = 1000, message = "El costo por dia ingresado no es válido. Tiene que ser mayor o igual a 1000")
     @Max(value = 999999999, message = "El costo por dia ingresado no es válido.")
     @Column(name = "cost_per_day")
