@@ -120,7 +120,8 @@ h1
 .center-selection-container
 {
     position: absolute;
-    border: solid #282828;
+    border: 3px solid #000;
+    border-radius: 10px;
     background-color: white;
     height: 50vh;
     width: 30%;
@@ -134,11 +135,17 @@ h1
     grid-template-columns: repeat(2, 1fr);
     background-color: white;
     padding: 20px;
+    border-radius: 10px;
     text-decoration:none;
 }
 .center-type
 {
     text-align: right;
+}
+
+.link-dark:hover
+{
+    background-color: #c9c9c9;
 }
 
 .selection
