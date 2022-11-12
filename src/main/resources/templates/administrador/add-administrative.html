@@ -95,10 +95,17 @@
       </form>
     </div>
   </div>
-  <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
-          data-bs-target="#dataConfirmModal">
-    Enviar
-  </button>
+  <div>
+    <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
+            data-bs-target="#dataConfirmModal">
+      Registrar
+    </button>
+    <a th:href="@{/home}">
+    <button type="button" class="btn btn-secondary btn-send">
+      Volver
+    </button>
+    </a>
+  </div>
 </section>
 
 <div th:replace="fragments/common :: common-body"></div>

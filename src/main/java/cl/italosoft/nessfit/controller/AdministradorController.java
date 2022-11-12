@@ -95,12 +95,17 @@ public class AdministradorController
     {
         newUser.setRut(newUser.getRut().toUpperCase());
 
-        User user = this.userService.findByRutOrEmail(newUser.getRut(), newUser.getEmail());
-        if(user != null)
+        if(this.userService.findByRutOrEmail(null,newUser.getEmail()) != null)
         {
-            result.rejectValue("rut",null,"El RUT y/o correo electrónico ya existen " +
+            result.rejectValue("email",null,"El Correo electrónico ya existe " +
                     "en el sistema. Intente iniciar sesión.");
         }
+        if(this.userService.findByRutOrEmail(newUser.getRut(),null) != null)
+        {
+            result.rejectValue("rut",null,"El RUT ya existe " +
+                    "en el sistema. Intente iniciar sesión.");
+        }
+
         if(result.hasErrors())
         {
             return "administrador/add-administrative";
@@ -140,13 +145,19 @@ public class AdministradorController
     @PostMapping("/administrador/edit-administrative")
     public String editAdministrative(Model model, @Valid User user, BindingResult result, RedirectAttributes attr)
     {
-
         if(result.hasErrors())
         {
             return "administrador/edit-administrative";
         }
         String rut = user.getRut();
         User completeUser = userService.find(rut);
+        User emailUser = this.userService.findByRutOrEmail(null, user.getEmail());
+        if(emailUser != null && !emailUser.getRut().equalsIgnoreCase(rut))
+        {
+            result.rejectValue("email",null,"El Correo electrónico ya está en uso");
+            return "administrador/edit-administrative";
+        }
+
         completeUser.setName(user.getName().strip());
         completeUser.setFirstLastName(user.getFirstLastName().strip());
         completeUser.setSecondLastName(user.getSecondLastName().strip());

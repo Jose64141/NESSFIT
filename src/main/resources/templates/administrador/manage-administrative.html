@@ -27,13 +27,16 @@
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
                 </button>
+                <a th:href="@{/administrador/manage-administrative}">
+                    <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
+                </a>
             </form>
             <!-- ADMINISTRATIVOS TABLE -->
             <h2 th:if="${users.totalPages == 0}">No hay usuarios que mostrar.</h2>
             <div th:if="${users.totalPages > 0}" class="users-container">
-                <div class="user-entry">
-                    <div class="user-rut">RUT</div>
-                    <div class="user-name">Nombre</div>
+                <div class="user-entry user-entry-header">
+                    <div class="user-rut-header"><b>RUT</b></div>
+                    <div class="user-name-header"><b>Nombre</b></div>
                 </div>
                 <th:block th:each="user : ${users.content}">
 

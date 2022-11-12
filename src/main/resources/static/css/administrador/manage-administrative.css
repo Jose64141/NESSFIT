@@ -28,6 +28,12 @@ h1
     color: #000000;
 }
 
+.refresh-icon
+{
+    width: 28px;
+    height: 28px;
+}
+
 .attribute-logo
 {
     width: 5vh;
@@ -62,7 +68,8 @@ h1
 
 .btn-send
 {
-    margin: 0 0 0 28vw;
+    margin: 20px 10px 20px;
+    width: 100px;
 }
 
 .btn-primary
@@ -83,10 +90,11 @@ h1
     --bs-btn-active-border-color: #20c67a;
 }
 
-.btn-secondary {
+.btn-secondary
+{
     --bs-btn-color: #fff;
     --bs-btn-bg: #fd2222;
-    --bs-btn-border-color: #ff0000;
+    --bs-btn-border-color: #000;
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #980000;
     --bs-btn-hover-border-color: #980000;
@@ -128,9 +136,20 @@ h1
     text-decoration:none;
 }
 
+.user-entry-header
+{
+    border-bottom: 2px solid #000;
+    border-radius: 0;
+}
+
 .user-finder
 {
     margin: 60px 0 10px;
+}
+
+.user-rut-header, .user-name-header
+{
+    color: #3f8880;
 }
 
 .page-selector
