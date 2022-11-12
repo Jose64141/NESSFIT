@@ -192,7 +192,7 @@ public class AdministrativoController
         DeportiveCenter completeCenter = deportiveCenterService.find(name);
         if(completeCenter == null)
         {
-            attr.addFlashAttribute("errorMsg","Ha habido un problema.");
+            attr.addFlashAttribute("errorMsg","Ha habido un problema. Intente nuevamente.");
             return "redirect:/administrativo/manage-deportive-centers";
         }
         completeCenter.setAddress(deportiveCenter.getAddress().toUpperCase().strip());
