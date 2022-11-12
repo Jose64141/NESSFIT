@@ -177,7 +177,12 @@ h1
     padding: 0;
 }
 
-.send-button
+.send-button-active
+{
+    display: block;
+}
+
+.send-button-inactive
 {
     display: none;
 }

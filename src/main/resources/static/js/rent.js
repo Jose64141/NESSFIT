@@ -3,13 +3,14 @@ const selectedDates = Array(allDates.length).fill(false);
 
 function dateButton(event)
 {
-    var buttonNumber = parseInt(event.currentTarget.id);
+    let buttonNumber = parseInt(event.currentTarget.id);
     selectedDates[buttonNumber] = !selectedDates[buttonNumber];
     if(selectedDates[buttonNumber])
     {
         // https://www.delftstack.com/howto/javascript/change-the-class-of-an-element-with-javascript/#:~:text=Change%20the%20Class%20of%20an%20HTML%20Element%20With,Been%20Used%20in%20an%20Element%20in%20JavaScript%20
         event.currentTarget.firstElementChild.className = "btn btn-primary h-100 w-100";
-        document.getElementById("send-button").style.display = "block";
+        document.getElementById("send-button").className = "send-button-active" +
+            " position-absolute bottom-0 end-0 m-5";
     }
     else
     {
@@ -18,26 +19,30 @@ function dateButton(event)
         {
             if(date) return;
         }
-        document.getElementById("send-button").style.display = "none";
+        document.getElementById("send-button").className = "send-button-inactive" +
+            " position-absolute bottom-0 end-0 m-5";
     }
 
 }
 function confirmButton(event)
 {
-    var pricePerDay = parseInt(document.getElementById("price").textContent);
-    var days = 0;
+    let pricePerDay = parseInt(document.getElementById("price").textContent);
+    let days = 0;
+    let totalPrice = 0;
+    let datesForm = "";
+    let count = 0;
+
     selectedDates.forEach( (item) => { if(item) { days++;} })
-    var totalPrice = days*pricePerDay;
+    totalPrice = days*pricePerDay;
     document.getElementById("total").value = totalPrice;
     document.getElementById("confirm-total").textContent = "$" + totalPrice.toString();
-    var datesForm = "";
-    var count = 0;
+
     for(var i = 0; i < allDates.length; i++)
     {
         if(selectedDates[i])
         {
-            var date = allDates.item(i);
-            var dateEntry = "";
+            let date = allDates.item(i);
+            let dateEntry = "";
             if(count !== 0){ dateEntry = "," }
             dateEntry += date.textContent;
             datesForm += dateEntry;
