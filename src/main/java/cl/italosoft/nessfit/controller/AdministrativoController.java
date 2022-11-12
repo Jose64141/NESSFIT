@@ -89,10 +89,15 @@ public class AdministrativoController
     {
     	newUser.setRut(newUser.getRut().toUpperCase());
 
-        User user = this.userService.findByRutOrEmail(newUser.getRut(), newUser.getEmail());
-        if(user != null)
+        if(this.userService.findByEmail(newUser.getEmail()) != null)
         {
-            result.rejectValue("rut",null,"El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.");
+            result.rejectValue("email",null,"El correo electrónico ya existe " +
+                    "en el sistema. Intente iniciar sesión.");
+        }
+        if(this.userService.find(newUser.getRut()) != null)
+        {
+            result.rejectValue("rut",null,"El RUT ya existe " +
+                    "en el sistema. Intente iniciar sesión.");
         }
         if(result.hasErrors())
         {

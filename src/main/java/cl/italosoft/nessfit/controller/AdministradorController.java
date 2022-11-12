@@ -95,12 +95,12 @@ public class AdministradorController
     {
         newUser.setRut(newUser.getRut().toUpperCase());
 
-        if(this.userService.findByRutOrEmail(null,newUser.getEmail()) != null)
+        if(this.userService.findByEmail(newUser.getEmail()) != null)
         {
-            result.rejectValue("email",null,"El Correo electrónico ya existe " +
+            result.rejectValue("email",null,"El correo electrónico ya existe " +
                     "en el sistema. Intente iniciar sesión.");
         }
-        if(this.userService.findByRutOrEmail(newUser.getRut(),null) != null)
+        if(this.userService.find(newUser.getRut()) != null)
         {
             result.rejectValue("rut",null,"El RUT ya existe " +
                     "en el sistema. Intente iniciar sesión.");
@@ -151,10 +151,10 @@ public class AdministradorController
         }
         String rut = user.getRut();
         User completeUser = userService.find(rut);
-        User emailUser = this.userService.findByRutOrEmail(null, user.getEmail());
+        User emailUser = this.userService.findByEmail(user.getEmail());
         if(emailUser != null && !emailUser.getRut().equalsIgnoreCase(rut))
         {
-            result.rejectValue("email",null,"El Correo electrónico ya está en uso");
+            result.rejectValue("email",null,"El correo electrónico ya está en uso.");
             return "administrador/edit-administrative";
         }
 

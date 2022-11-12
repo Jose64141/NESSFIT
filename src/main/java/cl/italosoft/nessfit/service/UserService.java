@@ -28,11 +28,10 @@ public interface UserService
 
     /**
      * Find a user by their email
-     * @param userRut the id of the record tro find
      * @param userEmail the email of the record to find
      * @return User if exists, null if not
      */
-    public User findByRutOrEmail(String userRut,String userEmail);
+    public User findByEmail(String userEmail);
 
     /**
      * List or find a user by their rut and role

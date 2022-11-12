@@ -13,5 +13,5 @@ public interface UserRepository extends JpaRepository<User, String>
     Page<User> findByRutContainingAndRoleIdOrderByIsEnabledDesc(String rut, int role, Pageable page);
     Page<User> findByRoleIdOrderByIsEnabledDesc(int role, Pageable page);
     User findByRutAndRole_id(String rut, int role_id);
-    User findByRutOrEmail(String rut, String email);
+    User findByEmail(String email);
 }

@@ -100,10 +100,17 @@ public class UserController
                 return "redirect:/login";
             case "change-data":
                 attr.addFlashAttribute("showPassword", false);
+
+                User emailUser = this.userService.findByEmail(user.getEmail());
+                if(emailUser != null && !emailUser.getRut().equalsIgnoreCase(user.getRut()))
+                {
+                    result.rejectValue("email",null,"El correo electrónico ya está en uso.");
+                }
                 if(result.hasErrors())
                 {
                     return "account-settings";
                 }
+
                 user.setName(newInfo.getName().strip());
                 user.setFirstLastName(newInfo.getFirstLastName().strip());
                 user.setSecondLastName(newInfo.getSecondLastName().strip());
