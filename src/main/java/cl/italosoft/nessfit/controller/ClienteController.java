@@ -50,14 +50,13 @@ public class ClienteController
                 return "cliente/rent";
             }
             List<Date> takenDates = rentRequestService.listDeportiveCenterDates(id);
-            List<java.util.Date> dates = new ArrayList<>(7);
+            List<java.util.Date> dates = new ArrayList<>(8);
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.HOUR_OF_DAY, 0);
             cal.set(Calendar.MINUTE, 0);
             cal.set(Calendar.SECOND, 0);
             cal.set(Calendar.MILLISECOND, 0);
-            cal.add(Calendar.DAY_OF_MONTH,1);
-            for(int i = 0; i < 7; i++)
+            for(int i = 0; i <= 7; i++)
             {
                 java.util.Date date = cal.getTime();
                 dates.add(date);
@@ -65,8 +64,8 @@ public class ClienteController
             }
             model.addAttribute("dates", dates);
 
-            List<Boolean> availability = new ArrayList<>(7);
-            for(int i = 0; i < 7; i++)
+            List<Boolean> availability = new ArrayList<>(8);
+            for(int i = 0; i <= 7; i++)
             {
                 if(takenDates.contains(new Date(dates.get(i).getTime())))
                     availability.add(false);
