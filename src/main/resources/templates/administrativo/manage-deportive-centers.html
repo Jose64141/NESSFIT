@@ -31,9 +31,9 @@
   <!-- CENTERS TABLE -->
   <h2 th:if="${centers.totalPages == 0}">No hay recintos que mostrar.</h2>
   <div th:if="${centers.totalPages > 0}" class="centers-container">
-    <div class="center-entry">
-      <div class="center-name">Centro</div>
-      <div class="center-type">Tipo</div>
+    <div class="center-entry center-entry-header">
+      <div class="center-name-header">Centro</div>
+      <div class="center-type-header">Tipo</div>
     </div>
     <th:block th:each="center : ${centers.content}">
       <a class="center-entry link-dark" th:href="@{/administrativo/edit-deportive-center(name=${center.name})}">
