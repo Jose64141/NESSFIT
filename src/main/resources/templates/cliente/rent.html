@@ -33,6 +33,7 @@
           <th:block th:each="center : ${centers}">
             <a class="center-entry link-dark" th:href="@{/cliente/rent(id=${center.name})}" th:classappend="${(param.id ne null) ? (param.id[0] == center.name) : false}? 'selection'">
               <div class="center-name" th:text="${center.name}"></div>
+              <div class="center-cost" th:text="${'$'+center.costPerDay}"></div>
               <div class="center-type" th:text="${center.type.name}"></div>
             </a>
           </th:block>
@@ -41,8 +42,8 @@
 
       <div class="form-container ms-5 w-auto" th:if="${selection ne null}">
         <h2 th:text="${selection.name}"></h2>
-        <p>Costo Diario: $<span th:text="${selection.costPerDay}" id="price"></span></p>
-        <p>Dirección: <span th:text="${selection.address}"></span></p>
+        <h5>Costo Diario: $<span th:text="${selection.costPerDay}" id="price"></span></h5>
+        <h5>Dirección: <span th:text="${selection.address}"></span></h5>
         <h3>Seleccione los días que quiere arrendar</h3>
         <table class="table w-50">
           <tr class="ms-3 me-3">
