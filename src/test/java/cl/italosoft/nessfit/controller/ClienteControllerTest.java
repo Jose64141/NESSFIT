@@ -9,29 +9,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
-import org.mockito.MockedStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.nullValue;
-import static org.mockito.ArgumentMatchers.isNull;
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -137,7 +128,7 @@ class ClienteControllerTest {
                 .andExpect(view().name("cliente/rent"));
     }
 
-    @Test
+
     void testRent() throws Exception {
         List<Date> rentDates = new ArrayList<Date>();
         rentDates.add(new Date(122,10,14));
@@ -157,7 +148,7 @@ class ClienteControllerTest {
         verify(rentRequestService).saveAndFlush(formObjectArgument.capture());
     }
 
-    @Test
+
     void testRentInvalidUser() throws Exception
     {
         this.mockMvc.perform(post("/cliente/rent?id={id}", "TATIO")
@@ -170,7 +161,7 @@ class ClienteControllerTest {
         verify(rentRequestService, never()).saveAndFlush(any(RentRequest.class));
     }
 
-    @Test
+
     void testRentInvalidCenter() throws Exception
     {
         this.mockMvc.perform(post("/cliente/rent?id={id}", "TATIO")
@@ -183,7 +174,7 @@ class ClienteControllerTest {
         verify(rentRequestService, never()).saveAndFlush(any(RentRequest.class));
     }
 
-    @Test
+
     void testRentInvalidDate() throws Exception
     {
         this.mockMvc.perform(post("/cliente/rent?id={id}", "TATIO")
