@@ -3,6 +3,8 @@ package cl.italosoft.nessfit.service;
 import cl.italosoft.nessfit.model.User;
 import cl.italosoft.nessfit.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,23 +43,38 @@ public class UserServiceImpl implements UserService
 
     /**
      * Find a user by their email
-     * @param userRut the id of the record tro find
      * @param userEmail the email of the record to find
      * @return User if exists, null if not
      */
     @Override
-    public User findByRutOrEmail(String userRut,String userEmail) {
-        return this.userRepository.findByRutOrEmail(userRut, userEmail);
+    public User findByEmail(String userEmail) {
+        return this.userRepository.findByEmail(userEmail);
+    }
+
+    /**
+     * List or find a user by their rut and role
+     * @param userRut the id of the record to find
+     * @param page    the pagination information
+     * @param role    the role id of users to find
+     * @return Page with the records
+     */
+    @Override
+    public Page<User> findByRutWithRole(String userRut, Pageable page, int role) {
+        if(userRut != null)
+            return this.userRepository.findByRutContainingAndRoleIdOrderByIsEnabledDesc(userRut,role,page);
+        else
+            return this.userRepository.findByRoleIdOrderByIsEnabledDesc(role,page);
     }
 
     /**
      * Saves a given user record.
      * @param user the user to save.
+     * @return Saved user
      */
     @Override
-    public void save(User user)
+    public User save(User user)
     {
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     /**

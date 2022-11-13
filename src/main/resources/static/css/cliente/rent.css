@@ -57,13 +57,7 @@ h1
 
 .btn
 {
-    position: relative;
     margin: 4px;
-}
-
-.btn-send
-{
-    margin: 0 0 0 28vw;
 }
 
 .btn-primary
@@ -103,38 +97,71 @@ h1
     --bs-btn-border-color: #282828;
 }
 
+.btn-light
+{
+    --bs-btn-color: #000000;
+    --bs-btn-bg: #f8f9fa;
+    --bs-btn-border-color: #282828;
+    --bs-btn-hover-color: #000000;
+    --bs-btn-hover-bg: #27e78f;
+    --bs-btn-hover-border-color: #1bb26d;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #c6c7c8;
+    --bs-btn-active-border-color: #c6c7c8;
+}
+
+.content
+{
+    position: relative;
+    margin-left: 100px;
+}
+
+.center-selection-container
+{
+    position: absolute;
+    border: 3px solid #000;
+    border-radius: 10px;
+    background-color: white;
+    height: 50vh;
+    width: 35%;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.center-entry
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-decoration:none;
+}
+.center-cost
+{
+    text-align: center;
+}
+.center-type
+{
+    text-align: right;
+}
+
+.link-dark:hover
+{
+    background-color: #c9c9c9;
+}
+
+.selection
+{
+    background-color: aliceblue;
+}
+
 .form-container
 {
     position: absolute;
-    top:4vh;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 40%;
-    height: 86%;
-    border: 3px solid #000;
-    border-radius: 10px;
-}
-
-
-.information-form-control
-{
-    display: block;
-    width: 100%;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0.375rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    left: 35%;
+    top: 0;
 }
 
 .input-box
@@ -144,14 +171,34 @@ h1
     height: 100%;
 }
 
-.alert-danger
-{
-    margin: 0;
-    padding: 0 0 1px 0 ;
-}
-
 .input-item
 {
     margin: 2vh 0;
     padding: 0;
+}
+
+.send-button-active
+{
+    display: block;
+}
+
+.send-button-inactive
+{
+    display: none;
+}
+
+th
+{
+    width: 100px;
+}
+td
+{
+    width: 100px;
+    height: 180px;
+}
+
+.available-icon
+{
+    height: 30px;
+    width: 30px;
 }

@@ -1,13 +1,19 @@
 package cl.italosoft.nessfit.controller;
 
+import cl.italosoft.nessfit.model.DeportiveCenter;
 import cl.italosoft.nessfit.model.Role;
+import cl.italosoft.nessfit.model.Type;
 import cl.italosoft.nessfit.model.User;
+import cl.italosoft.nessfit.service.DeportiveCenterService;
+import cl.italosoft.nessfit.service.TypeService;
 import cl.italosoft.nessfit.service.UserService;
 import cl.italosoft.nessfit.util.RutValidator;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +34,12 @@ public class AdministrativoController
 {
 	@Autowired
     private UserService userService;
+	
+	@Autowired
+	private DeportiveCenterService deportiveCenterService;
+
+    @Autowired
+    private TypeService typeService;
 
     @Autowired
     private RutValidator rutValidator;
@@ -37,7 +49,7 @@ public class AdministrativoController
     {
         binder.addValidators(rutValidator);
     }
-    
+
     @GetMapping("/administrativo/manage-clients")
     public String manageUsers(HttpServletRequest request, @RequestParam(required = false) String rut, Model model)
     {
@@ -76,64 +88,32 @@ public class AdministrativoController
     }
 	
     @GetMapping("/administrativo/add-client")
-    public String addClient(Model model)
+    public String addClient(Model model, User newUser)
     {
-        model.addAttribute("user", new User());
+        if(newUser == null)
+            newUser = new User();
+        model.addAttribute("user", newUser);
     	return "administrativo/add-client";
     }
     
     @PostMapping("/administrativo/add-client")
     public String addClient(Model model, @Valid User newUser, BindingResult result, RedirectAttributes attr)
     {
-    	if(result.hasErrors())
-        {
-            StringBuffer errorMsg = new StringBuffer();
-            Boolean[] msgInserted = {false, false, false, false};
-            for (FieldError error: result.getFieldErrors())
-            {
-                switch (error.getField())
-                {
-                    case "name", "firstLastName", "secondLastName":
-                        if(!msgInserted[0])
-                        {
-                            errorMsg.append("Los nombres o apellidos deben tener más de 2 caracteres. ");
-                            msgInserted[0] = true;
-                        }
-                        break;
-                    case "phoneNumber":
-                        if(!msgInserted[1])
-                        {
-                            errorMsg.append("El teléfono móvil ingresado no es válido. ");
-                            msgInserted[1] = true;
-                        }
-                        break;
-                    case "email":
-                        if(!msgInserted[2])
-                        {
-                            errorMsg.append("Su correo electrónico no es válido. ");
-                            msgInserted[2] = true;
-                        }
-                        break;
-                    case "rut":
-                        if(!msgInserted[3])
-                        {
-                            errorMsg.append("RUT inválido. ");
-                            msgInserted[3] = true;
-                        }
-                        break;
-                }
-            }
-            attr.addFlashAttribute("errorMsg",errorMsg);
-            return "redirect:/administrativo/add-client";
-        }
-
     	newUser.setRut(newUser.getRut().toUpperCase());
 
-        User user = this.userService.findByRutOrEmail(newUser.getRut(), newUser.getEmail());
-        if(user != null)
+        if(this.userService.findByEmail(newUser.getEmail()) != null)
         {
-            attr.addFlashAttribute("errorMsg","El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.");
-            return "redirect:/administrativo/add-client";
+            result.rejectValue("email",null,"El correo electrónico ya existe " +
+                    "en el sistema. Intente iniciar sesión.");
+        }
+        if(this.userService.find(newUser.getRut()) != null)
+        {
+            result.rejectValue("rut",null,"El RUT ya existe " +
+                    "en el sistema. Intente iniciar sesión.");
+        }
+        if(result.hasErrors())
+        {
+            return "administrativo/add-client";
         }
 
     	newUser.setEnabled(true);
@@ -147,5 +127,86 @@ public class AdministrativoController
       attr.addFlashAttribute("successMsg","El cliente se añadió con éxito. ");
       return "redirect:/administrativo/add-client";
     }
+
+    @GetMapping("/administrativo/add-deportive-center")
+    public String addDeportiveCenter(Model model, DeportiveCenter newDeportiveCenter) 
+    {
+    	if(newDeportiveCenter == null)
+        {
+            newDeportiveCenter = new DeportiveCenter();
+            newDeportiveCenter.setType(new Type());
+        }
+
+    	model.addAttribute("deportiveCenter",newDeportiveCenter);
+        model.addAttribute("types", typeService.list());
+     	return "administrativo/add-deportive-center";
+    }
     
+    @PostMapping("/administrativo/add-deportive-center")
+    public String addDeportiveCenter(Model model,@Valid DeportiveCenter newDeportiveCenter, BindingResult result, RedirectAttributes attr)
+    {	
+    	newDeportiveCenter.setName(newDeportiveCenter.getName().toUpperCase().strip());
+        newDeportiveCenter.setAddress(newDeportiveCenter.getAddress().toUpperCase().strip());
+    	
+    	DeportiveCenter deportiveCenter =  this.deportiveCenterService.find(newDeportiveCenter.getName());
+    	if(deportiveCenter != null) 
+    	{
+            result.rejectValue("name", null, "El nombre ingresado ya existe en el sistema.");
+    	}    	
+    	if(result.hasErrors()) 
+    	{
+            model.addAttribute("types", typeService.list());
+            return "administrativo/add-deportive-center";
+    	}
+
+        deportiveCenterService.saveAndFlush(newDeportiveCenter);
+    	attr.addFlashAttribute("successMsg", "El recinto se añadió con éxito.");
+    	return "redirect:/administrativo/add-deportive-center";
+    }
+
+    @GetMapping("/administrativo/manage-deportive-centers")
+    public String manageDeportiveCenter(Model model, @PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String name)
+    {
+        model.addAttribute("centers", deportiveCenterService.findByName(name, page));
+        return "administrativo/manage-deportive-centers";
+    }
+
+    @GetMapping("/administrativo/edit-deportive-center")
+    public String editDeportiveCenter(Model model, @RequestParam String name)
+    {
+        DeportiveCenter deportiveCenter = this.deportiveCenterService.find(name);
+        model.addAttribute("types", typeService.list());
+        if(deportiveCenter == null)
+        {
+            return "redirect:/administrativo/manage-deportive-centers";
+        }
+        model.addAttribute("deportiveCenter",deportiveCenter);
+        return "administrativo/edit-deportive-center";
+    }
+
+    @PostMapping("/administrativo/edit-deportive-center")
+    public String editDeportiveCenter(Model model, @Valid DeportiveCenter deportiveCenter, BindingResult result, RedirectAttributes attr)
+    {
+        model.addAttribute("types", typeService.list());
+
+        if(result.hasErrors())
+        {
+            return "administrativo/edit-deportive-center";
+        }
+        String name = deportiveCenter.getName();
+        DeportiveCenter completeCenter = deportiveCenterService.find(name);
+        if(completeCenter == null)
+        {
+            attr.addFlashAttribute("errorMsg","Ha habido un problema. Intente nuevamente.");
+            return "redirect:/administrativo/manage-deportive-centers";
+        }
+        completeCenter.setAddress(deportiveCenter.getAddress().toUpperCase().strip());
+        completeCenter.setType(deportiveCenter.getType());
+        completeCenter.setIsEnabled(deportiveCenter.getIsEnabled());
+        completeCenter.setCostPerDay(deportiveCenter.getCostPerDay());
+        deportiveCenterService.saveAndFlush(completeCenter);
+        attr.addFlashAttribute("successMsg","Los cambios se han realizado con éxito.");
+
+        return "redirect:/administrativo/edit-deportive-center?name="+name;
+    }
 }

@@ -48,11 +48,6 @@ public class UserController
     public String config(HttpServletRequest request, Model model)
     {
         User user = this.userService.find(request.getRemoteUser());
-        model.addAttribute("rut", user.getRut().strip());
-        model.addAttribute("name", user.getName().strip());
-        model.addAttribute("lastName", user.getFirstLastName().strip());
-        model.addAttribute("email",user.getEmail().strip());
-        model.addAttribute("phoneNumber",user.getPhoneNumber());
         model.addAttribute("user",user);
         return "account-settings";
     }
@@ -105,40 +100,17 @@ public class UserController
                 return "redirect:/login";
             case "change-data":
                 attr.addFlashAttribute("showPassword", false);
+
+                User emailUser = this.userService.findByEmail(user.getEmail());
+                if(emailUser != null && !emailUser.getRut().equalsIgnoreCase(user.getRut()))
+                {
+                    result.rejectValue("email",null,"El correo electrónico ya está en uso.");
+                }
                 if(result.hasErrors())
                 {
-                    StringBuffer errorMsg = new StringBuffer();
-                    Boolean[] msgInserted = {false, false, false};
-                    for (FieldError error: result.getFieldErrors())
-                    {
-                        switch (error.getField())
-                        {
-                            case "name", "firstLastName", "secondLastName":
-                                if(!msgInserted[0])
-                                {
-                                    errorMsg.append("Los nombres o apellidos deben tener más de 2 caracteres. ");
-                                    msgInserted[0] = true;
-                                }
-                                break;
-                            case "phoneNumber":
-                                if(!msgInserted[1])
-                                {
-                                    errorMsg.append("El teléfono móvil ingresado no es válido. ");
-                                    msgInserted[1] = true;
-                                }
-                                break;
-                            case "email":
-                                if(!msgInserted[2])
-                                {
-                                    errorMsg.append("Su correo electrónico no es válido. ");
-                                    msgInserted[2] = true;
-                                }
-                                break;
-                        }
-                    }
-                    attr.addFlashAttribute("infoErrorMsg",errorMsg);
-                    break;
+                    return "account-settings";
                 }
+
                 user.setName(newInfo.getName().strip());
                 user.setFirstLastName(newInfo.getFirstLastName().strip());
                 user.setSecondLastName(newInfo.getSecondLastName().strip());
