@@ -69,11 +69,12 @@ public class UserServiceImpl implements UserService
     /**
      * Saves a given user record.
      * @param user the user to save.
+     * @return Saved user
      */
     @Override
-    public void save(User user)
+    public User save(User user)
     {
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     /**

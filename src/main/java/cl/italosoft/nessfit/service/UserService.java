@@ -46,8 +46,9 @@ public interface UserService
     /**
      * Saves a given user record.
      * @param user the user to save.
+     * @return Saved user
      */
-    public void save(User user);
+    public User save(User user);
 
     /**
      * Saves a given user record and flushes the change instantly.
