@@ -14,63 +14,55 @@ import cl.italosoft.nessfit.model.Type;
 import cl.italosoft.nessfit.repository.DeportiveCenterRepository;
 @SpringBootTest
 class DeportiveCenterServiceTest {
-
+	
 	@Autowired
-	private DeportiveCenterService deportiveService = new DeportiveCenterServiceImpl();
+	private DeportiveCenterService deportiveService;
 	
 	private DeportiveCenter deportiveCenter;
 	
-	@Autowired
-	private DeportiveCenterRepository deportiveCenterRepository;
-
+	Type type = new Type(0,"CANCHA");
+	Type type1 = new Type(1,"GIMNASIO");
+	Type type2 = new Type(2,"PISCINA");
+	Type type3 = new Type(3,"QUINCHO");
+	Type type4 = new Type(4,"ESTADIO");
+	
 	@Test
 	void save() 
 	{
-		Type type = new Type(0,"CANCHA");
-		Type type1 = new Type(1,"GIMNASIO");
-		Type type2 = new Type(2,"PISCINA");
-		Type type3 = new Type(3,"QUINCHO");
-		Type type4 = new Type(4,"ESTADIO");
 		
 		deportiveCenter = new DeportiveCenter("RINGFIT","AVENIDA ANGAMOS 001",type,2000,true);
-		assertNotNull(deportiveCenterRepository.save(deportiveCenter));
+		assertNotNull(deportiveService.save(deportiveCenter));
 		
 		deportiveCenter = new DeportiveCenter("SOKOL","AVENIDA ANGAMOS 002",type1,6000,false);
-		assertNotNull(deportiveCenterRepository.save(deportiveCenter));
+		assertNotNull(deportiveService.save(deportiveCenter));
 		
 		deportiveCenter = new DeportiveCenter("GREEN CROSS","AVENIDA ANGAMOS 003", type2,4000,false);
-		assertNotNull(deportiveCenterRepository.save(deportiveCenter));
+		assertNotNull(deportiveService.save(deportiveCenter));
 		
 		deportiveCenter = new DeportiveCenter("MATCH","AVENIDA ANGAMOS 004", type3,5000,true);
-		assertNotNull(deportiveCenterRepository.save(deportiveCenter));
+		assertNotNull(deportiveService.save(deportiveCenter));
 		
 		deportiveCenter = new DeportiveCenter("ESTADIO","AVENIDA ANGAMOS 003", type4,8000,true);
-		assertNotNull(deportiveCenterRepository.save(deportiveCenter));
+		assertNotNull(deportiveService.save(deportiveCenter));
 	}
 	
 	@Test
 	void saveAndFlush() 
 	{
-		Type type = new Type(0,"CANCHA");
-		Type type1 = new Type(1,"GIMNASIO");
-		Type type2 = new Type(2,"PISCINA");
-		Type type3 = new Type(3,"QUINCHO");
-		Type type4 = new Type(4,"ESTADIO");
-		
 		deportiveCenter = new DeportiveCenter("RINGFIT","AVENIDA ANGAMOS 001",type,2000,true);
-		assertNotNull(deportiveCenterRepository.saveAndFlush(deportiveCenter));
+		assertNotNull(deportiveService.saveAndFlush(deportiveCenter));
 		
 		deportiveCenter = new DeportiveCenter("SOKOL","AVENIDA ANGAMOS 002",type1,6000,false);
-		assertNotNull(deportiveCenterRepository.saveAndFlush(deportiveCenter));
+		assertNotNull(deportiveService.saveAndFlush(deportiveCenter));
 		
 		deportiveCenter = new DeportiveCenter("GREEN CROSS","AVENIDA ANGAMOS 003", type2,4000,false);
-		assertNotNull(deportiveCenterRepository.saveAndFlush(deportiveCenter));
+		assertNotNull(deportiveService.saveAndFlush(deportiveCenter));
 		
 		deportiveCenter = new DeportiveCenter("MATCH","AVENIDA ANGAMOS 004", type3,5000,true);
-		assertNotNull(deportiveCenterRepository.saveAndFlush(deportiveCenter));
+		assertNotNull(deportiveService.saveAndFlush(deportiveCenter));
 		
 		deportiveCenter = new DeportiveCenter("ESTADIO","AVENIDA ANGAMOS 003", type4,8000,true);
-		assertNotNull(deportiveCenterRepository.saveAndFlush(deportiveCenter));
+		assertNotNull(deportiveService.saveAndFlush(deportiveCenter));
 	}
 	
 	@Test
@@ -78,6 +70,30 @@ class DeportiveCenterServiceTest {
 	{
 		List<DeportiveCenter> list = deportiveService.list();
 		assertNotNull(list);
+	}
+	
+	@Test
+	void find() 
+	{
+		deportiveCenter = new DeportiveCenter("GREEN CROSS","AVENIDA ANGAMOS 003",type2,4000,true);
+		DeportiveCenter newDeportiveCenter = deportiveService.find("GREEN CROSS");
+		assertSame(deportiveCenter.getName(),newDeportiveCenter.getName());
+		
+		newDeportiveCenter = deportiveService.find("GREEN CROSS", 2);
+		assertSame(deportiveCenter.getType().getId(),newDeportiveCenter.getType().getId());
+		
+	}
+	
+	void findByNameOrAddress() 
+	{
+		deportiveCenter = new DeportiveCenter("MATCH","AVENIDA ANGAMOS 004",type3, 2000,false);
+		DeportiveCenter newDeportiveCenter = deportiveService.findByNameOrAddress("MATCH", "AVENIDA ANGAMOS 007");
+		assertSame(deportiveCenter.getName(), newDeportiveCenter.getName());
+		assertSame(deportiveCenter.getAddress(),newDeportiveCenter.getAddress());
+		
+		newDeportiveCenter = deportiveService.findByNameOrAddress("GREEN CROSS", "AVENIDA ANGAMOS 003");
+		assertSame(deportiveCenter.getName(), newDeportiveCenter.getName());
+		assertSame(deportiveCenter.getAddress(),newDeportiveCenter.getAddress());
 	}
 	
 }
