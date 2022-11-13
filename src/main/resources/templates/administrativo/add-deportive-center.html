@@ -51,7 +51,7 @@
                     <div class="input-item">
                         <label>Costo de arriendo (por día)</label>
                         <label class="input-box">
-                            <input class="information-form-control" type="text" inputmode="numeric" pattern="\d*"
+                            <input class="information-form-control" type="text" inputmode="numeric"
                                    th:field="*{costPerDay}">
                             <div th:if="${#fields.hasErrors('costPerDay')}" th:errorclass="text-danger" th:errors="*{costPerDay}"></div>
                         </label>

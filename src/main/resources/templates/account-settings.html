@@ -68,7 +68,7 @@
                                 <img class = "attribute-logo" th:src="@{/images/phone-icon.png}">
                                 <label>Número de teléfono</label>
                                 <label class="input-box">
-                                    <input class="information-form-control" type="tel" pattern="\d*" th:field="*{phoneNumber}" th:value="${user.phoneNumber}" th:errorclass="border-danger" required>
+                                    <input class="information-form-control" type="tel" th:field="*{phoneNumber}" th:value="${user.phoneNumber}" th:errorclass="border-danger" required>
                                     <div th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></div>
                                 </label>
                             </div>

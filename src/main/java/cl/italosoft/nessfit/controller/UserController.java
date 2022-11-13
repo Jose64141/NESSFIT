@@ -101,7 +101,7 @@ public class UserController
             case "change-data":
                 attr.addFlashAttribute("showPassword", false);
 
-                User emailUser = this.userService.findByEmail(user.getEmail());
+                User emailUser = this.userService.findByEmail(newInfo.getEmail());
                 if(emailUser != null && !emailUser.getRut().equalsIgnoreCase(user.getRut()))
                 {
                     result.rejectValue("email",null,"El correo electrónico ya está en uso.");
@@ -115,7 +115,7 @@ public class UserController
                 user.setFirstLastName(newInfo.getFirstLastName().strip());
                 user.setSecondLastName(newInfo.getSecondLastName().strip());
                 user.setPhoneNumber(newInfo.getPhoneNumber());
-                user.setEmail(newInfo.getEmail().strip());
+                user.setEmail(newInfo.getEmail().strip().toLowerCase());
                 userService.saveAndFlush(user);
                 attr.addFlashAttribute("infoSuccessMsg","Los cambios se han realizado con éxito.");
             default:

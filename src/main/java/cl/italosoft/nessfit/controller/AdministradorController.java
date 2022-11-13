@@ -93,7 +93,8 @@ public class AdministradorController
     @PostMapping("/administrador/add-administrative")
     public String addAdministrative(Model model, @Valid User newUser, BindingResult result, RedirectAttributes attr)
     {
-        newUser.setRut(newUser.getRut().toUpperCase());
+        newUser.setRut(newUser.getRut().strip().toUpperCase());
+        newUser.setEmail(newUser.getEmail().strip().toLowerCase());
 
         if(this.userService.findByEmail(newUser.getEmail()) != null)
         {
@@ -162,7 +163,7 @@ public class AdministradorController
         completeUser.setFirstLastName(user.getFirstLastName().strip());
         completeUser.setSecondLastName(user.getSecondLastName().strip());
         completeUser.setPhoneNumber(user.getPhoneNumber());
-        completeUser.setEmail(user.getEmail().strip());
+        completeUser.setEmail(user.getEmail().strip().toLowerCase());
         userService.saveAndFlush(completeUser);
         attr.addFlashAttribute("infoSuccessMsg","Los cambios se han realizado con éxito.");
 

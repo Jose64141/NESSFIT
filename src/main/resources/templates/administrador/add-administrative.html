@@ -59,7 +59,7 @@
         <div class="input-item">
           <label>Número de teléfono</label>
           <label class="input-box">
-            <input class="information-form-control" type="tel" pattern="\d*" th:field="*{phoneNumber}" placeholder="912345678" th:errorclass="border-danger">
+            <input class="information-form-control" type="tel" th:field="*{phoneNumber}" placeholder="912345678" th:errorclass="border-danger">
             <div th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></div>
           </label>
         </div>
