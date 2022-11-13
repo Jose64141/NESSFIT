@@ -129,6 +129,17 @@ h1
     overflow-y: auto;
 }
 
+.center-entry-header
+{
+    border-bottom: 2px solid #000;
+    border-radius: 0;
+}
+
+.center-name-header, .center-cost-header, .center-type-header
+{
+    color: #3f8880;
+}
+
 .center-entry
 {
     display: grid;
@@ -138,11 +149,11 @@ h1
     border-radius: 10px;
     text-decoration:none;
 }
-.center-cost
+.center-cost, .center-cost-header
 {
     text-align: center;
 }
-.center-type
+.center-type, .center-type-header
 {
     text-align: right;
 }

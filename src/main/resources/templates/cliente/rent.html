@@ -30,6 +30,11 @@
       <div th:if="${centers.size() ne 0}" class="me-5 w-25 start-0">
         <h2>Por favor, seleccione un centro</h2>
         <div class="center-selection-container">
+          <div class="center-entry center-entry-header">
+            <div class="center-name-header">Centro</div>
+            <div class="center-cost-header">Costo Diario</div>
+            <div class="center-type-header">Tipo</div>
+          </div>
           <th:block th:each="center : ${centers}">
             <a class="center-entry link-dark" th:href="@{/cliente/rent(id=${center.name})}" th:classappend="${(param.id ne null) ? (param.id[0] == center.name) : false}? 'selection'">
               <div class="center-name" th:text="${center.name}"></div>

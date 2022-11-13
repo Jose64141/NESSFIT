@@ -28,6 +28,12 @@ h1
     color: #000000;
 }
 
+.refresh-icon
+{
+    width: 28px;
+    height: 28px;
+}
+
 .attribute-logo
 {
     width: 5vh;
