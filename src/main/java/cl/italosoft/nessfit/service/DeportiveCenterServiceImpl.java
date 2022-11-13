@@ -70,9 +70,8 @@ public class DeportiveCenterServiceImpl implements DeportiveCenterService
      * @param deportiveCenter the record to save.
      */
     @Override
-    public void save(DeportiveCenter deportiveCenter)
-    {
-    	deportiveCenterRepository.save(deportiveCenter);
+    public DeportiveCenter save(DeportiveCenter deportiveCenter) {
+    	return deportiveCenterRepository.save(deportiveCenter);
     }
 
     /**
@@ -80,7 +79,7 @@ public class DeportiveCenterServiceImpl implements DeportiveCenterService
      * @param deportiveCenter the record to save.
      */
     @Override
-    public void saveAndFlush(DeportiveCenter deportiveCenter) { deportiveCenterRepository.saveAndFlush(deportiveCenter); }
+    public DeportiveCenter saveAndFlush(DeportiveCenter deportiveCenter) { return deportiveCenterRepository.saveAndFlush(deportiveCenter); }
 
     /**
      * Deletes a DeportiveCenter record.

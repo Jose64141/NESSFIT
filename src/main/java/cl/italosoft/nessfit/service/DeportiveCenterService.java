@@ -46,14 +46,16 @@ public interface DeportiveCenterService
     /**
      * Saves a given DeportiveCenter record.
      * @param deportiveCenter the record to save.
+     * @return 
      */
-    public void save(DeportiveCenter deportiveCenter);
+    public DeportiveCenter save(DeportiveCenter deportiveCenter);
 
     /**
      * Saves a given DeportiveCenter record and flushes the change instantly.
      * @param deportiveCenter the record to save.
+     * @return 
      */
-    public void saveAndFlush(DeportiveCenter deportiveCenter);
+    public DeportiveCenter saveAndFlush(DeportiveCenter deportiveCenter);
 
     /**
      * Deletes a DeportiveCenter record.
