@@ -72,7 +72,7 @@
 
             <div class="buttons" sec:authorize="hasRole('ROLE_CLIENTE')">
                 <h3>¿Qué desea hacer?</h3>
-                <a class="button-container" th:href="@{/home}">
+                <a class="button-container" th:href="@{/cliente/rent}">
                     <button>Arrendar
                         <img class="button-logo" th:src="@{images/rent-logo.png}" alt="Arendar recinto">
                     </button>
