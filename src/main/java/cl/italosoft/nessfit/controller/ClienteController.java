@@ -44,7 +44,7 @@ public class ClienteController
         if (id != null)
         {
             selection = deportiveCenterService.find(id);
-            if(!selection.isEnabled())
+            if(!selection.getIsEnabled())
             {
                 model.addAttribute("selection", null);
                 return "cliente/rent";

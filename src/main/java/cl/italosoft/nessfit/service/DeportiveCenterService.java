@@ -2,6 +2,8 @@ package cl.italosoft.nessfit.service;
 
 
 import cl.italosoft.nessfit.model.DeportiveCenter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -33,18 +35,27 @@ public interface DeportiveCenterService
      */
     public DeportiveCenter findByNameOrAddress(String deportiveCenterName, String address);
 
+    /**
+     * Lists all deportive centers or find a record by its name.
+     * @param name  the id of the record to find
+     * @param page the pagination information
+     * @return page containing the records.
+     */
+    public Page<DeportiveCenter> findByName(String name, Pageable page);
 
     /**
      * Saves a given DeportiveCenter record.
      * @param deportiveCenter the record to save.
+     * @return 
      */
-    public void save(DeportiveCenter deportiveCenter);
+    public DeportiveCenter save(DeportiveCenter deportiveCenter);
 
     /**
      * Saves a given DeportiveCenter record and flushes the change instantly.
      * @param deportiveCenter the record to save.
+     * @return 
      */
-    public void saveAndFlush(DeportiveCenter deportiveCenter);
+    public DeportiveCenter saveAndFlush(DeportiveCenter deportiveCenter);
 
     /**
      * Deletes a DeportiveCenter record.

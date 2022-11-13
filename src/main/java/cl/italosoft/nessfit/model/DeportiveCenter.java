@@ -11,21 +11,19 @@ import javax.validation.constraints.*;
 @Table(name = "deportive_centers")
 public class DeportiveCenter implements Serializable
 {
-    @NotBlank
+    @NotBlank(message = "Este campo es obligatorio.")
     @Id
     private String name;
-    @NotBlank
+    @NotBlank(message = "Este campo es obligatorio.")
     private String address;
-    @NotBlank
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id",referencedColumnName = "id")
     private Type type;
-    @NotBlank
+    @NotNull(message = "Este campo es obligatorio.")
     @Min(value = 1000, message = "El costo por dia ingresado no es válido. Tiene que ser mayor o igual a 1000")
     @Max(value = 999999999, message = "El costo por dia ingresado no es válido.")
     @Column(name = "cost_per_day")
-    private int costPerDay;
-    @NotBlank
+    private Integer costPerDay;
     @Column(name = "is_enabled")
     private boolean isEnabled;
 
@@ -55,7 +53,7 @@ public class DeportiveCenter implements Serializable
         this.name = null;
         this.address = null;
         this.type = null;
-        this.costPerDay = -1;
+        this.costPerDay = null;
         this.isEnabled = false;
 
     }
@@ -118,7 +116,7 @@ public class DeportiveCenter implements Serializable
      * Gets the cost per day
      * @return Integer with cost per day
      */
-    public int getCostPerDay()
+    public Integer getCostPerDay()
     {
         return costPerDay;
     }
@@ -127,7 +125,7 @@ public class DeportiveCenter implements Serializable
      * Sets the cost per day
      * @param costPerDay new cost per day
      */
-    public void setCostPerDay(int costPerDay)
+    public void setCostPerDay(Integer costPerDay)
     {
         this.costPerDay = costPerDay;
     }
@@ -136,7 +134,7 @@ public class DeportiveCenter implements Serializable
      * Gets the enabled status
      * @return True if its enabled, False is not
      */
-    public boolean isEnabled()
+    public boolean getIsEnabled()
     {
         return isEnabled;
     }
@@ -145,7 +143,7 @@ public class DeportiveCenter implements Serializable
      * Sets the enabled status
      * @param enabled new enabled status
      */
-    public void setEnabled(boolean enabled)
+    public void setIsEnabled(boolean enabled)
     {
         isEnabled = enabled;
     }

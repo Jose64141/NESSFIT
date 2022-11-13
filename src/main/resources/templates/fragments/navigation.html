@@ -46,13 +46,13 @@
 
                             <th:block sec:authorize="hasRole('ADMINISTRATIVO')">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Agregar Recintos</a>
+                                    <a class="nav-link" th:href="@{/administrativo/add-deportive-center}">Agregar Recinto</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" th:href="@{/administrativo/add-client}">Agregar Cliente</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Administrar Recintos</a>
+                                    <a class="nav-link" th:href="@{/administrativo/manage-deportive-centers}">Administrar Recintos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" th:href="@{/administrativo/manage-clients}">Administrar Clientes</a>

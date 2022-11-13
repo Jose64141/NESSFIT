@@ -3,6 +3,8 @@ package cl.italosoft.nessfit.service;
 import cl.italosoft.nessfit.model.DeportiveCenter;
 import cl.italosoft.nessfit.repository.DeportiveCenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,13 +51,27 @@ public class DeportiveCenterServiceImpl implements DeportiveCenterService
     }
 
     /**
+     * Lists all deportive centers or find a record by its name.
+     * @param name  the id of the record to find
+     * @param page the pagination information
+     * @return page containing the records.
+     */
+    @Override
+    public Page<DeportiveCenter> findByName(String name, Pageable page)
+    {
+        if(name != null)
+            return this.deportiveCenterRepository.findByNameContaining(name, page);
+        else
+            return deportiveCenterRepository.findAll(page);
+    }
+
+    /**
      * Saves a given DeportiveCenter record.
      * @param deportiveCenter the record to save.
      */
     @Override
-    public void save(DeportiveCenter deportiveCenter)
-    {
-    	deportiveCenterRepository.save(deportiveCenter);
+    public DeportiveCenter save(DeportiveCenter deportiveCenter) {
+    	return deportiveCenterRepository.save(deportiveCenter);
     }
 
     /**
@@ -63,7 +79,7 @@ public class DeportiveCenterServiceImpl implements DeportiveCenterService
      * @param deportiveCenter the record to save.
      */
     @Override
-    public void saveAndFlush(DeportiveCenter deportiveCenter) { deportiveCenterRepository.saveAndFlush(deportiveCenter); }
+    public DeportiveCenter saveAndFlush(DeportiveCenter deportiveCenter) { return deportiveCenterRepository.saveAndFlush(deportiveCenter); }
 
     /**
      * Deletes a DeportiveCenter record.
@@ -84,6 +100,7 @@ public class DeportiveCenterServiceImpl implements DeportiveCenterService
     {
         return deportiveCenterRepository.findAll();
     }
+
 
     /**
      * Returns all DeportiveCenter records which are enabled.
