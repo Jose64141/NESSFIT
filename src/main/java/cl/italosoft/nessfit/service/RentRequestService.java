@@ -26,14 +26,14 @@ RentRequestService
      *
      * @param rentRequest the rent request to save.
      */
-    public void save(RentRequest rentRequest);
+    public RentRequest save(RentRequest rentRequest);
 
     /**
      * Saves a given rent request record and flushes the change instantly.
      *
      * @param rentRequest the rent request to save.
      */
-    public void saveAndFlush(RentRequest rentRequest);
+    public RentRequest saveAndFlush(RentRequest rentRequest);
 
     /**
      * Deletes a rent request record.

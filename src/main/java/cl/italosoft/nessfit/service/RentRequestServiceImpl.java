@@ -32,7 +32,7 @@ public class RentRequestServiceImpl implements RentRequestService
      * @param rentRequest the rent request to save.
      */
     @Override
-    public void save(RentRequest rentRequest) { rentRequestRepository.save(rentRequest);}
+    public RentRequest save(RentRequest rentRequest) { return rentRequestRepository.save(rentRequest);}
 
     /**
      * Saves a given rent request record and flushes the change instantly.
@@ -40,7 +40,7 @@ public class RentRequestServiceImpl implements RentRequestService
      * @param rentRequest the rent request to save.
      */
     @Override
-    public void saveAndFlush(RentRequest rentRequest) { rentRequestRepository.saveAndFlush(rentRequest);}
+    public RentRequest saveAndFlush(RentRequest rentRequest) { return rentRequestRepository.saveAndFlush(rentRequest);}
 
     /**
      * Deletes a rent request record.
