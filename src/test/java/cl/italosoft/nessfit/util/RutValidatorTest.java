@@ -51,7 +51,6 @@ class RutValidatorTest {
     @Test
     void checkFormat()
     {
-
         String rut = "209674327";
         assertTrue(validator.checkFormat(rut));
         rut = "17977139K";

@@ -51,14 +51,18 @@ class ClienteControllerTest {
     @BeforeEach
     void setUp()
     {
-        user = new User("207676918","","","","",null,"",true,new Role(3));
+        user = new User("207676918","","","","",null,
+                "",true,new Role(3));
         when(userService.find("207676918")).thenReturn(user);
-        user = new User("209674327","","","","",null,"",true,new Role(2));
+        user = new User("209674327","","","","",null,
+                "",true,new Role(2));
         when(userService.find("209674327")).thenReturn(user);
 
         this.deportiveCenters = new ArrayList<>();
-        deportiveCenters.add(new DeportiveCenter("TATIO","ORELLA 1040", new Type(2,"Piscina"), 45000,true));
-        deportiveCenters.add(new DeportiveCenter("SPLIT","VLADIMIR ZAAVEDRA 355", new Type(0,"Cancha"), 30000,true));
+        deportiveCenters.add(new DeportiveCenter("TATIO","ORELLA 1040", new Type(2,"Piscina"),
+                45000,true));
+        deportiveCenters.add(new DeportiveCenter("SPLIT","VLADIMIR ZAAVEDRA 355",
+                new Type(0,"Cancha"), 30000,true));
         when(deportiveCenterService.listEnabled()).thenReturn(this.deportiveCenters);
         when(deportiveCenterService.find("TATIO")).thenReturn(deportiveCenters.get(1));
     }
@@ -77,7 +81,9 @@ class ClienteControllerTest {
     @Test
     void rentDisabled() throws Exception
     {
-        when(deportiveCenterService.find("SOKOL")).thenReturn(new DeportiveCenter("SOKOL","ESMERALDA", new Type(2,"Piscina"), 1500,false));
+        when(deportiveCenterService.find("SOKOL"))
+                .thenReturn(new DeportiveCenter("SOKOL","ESMERALDA", new Type(2,"Piscina"),
+                        1500,false));
         this.mockMvc.perform(get("/cliente/rent?id={id}", "SOKOL")
                         .with(user("207676918").roles("CLIENTE")) )
                 .andExpect(status().isOk())
@@ -90,16 +96,14 @@ class ClienteControllerTest {
     @Test
     void rentOne() throws Exception
     {
-        List<Date> rentDates = new ArrayList<Date>();
-        rentDates.add(new Date(122,10,14));
-        rentDates.add(new Date(122,10,16));
+        List<Date> rentDates = List.of(new Date(122,10,14),new Date(122,10,16));
 
         when(rentRequestService.listDeportiveCenterDates("TATIO")).thenReturn(rentDates);
 
-        RentRequest rentRequest = new RentRequest(user, deportiveCenters.get(1), "PENDIENTE",90000, rentDates, new Date(2022,11,12)  );
+        RentRequest rentRequest = new RentRequest(user, deportiveCenters.get(1), "PENDIENTE",90000,
+                rentDates, new Date(2022,11,13)  );
 
         List<java.util.Date> dates = new ArrayList<>(8);
-        dates.add(new java.util.Date(122,10,12));
         dates.add(new java.util.Date(122,10,13));
         dates.add(new java.util.Date(122,10,14));
         dates.add(new java.util.Date(122,10,15));
@@ -107,19 +111,13 @@ class ClienteControllerTest {
         dates.add(new java.util.Date(122,10,17));
         dates.add(new java.util.Date(122,10,18));
         dates.add(new java.util.Date(122,10,19));
+        dates.add(new java.util.Date(122,10,20));
 
 
-        List<Boolean> availability = new ArrayList<>(8);
-        availability.add(true);
-        availability.add(true);
-        availability.add(false);
-        availability.add(true);
-        availability.add(false);
-        availability.add(true);
-        availability.add(true);
-        availability.add(true);
+        List<Boolean> availability = List.of(true,false,true,false,true,true,true,true);
 
-        this.mockMvc.perform(get("/cliente/rent?id={id}", "TATIO").with(user("207676918").roles("CLIENTE")))
+        this.mockMvc.perform(get("/cliente/rent?id={id}", "TATIO")
+                        .with(user("207676918").roles("CLIENTE")))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("centers",deportiveCenters))
                 .andExpect(model().attribute("selection",deportiveCenters.get(1)))
@@ -130,10 +128,10 @@ class ClienteControllerTest {
 
 
     void testRent() throws Exception {
-        List<Date> rentDates = new ArrayList<Date>();
-        rentDates.add(new Date(122,10,14));
-        rentDates.add(new Date(122,10,16));
-        RentRequest rentRequest = new RentRequest(user, deportiveCenters.get(1), "PENDIENTE",90000, rentDates, new Date(2022,11,12)  );
+        List<Date> rentDates = List.of(new Date(122,10,14),new Date(122,10,16));
+
+        RentRequest rentRequest = new RentRequest(user, deportiveCenters.get(1), "PENDIENTE",90000,
+                rentDates, new Date(2022,11,12)  );
         when(rentRequestService.saveAndFlush(any(RentRequest.class))).thenReturn(rentRequest);
 
         this.mockMvc.perform(post("/cliente/rent?id={id}", "TATIO")

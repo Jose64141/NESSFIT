@@ -37,23 +37,23 @@ class RentRequestServiceTest {
     @BeforeEach
     void setUp()
     {
-        testUser = new User("207676918","","","","",null,"",true,new Role(3));
-        testDeportiveCenter = new DeportiveCenter("TATIO","ORELLA 1040", new Type(2,"Piscina"), 45000,true);
+        testUser = new User("207676918","","","","",null,
+                "",true,new Role(3));
+        testDeportiveCenter = new DeportiveCenter("TATIO","ORELLA 1040", new Type(2,"Piscina"),
+                45000,true);
 
         List<Date> rentDates = new ArrayList<Date>();
         rentDates.add(new Date(122,10,14));
         rentDates.add(new Date(122,10,16));
-        testRentRequest = new RentRequest(testUser, testDeportiveCenter, "PENDIENTE",90000, rentDates, new Date(2022,11,12)  );
+        testRentRequest = new RentRequest(testUser, testDeportiveCenter, "PENDIENTE",90000, rentDates,
+                new Date(2022,11,12)  );
     }
 
     @Test
     void find()
     {
-
         when(rentRequestRepository.findById(testRentRequest.getId())).thenReturn(Optional.of(testRentRequest));
-
         RentRequest found = service.find(testRentRequest.getId());
-
         assertEquals(testRentRequest,found);
     }
 
@@ -61,17 +61,14 @@ class RentRequestServiceTest {
     void save()
     {
         when(rentRequestRepository.save(testRentRequest)).thenReturn(testRentRequest);
-
         RentRequest saved = service.save(testRentRequest);
         assertEquals(testRentRequest,saved);
-
     }
 
     @Test
     void saveAndFlush()
     {
         when(rentRequestRepository.saveAndFlush(testRentRequest)).thenReturn(testRentRequest);
-
         RentRequest saved = service.saveAndFlush(testRentRequest);
         assertEquals(testRentRequest,saved);
     }
@@ -88,9 +85,10 @@ class RentRequestServiceTest {
     {
         List<Date> rentDates = new ArrayList<Date>();
         rentDates.add(new Date(122,10,13));
-        RentRequest testRentRequest2 = new RentRequest(testUser, testDeportiveCenter, "PENDIENTE",45000, rentDates, new Date(2022,11,12)  );
-
-        when(rentRequestRepository.findByUser_Rut(testUser.getRut())).thenReturn(List.of(testRentRequest,testRentRequest2));
+        RentRequest testRentRequest2 = new RentRequest(testUser, testDeportiveCenter,
+                "PENDIENTE",45000, rentDates, new Date(2022,11,12));
+        when(rentRequestRepository.findByUser_Rut(testUser.getRut()))
+                .thenReturn(List.of(testRentRequest,testRentRequest2));
         List<RentRequest> found = service.listByUser(testUser.getRut());
 
         assertEquals(2,found.size());
@@ -99,16 +97,17 @@ class RentRequestServiceTest {
     @Test
     void listByDeportiveCenter()
     {
-        when(rentRequestRepository.findByDeportiveCenter(testDeportiveCenter.getName())).thenReturn(List.of(testRentRequest));
+        when(rentRequestRepository.findByDeportiveCenter(testDeportiveCenter.getName()))
+                .thenReturn(List.of(testRentRequest));
         List<RentRequest> found = service.listByDeportiveCenter(testDeportiveCenter.getName());
-
         assertEquals(1,found.size());
     }
 
     @Test
     void listDeportiveCenterDates()
     {
-        when(rentRequestRepository.findDeportiveCenterDates("TATIO")).thenReturn(testRentRequest.getDates());
+        when(rentRequestRepository.findDeportiveCenterDates("TATIO"))
+                .thenReturn(testRentRequest.getDates());
         List<Date> found = service.listDeportiveCenterDates("TATIO");
         assertEquals(testRentRequest.getDates(),found);
     }
