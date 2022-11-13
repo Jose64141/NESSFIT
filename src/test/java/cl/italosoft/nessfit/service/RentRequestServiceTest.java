@@ -52,11 +52,8 @@ class RentRequestServiceTest {
     @Test
     void find()
     {
-
         when(rentRequestRepository.findById(testRentRequest.getId())).thenReturn(Optional.of(testRentRequest));
-
         RentRequest found = service.find(testRentRequest.getId());
-
         assertEquals(testRentRequest,found);
     }
 
@@ -64,17 +61,14 @@ class RentRequestServiceTest {
     void save()
     {
         when(rentRequestRepository.save(testRentRequest)).thenReturn(testRentRequest);
-
         RentRequest saved = service.save(testRentRequest);
         assertEquals(testRentRequest,saved);
-
     }
 
     @Test
     void saveAndFlush()
     {
         when(rentRequestRepository.saveAndFlush(testRentRequest)).thenReturn(testRentRequest);
-
         RentRequest saved = service.saveAndFlush(testRentRequest);
         assertEquals(testRentRequest,saved);
     }
@@ -92,8 +86,7 @@ class RentRequestServiceTest {
         List<Date> rentDates = new ArrayList<Date>();
         rentDates.add(new Date(122,10,13));
         RentRequest testRentRequest2 = new RentRequest(testUser, testDeportiveCenter,
-                "PENDIENTE",45000, rentDates, new Date(2022,11,12)  );
-
+                "PENDIENTE",45000, rentDates, new Date(2022,11,12));
         when(rentRequestRepository.findByUser_Rut(testUser.getRut()))
                 .thenReturn(List.of(testRentRequest,testRentRequest2));
         List<RentRequest> found = service.listByUser(testUser.getRut());
@@ -107,7 +100,6 @@ class RentRequestServiceTest {
         when(rentRequestRepository.findByDeportiveCenter(testDeportiveCenter.getName()))
                 .thenReturn(List.of(testRentRequest));
         List<RentRequest> found = service.listByDeportiveCenter(testDeportiveCenter.getName());
-
         assertEquals(1,found.size());
     }
 
