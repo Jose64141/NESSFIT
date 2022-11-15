@@ -92,25 +92,8 @@
                                 </button>
                             </div>
 
-                            <div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="dataConfirmModalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="dataConfirmModalLabel">Confirmar</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>¿Está seguro de realizar los cambios?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancelar</button>
-                                            <button type="submit" class="btn btn-primary">Aplicar</button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div th:replace="fragments/common :: modalButton('dataConfirmModal', ~{::p#infoMsg})">
+                                <p id="infoMsg">¿Está seguro de realizar los cambios?</p>
                             </div>
 
                         </form>
@@ -142,25 +125,8 @@
                             Aplicar
                         </button>
 
-                        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="confirmModalLabel">Confirmar</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>¿Está seguro de realizar los cambios?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Aplicar</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div th:replace="fragments/common :: modalButton('confirmModal', ~{::p#passwdMsg})">
+                            <p id="passwdMsg">¿Está seguro de realizar los cambios?</p>
                         </div>
                     </form>
 

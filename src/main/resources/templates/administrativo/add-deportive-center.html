@@ -70,25 +70,8 @@
                             </select>
                             </label>
                         </div>
-                        <div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="dataConfirmModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="dataConfirmModalLabel">Confirmar</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>¿Está seguro?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Aceptar</button>
-                                        <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cancelar</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div th:replace="fragments/common :: modalButton(null, ~{::p})">
+                            <p>Está seguro?</p>
                         </div>
                     </form>
                 </div>
