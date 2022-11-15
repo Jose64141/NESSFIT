@@ -17,86 +17,88 @@
 <div th:replace="~{fragments/common::common-body}"></div>
 
 <h1>Editar Recinto</h1>
-
-<div class="form-container">
-    <div class="m-5">
-        <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
-            <label th:text="${successMsg}"></label>
-        </div>
-        <form th:action="@{/administrativo/edit-deportive-center}" th:object="${deportiveCenter}" method="post">
-            <div class="input-item">
-                <label>Nombre de la instalación</label>
-                <label class="input-box">
-                    <input class="information-form-control" type="text" th:field="*{name}" readonly>
-                    <div th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}"></div>
-                </label>
+<section class="form-section">
+    <div class="form-container">
+        <div class="m-5">
+            <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
+                <label th:text="${successMsg}"></label>
             </div>
-            <div class="input-item">
-                <label>Dirección</label>
-                <label class="input-box">
-                    <input class="information-form-control" type="text" th:field="*{address}">
-                    <div th:if="${#fields.hasErrors('address')}" th:errorclass="text-danger" th:errors="*{address}">
-                    </div>
-                </label>
-            </div>
-            <div class="input-item">
-                <label>Tipo</label>
-                <br>
-                <select th:field="*{type.id}">
-                    <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.name}"></option>
-                </select>
-            </div>
-            <div class="input-item">
-                <label>Costo de arriendo (por día)</label>
-                <label class="input-box">
-                    <input class="information-form-control" type="text" inputmode="numeric"
-                           th:field="*{costPerDay}">
-                    <div th:if="${#fields.hasErrors('costPerDay')}" th:errorclass="text-danger" th:errors="*{costPerDay}">
-                    </div>
-                </label>
-            </div>
-            <div class="input-item">
-                <label>Estado</label>
-                <label class="input-box">
-                    <select th:field="*{isEnabled}">
-                        <option th:value="true">Operativo</option>
-                        <option th:value="false">Inoperativo</option>
+            <form th:action="@{/administrativo/edit-deportive-center}" th:object="${deportiveCenter}" method="post">
+                <div class="input-item">
+                    <label>Nombre de la instalación</label>
+                    <label class="input-box">
+                        <input class="information-form-control" type="text" th:field="*{name}" readonly>
+                        <div th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}"></div>
+                    </label>
+                </div>
+                <div class="input-item">
+                    <label>Dirección</label>
+                    <label class="input-box">
+                        <input class="information-form-control" type="text" th:field="*{address}">
+                        <div th:if="${#fields.hasErrors('address')}" th:errorclass="text-danger" th:errors="*{address}">
+                        </div>
+                    </label>
+                </div>
+                <div class="input-item">
+                    <label>Tipo</label>
+                    <br>
+                    <select th:field="*{type.id}">
+                        <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.name}"></option>
                     </select>
-                </label>
-            </div>
-
-            <div class="position-absolute bottom-0 end-0 m-5">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#dataConfirmModal">
-                    Editar
-                </button>
-                <a th:href="@{/administrativo/manage-deportive-centers}">
-                    <button type="button" class="btn btn-primary">Volver</button>
-                </a>
-            </div>
-
-            <div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="dataConfirmModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="dataConfirmModalLabel">Confirmar</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                </div>
+                <div class="input-item">
+                    <label>Costo de arriendo (por día)</label>
+                    <label class="input-box">
+                        <input class="information-form-control" type="text" inputmode="numeric"
+                               th:field="*{costPerDay}">
+                        <div th:if="${#fields.hasErrors('costPerDay')}" th:errorclass="text-danger" th:errors="*{costPerDay}">
                         </div>
-                        <div class="modal-body">
-                            <p>¿Está seguro?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Aceptar</button>
-                            <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Cancelar</button>
+                    </label>
+                </div>
+                <div class="input-item">
+                    <label>Estado</label>
+                    <label class="input-box">
+                        <select th:field="*{isEnabled}">
+                            <option th:value="true">Operativo</option>
+                            <option th:value="false">Inoperativo</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="dataConfirmModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="dataConfirmModalLabel">Confirmar</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>¿Está seguro?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                                <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
+    <div>
+        <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
+                data-bs-target="#dataConfirmModal">
+            Registrar
+        </button>
+        <a th:href="@{/administrativo/manage-deportive-centers}">
+            <button type="button" class="btn btn-tertiary btn-send">
+                Volver
+            </button>
+        </a>
+    </div>
+</section>
 </body>
 </html>
