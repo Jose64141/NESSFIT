@@ -22,8 +22,8 @@
       <div th:if="${errorMsg} ne null" class="alert alert-danger w-25" role="alert">
         <label th:text="${errorMsg}"></label>
       </div>
-      <div th:if="${successMsg} ne null" class="alert alert-success w-25" role="alert">
-        <label th:text="${successMsg}"></label>
+      <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
+        <label class= "success-message" th:text="${successMsg}"></label>
       </div>
 
       <h3 th:if="${centers.size() == 0}">No hay centros disponibles</h3>
@@ -31,9 +31,9 @@
         <h2>Por favor, seleccione un centro</h2>
         <div class="center-selection-container">
           <div class="center-entry center-entry-header">
-            <div class="center-name-header">Centro</div>
-            <div class="center-cost-header">Costo Diario</div>
-            <div class="center-type-header">Tipo</div>
+            <div class="center-name-header"><b>Centro</b></div>
+            <div class="center-cost-header"><b>Costo Diario</b></div>
+            <div class="center-type-header"><b>Tipo</b></div>
           </div>
           <th:block th:each="center : ${centers}">
             <a class="center-entry link-dark" th:href="@{/cliente/rent(id=${center.name})}" th:classappend="${(param.id ne null) ? (param.id[0] == center.name) : false}? 'selection'">

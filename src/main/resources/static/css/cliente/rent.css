@@ -28,6 +28,12 @@ h1
     color: #000000;
 }
 
+.success-message
+{
+    display: block;
+    text-align: center;
+}
+
 .attribute-logo
 {
     width: 5vh;
