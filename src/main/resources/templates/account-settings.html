@@ -109,14 +109,17 @@
                     </div>
                     <form th:action="@{/account-settings/change-password}" method="post">
                         <div class="mb-3">
+                            <img class = "attribute-logo" th:src="@{/images/current-password-icon.png}">
                             <label for="actualPassword" class="col-form-label">Contraseña actual:</label>
                             <input type="password" class="form-control" id="actualPassword" name="actualPassword" required>
                         </div>
                         <div class="mb-3">
+                            <img class = "attribute-logo" th:src="@{/images/new-password-icon.png}">
                             <label for="newPassword" class="col-form-label">Contraseña nueva:</label>
                             <input type="password" class="form-control" id="newPassword" name="newPassword" required>
                         </div>
                         <div class="mb-3">
+                            <img class = "attribute-logo" th:src="@{/images/confirm-new-password-icon.png}">
                             <label for="confirmNewPassword" class="col-form-label">Confirmar contraseña nueva:</label>
                             <input type="password" class="form-control" id="confirmNewPassword"
                                    name="confirmNewPassword" required>
