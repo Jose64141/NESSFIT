@@ -13,6 +13,7 @@
   <link rel="stylesheet" th:href="@{/css/administrador/add-administrative.css}">
   <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
   <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
+  <link rel="stylesheet" th:href="@{/css/form-icons.css}">
 </head>
 
 <body>
@@ -29,6 +30,7 @@
       </div>
       <form th:action="@{/administrador/add-administrative}" th:object="${user}" method="post">
         <div class="input-item">
+          <img class = "attribute-logo" th:src="@{/images/rut-logo.png}">
           <label>RUT</label>
           <label class="input-box">
             <input class="information-form-control" type="text" th:field="*{rut}" placeholder="10123123K" th:errorclass="border-danger">
@@ -36,6 +38,7 @@
           </label>
         </div>
         <div class="input-item">
+          <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
           <label>Nombre(s)</label>
           <label class="input-box">
             <input class="information-form-control" type="text" th:field="*{name}" th:errorclass="border-danger" >
@@ -43,6 +46,7 @@
           </label>
         </div>
         <div class="input-item">
+          <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
           <label>Apellido Paterno</label>
           <label class="input-box">
             <input class="information-form-control" type="text" th:field="*{firstLastName}" th:errorclass="border-danger">
@@ -50,6 +54,7 @@
           </label>
         </div>
         <div class="input-item">
+          <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
           <label>Apellido Materno</label>
           <label class="input-box">
             <input class="information-form-control" type="text" th:field="*{secondLastName}" th:errorclass="border-danger">
@@ -57,6 +62,7 @@
           </label>
         </div>
         <div class="input-item">
+          <img class = "attribute-logo" th:src="@{/images/phone-icon.png}">
           <label>Número de teléfono</label>
           <label class="input-box">
             <input class="information-form-control" type="tel" th:field="*{phoneNumber}" placeholder="912345678" th:errorclass="border-danger">
@@ -64,6 +70,7 @@
           </label>
         </div>
         <div class="input-item">
+          <img class = "attribute-logo" th:src="@{/images/email-logo.png}">
           <label>Correo electrónico</label>
           <label class="input-box">
             <input class="information-form-control" type="email" th:field="*{email}" th:errorclass="border-danger">
