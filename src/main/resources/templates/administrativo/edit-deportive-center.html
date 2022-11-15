@@ -4,7 +4,7 @@
       xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/common :: head('Editar Recinto', ~{::link})">
-    <link rel="stylesheet" th:href="@{/css/administrativo/add-deportive-center.css}">
+    <link rel="stylesheet" th:href="@{/css/administrativo/edit-deportive-center.css}">
     <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
     <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
     <link rel="stylesheet" th:href="@{/css/form-icons.css}">
@@ -26,21 +26,24 @@
             </div>
             <form th:action="@{/administrativo/edit-deportive-center}" th:object="${deportiveCenter}" method="post">
                 <div class="input-item">
+                    <img class = "attribute-logo" th:src="@{/images/rut-logo.png}">
                     <label>Nombre de la instalación</label>
                     <label class="input-box">
-                        <input class="information-form-control" type="text" th:field="*{name}" readonly>
+                        <input class="information-form-control  readonly-input-field" type="text" th:field="*{name}" readonly>
                         <div th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}"></div>
                     </label>
                 </div>
                 <div class="input-item">
+                    <img class = "attribute-logo" th:src="@{/images/address-icon.png}">
                     <label>Dirección</label>
                     <label class="input-box">
-                        <input class="information-form-control" type="text" th:field="*{address}">
+                        <input class="information-form-control readonly-input-field" type="text" th:field="*{address}" readonly>
                         <div th:if="${#fields.hasErrors('address')}" th:errorclass="text-danger" th:errors="*{address}">
                         </div>
                     </label>
                 </div>
                 <div class="input-item">
+                    <img class = "attribute-logo" th:src="@{/images/category-icon.png}">
                     <label>Tipo</label>
                     <br>
                     <select th:field="*{type.id}">
@@ -48,6 +51,7 @@
                     </select>
                 </div>
                 <div class="input-item">
+                    <img class = "attribute-logo" th:src="@{/images/cost-icon.png}">
                     <label>Costo de arriendo (por día)</label>
                     <label class="input-box">
                         <input class="information-form-control" type="text" inputmode="numeric"
@@ -57,6 +61,7 @@
                     </label>
                 </div>
                 <div class="input-item">
+                    <img class = "attribute-logo" th:src="@{/images/operative-icon.png}">
                     <label>Estado</label>
                     <label class="input-box">
                         <select th:field="*{isEnabled}">
@@ -75,7 +80,7 @@
     <div>
         <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
                 data-bs-target="#dataConfirmModal">
-            Registrar
+            Editar
         </button>
         <a th:href="@{/administrativo/manage-deportive-centers}">
             <button type="button" class="btn btn-tertiary btn-send">

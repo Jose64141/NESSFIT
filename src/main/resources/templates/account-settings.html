@@ -137,10 +137,10 @@
 
             <!-- info buttons -->
 
-            <div class="data-buttons" th:if="${showPassword}">
+            <div class="data-buttons" th:if="not ${showPassword}">
                 <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
                         data-bs-target="#dataConfirmModal">
-                    Registrar
+                    Editar
                 </button>
                 <a th:href="@{/home}">
                     <button type="button" class="btn btn-tertiary btn-send">
@@ -148,7 +148,7 @@
                     </button>
                 </a>
             </div>
-            <div class="password-buttons" th:if="not ${showPassword}">
+            <div class="password-buttons" th:if="${showPassword}">
                 <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
                         data-bs-target="#confirmModal">
                     Aplicar
