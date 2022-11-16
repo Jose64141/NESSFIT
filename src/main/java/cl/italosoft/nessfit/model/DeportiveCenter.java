@@ -20,7 +20,7 @@ public class DeportiveCenter implements Serializable
     @JoinColumn(name = "type_id",referencedColumnName = "id")
     private Type type;
     @NotNull(message = "Este campo es obligatorio.")
-    @Min(value = 1000, message = "El costo por dia ingresado no es válido. Tiene que ser mayor o igual a 1000")
+    @Min(value = 1000, message = "El costo por dia ingresado no es válido. Tiene que ser mayor o igual a 1000.")
     @Max(value = 999999999, message = "El costo por dia ingresado no es válido.")
     @Column(name = "cost_per_day")
     private Integer costPerDay;
