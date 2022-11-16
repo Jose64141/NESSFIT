@@ -26,13 +26,15 @@
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <button class="nav-link" th:classappend="not (${showPassword} ?: false) ? ' active'"
                             id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info"
-                            type="button" role="tab" aria-controls="nav-info" aria-selected="true">
+                            type="button" role="tab" aria-controls="nav-info" aria-selected="true"
+                            onclick="showInfo()">
                         Información
                     </button>
 
                     <button class="nav-link" th:classappend="(${showPassword} ?: false) ? ' active'"
                             id="nav-password-tab" data-bs-toggle="tab" data-bs-target="#nav-password"
-                            type="button" role="tab" aria-controls="nav-password" aria-selected="false">
+                            type="button" role="tab" aria-controls="nav-password" aria-selected="false"
+                            onclick="showPasswd()">
                         Contraseña
                     </button>
                 </div>
@@ -140,7 +142,7 @@
 
             <!-- info buttons -->
 
-            <div class="data-buttons" th:if="not ${showPassword}">
+            <div class="data-buttons" th:classappend="(${showPassword} ?: false) ? 'd-none'">
                 <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
                         data-bs-target="#dataConfirmModal">
                     Editar
@@ -151,7 +153,7 @@
                     </button>
                 </a>
             </div>
-            <div class="password-buttons" th:if="${showPassword}">
+            <div class="password-buttons" th:classappend="not (${showPassword} ?: false) ? 'd-none'">
                 <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
                         data-bs-target="#confirmModal">
                     Aplicar
@@ -167,7 +169,7 @@
 
 
 
-
+        <script th:src="@{/js/account-settings.js}"></script>
         <div th:replace="fragments/common :: common-body"></div>
     </body>
 </html>
