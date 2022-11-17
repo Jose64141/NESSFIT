@@ -15,6 +15,11 @@ public interface RentRequestRepository extends JpaRepository<RentRequest, Intege
     List<RentRequest> findByUser_Rut(String userRut);
     List<RentRequest> findByDeportiveCenter(String deportiveCenterName);
 
+    /**
+     * Find all the requested dates of a deportive center
+     * @param deportiveCenterName Deportive center name
+     * @return List of Dates
+     */
     @Query(value = "SELECT rd.date " +
             "FROM rent_requests r INNER JOIN rent_dates rd ON r.id = rd.rent_id " +
             "WHERE rd.date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL 7 DAY " +
