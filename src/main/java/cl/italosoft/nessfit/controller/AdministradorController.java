@@ -86,8 +86,8 @@ public class AdministradorController
     }
 
     /**
-     * Manage Users
-     * @param rut new User rut
+     * Manage Users page
+     * @param rut rut of user to manage
      * @param attr view redirect attributes
      * @return page template
      */
@@ -102,7 +102,7 @@ public class AdministradorController
     }
 
     /**
-     * Add administrative
+     * Add administrative page
      * @param model view template model
      * @param newUser new User to add
      * @return page template
@@ -117,7 +117,7 @@ public class AdministradorController
     }
 
     /**
-     * Add administrative
+     * Add administrative page
      * @param model view template model
      * @param newUser new User to add
      * @param result validation errors on newInfo
@@ -159,7 +159,7 @@ public class AdministradorController
     }
 
     /**
-     * Manage administrative
+     * Manage administrative page
      * @param model view template model
      * @param page Page with the results ordered in tuples
      * @param rut rut to search
@@ -173,7 +173,7 @@ public class AdministradorController
     }
 
     /**
-     * edit Administrative
+     * edit Administrative page
      * @param model view template model
      * @param rut rut of the user to edit
      * @return page template
@@ -191,7 +191,7 @@ public class AdministradorController
     }
 
     /**
-     * Edit Administrative
+     * Edit Administrative page
      * @param model view template model
      * @param user User to edit
      * @param result validation errors on newInfo
