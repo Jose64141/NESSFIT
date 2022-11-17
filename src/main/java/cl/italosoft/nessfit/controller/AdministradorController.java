@@ -34,12 +34,23 @@ public class AdministradorController
     @Autowired
     private RutValidator rutValidator;
 
+    /**
+     * Adds RUT validator to the validation on BindingResult
+     * @param binder binder Data binder object
+     */
     @InitBinder("user")
     public void initBinder(WebDataBinder binder)
     {
         binder.addValidators(rutValidator);
     }
 
+    /**
+     * Manage Users page
+     * @param request HTTP request
+     * @param rut new User rut
+     * @param model view template model
+     * @return page template
+     */
     @GetMapping("/administrador/manage-clients")
     public String manageUsers(HttpServletRequest request, @RequestParam(required = false) String rut, Model model)
     {
@@ -74,6 +85,12 @@ public class AdministradorController
         return "administrador/manage-clients";
     }
 
+    /**
+     * Manage Users
+     * @param rut new User rut
+     * @param attr view redirect attributes
+     * @return page template
+     */
     @PostMapping("/administrador/manage-clients")
     public String manageUsers(@RequestParam String rut, RedirectAttributes attr)
     {
@@ -84,6 +101,12 @@ public class AdministradorController
         return "redirect:/administrador/manage-clients?rut="+rut;
     }
 
+    /**
+     * Add administrative
+     * @param model view template model
+     * @param newUser new User to add
+     * @return page template
+     */
     @GetMapping("/administrador/add-administrative")
     public String addAdministrative(Model model, User newUser)
     {
@@ -93,6 +116,14 @@ public class AdministradorController
         return "administrador/add-administrative";
     }
 
+    /**
+     * Add administrative
+     * @param model view template model
+     * @param newUser new User to add
+     * @param result validation errors on newInfo
+     * @param attr view redirect attributes
+     * @return page template
+     */
     @PostMapping("/administrador/add-administrative")
     public String addAdministrative(Model model, @Valid User newUser, BindingResult result, RedirectAttributes attr)
     {
@@ -127,6 +158,13 @@ public class AdministradorController
         return "redirect:/administrador/add-administrative";
     }
 
+    /**
+     * Manage administrative
+     * @param model view template model
+     * @param page Page with the results ordered in tuples
+     * @param rut rut to search
+     * @return page template
+     */
     @GetMapping("/administrador/manage-administrative")
     public String manageAdministrative(Model model, @PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String rut)
     {
@@ -134,6 +172,12 @@ public class AdministradorController
         return "administrador/manage-administrative";
     }
 
+    /**
+     * edit Administrative
+     * @param model view template model
+     * @param rut rut of the user to edit
+     * @return page template
+     */
     @GetMapping("/administrador/edit-administrative")
     public String editAdministrative(Model model, @RequestParam String rut)
     {
@@ -146,6 +190,14 @@ public class AdministradorController
         return "administrador/edit-administrative";
     }
 
+    /**
+     * Edit Administrative
+     * @param model view template model
+     * @param user User to edit
+     * @param result validation errors on newInfo
+     * @param attr view redirect attributes
+     * @return page template
+     */
     @PostMapping("/administrador/edit-administrative")
     public String editAdministrative(Model model, @Valid User user, BindingResult result, RedirectAttributes attr)
     {
