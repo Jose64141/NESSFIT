@@ -22,6 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+/**
+ * Controller for all users pages
+ */
 @Controller
 public class UserController
 {
@@ -35,6 +38,13 @@ public class UserController
     public void initBinder(WebDataBinder binder) {
         binder.addValidators(rutValidator);
     }
+
+    /**
+     * Logout page
+     * @param request HTTP request
+     * @param response HTTP response
+     * @return page template
+     */
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response)
     {
@@ -44,6 +54,12 @@ public class UserController
         return "redirect:/login?logout";
     }
 
+    /**
+     * Account settings page
+     * @param request HTTP request
+     * @param model view template model
+     * @return page template
+     */
     @GetMapping("/account-settings")
     public String config(HttpServletRequest request, Model model)
     {
@@ -52,6 +68,18 @@ public class UserController
         return "account-settings";
     }
 
+    /**
+     * Account settings page
+     * @param request HTTP request
+     * @param response HTTP response
+     * @param model view template model
+     * @param operation selected operation by the user
+     * @param formBody form fields values
+     * @param attr view redirect attributes
+     * @param newInfo user with new information
+     * @param result validation errors on newInfo
+     * @return page template
+     */
     @PostMapping("/account-settings/{operation}")
     public String configChange(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable String operation, @RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr, @Valid User newInfo, BindingResult result) //https://stackoverflow.com/a/55338584
     {

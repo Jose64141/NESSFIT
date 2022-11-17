@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
+/***
+ * Controller for home page
+ */
 @Controller
 public class HomeController
 {

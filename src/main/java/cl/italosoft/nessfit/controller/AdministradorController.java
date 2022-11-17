@@ -22,6 +22,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+/***
+ * Controller for Administrador role pages
+ */
 @Controller
 public class AdministradorController
 {

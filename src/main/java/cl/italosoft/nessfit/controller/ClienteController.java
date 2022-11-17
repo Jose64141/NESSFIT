@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/***
+ * Controller for Cliente role pages
+ */
 @Controller
 public class ClienteController
 {

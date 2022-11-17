@@ -29,6 +29,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
+/***
+ * Controller for Administrativo role pages
+ */
 @Controller
 public class AdministrativoController 
 {
