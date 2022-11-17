@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
+  <head th:replace="fragments/common :: head('Arrendar', ~{::link})">
+    <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
+    <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
+    <link rel="stylesheet" th:href="@{/css/background-font-style.css}">
+    <link rel="stylesheet" th:href="@{/css/confirmation-modal.css}">
+    <link rel="stylesheet" th:href="@{/css/cliente/rent.css}">
+  </head>
+
+  <body>
+    <nav th:replace="~{fragments/navigation::navbar}"></nav>
+
+    <div th:replace="~{fragments/navigation::shortcuts}"></div>
+
+    <script th:src="@{/js/rent.js}"></script>
+    <h1>Arrendar</h1>
+
+    <div class="content mt-5">
+      <div th:if="${errorMsg} ne null" class="alert alert-danger w-25" role="alert">
+        <label th:text="${errorMsg}"></label>
+      </div>
+      <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
+        <label class= "success-message" th:text="${successMsg}"></label>
+      </div>
+
+      <h3 th:if="${centers.size() == 0}">No hay centros disponibles</h3>
+      <div th:if="${centers.size() ne 0}" class="me-5 w-25 start-0">
+        <h2>Por favor, seleccione un centro</h2>
+        <div class="center-selection-container">
+          <div class="center-entry center-entry-header">
+            <div class="center-name-header"><b>Centro</b></div>
+            <div class="center-cost-header"><b>Costo Diario</b></div>
+            <div class="center-type-header"><b>Tipo</b></div>
+          </div>
+          <th:block th:each="center : ${centers}">
+            <a class="center-entry link-dark" th:href="@{/cliente/rent(id=${center.name})}" th:classappend="${(param.id ne null) ? (param.id[0] == center.name) : false}? 'selection'">
+              <div class="center-name" th:text="${center.name}"></div>
+              <div class="center-cost" th:text="${'$'+center.costPerDay}"></div>
+              <div class="center-type" th:text="${center.type.name}"></div>
+            </a>
+          </th:block>
+        </div>
+      </div>
+
+      <div class="form-container ms-5 w-auto" th:if="${selection ne null}">
+        <h2 th:text="${selection.name}"></h2>
+        <h5>Costo Diario: $<span th:text="${selection.costPerDay}" id="price"></span></h5>
+        <h5>Dirección: <span th:text="${selection.address}"></span></h5>
+        <h3>Seleccione los días que quiere arrendar</h3>
+        <table class="table w-50">
+          <tr class="ms-3 me-3">
+            <th:block th:each="date : ${dates}">
+              <th class="date-label" th:id="'date'+${dateStat.index}" th:text="${#dates.format(date, 'dd/MM/yyyy')}"></th>
+            </th:block>
+          </tr>
+          <tr class="ms-3 me-3">
+            <th:block th:each="date : ${avaliable}">
+              <td class="date-button" onclick="dateButton(event)" th:if="${date}" th:id="${dateStat.index}">
+                <button type="button" class="btn btn-light h-100 w-100">‎
+                  <img class = "available-icon" th:src="@{/images/available-icon.png}" alt = "Disponible">
+                </button>
+              </td>
+              <td class="unavailable-date"th:unless="${date}">
+                <button type="button" class="btn btn-danger h-100 w-100" disabled>X</button>
+              </td>
+            </th:block>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <form th:if="${selection ne null}" th:action="@{/cliente/rent}" method="post">
+      <input type="hidden" name="center" id="center" th:value="${selection.name}">
+      <input type="hidden" name="dates" id="dates" value="">
+      <input type="hidden" name="total" id="total" value="">
+
+      <div class="send-button-inactive position-absolute bottom-0 end-0 m-5" id="send-button">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#dataConfirmModal" onclick="confirmButton()">
+          Arrendar
+        </button>
+      </div>
+
+      <div th:replace="fragments/common :: modalButton(null, ~{::p})">
+        <p>¿Está seguro de proceder con la
+          solicitud de arriendo?
+        <p>El costo total de arriendo es de <span id="confirm-total"></span></p>
+      </div>
+
+    </form>
+
+    <div th:replace="fragments/common :: common-body"></div>
+  </body>
+</html>
