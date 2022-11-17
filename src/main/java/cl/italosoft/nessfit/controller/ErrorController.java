@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ErrorController
 {
+    /**
+     * Error page
+     * @return page template
+     */
     @GetMapping("/name")
     public String error()
     {

@@ -38,6 +38,12 @@ public class ClienteController
     @Autowired
     private RentRequestService rentRequestService;
 
+    /**
+     * Rent page
+     * @param model view template model
+     * @param id selected center name
+     * @return page template
+     */
     @GetMapping("/cliente/rent")
     public String rent(Model model, @RequestParam(required = false) String id)
     {
@@ -82,6 +88,14 @@ public class ClienteController
         return "cliente/rent";
     }
 
+    /**
+     * Rent page
+     * @param request HTTP request
+     * @param model view template model
+     * @param formBody form fields values
+     * @param attr view redirect attributes
+     * @return redirected page
+     */
     @PostMapping("/cliente/rent")
     public String rent(HttpServletRequest request, Model model, @RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr)
     {

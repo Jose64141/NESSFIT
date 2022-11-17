@@ -34,6 +34,10 @@ public class UserController
     @Autowired
     private RutValidator rutValidator;
 
+    /**
+     * Adds RUT validator to the validation on BindingResult
+     * @param binder Data binder object
+     */
     @InitBinder("user")
     public void initBinder(WebDataBinder binder) {
         binder.addValidators(rutValidator);

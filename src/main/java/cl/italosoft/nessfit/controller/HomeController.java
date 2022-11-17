@@ -18,6 +18,12 @@ public class HomeController
     @Autowired
     private UserService userService;
 
+    /**
+     * Home page
+     * @param request HTTP request
+     * @param model view template model
+     * @return page template
+     */
     @GetMapping("/home")
     public String home(HttpServletRequest request, Model model)
     {
@@ -28,6 +34,10 @@ public class HomeController
         return "home";
     }
 
+    /**
+     * Home page redirection
+     * @return redirected page
+     */
     @GetMapping("/")
     public String rootPage()
     {
