@@ -1,10 +1,12 @@
 package cl.italosoft.nessfit.controller;
 
 import cl.italosoft.nessfit.model.DeportiveCenter;
+import cl.italosoft.nessfit.model.RentRequest;
 import cl.italosoft.nessfit.model.Role;
 import cl.italosoft.nessfit.model.Type;
 import cl.italosoft.nessfit.model.User;
 import cl.italosoft.nessfit.service.DeportiveCenterService;
+import cl.italosoft.nessfit.service.RentRequestService;
 import cl.italosoft.nessfit.service.TypeService;
 import cl.italosoft.nessfit.service.UserService;
 import cl.italosoft.nessfit.util.RutValidator;
@@ -14,6 +16,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +30,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -44,6 +50,8 @@ public class AdministrativoController
     @Autowired
     private TypeService typeService;
 
+    private RentRequestService rentRequestService;
+    
     @Autowired
     private RutValidator rutValidator;
 
@@ -278,5 +286,9 @@ public class AdministrativoController
         attr.addFlashAttribute("successMsg","Los cambios se han realizado con éxito.");
 
         return "redirect:/administrativo/edit-deportive-center?name="+name;
+    }
+    @GetMapping("/administrativo/statistics")
+    public String viewStatistics() {
+    	return "administrativo/statistics";
     }
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+     <head th:replace="fragments/common :: head('Estadísticas', ~{::link})">
+        <link rel="stylesheet" th:href="@{/css/administrativo/statistics.css}">
+        <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
+        <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
+        <link rel="stylesheet" th:href="@{/css/form-icons.css}">
+        <link rel="stylesheet" th:href="@{/css/background-font-style.css}">      
+    </head>
+    
+    <body>
+    	<nav th:replace="~{fragments/navigation::navbar}"></nav>
+
+        <div th:replace="~{fragments/navigation::shortcuts}"></div>
+
+		<div th:replace="~{fragments/common::common-body}"></div>
+        
+        <div class = "container">
+	        <div class = "labels">
+	        	<h1>Estadísticas</h1>
+        	</div>
+	        <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+	       	<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+	       	<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+	       	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+	       	<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+	      	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+	        
+	       
+	       
+	       	<div id="chartdiv"></div>
+	       	
+	        <script th:src="@{/js/statistics.js}"></script>
+
+    	</div> 
+    </body>
+</html>
