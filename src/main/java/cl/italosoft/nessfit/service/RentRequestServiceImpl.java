@@ -82,4 +82,12 @@ public class RentRequestServiceImpl implements RentRequestService
      */
     @Override
     public void flush() { rentRequestRepository.flush(); }
+
+    /**
+     * Returns all rent requests 
+     *
+     * @return a list containing all rent requests.
+     */
+	@Override
+	public List<RentRequest> findAll() { return this.rentRequestRepository.findAll();}
 }

@@ -58,6 +58,8 @@ RentRequestService
      * @return a list containing the records.
      */
     public List<Date> listDeportiveCenterDates(String deportiveCenterName);
+    
+    public List<RentRequest> findAll();
 
     /**
      * Flushes all the changes to the database.
