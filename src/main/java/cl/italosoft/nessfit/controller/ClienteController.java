@@ -143,19 +143,19 @@ public class ClienteController
         return "redirect:/cliente/rent";
     }
     
-    @GetMapping("/cliente/viewrequest")
-    public String rentrequestlist(Model model, @RequestParam(required = false) String id)
+    @GetMapping("/cliente/visualize-rent-requests")
+    public String visualizeRentRequests(Model model, @RequestParam(required = false) String id)
     {
 
 
-        return "cliente/viewrequest";
+        return "cliente/visualize-rent-requests";
     }
     
-    @PostMapping("/cliente/viewrequest")
-    public String rentrequestlist(HttpServletRequest request, Model model, @RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr)
+    @PostMapping("/cliente/visualize-rent-requests")
+    public String visualizeRentRequests(HttpServletRequest request, Model model, @RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr)
     {
       
-        return "redirect:/cliente/viewrequest";
+        return "redirect:/cliente/visualize-rent-requests";
     }
     
 }
