@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>NESSFIT | Agregar Administrativo</title>
+  <link rel="icon" th:href="@{/images/nessfit-logo.png}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{/css/login-nessfit-logo.css}">
+  <link rel="stylesheet" th:href="@{/css/administrador/add-administrative.css}">
+  <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
+  <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
+  <link rel="stylesheet" th:href="@{/css/form-icons.css}">
+</head>
+
+<body>
+<nav th:replace="~{fragments/navigation::navbar}"></nav>
+
+<div th:replace="~{fragments/navigation::shortcuts}"></div>
+
+<h1>Agregar Administrativo</h1>
+<section class="form-section">
+  <div class="form-container">
+    <div class="m-5">
+      <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
+        <label th:text="${successMsg}"></label>
+      </div>
+      <form th:action="@{/administrador/add-administrative}" th:object="${user}" method="post">
+        <div class="input-item">
+          <img class = "attribute-logo" th:src="@{/images/rut-logo.png}">
+          <label>RUT</label>
+          <label class="input-box">
+            <input class="information-form-control" type="text" th:field="*{rut}" placeholder="10123123K" th:errorclass="border-danger">
+            <div th:if="${#fields.hasErrors('rut')}" th:class="${#fields.hasErrors('rut')}? 'text-danger'" th:text="${#fields.errors('rut')[0]}"></div>
+          </label>
+        </div>
+        <div class="input-item">
+          <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
+          <label>Nombre(s)</label>
+          <label class="input-box">
+            <input class="information-form-control" type="text" th:field="*{name}" th:errorclass="border-danger" >
+            <div th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}"></div>
+          </label>
+        </div>
+        <div class="input-item">
+          <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
+          <label>Apellido Paterno</label>
+          <label class="input-box">
+            <input class="information-form-control" type="text" th:field="*{firstLastName}" th:errorclass="border-danger">
+            <div th:if="${#fields.hasErrors('firstLastName')}" th:errorclass="text-danger" th:errors="*{firstLastName}"></div>
+          </label>
+        </div>
+        <div class="input-item">
+          <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
+          <label>Apellido Materno</label>
+          <label class="input-box">
+            <input class="information-form-control" type="text" th:field="*{secondLastName}" th:errorclass="border-danger">
+            <div th:if="${#fields.hasErrors('secondLastName')}" th:errorclass="text-danger" th:errors="*{secondLastName}"></div>
+          </label>
+        </div>
+        <div class="input-item">
+          <img class = "attribute-logo" th:src="@{/images/phone-icon.png}">
+          <label>Número de teléfono</label>
+          <label class="input-box">
+            <input class="information-form-control" type="tel" th:field="*{phoneNumber}" placeholder="912345678" th:errorclass="border-danger">
+            <div th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></div>
+          </label>
+        </div>
+        <div class="input-item">
+          <img class = "attribute-logo" th:src="@{/images/email-logo.png}">
+          <label>Correo electrónico</label>
+          <label class="input-box">
+            <input class="information-form-control" type="email" th:field="*{email}" th:errorclass="border-danger">
+            <div th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="*{email}"></div>
+          </label>
+        </div>
+
+        <div th:replace="fragments/common :: modalButton(null, ~{::p})">
+          <p>Está seguro?</p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div>
+    <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
+            data-bs-target="#dataConfirmModal">
+      Registrar
+    </button>
+    <a th:href="@{/home}">
+    <button type="button" class="btn btn-tertiary btn-send">
+      Volver
+    </button>
+    </a>
+  </div>
+</section>
+
+<div th:replace="fragments/common :: common-body"></div>
+
+</script>
+</body>
+</html>

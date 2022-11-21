@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="es">
+<head th:replace="fragments/common :: head('Error', ~{::link})">
+    <link rel="stylesheet" th:href="@{/css/error.css}">
+</head>
+<body>
+    <h1>Esta página no existe</h1>
+    <div th:replace="fragments/common :: common-body"></div>
+</body>
+</html>

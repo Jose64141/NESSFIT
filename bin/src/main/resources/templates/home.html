@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
+    <head th:replace="fragments/common :: head('Inicio', ~{::link})">
+        <link rel="stylesheet" th:href="@{/css/home.css}">
+        <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
+        <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
+        <link rel="stylesheet" th:href="@{/css/background-font-style.css}">
+    </head>
+    <body>
+        <nav th:replace="~{fragments/navigation::navbar}"></nav>
+
+        <div th:replace="~{fragments/navigation::shortcuts}"></div>
+
+        <div class="container">
+            <div class = "labels">
+                <h1>Bienvenido</h1>
+                <h2 th:text="${name}+' '+${firstLastName}+' '+${secondLastName}" ></h2>
+            </div>
+            <div class="buttons" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">
+                <h3>¿Qué desea hacer?</h3>
+                <a th:href="@{/administrador/manage-administrative}">
+                    <button>Editar Administrativos
+                        <img class="button-logo" th:src="@{images/manage-users-logo.png}" alt="Editar administrativos">
+                    </button>
+                </a>
+                <a th:href="@{/administrador/add-administrative}">
+                    <button>Agregar Administrativos
+                        <img class="button-logo" th:src="@{images/add-user-logo.png}" alt="Agregar administrativos">
+                    </button>
+                </a>
+                <a th:href="@{/administrador/manage-clients}">
+                    <button>Administrar Usuarios
+                        <img class="button-logo" th:src="@{images/manage-users-logo.png}" alt="Administrar usuarios">
+                    </button>
+                </a>
+            </div>
+
+            <div class="buttons administrativo-buttons"  sec:authorize="hasRole('ROLE_ADMINISTRATIVO')">
+                <h3>¿Qué desea hacer?</h3>
+                <a th:href="@{/administrativo/add-deportive-center}">
+                    <button>Agregar Recinto
+                        <img class="button-logo" th:src="@{images/add-place-logo.png}" alt="Agregar recito">
+                    </button>
+                </a>
+                <a th:href="@{/administrativo/add-client}">
+                    <button>Agregar Cliente
+                        <img class="button-logo" th:src="@{images/add-user-logo.png}" alt="Agregar cliente"></button>
+                </a>
+                <a th:href="@{/administrativo/manage-deportive-centers}">
+                    <button>Administrar Recintos
+                        <img class="button-logo" th:src="@{images/manage-places-logo.png}" alt="Administrar recintos">
+                    </button>
+                </a>
+                <a th:href="@{/administrativo/manage-clients}">
+                    <button>Administrar Clientes
+                        <img class="button-logo" th:src="@{images/manage-users-logo.png}" alt="Administrar clientes">
+                    </button>
+                </a>
+                <a th:href="@{/home}">
+                    <button>Administrar Solicitudes
+                        <img class="button-logo" th:src="@{images/manage-requests-logo.png}" alt="Administrar solicitudes">
+                    </button>
+                </a>
+                <a th:href="@{/home}">
+                    <button>Estadísticas
+                        <img class="button-logo" th:src="@{images/statistics-logo.png}" alt="Estadísticas">
+                    </button>
+                </a>
+            </div>
+
+            <div class="buttons" sec:authorize="hasRole('ROLE_CLIENTE')">
+                <h3>¿Qué desea hacer?</h3>
+                <a class="button-container" th:href="@{/cliente/rent}">
+                    <button>Arrendar
+                        <img class="button-logo" th:src="@{images/rent-logo.png}" alt="Arendar recinto">
+                    </button>
+                </a>
+                <a class="button-container" th:href="@{/home}">
+                    <button>Mis solicitudes
+                        <img class="button-logo" th:src="@{images/quote-request-logo.png}" alt="Mis solicitudes">
+                    </button>
+                </a>
+            </div>
+        </div>
+        <!--
+        <div class = "nessfit-description-container">
+            <div class="nessfit-text-desription">Nessfit® Arriendo de Espacios Deportivos</div>
+        </div>-->
+
+        <div th:replace="fragments/common :: common-body"></div>
+    </body>
+</html>

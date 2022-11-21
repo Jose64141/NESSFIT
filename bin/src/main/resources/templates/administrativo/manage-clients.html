@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
+<head th:replace="fragments/common :: head('Administrar Clientes', ~{::link})">
+  <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
+  <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
+  <link rel="stylesheet" th:href="@{/css/manage-clients.css}">
+  <link rel="stylesheet" th:href="@{/css/background-font-style.css}">
+  <link rel="stylesheet" th:href="@{/css/confirmation-modal.css}">
+</head>
+<body>
+<nav th:replace="~{fragments/navigation::navbar}"></nav>
+
+<div th:replace="~{fragments/navigation::shortcuts}"></div>
+
+
+<h1>Administrar Clientes</h1>
+<div class="input-container">
+
+  <div  class="user-search-container">
+      <div th:if="${RUT} ne null">
+        <p th:text="'Nombre Completo: '+${name}+' '+${firstLastName}
+      +' '+${secondLastName}"></p>
+        <p th:text="'Estado: ' +${isEnabled}">
+        </p>
+        <form th:action="@{/administrativo/manage-clients} " method="post" class="form-container">
+          <input type="hidden" name="rut" th:value="${RUT}" />
+          <div class="change-status-submit-button">
+            <button type="button"  class="btn btn-primary enable-disable" th:text="${actionName}" data-bs-toggle="modal"
+                    data-bs-target="#confirmModal"></button>
+          </div>
+          <!-- MODAL -->
+          <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+               aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="confirmModalLabel">Confirmar</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                          aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>¿Está seguro de realizar los cambios?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary"
+                          data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary">Aplicar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div th:unless="${RUT} ne null">
+        <p  class="initial-message" th:text="${nullMessage}"></p>
+      </div>
+  </div>
+<form class="form-container" th:action="@{/administrativo/manage-clients}">
+  <div class="rut-input">
+    <label>Ingrese RUT del cliente a buscar
+      <input th:if="${RUT} ne null" name="rut" type="text" placeholder="RUT (Ej: 20123123K)" th:value="${RUT}">
+      <input th:unless="${RUT} ne null" name="rut" type="text" placeholder="RUT (Ej: 20123123K)">
+    </label>
+  </div>
+  <div class="search-submit-button">
+    <button type="submit" class="btn search-button">Buscar</button>
+  </div>
+</form>
+
+</div>
+<div th:replace="fragments/common :: common-body"></div>
+</body>
+</html>

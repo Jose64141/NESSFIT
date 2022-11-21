@@ -1,0 +1,107 @@
+.container
+{
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.labels
+{
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+    color: #000000;
+}
+
+h1
+{
+    font-size: 4em;
+    padding: 0;
+    margin: 0;
+}
+
+h2
+{
+    font-size: 2em;
+    padding: 0;
+    margin: 0;
+}
+
+h3
+{
+    font-size: 1.5em;
+    padding: 0;
+    margin: 20vh auto 1vh;
+}
+
+.nessfit-description-container
+{
+    position: absolute;
+    display: block;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #20c67a;
+    height: 40px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+
+
+
+.buttons
+{
+    position: relative;
+    padding: 0;
+    margin: auto;
+    object-position: center;
+    display: grid;
+    align-items: center;
+}
+
+a
+{
+    padding: 0;
+    margin: 5px auto;
+    position: relative;
+}
+
+button
+{
+    width: 300px;
+    height: 80px;
+    padding: 0;
+    border-radius: 5px;
+    border: 2px solid #000;
+    margin: 0 auto;
+    background-color: #20c67a;
+    font-size: 18px;
+}
+
+button:hover
+{
+    background-color: #28e890;
+}
+
+.button-logo
+{
+    position: relative;
+    display: grid;
+    margin: 0 auto;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+}
+
+.administrativo-buttons h3
+{
+    margin: 8vh auto 1vh;
+}
