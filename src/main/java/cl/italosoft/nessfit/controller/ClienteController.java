@@ -142,4 +142,20 @@ public class ClienteController
         attr.addFlashAttribute("successMsg","La solicitud se ha procesado con éxito.");
         return "redirect:/cliente/rent";
     }
+    
+    @GetMapping("/cliente/viewrequest")
+    public String rentrequestlist(Model model, @RequestParam(required = false) String id)
+    {
+
+
+        return "cliente/viewrequest";
+    }
+    
+    @PostMapping("/cliente/viewrequest")
+    public String rentrequestlist(HttpServletRequest request, Model model, @RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr)
+    {
+      
+        return "redirect:/cliente/viewrequest";
+    }
+    
 }
