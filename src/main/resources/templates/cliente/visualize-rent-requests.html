@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
+  <head th:replace="fragments/common :: head('Visualizar solicitudes', ~{::link})">
+    <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
+    <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
+    <link rel="stylesheet" th:href="@{/css/confirmation-modal.css}">
+    <link rel="stylesheet" th:href="@{/css/cliente/visualize-rent-requests.css}">
+  </head>
+  <body>
+    <nav th:replace="~{fragments/navigation::navbar}"></nav>
+    <div th:replace="~{fragments/navigation::shortcuts}"></div>
+
+
+    <div th:replace="fragments/common :: common-body"></div>
+  </body>
+</html>
