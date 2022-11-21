@@ -7,7 +7,7 @@
         <link rel="stylesheet" th:href="@{/css/administrativo/add-client.css}">
         <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
         <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
-        <link rel="stylesheet" th:href="@{/css/common-buttons.css}">
+        <link rel="stylesheet" th:href="@{/css/form-icons.css}">
     </head>
 
     <body>
@@ -17,83 +17,81 @@
 
         <h1>Agregar Cliente</h1>
 
-        <div class="form-container">
-            <div class="m-5">
-                <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
-                    <label th:text="${successMsg}"></label>
-                </div>
-                <form th:action="@{/administrativo/add-client}" th:object="${user}" method="post">
-                    <div class="input-item">
-                        <label>RUT</label>
-                        <label class="input-box">
-                            <input class="information-form-control" type="text" th:field="*{rut}" placeholder="10123123K" th:errorclass="border-danger" required>
-                            <div th:if="${#fields.hasErrors('rut')}" th:errorclass="text-danger" th:errors="*{rut}"></div>
-                        </label>
+        <section class="form-section">
+            <div class="form-container">
+                <div class="m-5">
+                    <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
+                        <label th:text="${successMsg}"></label>
                     </div>
-                    <div class="input-item">
-                        <label>Nombre(s)</label>
-                        <label class="input-box">
-                            <input class="information-form-control" type="text" th:field="*{name}" th:errorclass="border-danger" required>
-                            <div th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}"></div>
-                        </label>
-                    </div>
-                    <div class="input-item">
-                        <label>Apellido Paterno</label>
-                        <label class="input-box">
-                            <input class="information-form-control" type="text" th:field="*{firstLastName}" th:errorclass="border-danger" required>
-                            <div th:if="${#fields.hasErrors('firstLastName')}" th:errorclass="text-danger" th:errors="*{firstLastName}"></div>
-                        </label>
-                    </div>
-                    <div class="input-item">
-                        <label>Apellido Materno</label>
-                        <label class="input-box">
-                            <input class="information-form-control" type="text" th:field="*{secondLastName}" th:errorclass="border-danger" required>
-                            <div th:if="${#fields.hasErrors('secondLastName')}" th:errorclass="text-danger" th:errors="*{secondLastName}"></div>
-                        </label>
-                    </div>
-                    <div class="input-item">
-                        <label>Número de teléfono</label>
-                        <label class="input-box">
-                            <input class="information-form-control" type="tel" pattern="\d*" th:field="*{phoneNumber}" placeholder="912345678" th:errorclass="border-danger" required>
-                            <div th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></div>
-                        </label>
-                    </div>
-                    <div class="input-item">
-                        <label>Correo electrónico</label>
-                        <label class="input-box">
-                            <input class="information-form-control" type="email" th:field="*{email}" th:errorclass="border-danger" required>
-                            <div th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="*{email}"></div>
-                        </label>
-                    </div>
-
-                    <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
-                            data-bs-target="#dataConfirmModal">
-                        Enviar
-                    </button>
-
-                    <div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="dataConfirmModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="dataConfirmModalLabel">Confirmar</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>¿Está seguro?</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Aplicar</button>
-                                </div>
-                            </div>
+                    <form th:action="@{/administrativo/add-client}" th:object="${user}" method="post">
+                        <div class="input-item">
+                            <img class = "attribute-logo" th:src="@{/images/rut-logo.png}">
+                            <label>RUT</label>
+                            <label class="input-box">
+                                <input class="information-form-control" type="text" th:field="*{rut}" placeholder="10123123K" th:errorclass="border-danger">
+                                <div th:if="${#fields.hasErrors('rut')}" th:class="${#fields.hasErrors('rut')}? 'text-danger'" th:text="${#fields.errors('rut')[0]}"></div>
+                            </label>
                         </div>
-                    </div>
-                </form>
+                        <div class="input-item">
+                            <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
+                            <label>Nombre(s)</label>
+                            <label class="input-box">
+                                <input class="information-form-control" type="text" th:field="*{name}" th:errorclass="border-danger" >
+                                <div th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}"></div>
+                            </label>
+                        </div>
+                        <div class="input-item">
+                            <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
+                            <label>Apellido Paterno</label>
+                            <label class="input-box">
+                                <input class="information-form-control" type="text" th:field="*{firstLastName}" th:errorclass="border-danger">
+                                <div th:if="${#fields.hasErrors('firstLastName')}" th:errorclass="text-danger" th:errors="*{firstLastName}"></div>
+                            </label>
+                        </div>
+                        <div class="input-item">
+                            <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
+                            <label>Apellido Materno</label>
+                            <label class="input-box">
+                                <input class="information-form-control" type="text" th:field="*{secondLastName}" th:errorclass="border-danger">
+                                <div th:if="${#fields.hasErrors('secondLastName')}" th:errorclass="text-danger" th:errors="*{secondLastName}"></div>
+                            </label>
+                        </div>
+                        <div class="input-item">
+                            <img class = "attribute-logo" th:src="@{/images/phone-icon.png}">
+                            <label>Número de teléfono</label>
+                            <label class="input-box">
+                                <input class="information-form-control" type="tel" pattern="\d*" th:field="*{phoneNumber}" placeholder="912345678" th:errorclass="border-danger">
+                                <div th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></div>
+                            </label>
+                        </div>
+                        <div class="input-item">
+                            <img class = "attribute-logo" th:src="@{/images/email-logo.png}">
+                            <label>Correo electrónico</label>
+                            <label class="input-box">
+                                <input class="information-form-control" type="email" th:field="*{email}" th:errorclass="border-danger">
+                                <div th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="*{email}"></div>
+                            </label>
+                        </div>
+
+
+                        <div th:replace="fragments/common :: modalButton(null, ~{::p})">
+                            <p>¿Está seguro?</p>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+            <div>
+                <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
+                        data-bs-target="#dataConfirmModal">
+                    Registrar
+                </button>
+                <a th:href="@{/home}">
+                    <button type="button" class="btn btn-tertiary btn-send">
+                        Volver
+                    </button>
+                </a>
+            </div>
+        </section>
 
         <div th:replace="fragments/common :: common-body"></div>
     </body>

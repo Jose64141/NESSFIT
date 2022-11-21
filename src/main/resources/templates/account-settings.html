@@ -8,7 +8,7 @@
         <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
         <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
         <link rel="stylesheet" th:href="@{/css/confirmation-modal.css}">
-        <link rel="stylesheet" th:href="@{/css/common-buttons.css}">
+        <link rel="stylesheet" th:href="@{/css/form-icons.css}">
     </head>
 
     <body>
@@ -17,157 +17,159 @@
         <div th:replace="~{fragments/navigation::shortcuts}"></div>
 
         <h1>Editar Datos</h1>
-        <div class="form-section">
+        <section class="form-section">
+
             <div class="form-container">
+            <!-- Choose Nav -->
+
                 <nav>
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <button class="nav-link" th:classappend="not (${showPassword} ?: false) ? ' active'" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info"
-                                type="button" role="tab" aria-controls="nav-info" aria-selected="true">Información
-                        </button>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link" th:classappend="not (${showPassword} ?: false) ? ' active'"
+                            id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info"
+                            type="button" role="tab" aria-controls="nav-info" aria-selected="true"
+                            onclick="showInfo()">
+                        Información
+                    </button>
 
-                        <button class="nav-link" th:classappend="(${showPassword} ?: false) ? ' active'" id="nav-password-tab" data-bs-toggle="tab" data-bs-target="#nav-password"
-                                type="button" role="tab" aria-controls="nav-password" aria-selected="false">Contraseña
-                        </button>
-                    </div>
-                </nav>
+                    <button class="nav-link" th:classappend="(${showPassword} ?: false) ? ' active'"
+                            id="nav-password-tab" data-bs-toggle="tab" data-bs-target="#nav-password"
+                            type="button" role="tab" aria-controls="nav-password" aria-selected="false"
+                            onclick="showPasswd()">
+                        Contraseña
+                    </button>
+                </div>
+            </nav>
 
-                <div class="tab-content m-5" id="nav-tabContent">
+            <!-- Forms -->
+            <div class="tab-content m-5" id="nav-tabContent">
 
-                    <div class="tab-pane fade" th:classappend="not (${showPassword} ?: false) ? ' show active'" id="nav-info" role="tabpanel"  aria-labelledby="nav-info-tab" tabindex="0">
-                        <div class="user-info">
-                            <div th:if="${infoSuccessMsg} ne null" class="alert alert-success" role="alert">
-                                <label th:text="${infoSuccessMsg}"></label>
-                            </div>
-
-                            <form th:action="@{/account-settings/change-data}" th:object="${user}" method="post">
-
-                                <input class="information-form-control" type="hidden" th:field="*{rut}" th:value="${user.rut}" readonly>
-
-                                <div class="input-item">
-                                    <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
-                                    <label>Nombre(s)</label>
-                                    <label class="input-box">
-                                        <input class="information-form-control" th:field="*{name}" th:value="${user.name}" th:errorclass="border-danger" required>
-                                        <div th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}"></div>
-                                    </label>
-                                </div>
-                                <div class="input-item">
-                                    <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
-                                    <label>Apellido Paterno</label>
-                                    <label class="input-box">
-                                        <input class="information-form-control" th:field="*{firstLastName}" th:value="${user.firstLastName}" th:errorclass="border-danger" required>
-                                        <div th:if="${#fields.hasErrors('firstLastName')}" th:errorclass="text-danger" th:errors="*{firstLastName}"></div>
-                                    </label>
-                                </div>
-                                <div class="input-item">
-                                    <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
-                                    <label>Apellido Materno</label>
-                                    <label class="input-box">
-                                        <input class="information-form-control" th:field="*{secondLastName}" th:value="${user.secondLastName}" th:errorclass="border-danger" required>
-                                        <div th:if="${#fields.hasErrors('secondLastName')}" th:errorclass="text-danger" th:errors="*{secondLastName}"></div>
-                                    </label>
-                                </div>
-                                <div class="input-item">
-                                    <img class = "attribute-logo" th:src="@{/images/phone-icon.png}">
-                                    <label>Número de teléfono</label>
-                                    <label class="input-box">
-                                        <input class="information-form-control" type="tel" pattern="\d*" th:field="*{phoneNumber}" th:value="${user.phoneNumber}" th:errorclass="border-danger" required>
-                                        <div th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></div>
-                                    </label>
-                                </div>
-                                <div class="input-item">
-                                    <img class = "attribute-logo" th:src="@{/images/email-logo.png}">
-                                    <label>Correo electrónico</label>
-                                    <label class="input-box">
-                                        <input class="information-form-control" th:field="*{email}" th:value="${user.email}" th:errorclass="border-danger" required>
-                                        <div th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="*{email}"></div>
-                                    </label>
-                                </div>
-                                <div class="modal fade" id="dataConfirmModal" tabindex="-1" aria-labelledby="dataConfirmModalLabel"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="dataConfirmModalLabel">Confirmar</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>¿Está seguro de realizar los cambios?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-primary">Aplicar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </form>
+                <!-- Info -->
+                <div class="tab-pane fade" th:classappend="not (${showPassword} ?: false) ? ' show active'" id="nav-info" role="tabpanel"  aria-labelledby="nav-info-tab" tabindex="0">
+                    <div class="user-info">
+                        <div th:if="${infoSuccessMsg} ne null" class="alert alert-success" role="alert">
+                            <label th:text="${infoSuccessMsg}"></label>
                         </div>
 
-                    </div>
+                        <form th:action="@{/account-settings/change-data}" th:object="${user}" method="post">
 
-                    <div class="tab-pane fade" th:classappend="(${showPassword} ?: false) ? ' show active'" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab" tabindex="0">
-                        <div th:if="${passwordErrorMsg} ne null" class="alert alert-danger" role="alert">
-                            <label th:text="${passwordErrorMsg}"></label>
-                        </div>
-                        <form th:action="@{/account-settings/change-password}" method="post">
-                            <div class="mb-3">
-                                <label for="actualPassword" class="col-form-label">Contraseña actual:</label>
-                                <input type="password" class="form-control" id="actualPassword" name="actualPassword" required>
+                            <input class="information-form-control" type="hidden" th:field="*{rut}" th:value="${user.rut}" readonly>
+
+                            <div class="input-item">
+                                <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
+                                <label>Nombre(s)</label>
+                                <label class="input-box">
+                                    <input class="information-form-control" th:field="*{name}" th:value="${user.name}" th:errorclass="border-danger" >
+                                    <div th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}"></div>
+                                </label>
                             </div>
-                            <div class="mb-3">
-                                <label for="newPassword" class="col-form-label">Contraseña nueva:</label>
-                                <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                            <div class="input-item">
+                                <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
+                                <label>Apellido Paterno</label>
+                                <label class="input-box">
+                                    <input class="information-form-control" th:field="*{firstLastName}" th:value="${user.firstLastName}" th:errorclass="border-danger" >
+                                    <div th:if="${#fields.hasErrors('firstLastName')}" th:errorclass="text-danger" th:errors="*{firstLastName}"></div>
+                                </label>
                             </div>
-                            <div class="mb-3">
-                                <label for="confirmNewPassword" class="col-form-label">Confirmar contraseña nueva:</label>
-                                <input type="password" class="form-control" id="confirmNewPassword"
-                                       name="confirmNewPassword" required>
+                            <div class="input-item">
+                                <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
+                                <label>Apellido Materno</label>
+                                <label class="input-box">
+                                    <input class="information-form-control" th:field="*{secondLastName}" th:value="${user.secondLastName}" th:errorclass="border-danger" >
+                                    <div th:if="${#fields.hasErrors('secondLastName')}" th:errorclass="text-danger" th:errors="*{secondLastName}"></div>
+                                </label>
+                            </div>
+                            <div class="input-item">
+                                <img class = "attribute-logo" th:src="@{/images/phone-icon.png}">
+                                <label>Número de teléfono</label>
+                                <label class="input-box">
+                                    <input class="information-form-control" type="tel" th:field="*{phoneNumber}" th:value="${user.phoneNumber}" th:errorclass="border-danger" >
+                                    <div th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></div>
+                                </label>
+                            </div>
+                            <div class="input-item">
+                                <img class = "attribute-logo" th:src="@{/images/email-logo.png}">
+                                <label>Correo electrónico</label>
+                                <label class="input-box">
+                                    <input class="information-form-control" th:field="*{email}" th:value="${user.email}" th:errorclass="border-danger" >
+                                    <div th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="*{email}"></div>
+                                </label>
                             </div>
 
 
-
-                            <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="confirmModalLabel">Confirmar</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>¿Está seguro de realizar los cambios?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancelar</button>
-                                            <button type="submit" class="btn btn-primary">Aplicar</button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div th:replace="fragments/common :: modalButton('dataConfirmModal', ~{::p#infoMsg})">
+                                <p id="infoMsg">¿Está seguro de realizar los cambios?</p>
                             </div>
+
                         </form>
-
                     </div>
+                </div>
+
+                <!-- Password -->
+                <div class="tab-pane fade" th:classappend="(${showPassword} ?: false) ? ' show active'" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab" tabindex="0">
+                    <div th:if="${passwordErrorMsg} ne null" class="alert alert-danger" role="alert">
+                        <label th:text="${passwordErrorMsg}"></label>
+                    </div>
+                    <form th:action="@{/account-settings/change-password}" method="post">
+                        <div class="mb-3">
+                            <img class = "attribute-logo" th:src="@{/images/current-password-icon.png}">
+                            <label for="actualPassword" class="col-form-label">Contraseña actual:</label>
+                            <input type="password" class="form-control" id="actualPassword" name="actualPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <img class = "attribute-logo" th:src="@{/images/new-password-icon.png}">
+                            <label for="newPassword" class="col-form-label">Contraseña nueva:</label>
+                            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <img class = "attribute-logo" th:src="@{/images/confirm-new-password-icon.png}">
+                            <label for="confirmNewPassword" class="col-form-label">Confirmar contraseña nueva:</label>
+                            <input type="password" class="form-control" id="confirmNewPassword"
+                                   name="confirmNewPassword" required>
+                        </div>
+
+
+
+                        <div th:replace="fragments/common :: modalButton('confirmModal', ~{::p#passwdMsg})">
+                            <p id="passwdMsg">¿Está seguro de realizar los cambios?</p>
+                        </div>
+                    </form>
 
                 </div>
+
             </div>
-            <div class="button-container">
+
+        </div>
+
+            <!-- info buttons -->
+
+            <div class="data-buttons" th:classappend="(${showPassword} ?: false) ? 'd-none'">
                 <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
                         data-bs-target="#dataConfirmModal">
-                    Enviar
+                    Editar
                 </button>
-                <a th:href="@{/account-settings}" class="btn btn-secondary .btn-revert">
-                    Revertir
+                <a th:href="@{/home}">
+                    <button type="button" class="btn btn-tertiary btn-send">
+                        Volver
+                    </button>
+                </a>
+            </div>
+            <div class="password-buttons" th:classappend="not (${showPassword} ?: false) ? 'd-none'">
+                <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
+                        data-bs-target="#confirmModal">
+                    Aplicar
+                </button>
+                <a th:href="@{/home}">
+                    <button type="button" class="btn btn-tertiary btn-send">
+                        Volver
+                    </button>
                 </a>
             </div>
 
+        </section>
 
-        </div>
+
+
+        <script th:src="@{/js/account-settings.js}"></script>
         <div th:replace="fragments/common :: common-body"></div>
     </body>
 </html>

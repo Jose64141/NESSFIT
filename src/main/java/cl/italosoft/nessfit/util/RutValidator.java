@@ -13,12 +13,22 @@ import java.util.regex.Pattern;
 @Component
 public class RutValidator implements Validator
 {
+    /**
+     * Checks if a given class is supported by the validator
+     * @param clazz the class
+     * @return True if it's accepted, false if it's not
+     */
     @Override
     public boolean supports(Class<?> clazz)
     {
         return User.class.isAssignableFrom(clazz);
     }
 
+    /**
+     * Validate a given User object, rejecting if it has errors in its RUT
+     * @param target
+     * @param errors
+     */
     @Override
     public void validate(Object target, Errors errors)
     {
@@ -41,6 +51,11 @@ public class RutValidator implements Validator
         errors.rejectValue("rut", null, "El RUT es inválido.");
     }
 
+    /**
+     * Check the format of a RUT string
+     * @param rut the rut to check
+     * @return True if it matches the format, false if it doesn't
+     */
     public boolean checkFormat(String rut)
     {
         Pattern rutPattern = Pattern.compile("\\d{1,2}\\d{3}\\d{3}[Kk0-9]");
@@ -50,6 +65,12 @@ public class RutValidator implements Validator
     {
         return rut.substring(0,lenght-1);
     }
+
+    /**
+     * Obtains the check digit of a number
+     * @param rutNumbers the RUT numbers
+     * @return the check digit
+     */
     public char getCheckDigit(String rutNumbers) {
         int checkDigit = 0;
         int[] serie = {2,3,4,5,6,7};

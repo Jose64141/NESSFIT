@@ -20,9 +20,14 @@
             </div>
             <div class="buttons" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">
                 <h3>¿Qué desea hacer?</h3>
-                <a th:href="@{/home}">
+                <a th:href="@{/administrador/manage-administrative}">
+                    <button>Editar Administrativos
+                        <img class="button-logo" th:src="@{images/manage-users-logo.png}" alt="Editar administrativos">
+                    </button>
+                </a>
+                <a th:href="@{/administrador/add-administrative}">
                     <button>Agregar Administrativos
-                        <img class="button-logo" th:src="@{images/add-user-logo.png}" alt="Agregar administrativos"></button>
+                        <img class="button-logo" th:src="@{images/add-user-logo.png}" alt="Agregar administrativos">
                     </button>
                 </a>
                 <a th:href="@{/administrador/manage-clients}">
@@ -34,7 +39,7 @@
 
             <div class="buttons administrativo-buttons"  sec:authorize="hasRole('ROLE_ADMINISTRATIVO')">
                 <h3>¿Qué desea hacer?</h3>
-                <a th:href="@{/home}">
+                <a th:href="@{/administrativo/add-deportive-center}">
                     <button>Agregar Recinto
                         <img class="button-logo" th:src="@{images/add-place-logo.png}" alt="Agregar recito">
                     </button>
@@ -43,7 +48,7 @@
                     <button>Agregar Cliente
                         <img class="button-logo" th:src="@{images/add-user-logo.png}" alt="Agregar cliente"></button>
                 </a>
-                <a th:href="@{/home}">
+                <a th:href="@{/administrativo/manage-deportive-centers}">
                     <button>Administrar Recintos
                         <img class="button-logo" th:src="@{images/manage-places-logo.png}" alt="Administrar recintos">
                     </button>
@@ -67,7 +72,7 @@
 
             <div class="buttons" sec:authorize="hasRole('ROLE_CLIENTE')">
                 <h3>¿Qué desea hacer?</h3>
-                <a class="button-container" th:href="@{/home}">
+                <a class="button-container" th:href="@{/cliente/rent}">
                     <button>Arrendar
                         <img class="button-logo" th:src="@{images/rent-logo.png}" alt="Arendar recinto">
                     </button>

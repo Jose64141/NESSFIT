@@ -28,22 +28,31 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <th:block sec:authorize="hasRole('ADMINISTRADOR')">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Agregar Administrativos</a>
+                                    <a class="nav-link" th:href="@{/administrador/manage-administrative}">
+                                        Editar Administrativos
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/administrador/manage-clients}">Administrar Usuarios</a>
+                                    <a class="nav-link" th:href="@{/administrador/add-administrative}">
+                                        Agregar Administrativos
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/administrador/manage-clients}">
+                                        Administrar Usuarios
+                                    </a>
                                 </li>
                             </th:block>
 
                             <th:block sec:authorize="hasRole('ADMINISTRATIVO')">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Agregar Recintos</a>
+                                    <a class="nav-link" th:href="@{/administrativo/add-deportive-center}">Agregar Recinto</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" th:href="@{/administrativo/add-client}">Agregar Cliente</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Administrar Recintos</a>
+                                    <a class="nav-link" th:href="@{/administrativo/manage-deportive-centers}">Administrar Recintos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" th:href="@{/administrativo/manage-clients}">Administrar Clientes</a>
@@ -58,7 +67,7 @@
 
                             <th:block sec:authorize="hasRole('CLIENTE')">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Arrendar</a>
+                                    <a class="nav-link" th:href="@{/cliente/rent}">Arrendar</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Mis Solicitudes</a>

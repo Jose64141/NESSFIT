@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/common :: head('Administrar Recintos', ~{::link})">
+  <link rel="stylesheet" th:href="@{/css/administrativo/manage-deportive-centers.css}">
+  <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
+  <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
+</head>
+<body>
+<nav th:replace="~{fragments/navigation::navbar}"></nav>
+
+<div th:replace="~{fragments/navigation::shortcuts}"></div>
+
+<h1>Administrar Recintos</h1>
+
+<section class="flex-container">
+  <!-- CENTER FINDER -->
+  <form th:action="@{/administrativo/manage-deportive-centers}" method="get" class="center-finder">
+    <label>Ingrese nombre para búsqueda</label>
+    <input type="text" id="name" name="name">
+    <button type="submit">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+           class="bi bi-search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+      </svg>
+    </button>
+    <a th:href="@{/administrativo/manage-deportive-centers}">
+      <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
+    </a>
+  </form>
+  <!-- CENTERS TABLE -->
+  <h2 th:if="${centers.totalPages == 0}">No hay recintos que mostrar.</h2>
+  <div th:if="${centers.totalPages > 0}" class="centers-container">
+    <div class="center-entry center-entry-header">
+      <div class="center-name-header">Centro</div>
+      <div class="center-type-header">Tipo</div>
+    </div>
+    <th:block th:each="center : ${centers.content}">
+      <a class="center-entry link-dark" th:href="@{/administrativo/edit-deportive-center(name=${center.name})}">
+        <div class="center-name" th:text="${center.name}"></div>
+        <div class="center-type" th:text="${center.type.name}"></div>
+      </a>
+    </th:block>
+  </div>
+  <!--  PAGE SELECTOR -->
+  <nav class = "page-selector" th:if="${centers.totalPages > 0}">
+    <ul class="pagination ">
+      <li class="page-item" th:classappend="${centers.number == 0 ? 'disabled' : ''}">
+        <a th:href="@{/administrativo/manage-deportive-centers(page=${centers.number - 1})}"
+           class="page-link">Anterior</a>
+      </li>
+      <li class="page-item"
+          th:classappend="${i eq centers.number + 1} ? 'active'"
+          th:each="i : ${#numbers.sequence( 1, centers.totalPages, 1)}">
+        <a class="page-link"
+           th:href="@{/administrativo/manage-deportive-centers?page={tmpPag} (tmpPag=${i-1}) }"
+           th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+      </li>
+      <li class="page-item"
+          th:classappend="${centers.number == (centers.totalPages - 1) ? 'disabled' : ''}">
+        <a th:href="@{/administrativo/manage-deportive-centers(page=${centers.number + 1})}"
+           class="page-link">Siguiente</a>
+      </li>
+    </ul>
+  </nav>
+</section>
+
+
+<div th:replace="fragments/common :: common-body"></div>
+</body>
+</html>
