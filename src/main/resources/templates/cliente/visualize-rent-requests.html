@@ -11,6 +11,70 @@
   <body>
     <nav th:replace="~{fragments/navigation::navbar}"></nav>
     <div th:replace="~{fragments/navigation::shortcuts}"></div>
+    <h1>Visualizar solicitudes</h1>
+
+
+    <section class="flex-container">
+      <!-- CENTER FINDER -->
+      <form th:action="@{/cliente/visualize-rent-requests}" method="get" class="center-finder">
+        <label>Ingrese nombre para búsqueda</label>
+        <input type="text" id="name" name="name">
+        <button type="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+               class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+        </button>
+        <a th:href="@{/cliente/visualize-rent-requests}">
+          <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
+        </a>
+      </form>
+      <!-- CENTERS TABLE -->
+      <h2 th:if="${rentRequests.totalPages == 0}">No hay solicitudes por mostrar.</h2>
+      <div th:if="${rentRequests.totalPages > 0}" class="centers-container">
+        <div class="center-entry center-entry-header">
+          <div class="center-header">Fecha</div>
+          <div class="center-header">ID</div>
+          <div class="center-header">Nombre Centro Deportivo</div>
+          <div class="center-header">Costo Total</div>
+          <div class="center-header">RUT Cliente</div>
+          <div class="center-header">Nombre Cliente</div>
+          <div class="center-header">Estado</div>
+        </div>
+        <th:block th:each="rentRequest : ${rentRequests.content}">
+          <a class="center-entry link-dark" th:href="@{/cliente/visualize-rent-requests(name=${requests.name})}">
+            <div class="center-name" th:text="${rentRequest.requestDate}"></div>
+            <div class="center-type" th:text="${rentRequest.deportiveCenter.name}"></div>
+            <div class="center-type" th:text="${rentRequest.totalPrice}"></div>
+            <div class="center-type" th:text="${rentRequest.user.rut}"></div>
+            <div class="center-type" th:text="${rentRequest.user.name}"></div>
+            <div class="center-type" th:text="${rentRequest.status}"></div>
+          </a>
+        </th:block>
+      </div>
+      <!--  PAGE SELECTOR -->
+      <nav class = "page-selector" th:if="${rentRequests.totalPages > 0}">
+        <ul class="pagination ">
+          <li class="page-item" th:classappend="${rentRequests.number == 0 ? 'disabled' : ''}">
+            <a th:href="@{/cliente/visualize-rent-requests(page=${rentRequests.number - 1})}"
+               class="page-link">Anterior</a>
+          </li>
+          <li class="page-item"
+              th:classappend="${i eq rentRequests.number + 1} ? 'active'"
+              th:each="i : ${#numbers.sequence( 1, rentRequests.totalPages, 1)}">
+            <a class="page-link"
+               th:href="@{/cliente/visualize-rent-requests?page={tmpPag} (tmpPag=${i-1}) }"
+               th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+          </li>
+          <li class="page-item"
+              th:classappend="${rentRequests.number == (rentRequests.totalPages - 1) ? 'disabled' : ''}">
+            <a th:href="@{/cliente/visualize-rent-requests(page=${rentRequests.number + 1})}"
+               class="page-link">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+
 
 
     <div th:replace="fragments/common :: common-body"></div>
