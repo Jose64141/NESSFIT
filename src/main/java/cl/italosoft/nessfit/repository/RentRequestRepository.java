@@ -1,6 +1,11 @@
 package cl.italosoft.nessfit.repository;
 
+import cl.italosoft.nessfit.model.DeportiveCenter;
 import cl.italosoft.nessfit.model.RentRequest;
+import cl.italosoft.nessfit.model.User;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,6 +19,9 @@ public interface RentRequestRepository extends JpaRepository<RentRequest, Intege
 {
     List<RentRequest> findByUser_Rut(String userRut);
     List<RentRequest> findByDeportiveCenter(String deportiveCenterName);
+    
+
+	Page<RentRequest> findByUser_Rut(String userRut, Pageable page);
 
     /**
      * Find all the requested dates of a deportive center
@@ -25,4 +33,6 @@ public interface RentRequestRepository extends JpaRepository<RentRequest, Intege
             "WHERE rd.date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL 7 DAY " +
             "AND r.deportive_center_name = ?1", nativeQuery = true)
     List<Date> findDeportiveCenterDates(String deportiveCenterName);
+    
+   
 }

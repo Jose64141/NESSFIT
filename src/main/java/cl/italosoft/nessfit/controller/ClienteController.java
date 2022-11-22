@@ -7,6 +7,8 @@ import cl.italosoft.nessfit.service.DeportiveCenterService;
 import cl.italosoft.nessfit.service.RentRequestService;
 import cl.italosoft.nessfit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -16,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.lowagie.text.DocumentException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -144,18 +150,23 @@ public class ClienteController
     }
     
     @GetMapping("/cliente/visualize-rent-requests")
-    public String visualizeRentRequests(Model model, @RequestParam(required = false) String id)
+    public String visualizeRentRequests(Model model,@PageableDefault(value = 5) Pageable page, @RequestParam(required = false)String rut)
     {
 
+    	List<RentRequest> listrentrequest = rentRequestService.listByUser(rut);
+    	
+    	model.addAttribute("renRequest", listrentrequest);
+        model.addAttribute("rentRequest", rentRequestService.findByUser(rut, page));  	
 
         return "cliente/visualize-rent-requests";
     }
     
-    @PostMapping("/cliente/visualize-rent-requests")
-    public String visualizeRentRequests(HttpServletRequest request, Model model, @RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr)
+    @GetMapping("/cliente/visualize-rent-requests/pdf")
+    public void exporttoPDF(HttpServletResponse response) throws DocumentException, IOException
     {
-      
-        return "redirect:/cliente/visualize-rent-requests";
+    	
     }
     
 }
+
+

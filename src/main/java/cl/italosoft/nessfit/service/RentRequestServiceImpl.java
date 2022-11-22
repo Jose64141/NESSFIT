@@ -1,8 +1,13 @@
 package cl.italosoft.nessfit.service;
 
+import cl.italosoft.nessfit.model.DeportiveCenter;
 import cl.italosoft.nessfit.model.RentRequest;
+import cl.italosoft.nessfit.model.User;
 import cl.italosoft.nessfit.repository.RentRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -58,7 +63,8 @@ public class RentRequestServiceImpl implements RentRequestService
      */
     @Override
     public List<RentRequest> listByUser(String userRut) { return this.rentRequestRepository.findByUser_Rut(userRut); }
-
+    
+ 
     /**
      * Returns all rent request records associated to the given deportive center.
      *
@@ -82,4 +88,26 @@ public class RentRequestServiceImpl implements RentRequestService
      */
     @Override
     public void flush() { rentRequestRepository.flush(); }
+
+	@Override
+	public Page<RentRequest> findByUser(String userRut, Pageable page) {
+	
+		if(userRut != null)
+			return this.rentRequestRepository.findByUser_Rut(userRut, page);
+		else
+			return rentRequestRepository.findAll(page);
+	}
+
+    @Override
+    public List<RentRequest> list()
+    {
+        return rentRequestRepository.findAll();
+    }
+
+
 }
+
+
+
+
+
