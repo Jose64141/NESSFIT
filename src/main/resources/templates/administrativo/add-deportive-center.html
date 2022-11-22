@@ -49,7 +49,8 @@
                             <label>Tipo</label>
                             <br>
                             <select th:field="*{type.id}">
-                                <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.name}"></option>
+                                <option th:each="type : ${types}" th:value="${type.id}"
+                                        th:text="${#strings.capitalizeWords(type.name)}"></option>
                             </select>
                         </div>
                         <div class="input-item">
