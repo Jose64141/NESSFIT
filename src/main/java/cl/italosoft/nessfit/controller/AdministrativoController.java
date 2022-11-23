@@ -294,4 +294,36 @@ public class AdministrativoController
     	model.addAttribute("rentRequests",rentRequestService.findStatusPendiente());  	
     	return "administrativo/manage-rent-requests";
     }
+    
+    @GetMapping("")
+    public String editRentRequest(Model model, @RequestParam int id) 
+    {
+    	RentRequest rentRequest = this.rentRequestService.find(id);
+    	if(rentRequest == null) {
+    		return "redirect:/administrativo/ ";
+    	}
+    	model.addAttribute("rentRequest", rentRequest);
+ 
+        return "administrativo/ ";
+    }
+    @PostMapping("")
+    public String editRentRequest(Model model, @Valid RentRequest rentRequest, BindingResult result, RedirectAttributes attr) 
+    {
+    	if(result.hasErrors())
+    	{
+    		return "administrativo/ ";
+    	}
+    	int id = rentRequest.getId();
+    	RentRequest requestUpdated = rentRequestService.find(id);
+    	if(requestUpdated == null) 
+    	{
+    		attr.addFlashAttribute("errorMsg","Ha habido un problema. Intente nuevamente.");
+    		return "redirect:/administrativo/ ";
+    	}
+    	requestUpdated.setStatus(rentRequest.getStatus());
+    	rentRequestService.saveAndFlush(requestUpdated);
+    	attr.addFlashAttribute("successMsg","Se ha actualizado el estado de la petición.");
+  	
+    	return "administrativo/ ";
+    }
 }
