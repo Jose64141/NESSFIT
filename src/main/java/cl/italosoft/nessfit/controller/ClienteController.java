@@ -150,14 +150,9 @@ public class ClienteController
     }
     
     @GetMapping("/cliente/visualize-rent-requests")
-    public String visualizeRentRequests(Model model,@PageableDefault(value = 5) Pageable page, @RequestParam(required = false)String rut)
+    public String visualizeRentRequests(Model model,@PageableDefault(value = 5) Pageable page, @RequestParam(required = false)int idrequest)
     {
-
-    	List<RentRequest> listrentrequest = rentRequestService.listByUser(rut);
-    	
-    	model.addAttribute("renRequest", listrentrequest);
-        model.addAttribute("rentRequest", rentRequestService.findByUser(rut, page));  	
-
+        model.addAttribute("rentRequest", rentRequestService.findById(idrequest, page));  	
         return "cliente/visualize-rent-requests";
     }
     

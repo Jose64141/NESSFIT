@@ -21,7 +21,7 @@ public interface RentRequestRepository extends JpaRepository<RentRequest, Intege
     List<RentRequest> findByDeportiveCenter(String deportiveCenterName);
     
 
-	Page<RentRequest> findByUser_Rut(String userRut, Pageable page);
+	Page<RentRequest> findByUser_Rut(int id, Pageable page);
 
     /**
      * Find all the requested dates of a deportive center
