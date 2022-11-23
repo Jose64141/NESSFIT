@@ -1,6 +1,8 @@
 package cl.italosoft.nessfit.service;
 
 import cl.italosoft.nessfit.model.RentRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.sql.Date;
 import java.util.List;
@@ -20,6 +22,13 @@ RentRequestService
      */
     public RentRequest find(int requestId);
 
+    /**
+     * List all the requests with the given status
+     * @param status the status of the records to find
+     * @param page the pagination information
+     * @return page containing the records.
+     */
+    public Page<RentRequest> findByStatus(String status, Pageable page);
 
     /**
      * Saves a given rent request record.

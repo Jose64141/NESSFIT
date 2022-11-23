@@ -288,9 +288,9 @@ public class AdministrativoController
         return "redirect:/administrativo/edit-deportive-center?name="+name;
     }
 
-    @GetMapping("administrativo/manage-deportive-centers")
+    @GetMapping("administrativo/manage-rent-requests")
     public String manageRentRequests() {
     	
-    	return "administrativo/manage-deportive-centers";
+    	return "administrativo/manage-rent-requests";
     }
 }

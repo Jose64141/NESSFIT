@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -17,8 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -39,13 +42,13 @@ class RentRequestServiceTest {
     {
         testUser = new User("207676918","","","","",null,
                 "",true,new Role(3));
-        testDeportiveCenter = new DeportiveCenter("TATIO","ORELLA 1040", new Type(2,"Piscina"),
+        testDeportiveCenter = new DeportiveCenter("tatio","orella 1040", new Type(2,"piscina"),
                 45000,true);
 
         List<Date> rentDates = new ArrayList<Date>();
         rentDates.add(new Date(122,10,14));
         rentDates.add(new Date(122,10,16));
-        testRentRequest = new RentRequest(testUser, testDeportiveCenter, "PENDIENTE",90000, rentDates,
+        testRentRequest = new RentRequest(testUser, testDeportiveCenter, "pendiente",90000, rentDates,
                 new Date(2022,11,12)  );
     }
 
@@ -55,6 +58,18 @@ class RentRequestServiceTest {
         when(rentRequestRepository.findById(testRentRequest.getId())).thenReturn(Optional.of(testRentRequest));
         RentRequest found = service.find(testRentRequest.getId());
         assertEquals(testRentRequest,found);
+    }
+
+    @Test
+    void findByStatus()
+    {
+        Pageable page = spy(Pageable.class);
+        List<RentRequest> list = List.of(testRentRequest);
+        Page<RentRequest> expected = new PageImpl(list);
+        when(rentRequestRepository.findByStatusOrderByRequestDateAsc("pendiente", page))
+                .thenReturn(expected);
+        Page<RentRequest> found = service.findByStatus("pendiente", page);
+        assertEquals(expected,found);
     }
 
     @Test

@@ -3,6 +3,8 @@ package cl.italosoft.nessfit.service;
 import cl.italosoft.nessfit.model.RentRequest;
 import cl.italosoft.nessfit.repository.RentRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -24,6 +26,17 @@ public class RentRequestServiceImpl implements RentRequestService
     {
         java.util.Optional<RentRequest> rentRequest = this.rentRequestRepository.findById(requestId);
         return rentRequest.orElse(null);
+    }
+
+    /**
+     * List all the requests with the given status
+     * @param status the status of the records to find
+     * @param page the pagination information
+     * @return page containing the records.
+     */
+    public Page<RentRequest> findByStatus(String status, Pageable page)
+    {
+        return rentRequestRepository.findByStatusOrderByRequestDateAsc(status, page);
     }
 
     /**

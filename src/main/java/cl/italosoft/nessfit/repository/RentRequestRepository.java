@@ -1,6 +1,9 @@
 package cl.italosoft.nessfit.repository;
 
+import cl.italosoft.nessfit.model.DeportiveCenter;
 import cl.italosoft.nessfit.model.RentRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -25,4 +28,12 @@ public interface RentRequestRepository extends JpaRepository<RentRequest, Intege
             "WHERE rd.date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL 7 DAY " +
             "AND r.deportive_center_name = ?1", nativeQuery = true)
     List<Date> findDeportiveCenterDates(String deportiveCenterName);
+
+    /**
+     * Find all requests with the given status, ordered from the oldest one to the most recent
+     * @param status the request status
+     * @param page type of page to group
+     * @return Page of rent requests
+     */
+    Page<RentRequest> findByStatusOrderByRequestDateAsc(String status, Pageable page);
 }
