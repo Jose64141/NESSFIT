@@ -90,4 +90,6 @@ public class RentRequestServiceImpl implements RentRequestService
      */
 	@Override
 	public List<RentRequest> findAll() { return this.rentRequestRepository.findAll();}
+	
+	public List<RentRequest> findStatusPendiente() { return this.rentRequestRepository.findStatusPendiente(); }
 }

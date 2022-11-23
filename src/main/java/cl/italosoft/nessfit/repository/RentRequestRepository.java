@@ -25,4 +25,9 @@ public interface RentRequestRepository extends JpaRepository<RentRequest, Intege
             "WHERE rd.date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL 7 DAY " +
             "AND r.deportive_center_name = ?1", nativeQuery = true)
     List<Date> findDeportiveCenterDates(String deportiveCenterName);
+    
+    @Query(value = "SELECT r.varchar" +
+    		"FROM rent_requests r" + 
+    		"WHERE r.request_status = ?PENDIENTE", nativeQuery = true)
+    List<RentRequest> findStatusPendiente();
 }

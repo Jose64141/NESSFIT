@@ -60,6 +60,8 @@ RentRequestService
     public List<Date> listDeportiveCenterDates(String deportiveCenterName);
     
     public List<RentRequest> findAll();
+    
+    public List<RentRequest> findStatusPendiente();
 
     /**
      * Flushes all the changes to the database.
