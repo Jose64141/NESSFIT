@@ -90,10 +90,10 @@ public class RentRequestServiceImpl implements RentRequestService
     public void flush() { rentRequestRepository.flush(); }
 
 	@Override
-	public Page<RentRequest> findById(int requestId, Pageable page) {
+	public Page<RentRequest> findByName(String deportiveCenterName, Pageable page) {
 	
-		if(requestId != 0)
-			return this.rentRequestRepository.findByUser_Rut(requestId, page);
+		if(deportiveCenterName != null)
+			return this.rentRequestRepository.findByName(deportiveCenterName, page);
 		else
 			return rentRequestRepository.findAll(page);
 	}
