@@ -55,7 +55,7 @@
                     <img class = "attribute-logo" th:src="@{/images/cost-icon.png}">
                     <label>Costo de arriendo (por día)</label>
                     <label class="input-box">
-                        <input class="information-form-control" type="text" inputmode="numeric"
+                        <input class="information-form-control" type="text" inputmode="numeric" onkeydown="return onlyNumberInput(event)"
                                th:field="*{costPerDay}">
                         <div th:if="${#fields.hasErrors('costPerDay')}" th:errorclass="text-danger" th:errors="*{costPerDay}">
                         </div>
@@ -90,5 +90,8 @@
         </a>
     </div>
 </section>
+
+<script th:src="@{/js/utils.js}"></script>
+
 </body>
 </html>
