@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
@@ -292,5 +293,64 @@ public class AdministrativoController
     public String manageRentRequests() {
     	
     	return "administrativo/manage-rent-requests";
+    }
+
+    /**
+     * Review rent request page
+     * @param model view template model
+     * @param id id of the request to review
+     * @return page template
+     */
+    @GetMapping("administrativo/review-rent-request")
+    public String reviewRentRequest(Model model, @RequestParam int id)
+    {
+        RentRequest request = rentRequestService.find(id);
+        if (request == null)
+            return "redirect:/administrativo/manage-rent-requests";
+        model.addAttribute("request",request);
+        return "administrativo/review-rent-request";
+    }
+
+    /**
+     * Review rent request page
+     * @param formBody POST method form values
+     * @param attr redirect attributes
+     * @return page template
+     */
+    @PostMapping("administrativo/review-rent-request")
+    public String reviewRentRequest(@RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr)
+    {
+        int id;
+        try
+        {
+            id = Integer.parseInt(formBody.getFirst("id"));
+        }
+        catch (Exception e )
+        {
+            return "redirect:/adimistrativo/manage-rent-request";
+        }
+        RentRequest request = rentRequestService.find(id);
+        if (request == null)
+            return "redirect:/administrativo/manage-rent-requests";
+        StringBuilder response = new StringBuilder("La solicitud fue ");
+        String action;
+
+        String approve = formBody.getFirst("approve");
+        if(approve.equals("true"))
+            action = "aprovada";
+        else if(approve.equals("false"))
+            action = "rechazada";
+        else
+        {
+            attr.addFlashAttribute("errorMsg","Ha ocurrido un error.");
+            return "redirect:/administrativo/manage-rent-requests";
+        }
+
+        response.append(action);
+        response.append(" con éxito.");
+        request.setStatus(action);
+        rentRequestService.saveAndFlush(request);
+        attr.addFlashAttribute("successMsg",response);
+        return "redirect:/administrativo/manage-rent-requests";
     }
 }

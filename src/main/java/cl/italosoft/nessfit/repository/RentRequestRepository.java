@@ -1,6 +1,5 @@
 package cl.italosoft.nessfit.repository;
 
-import cl.italosoft.nessfit.model.DeportiveCenter;
 import cl.italosoft.nessfit.model.RentRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
