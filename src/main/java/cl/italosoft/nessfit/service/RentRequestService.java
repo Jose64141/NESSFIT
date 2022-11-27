@@ -59,6 +59,8 @@ RentRequestService
      */
     public List<Date> listDeportiveCenterDates(String deportiveCenterName);
     
+    public List<RentRequest> findByDateBetween(Date beginningdate, Date enddate);
+    
     public List<RentRequest> findAll();
 
     /**

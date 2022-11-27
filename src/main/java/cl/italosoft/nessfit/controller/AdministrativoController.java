@@ -31,6 +31,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -287,8 +291,55 @@ public class AdministrativoController
 
         return "redirect:/administrativo/edit-deportive-center?name="+name;
     }
+
+   
     @GetMapping("/administrativo/statistics")
-    public String viewStatistics() {
+    public String viewStatistics(Model model, @RequestParam(name = "inicio", required = false, defaultValue = "1900-01-01") String beginning, @RequestParam(name = "fin", required = false, defaultValue = "2999-01-01") String end)throws ParseException {
+    	
+    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    	Date beginningdate = (Date) formatter.parse(beginning);
+    	Date enddate = (Date) formatter.parse(end);
+    	int contCancha = 0;
+    	int contGimnasio = 0;
+    	int contPiscina = 0;
+    	int contQuincho = 0;
+    	int contEstadio = 0;
+    	
+    	List<RentRequest> requests = rentRequestService.findByDateBetween(beginningdate, enddate);
+    	
+    	for (RentRequest rentrequest : requests) {
+    		switch ( rentrequest.getDeportiveCenter().getType().getName() ) {			
+    		case "Cancha": 
+    			contCancha++;
+    			break;
+    		case "Gimnasio": 
+    			contCancha++;
+    			break;
+    		case "Piscina": 
+    			contCancha++;
+    			break;
+    		case "Quincho": 
+    			contCancha++;
+    			break;
+    		case "Estadio": 
+    			contCancha++;
+    			break;
+    		default: 
+    			break;
+			}
+    	}
+    	
+    	model.addAttribute("solicitudes", requests);
+    	model.addAttribute("CantidadCancha", contCancha);
+    	model.addAttribute("CantidadGimnasio", contGimnasio);
+    	model.addAttribute("CantidadPiscina", contPiscina);
+    	model.addAttribute("CantidadQuincho", contQuincho);
+    	model.addAttribute("CantidadEstadio", contEstadio);
+    	
+    	model.addAttribute("inicio", beginning);
+    	model.addAttribute("fin", end);
+	
     	return "administrativo/statistics";
     }
+
 }
