@@ -51,6 +51,7 @@ public class AdministrativoController
     @Autowired
     private TypeService typeService;
 
+    @Autowired
     private RentRequestService rentRequestService;
     
     @Autowired
@@ -290,8 +291,9 @@ public class AdministrativoController
     }
 
     @GetMapping("administrativo/manage-rent-requests")
-    public String manageRentRequests() {
-    	
+    public String manageRentRequests(Model model, @PageableDefault(value = 5) Pageable page)
+    {
+        model.addAttribute("requests",rentRequestService.findByStatus("PENDIENTE",page));
     	return "administrativo/manage-rent-requests";
     }
 
