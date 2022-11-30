@@ -16,7 +16,7 @@
     <h1>Editar Administrativo</h1>
 
     <section class="flex-container">
-        <!-- RUT FINDER -->
+        <!-- DEPORTIVE CENTER FINDER -->
         <form th:action="@{/administrativo/manage-rent-requests}" method="get" class="user-finder">
             <label>Ingrese RUT para búsqueda</label>
             <input type="text" id="rut" name="rut" placeholder="10123123K">
@@ -30,7 +30,7 @@
                 <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
             </a>
         </form>
-        <!-- ADMINISTRATIVOS TABLE -->
+        <!-- REQUESTS TABLE -->
         <h2 th:if="${requests.totalPages == 0}">No hay solicitudes que mostrar.</h2>
         <div th:if="${requests.totalPages > 0}" class="users-container">
             <div class="user-entry user-entry-header">
@@ -44,7 +44,7 @@
             </div>
             <th:block th:each="request : ${requests.content}">
 
-                <a class="user-entry link-dark" th:href="@{/administrativo/manage-rent-requests(request=${request.id})}">
+                <a class="user-entry link-dark" th:href="@{/administrativo/review-rent-request(id=${request.id})}">
                     <div class="grid-item" th:text="${request.requestDate}"></div>
                     <div class="grid-item" th:text="${request.id}"></div>
                     <div class="grid-item" th:text="${request.deportiveCenter.name}"></div>

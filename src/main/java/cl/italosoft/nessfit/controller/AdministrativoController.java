@@ -329,7 +329,7 @@ public class AdministrativoController
         }
         catch (Exception e )
         {
-            return "redirect:/adimistrativo/manage-rent-request";
+            return "redirect:/administrativo/manage-rent-request";
         }
         RentRequest request = rentRequestService.find(id);
         if (request == null)
@@ -339,7 +339,7 @@ public class AdministrativoController
 
         String approve = formBody.getFirst("approve");
         if(approve.equals("true"))
-            action = "aprovada";
+            action = "aprobada";
         else if(approve.equals("false"))
             action = "rechazada";
         else
