@@ -1,9 +1,9 @@
-function approveButton(event)
+function approveButton()
 {
-    document.getElementById("status").value = "aprobado";
+    document.getElementById("status").value = "aprobada";
 }
 
-function rejectButton(event)
+function rejectButton()
 {
-    document.getElementById("status").value = "rechazado";
+    document.getElementById("status").value = "rechazada";
 }

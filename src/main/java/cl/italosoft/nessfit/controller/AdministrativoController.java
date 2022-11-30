@@ -320,7 +320,7 @@ public class AdministrativoController
      * @return page template
      */
     @PostMapping("administrativo/review-rent-request")
-    public String reviewRentRequest(@RequestBody RentRequest rentRequest, RedirectAttributes attr)
+    public String reviewRentRequest(RentRequest rentRequest, RedirectAttributes attr)
     {
         String action = rentRequest.getStatus();
         if(!(action.equals("aprobada") || action.equals("rechazada")))

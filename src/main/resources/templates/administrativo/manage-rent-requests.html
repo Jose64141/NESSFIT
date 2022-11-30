@@ -13,9 +13,12 @@
     <nav th:replace="~{fragments/navigation::navbar}"></nav>
     <div th:replace="~{fragments/navigation::shortcuts}"></div>
 
-    <h1>Editar Administrativo</h1>
+    <h1>Administrar Solicitudes de Arriendo</h1>
 
     <section class="flex-container">
+        <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
+            <label th:text="${successMsg}"></label>
+        </div>
         <!-- DEPORTIVE CENTER FINDER -->
         <form th:action="@{/administrativo/manage-rent-requests}" method="get" class="user-finder">
             <label>Ingrese RUT para búsqueda</label>
