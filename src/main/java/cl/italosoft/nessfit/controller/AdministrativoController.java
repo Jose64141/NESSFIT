@@ -315,43 +315,33 @@ public class AdministrativoController
 
     /**
      * Review rent request page
-     * @param formBody POST method form values
+     * @param rentRequest form object with new status
      * @param attr redirect attributes
      * @return page template
      */
     @PostMapping("administrativo/review-rent-request")
-    public String reviewRentRequest(@RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr)
+    public String reviewRentRequest(@RequestBody RentRequest rentRequest, RedirectAttributes attr)
     {
-        int id;
-        try
-        {
-            id = Integer.parseInt(formBody.getFirst("id"));
-        }
-        catch (Exception e )
-        {
-            return "redirect:/administrativo/manage-rent-request";
-        }
-        RentRequest request = rentRequestService.find(id);
-        if (request == null)
-            return "redirect:/administrativo/manage-rent-requests";
-        StringBuilder response = new StringBuilder("La solicitud fue ");
-        String action;
-
-        String approve = formBody.getFirst("approve");
-        if(approve.equals("true"))
-            action = "aprobada";
-        else if(approve.equals("false"))
-            action = "rechazada";
-        else
+        String action = rentRequest.getStatus();
+        if(!(action.equals("aprobada") || action.equals("rechazada")))
         {
             attr.addFlashAttribute("errorMsg","Ha ocurrido un error.");
             return "redirect:/administrativo/manage-rent-requests";
         }
 
+        int id = rentRequest.getId();
+        rentRequest = rentRequestService.find(id);
+        if (rentRequest == null)
+        {
+            attr.addFlashAttribute("errorMsg","Ha ocurrido un error.");
+            return "redirect:/administrativo/manage-rent-requests";
+        }
+
+        StringBuilder response = new StringBuilder("La solicitud fue ");
         response.append(action);
         response.append(" con éxito.");
-        request.setStatus(action);
-        rentRequestService.saveAndFlush(request);
+        rentRequest.setStatus(action);
+        rentRequestService.saveAndFlush(rentRequest);
         attr.addFlashAttribute("successMsg",response);
         return "redirect:/administrativo/manage-rent-requests";
     }
