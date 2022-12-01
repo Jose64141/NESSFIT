@@ -148,20 +148,20 @@ public class ClienteController
         attr.addFlashAttribute("successMsg","La solicitud se ha procesado con éxito.");
         return "redirect:/cliente/rent";
     }
-    
+
     @GetMapping("/cliente/visualize-rent-requests")
     public String visualizeRentRequests(Model model,@PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String deportivename)
     {
-        model.addAttribute("rentRequests", rentRequestService.findByName(deportivename, page));  	
+        model.addAttribute("requests", rentRequestService.findByName(deportivename, page));
         return "cliente/visualize-rent-requests";
     }
-    
+
     @GetMapping("/cliente/visualize-rent-requests/pdf")
     public void exporttoPDF(HttpServletResponse response) throws DocumentException, IOException
     {
-    	
+
     }
-    
+
 }
 
 
