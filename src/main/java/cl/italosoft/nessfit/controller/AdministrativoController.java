@@ -36,6 +36,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static cl.italosoft.nessfit.util.Util.capitelizeEachWord;
+
 /***
  * Controller for Administrativo role pages
  */
@@ -83,9 +85,9 @@ public class AdministrativoController
             if(user != null)
             {
                 model.addAttribute("RUT",rut);
-                model.addAttribute("name",user.getName());
-                model.addAttribute("firstLastName",user.getFirstLastName());
-                model.addAttribute("secondLastName",user.getSecondLastName());
+                model.addAttribute("name",capitelizeEachWord(user.getName()));
+                model.addAttribute("firstLastName",capitelizeEachWord(user.getFirstLastName()));
+                model.addAttribute("secondLastName",capitelizeEachWord(user.getSecondLastName()));
                 model.addAttribute("isEnabled",user.isEnabled() ? "Habilitado" : "Deshabilitado");
                 model.addAttribute("actionName",user.isEnabled() ? "Deshabilitar" : "Habilitar");
             }
@@ -165,12 +167,15 @@ public class AdministrativoController
     	Role role = new Role(3);
     	newUser.setRole(role);
     	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-      String newPasswordHash = passwordEncoder.encode(newUser.getRut());
-      newUser.setPassword(newPasswordHash);
-      userService.saveAndFlush(newUser);
+        String newPasswordHash = passwordEncoder.encode(newUser.getRut());
+        newUser.setPassword(newPasswordHash);
+        newUser.setName(newUser.getName().strip().toLowerCase());
+        newUser.setFirstLastName(newUser.getFirstLastName().strip().toLowerCase());
+        newUser.setSecondLastName(newUser.getSecondLastName().strip().toLowerCase());
+        userService.saveAndFlush(newUser);
 
-      attr.addFlashAttribute("successMsg","El cliente se añadió con éxito. ");
-      return "redirect:/administrativo/add-client";
+        attr.addFlashAttribute("successMsg","El cliente se añadió con éxito. ");
+        return "redirect:/administrativo/add-client";
     }
 
     /**
@@ -218,6 +223,8 @@ public class AdministrativoController
             return "administrativo/add-deportive-center";
     	}
 
+        newDeportiveCenter.setName(newDeportiveCenter.getName().toLowerCase().strip());
+        newDeportiveCenter.setAddress(newDeportiveCenter.getAddress().toLowerCase().strip());
         deportiveCenterService.saveAndFlush(newDeportiveCenter);
     	attr.addFlashAttribute("successMsg", "El recinto se añadió con éxito.");
     	return "redirect:/administrativo/add-deportive-center";
@@ -252,6 +259,8 @@ public class AdministrativoController
         {
             return "redirect:/administrativo/manage-deportive-centers";
         }
+        deportiveCenter.setName(deportiveCenter.getName().toUpperCase());
+        deportiveCenter.setAddress(deportiveCenter.getAddress().toUpperCase());
         model.addAttribute("deportiveCenter",deportiveCenter);
         return "administrativo/edit-deportive-center";
     }
@@ -280,7 +289,7 @@ public class AdministrativoController
             attr.addFlashAttribute("errorMsg","Ha habido un problema. Intente nuevamente.");
             return "redirect:/administrativo/manage-deportive-centers";
         }
-        completeCenter.setAddress(deportiveCenter.getAddress().toUpperCase().strip());
+        completeCenter.setAddress(deportiveCenter.getAddress().toLowerCase().strip());
         completeCenter.setType(deportiveCenter.getType());
         completeCenter.setIsEnabled(deportiveCenter.getIsEnabled());
         completeCenter.setCostPerDay(deportiveCenter.getCostPerDay());

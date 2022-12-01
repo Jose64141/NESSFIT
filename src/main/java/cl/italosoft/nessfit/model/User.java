@@ -28,8 +28,8 @@ public class User implements Serializable
 
     private String password;
     @NotNull(message = "Este campo es obligatorio.")
-    @Min(value = 100000000, message = "El teléfono móvil ingresado no es válido.")
-    @Max(value = 999999999, message = "El teléfono móvil ingresado no es válido.")
+    @Min(value = 100000000, message = "El telefono no es válido.")
+    @Max(value = 999999999, message = "El telefono no es válido.")
     @Column(name = "phone_number")
     private Integer phoneNumber;
     @NotBlank(message = "Este campo es obligatorio.")
