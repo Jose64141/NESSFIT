@@ -18,7 +18,7 @@
                 <h1>Bienvenido</h1>
                 <h2 th:text="${name}+' '+${firstLastName}+' '+${secondLastName}" ></h2>
             </div>
-            <div class="buttons" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">
+            <div class="buttons" sec:authorize="hasRole('administrador')">
                 <h3>¿Qué desea hacer?</h3>
                 <a th:href="@{/administrador/manage-administrative}">
                     <button>Editar Administrativos
@@ -37,7 +37,7 @@
                 </a>
             </div>
 
-            <div class="buttons administrativo-buttons"  sec:authorize="hasRole('ROLE_ADMINISTRATIVO')">
+            <div class="buttons administrativo-buttons"  sec:authorize="hasRole('administrativo')">
                 <h3>¿Qué desea hacer?</h3>
                 <a th:href="@{/administrativo/add-deportive-center}">
                     <button>Agregar Recinto
@@ -70,7 +70,7 @@
                 </a>
             </div>
 
-            <div class="buttons" sec:authorize="hasRole('ROLE_CLIENTE')">
+            <div class="buttons" sec:authorize="hasRole('cliente')">
                 <h3>¿Qué desea hacer?</h3>
                 <a class="button-container" th:href="@{/cliente/rent}">
                     <button>Arrendar
