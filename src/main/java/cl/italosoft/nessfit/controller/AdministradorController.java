@@ -96,7 +96,7 @@ public class AdministradorController
     @PostMapping("/administrador/manage-clients")
     public String manageUsers(@RequestParam String rut, RedirectAttributes attr)
     {
-        User user = this.userService.find(rut);
+        User user = this.userService.find(rut.toLowerCase());
         user.setEnabled(!user.isEnabled());
         this.userService.saveAndFlush(user);
         attr.addFlashAttribute("isEnabledChanged","Se ha cambiado el estado con éxito");
@@ -129,7 +129,7 @@ public class AdministradorController
     @PostMapping("/administrador/add-administrative")
     public String addAdministrative(Model model, @Valid User newUser, BindingResult result, RedirectAttributes attr)
     {
-        newUser.setRut(newUser.getRut().strip().toUpperCase());
+        newUser.setRut(newUser.getRut().strip().toLowerCase());
         newUser.setEmail(newUser.getEmail().strip().toLowerCase());
 
         if(this.userService.findByEmail(newUser.getEmail()) != null)
