@@ -108,7 +108,7 @@ public class ClienteController
     public String rent(HttpServletRequest request, Model model, @RequestBody MultiValueMap<String, String> formBody, RedirectAttributes attr)
     {
         User user = this.userService.find(request.getRemoteUser());
-        DeportiveCenter deportiveCenter = this.deportiveCenterService.find(formBody.getFirst("center"));
+        DeportiveCenter deportiveCenter = this.deportiveCenterService.find(formBody.getFirst("center").toLowerCase());
 
         if(user == null || deportiveCenter == null)
         {
