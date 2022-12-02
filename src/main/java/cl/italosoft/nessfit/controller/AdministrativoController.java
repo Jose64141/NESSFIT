@@ -147,7 +147,7 @@ public class AdministrativoController
     @PostMapping("/administrativo/add-client")
     public String addClient(Model model, @Valid User newUser, BindingResult result, RedirectAttributes attr)
     {
-        newUser.setRut(newUser.getRut().strip().toUpperCase());
+        newUser.setRut(newUser.getRut().strip().toLowerCase());
         newUser.setEmail(newUser.getEmail().strip().toLowerCase());
 
         if(this.userService.findByEmail(newUser.getEmail()) != null)
