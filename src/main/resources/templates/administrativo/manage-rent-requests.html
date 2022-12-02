@@ -55,8 +55,8 @@
                     <div class="grid-item" th:text="${request.user.rut}"></div>
                     <div class="grid-item">
                         <div th:id="${'mini-grid' + request.id}" class="mini-grid link-dark">
-                            <div class="grid-item" th:text="${#strings.capitalizeWords(request.user.name)}" style="display : inline-block"></div>
-                            <div class="grid-item" th:text="${#strings.capitalizeWords(' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}" style="display : inline-block"></div>
+                            <div class="grid-item" th:text="${#strings.capitalizeWords(request.user.name)}"></div>
+                            <div class="grid-item" th:text="${#strings.capitalizeWords(' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}"></div>
                         </div>
                     </div>
                     <div class="grid-item" th:text="${#strings.capitalizeWords(request.status)}"></div>
