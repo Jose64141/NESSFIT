@@ -1,9 +1,9 @@
-function nameFocus()
+function nameFocus(id)
 {
-    document.getElementById("name-grid").style.backgroundColor = "#c9c9c9";
+    document.getElementById('mini-grid'+ id).style.backgroundColor = "#c9c9c9";
 }
 
-function nameUnFocus()
+function nameUnFocus(id)
 {
-    document.getElementById("name-grid").style.backgroundColor = "#fff";
+    document.getElementById('mini-grid'+ id).style.backgroundColor = "#fff";
 }

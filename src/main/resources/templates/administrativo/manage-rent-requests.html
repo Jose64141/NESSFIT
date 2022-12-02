@@ -47,14 +47,14 @@
             </div>
             <th:block th:each="request : ${requests.content}">
 
-                <a class="user-entry link-dark" onmouseover="nameFocus()" onmouseleave="nameUnFocus()" th:href="@{/administrativo/review-rent-request(id=${request.id})}">
+                <a class="user-entry link-dark"  th:id="${request.id}" onmouseover="nameFocus(this.id)" onmouseleave="nameUnFocus(this.id)" th:href="@{/administrativo/review-rent-request(id=${request.id})}">
                     <div class="grid-item" th:text="${request.requestDate}"></div>
                     <div class="grid-item" th:text="${request.id}"></div>
                     <div class="grid-item" th:text="${#strings.capitalizeWords(request.deportiveCenter.name)}"></div>
                     <div class="grid-item" th:text="${'$' + request.totalPrice}"></div>
                     <div class="grid-item" th:text="${request.user.rut}"></div>
                     <div class="grid-item">
-                        <div id="name-grid" class="mini-grid link-dark">
+                        <div th:id="${'mini-grid' + request.id}" class="mini-grid link-dark">
                             <div class="grid-item" th:text="${#strings.capitalizeWords(request.user.name)}" style="display : inline-block"></div>
                             <div class="grid-item" th:text="${#strings.capitalizeWords(' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}" style="display : inline-block"></div>
                         </div>
