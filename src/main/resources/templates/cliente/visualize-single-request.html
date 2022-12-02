@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/common :: head('Visualizar Solicitud de Arriendo', ~{::link})">
+    <link rel="stylesheet" th:href="@{/css/cliente/visualize-single-request.css}">
+    <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
+    <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
+    <link rel="stylesheet" th:href="@{/css/confirmation-modal.css}">
+    <link rel="stylesheet" th:href="@{/css/form-icons.css}">
+</head>
+
+<body>
+<nav th:replace="~{fragments/navigation::navbar}"></nav>
+
+<div th:replace="~{fragments/navigation::shortcuts}"></div>
+
+<h1>Visualizar Solicitud de Arriendo</h1>
+<section class="form-section">
+    <div class="form-container">
+        <div class="content m-5">
+            <div class="user-info">
+                <div class="input-item">
+                    <img class = "attribute-logo" th:src="@{/images/request-date-icon.png}">
+                    <label>Fecha de solicitud</label>
+                    <label class="input-box">
+                        <input class="information-form-control readonly-input-field" th:value="${#dates.format(request.requestDate, 'dd/MM/yyyy')}" readonly>
+                    </label>
+                </div>
+                <div class="input-item">
+                    <img class = "attribute-logo" th:src="@{/images/request-id-icon.png}">
+                    <label>ID</label>
+                    <label class="input-box">
+                        <input class="information-form-control readonly-input-field" th:value="${'#' + request.id}" readonly>
+                    </label>
+                </div>
+                <div class="input-item">
+                    <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
+                    <label>Nombre Recinto</label>
+                    <label class="input-box">
+                        <input class="information-form-control readonly-input-field"  th:value="${#strings.capitalizeWords(request.deportiveCenter.name)}" readonly>
+                    </label>
+                </div>
+                <div class="input-item">
+                    <img class = "attribute-logo" th:src="@{/images/cost-icon.png}">
+                    <label>Costo Total</label>
+                    <label class="input-box">
+                        <input class="information-form-control readonly-input-field"  th:value="${'$' + request.totalPrice}" readonly>
+                    </label>
+                </div>
+                <div class="input-item">
+                    <img class = "attribute-logo" th:src="@{/images/rut-logo.png}">
+                    <label>RUT Cliente</label>
+                    <label class="input-box">
+                        <input class="information-form-control readonly-input-field"  th:value="${request.user.rut}" readonly>
+                    </label>
+                </div>
+                <div class="input-item">
+                    <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
+                    <label>Nombre Cliente</label>
+                    <label class="input-box">
+                        <input class="information-form-control readonly-input-field"  th:value="${#strings.capitalizeWords(request.user.name
+                        + ' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}" readonly>
+                    </label>
+                </div>
+
+                <img class = "attribute-logo" th:src="@{/images/dates-icon.png}">
+                <label>Fechas de arriendo</label>
+                <a class="dates">
+                    <th:block th:each="date : ${request.dates}">
+                        <div class="center-name" th:text="${#dates.format(date, 'dd/MM/yyyy')}"></div>
+                    </th:block>
+                </a>
+<!--                <form th:action="@{/cliente/visualize-single-request}" th:object="${request}" method="post">-->
+
+<!--                    <input class="information-form-control readonly-input-field" type="hidden" th:field="*{id}" readonly>-->
+<!--                    <input class="dates information-form-control readonly-input-field" type="hidden" th:field="*{status}" readonly>-->
+<!--                    <div th:replace="fragments/common :: modalButton(null, ~{::p})">-->
+<!--                        <p>¿Está seguro de realizar los cambios?</p>-->
+<!--                    </div>-->
+<!--                </form>-->
+            </div>
+        </div>
+    </div>
+    <div>
+<!--        <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"-->
+<!--                data-bs-target="#dataConfirmModal"  onclick="approveButton()">-->
+<!--            Aprobar-->
+<!--        </button>-->
+<!--        <button type="button" class="btn btn-secondary btn-send" data-bs-toggle="modal"-->
+<!--                data-bs-target="#dataConfirmModal" onclick="rejectButton()">-->
+<!--            Rechazar-->
+<!--        </button>-->
+        <a th:href="@{/cliente/visualize-rent-requests}">
+            <button type="button" class="btn btn-tertiary btn-send">
+                Volver
+            </button>
+        </a>
+    </div>
+</section>
+
+<div th:replace="fragments/common :: common-body"></div>
+<script th:src="@{/js/visualize-single-request.js}"></script>
+</body>
+</html>

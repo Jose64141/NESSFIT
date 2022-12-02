@@ -164,6 +164,8 @@ public class ClienteController
 
     }
 
+    // Necesito un GetMapping para /cliente/visualize-single-request
+
 }
 
 

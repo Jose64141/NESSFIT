@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
-<head th:replace="fragments/common :: head('Visualizar solicitudes', ~{::link})">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/common :: head('Visualizar Solicitudes', ~{::link})">
+  <link rel="stylesheet" th:href="@{/css/cliente/visualize-rent-requests.css}">
   <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
   <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
-  <link rel="stylesheet" th:href="@{/css/confirmation-modal.css}">
-  <link rel="stylesheet" th:href="@{/css/cliente/visualize-rent-requests.css}">
+
 </head>
 <body>
 <nav th:replace="~{fragments/navigation::navbar}"></nav>
 <div th:replace="~{fragments/navigation::shortcuts}"></div>
-<h1>Visualizar solicitudes</h1>
 
+<h1>Visualizar Solicitudes de Arriendo</h1>
 
 <section class="flex-container">
-  <!-- CENTER FINDER -->
-  <form th:action="@{/cliente/visualize-rent-requests}" method="get" class="center-finder">
-    <label>Ingrese nombre para búsqueda</label>
-    <input type="text" id="name" name="name">
+  <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
+    <label th:text="${successMsg}"></label>
+  </div>
+  <!-- DEPORTIVE CENTER FINDER -->
+  <form th:action="@{/cliente/visualize-rent-requests}" method="get" class="user-finder">
+    <label>Ingrese RUT para búsqueda</label>
+    <input type="text" id="rut" name="rut" placeholder="10123123K">
     <button type="submit">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
            class="bi bi-search" viewBox="0 0 16 16">
@@ -29,26 +33,33 @@
       <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
     </a>
   </form>
-  <!-- CENTERS TABLE -->
-  <h2 th:if="${requests.totalPages == 0}">No hay solicitudes por mostrar.</h2>
-  <div th:if="${requests.totalPages > 0}" class="centers-container">
-    <div class="center-entry center-entry-header">
-      <div class="center-header">Estado</div>
-      <!--          <div class="center-header">ID</div>-->
-      <!--          <div class="center-header">Nombre Centro Deportivo</div>-->
-      <!--          <div class="center-header">Costo Total</div>-->
-      <!--          <div class="center-header">RUT Cliente</div>-->
-      <!--          <div class="center-header">Nombre Cliente</div>-->
-      <!--          <div class="center-header">Estado</div>-->
+  <!-- REQUESTS TABLE -->
+  <h2 th:if="${requests.totalPages == 0}">No hay solicitudes que mostrar.</h2>
+  <div th:if="${requests.totalPages > 0}" class="users-container">
+    <div class="user-entry user-entry-header">
+      <div class="page-header grid-item"><b>Fecha</b></div>
+      <div class="page-header grid-item"><b>ID</b></div>
+      <div class="page-header grid-item"><b>Nombre Centro Deportivo</b></div>
+      <div class="page-header grid-item"><b>Costo Total</b></div>
+      <div class="page-header grid-item"><b>RUT Cliente</b></div>
+      <div class="page-header grid-item"><b>Nombre Cliente</b></div>
+      <div class="page-header grid-item"><b>Estado</b></div>
     </div>
     <th:block th:each="request : ${requests.content}">
-      <a class="center-entry link-dark" th:href="@{/cliente/visualize-rent-requests(id=${request.id})}">
-        <div class="center-name" th:text="${request.status}"></div>
-        <!--            <div class="center-type" th:text="${requests.deportiveCenter.name}"></div>-->
-        <!--            <div class="center-type" th:text="${requests.totalPrice}"></div>-->
-        <!--            <div class="center-type" th:text="${requests.user.rut}"></div>-->
-        <!--            <div class="center-type" th:text="${requests.user.name}"></div>-->
-        <!--            <div class="center-type" th:text="${requests.status}"></div>-->
+
+      <a class="user-entry link-dark"  th:id="${request.id}" onmouseover="nameFocus(this.id)" onmouseleave="nameUnFocus(this.id)" th:href="@{/cliente/visualize-single-request(id=${request.id})}">
+        <div class="grid-item" th:text="${request.requestDate}"></div>
+        <div class="grid-item" th:text="${request.id}"></div>
+        <div class="grid-item" th:text="${#strings.capitalizeWords(request.deportiveCenter.name)}"></div>
+        <div class="grid-item" th:text="${'$' + request.totalPrice}"></div>
+        <div class="grid-item" th:text="${request.user.rut}"></div>
+        <div class="grid-item">
+          <div th:id="${'mini-grid' + request.id}" class="mini-grid link-dark">
+            <div class="grid-item" th:text="${#strings.capitalizeWords(request.user.name)}"></div>
+            <div class="grid-item" th:text="${#strings.capitalizeWords(' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}"></div>
+          </div>
+        </div>
+        <div class="grid-item" th:text="${#strings.capitalizeWords(request.status)}"></div>
       </a>
     </th:block>
   </div>
@@ -78,5 +89,6 @@
 
 
 <div th:replace="fragments/common :: common-body"></div>
+<script th:src="@{/js/visualize-rent-requests.js}"></script>
 </body>
 </html>
