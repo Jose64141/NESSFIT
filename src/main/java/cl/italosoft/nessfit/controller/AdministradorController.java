@@ -22,6 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import static cl.italosoft.nessfit.util.Util.capitelizeEachWord;
+
 /***
  * Controller for Administrador role pages
  */
@@ -62,9 +64,9 @@ public class AdministradorController
                 if(user.getRole().getId() != 1)
                 {
                     model.addAttribute("RUT",rut);
-                    model.addAttribute("name",user.getName());
-                    model.addAttribute("firstLastName",user.getFirstLastName());
-                    model.addAttribute("secondLastName",user.getSecondLastName());
+                    model.addAttribute("name",capitelizeEachWord(user.getName()));
+                    model.addAttribute("firstLastName",capitelizeEachWord(user.getFirstLastName()));
+                    model.addAttribute("secondLastName",capitelizeEachWord(user.getSecondLastName()));
                     model.addAttribute("isEnabled",user.isEnabled() ? "Habilitado" : "Deshabilitado");
                     model.addAttribute("actionName",user.isEnabled() ? "Deshabilitar" : "Habilitar");
                 }
@@ -152,6 +154,9 @@ public class AdministradorController
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String newPasswordHash = passwordEncoder.encode(newUser.getRut());
         newUser.setPassword(newPasswordHash);
+        newUser.setName(newUser.getName().strip().toLowerCase());
+        newUser.setFirstLastName(newUser.getFirstLastName().strip().toLowerCase());
+        newUser.setSecondLastName(newUser.getSecondLastName().strip().toLowerCase());
         userService.saveAndFlush(newUser);
 
         attr.addFlashAttribute("successMsg","El administrativo se añadió con éxito. ");
@@ -186,6 +191,9 @@ public class AdministradorController
         {
             return "redirect:/administrador/manage-administrative";
         }
+        user.setName(capitelizeEachWord(user.getName()));
+        user.setFirstLastName(capitelizeEachWord(user.getFirstLastName()));
+        user.setSecondLastName(capitelizeEachWord(user.getSecondLastName()));
         model.addAttribute("user",user);
         return "administrador/edit-administrative";
     }
@@ -214,9 +222,9 @@ public class AdministradorController
             return "administrador/edit-administrative";
         }
 
-        completeUser.setName(user.getName().strip());
-        completeUser.setFirstLastName(user.getFirstLastName().strip());
-        completeUser.setSecondLastName(user.getSecondLastName().strip());
+        completeUser.setName(user.getName().strip().toLowerCase());
+        completeUser.setFirstLastName(user.getFirstLastName().strip().toLowerCase());
+        completeUser.setSecondLastName(user.getSecondLastName().strip().toLowerCase());
         completeUser.setPhoneNumber(user.getPhoneNumber());
         completeUser.setEmail(user.getEmail().strip().toLowerCase());
         userService.saveAndFlush(completeUser);

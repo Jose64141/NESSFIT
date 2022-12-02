@@ -40,8 +40,8 @@
     </div>
     <th:block th:each="center : ${centers.content}">
       <a class="center-entry link-dark" th:href="@{/administrativo/edit-deportive-center(name=${center.name})}">
-        <div class="center-name" th:text="${center.name}"></div>
-        <div class="center-type" th:text="${center.type.name}"></div>
+        <div class="center-name" th:text="${#strings.toUpperCase(center.name)}"></div>
+        <div class="center-type" th:text="${#strings.capitalizeWords(center.type.name)}"></div>
       </a>
     </th:block>
   </div>

@@ -82,7 +82,8 @@
                                 <img class = "attribute-logo" th:src="@{/images/phone-icon.png}">
                                 <label>Número de teléfono</label>
                                 <label class="input-box">
-                                    <input class="information-form-control" type="tel" th:field="*{phoneNumber}" th:value="${user.phoneNumber}" th:errorclass="border-danger" >
+                                    <input class="information-form-control" type="tel" onkeydown="return onlyNumberInput(event)"
+                                           th:field="*{phoneNumber}" th:value="${user.phoneNumber}" th:errorclass="border-danger" >
                                     <div th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></div>
                                 </label>
                             </div>
@@ -94,7 +95,6 @@
                                     <div th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="*{email}"></div>
                                 </label>
                             </div>
-
 
                             <div th:replace="fragments/common :: modalButton('dataConfirmModal', ~{::p#infoMsg})">
                                 <p id="infoMsg">¿Está seguro de realizar los cambios?</p>
@@ -126,8 +126,6 @@
                             <input type="password" class="form-control" id="confirmNewPassword"
                                    name="confirmNewPassword" required>
                         </div>
-
-
 
                         <div th:replace="fragments/common :: modalButton('confirmModal', ~{::p#passwdMsg})">
                             <p id="passwdMsg">¿Está seguro de realizar los cambios?</p>
@@ -168,7 +166,7 @@
         </section>
 
 
-
+        <script th:src="@{/js/utils.js}"></script>
         <script th:src="@{/js/account-settings.js}"></script>
         <div th:replace="fragments/common :: common-body"></div>
     </body>

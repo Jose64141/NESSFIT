@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import static cl.italosoft.nessfit.util.Util.capitelizeEachWord;
+
 /**
  * Controller for all users pages
  */
@@ -68,6 +70,9 @@ public class UserController
     public String config(HttpServletRequest request, Model model)
     {
         User user = this.userService.find(request.getRemoteUser());
+        user.setName(capitelizeEachWord(user.getName()));
+        user.setFirstLastName(capitelizeEachWord(user.getFirstLastName()));
+        user.setSecondLastName(capitelizeEachWord(user.getSecondLastName()));
         model.addAttribute("user",user);
         return "account-settings";
     }
@@ -143,9 +148,9 @@ public class UserController
                     return "account-settings";
                 }
 
-                user.setName(newInfo.getName().strip());
-                user.setFirstLastName(newInfo.getFirstLastName().strip());
-                user.setSecondLastName(newInfo.getSecondLastName().strip());
+                user.setName(newInfo.getName().strip().toLowerCase());
+                user.setFirstLastName(newInfo.getFirstLastName().strip().toLowerCase());
+                user.setSecondLastName(newInfo.getSecondLastName().strip().toLowerCase());
                 user.setPhoneNumber(newInfo.getPhoneNumber());
                 user.setEmail(newInfo.getEmail().strip().toLowerCase());
                 userService.saveAndFlush(user);
