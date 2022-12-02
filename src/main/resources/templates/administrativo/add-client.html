@@ -60,7 +60,8 @@
                             <img class = "attribute-logo" th:src="@{/images/phone-icon.png}">
                             <label>Número de teléfono</label>
                             <label class="input-box">
-                                <input class="information-form-control" type="tel" pattern="\d*" th:field="*{phoneNumber}" placeholder="912345678" th:errorclass="border-danger">
+                                <input class="information-form-control" type="tel" onkeydown="return onlyNumberInput(event)"
+                                       th:field="*{phoneNumber}" placeholder="912345678" th:errorclass="border-danger">
                                 <div th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></div>
                             </label>
                         </div>
@@ -68,7 +69,7 @@
                             <img class = "attribute-logo" th:src="@{/images/email-logo.png}">
                             <label>Correo electrónico</label>
                             <label class="input-box">
-                                <input class="information-form-control" type="email" th:field="*{email}" th:errorclass="border-danger">
+                                <input class="information-form-control"th:field="*{email}" th:errorclass="border-danger">
                                 <div th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="*{email}"></div>
                             </label>
                         </div>
@@ -94,5 +95,6 @@
         </section>
 
         <div th:replace="fragments/common :: common-body"></div>
+        <script th:src="@{/js/utils.js}"></script>
     </body>
 </html>

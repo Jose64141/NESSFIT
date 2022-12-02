@@ -42,7 +42,9 @@
 
                     <a class="user-entry link-dark" th:href="@{/administrador/edit-administrative(rut=${user.rut})}">
                         <div class="user-rut" th:text="${user.rut}"></div>
-                        <div class="user-name" th:text="${user.name + ' ' + user.firstLastName + ' ' + user.secondLastName }"></div>
+                        <div class="user-name" th:text="${ #strings.capitalizeWords(user.name)  + ' ' +
+                        #strings.capitalizeWords(user.firstLastName)  + ' ' +
+                        #strings.capitalizeWords(user.secondLastName) }"></div>
                     </a>
                 </th:block>
             </div>

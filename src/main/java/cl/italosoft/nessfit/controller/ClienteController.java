@@ -64,6 +64,8 @@ public class ClienteController
                 model.addAttribute("selection", null);
                 return "cliente/rent";
             }
+            selection.setName(selection.getName().toUpperCase());
+            selection.setAddress(selection.getAddress().toUpperCase());
             List<Date> takenDates = rentRequestService.listDeportiveCenterDates(id);
             List<java.util.Date> dates = new ArrayList<>(8);
             Calendar cal = Calendar.getInstance();
@@ -142,7 +144,7 @@ public class ClienteController
         cal.set(Calendar.MILLISECOND, 0);
         Date date = new Date(cal.getTimeInMillis());
         // save actual date
-        RentRequest rentRequest = new RentRequest(user, deportiveCenter, "PENDIENTE", total, dates, date);
+        RentRequest rentRequest = new RentRequest(user, deportiveCenter, "pendiente", total, dates, date);
         this.rentRequestService.saveAndFlush(rentRequest);
 
         attr.addFlashAttribute("successMsg","La solicitud se ha procesado con éxito.");
