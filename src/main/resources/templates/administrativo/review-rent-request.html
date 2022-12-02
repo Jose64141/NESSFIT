@@ -32,21 +32,21 @@
                     <img class = "attribute-logo" th:src="@{/images/request-id-icon.png}">
                     <label>ID</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field" th:value="${request.id}" readonly>
+                        <input class="information-form-control readonly-input-field" th:value="${'#' + request.id}" readonly>
                     </label>
                 </div>
                 <div class="input-item">
                     <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
                     <label>Nombre Recinto</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field"  th:value="${request.deportiveCenter.name}" readonly>
+                        <input class="information-form-control readonly-input-field"  th:value="${#strings.capitalizeWords(request.deportiveCenter.name)}" readonly>
                     </label>
                 </div>
                 <div class="input-item">
                     <img class = "attribute-logo" th:src="@{/images/cost-icon.png}">
                     <label>Costo Total</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field"  th:value="${request.totalPrice}" readonly>
+                        <input class="information-form-control readonly-input-field"  th:value="${'$' + request.totalPrice}" readonly>
                     </label>
                 </div>
                 <div class="input-item">
@@ -60,21 +60,23 @@
                     <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
                     <label>Nombre Cliente</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field"  th:value="${request.user.name}" readonly>
+                        <input class="information-form-control readonly-input-field"  th:value="${#strings.capitalizeWords(request.user.name
+                        + ' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}" readonly>
                     </label>
                 </div>
-                <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/dates-icon.png}">
-                    <label>Fechas de arriendo</label>
-                    <label class="input-box">
-                        <input class="information-form-control readonly-input-field"  th:value="${#dates.format(request.dates.get(0), 'dd/MM/yyyy')}" readonly>
-                    </label>
-                </div>
+
+                <img class = "attribute-logo" th:src="@{/images/dates-icon.png}">
+                <label>Fechas de arriendo</label>
+                <a class="dates">
+                <th:block th:each="date : ${request.dates}">
+                        <div class="center-name" th:text="${#dates.format(date, 'dd/MM/yyyy')}"></div>
+                </th:block>
+                </a>
 
                 <form th:action="@{/administrativo/review-rent-request}" th:object="${request}" method="post">
 
                     <input class="information-form-control readonly-input-field" type="hidden" th:field="*{id}" readonly>
-                    <input class="information-form-control readonly-input-field" type="hidden" th:field="*{status}" readonly>
+                    <input class="dates information-form-control readonly-input-field" type="hidden" th:field="*{status}" readonly>
                     <div th:replace="fragments/common :: modalButton(null, ~{::p})">
                         <p>¿Está seguro de realizar los cambios?</p>
                     </div>

@@ -47,14 +47,19 @@
             </div>
             <th:block th:each="request : ${requests.content}">
 
-                <a class="user-entry link-dark" th:href="@{/administrativo/review-rent-request(id=${request.id})}">
+                <a class="user-entry link-dark" onmouseover="nameFocus()" onmouseleave="nameUnFocus()" th:href="@{/administrativo/review-rent-request(id=${request.id})}">
                     <div class="grid-item" th:text="${request.requestDate}"></div>
                     <div class="grid-item" th:text="${request.id}"></div>
-                    <div class="grid-item" th:text="${request.deportiveCenter.name}"></div>
-                    <div class="grid-item" th:text="${request.totalPrice}"></div>
+                    <div class="grid-item" th:text="${#strings.capitalizeWords(request.deportiveCenter.name)}"></div>
+                    <div class="grid-item" th:text="${'$' + request.totalPrice}"></div>
                     <div class="grid-item" th:text="${request.user.rut}"></div>
-                    <div class="grid-item" th:text="${request.user.name}"></div>
-                    <div class="grid-item" th:text="${request.status}"></div>
+                    <div class="grid-item">
+                        <div id="name-grid" class="mini-grid link-dark">
+                            <div class="grid-item" th:text="${#strings.capitalizeWords(request.user.name)}" style="display : inline-block"></div>
+                            <div class="grid-item" th:text="${#strings.capitalizeWords(' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}" style="display : inline-block"></div>
+                        </div>
+                    </div>
+                    <div class="grid-item" th:text="${#strings.capitalizeWords(request.status)}"></div>
                 </a>
             </th:block>
         </div>
@@ -84,5 +89,6 @@
 
 
     <div th:replace="fragments/common :: common-body"></div>
+    <script th:src="@{/js/manage-rent-request.js}"></script>
 </body>
 </html>

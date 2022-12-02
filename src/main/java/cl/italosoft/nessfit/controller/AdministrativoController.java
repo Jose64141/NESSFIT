@@ -302,7 +302,7 @@ public class AdministrativoController
     @GetMapping("administrativo/manage-rent-requests")
     public String manageRentRequests(Model model, @PageableDefault(value = 5) Pageable page)
     {
-        model.addAttribute("requests",rentRequestService.findByStatus("PENDIENTE",page));
+        model.addAttribute("requests",rentRequestService.findByStatus("pendiente",page));
     	return "administrativo/manage-rent-requests";
     }
 
