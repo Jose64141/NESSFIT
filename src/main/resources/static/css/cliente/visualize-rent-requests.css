@@ -215,3 +215,24 @@ h1
     --bs-alert-margin-top: 5px;
 
 }
+
+
+.pdf-icon
+{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.pdf-icon-container
+{
+    position: fixed;
+    height: 70px;
+    width: 70px;
+    margin: 110px 25px 0 0;
+    padding: 0;
+    right: 0;
+    top: 0;
+}

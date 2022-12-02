@@ -159,7 +159,7 @@ public class ClienteController
     }
 
     @GetMapping("/cliente/visualize-rent-requests/pdf")
-    public void exporttoPDF(HttpServletResponse response) throws DocumentException, IOException
+    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException
     {
 
     }

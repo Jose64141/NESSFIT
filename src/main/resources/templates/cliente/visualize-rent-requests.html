@@ -15,6 +15,12 @@
 
 <h1>Visualizar Solicitudes de Arriendo</h1>
 
+<div class="pdf-icon-container">
+  <a th:href="@{/cliente/visualize-rent-requests/pdf}">
+    <img class = "pdf-icon" th:src="@{/images/pdf-icon.png}" alt = "PDF Icon">
+  </a>
+</div>
+
 <section class="flex-container">
   <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
     <label th:text="${successMsg}"></label>
