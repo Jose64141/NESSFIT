@@ -8,7 +8,8 @@
         <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
         <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
         <link rel="stylesheet" th:href="@{/css/form-icons.css}">
-        <link rel="stylesheet" th:href="@{/css/background-font-style.css}">      
+        <link rel="stylesheet" th:href="@{/css/background-font-style.css}">   
+           
     </head>
     
     <body>
@@ -29,12 +30,73 @@
 	       	<script src="https://www.amcharts.com/lib/3/serial.js"></script>
 	      	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 	        
-	       
-	       
-	       	<div id="chartdiv"></div>
-	       	
-	        <script th:src="@{/js/statistics.js}"></script>
-
+		
+			<script>
+				console.log([[${CantidadPiscina}]]);
+				am5.ready(function() {
+				
+				// Create root element
+				// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+				var root = am5.Root.new("chartdiv");
+				
+				// Set themes
+				// https://www.amcharts.com/docs/v5/concepts/themes/
+				root.setThemes([
+				  am5themes_Animated.new(root)
+				]);
+				
+				// Create chart
+				// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+				var chart = root.container.children.push(
+				  am5percent.PieChart.new(root, {
+				    endAngle: 270
+				  })
+				);
+				
+				// Create series
+				// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+				var series = chart.series.push(
+				  am5percent.PieSeries.new(root, {
+				    valueField: "value",
+				    categoryField: "category",
+				    endAngle: 270
+				  })
+				);
+				
+				series.states.create("hidden", {
+				  endAngle: -90
+				});
+				
+				// Set data
+				// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+				series.data.setAll([{
+				  category: "Cancha",
+				  value: [[${CantidadCancha}]]
+				}, {
+				  category: "Gimnasio",
+				  value: [[${CantidadGimnasio}]]
+				}, {
+				  category: "Piscina",
+				  value: [[${CantidadPiscina}]]
+				}, {
+				  category: "Quincho",
+				  value: [[${CantidadQuincho}]]
+				}, {
+				  category: "Estadio",
+				  value: [[${CantidadEstadio}]]
+				}]);
+				
+				series.appear(1000, 100);
+				
+				}); // end am5.ready()
+			</script>
+			<div id="chartdiv"></div>
+			<h2 th:if="${solicitudes.size() == 0}">No hay solicitudes que mostrar.</h2>
+    	<div th:if="${solicitudes.size() > 0}" class="centers-container">
+    		<div class="center-entry center-entry-header">
+      			<div class="center-name-header">Centro</div>
+     	 		<div class="center-type-header">Tipo</div>
     	</div> 
+    	</div>
     </body>
 </html>

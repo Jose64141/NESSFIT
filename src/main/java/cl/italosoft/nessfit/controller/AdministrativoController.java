@@ -56,6 +56,7 @@ public class AdministrativoController
     @Autowired
     private TypeService typeService;
 
+    @Autowired
     private RentRequestService rentRequestService;
     
     @Autowired
@@ -306,8 +307,8 @@ public class AdministrativoController
     public String viewStatistics(Model model, @RequestParam(name = "inicio", required = false, defaultValue = "1900-01-01") String beginning, @RequestParam(name = "fin", required = false, defaultValue = "2999-01-01") String end)throws ParseException {
     	
     	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    	Date beginningdate = (Date) formatter.parse(beginning);
-    	Date enddate = (Date) formatter.parse(end);
+    	Date beginningdate = new Date((formatter.parse(beginning)).getTime());
+    	Date enddate = new Date((formatter.parse(end)).getTime());
     	int contCancha = 0;
     	int contGimnasio = 0;
     	int contPiscina = 0;
@@ -318,19 +319,19 @@ public class AdministrativoController
     	
     	for (RentRequest rentrequest : requests) {
     		switch ( rentrequest.getDeportiveCenter().getType().getName() ) {			
-    		case "Cancha": 
+    		case "cancha": 
     			contCancha++;
     			break;
-    		case "Gimnasio": 
+    		case "gimnasio": 
     			contCancha++;
     			break;
-    		case "Piscina": 
+    		case "piscina": 
     			contCancha++;
     			break;
-    		case "Quincho": 
+    		case "quincho": 
     			contCancha++;
     			break;
-    		case "Estadio": 
+    		case "estadio": 
     			contCancha++;
     			break;
     		default: 
@@ -347,8 +348,7 @@ public class AdministrativoController
     	
     	model.addAttribute("inicio", beginning);
     	model.addAttribute("fin", end);
-	
+    	
     	return "administrativo/statistics";
     }
-
 }

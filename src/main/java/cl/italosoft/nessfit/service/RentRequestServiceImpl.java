@@ -92,6 +92,6 @@ public class RentRequestServiceImpl implements RentRequestService
 	public List<RentRequest> findAll() { return this.rentRequestRepository.findAll();}
 		
 	@Override
-	public List<RentRequest> findByDateBetween(Date beginning, Date end){ return rentRequestRepository.findByDateBetween(beginning, end);}
+	public List<RentRequest> findByDateBetween(Date beginning, Date end){ return rentRequestRepository.findByRequestDateBetween(beginning, end);}
 	
 }
