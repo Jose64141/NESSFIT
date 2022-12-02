@@ -319,19 +319,19 @@ public class AdministrativoController
     	
     	for (RentRequest rentrequest : requests) {
     		switch ( rentrequest.getDeportiveCenter().getType().getName() ) {			
-    		case "cancha": 
+    		case "Cancha": 
     			contCancha++;
     			break;
-    		case "gimnasio": 
+    		case "Gimnasio": 
     			contCancha++;
     			break;
-    		case "piscina": 
+    		case "Piscina": 
     			contCancha++;
     			break;
-    		case "quincho": 
+    		case "Quincho": 
     			contCancha++;
     			break;
-    		case "estadio": 
+    		case "Estadio": 
     			contCancha++;
     			break;
     		default: 
