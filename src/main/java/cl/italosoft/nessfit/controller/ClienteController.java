@@ -9,6 +9,7 @@ import cl.italosoft.nessfit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -154,14 +155,25 @@ public class ClienteController
     @GetMapping("/cliente/visualize-rent-requests")
     public String visualizeRentRequests(Model model,@PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String deportivename)
     {
-        model.addAttribute("requests", rentRequestService.findByName(deportivename, page));
+        model.addAttribute("requests", rentRequestService.findRentRequestByUser(SecurityContextHolder.getContext().getAuthentication().getName(), page));
         return "cliente/visualize-rent-requests";
+    }
+    
+    @GetMapping("/cliente/visualize-single-request")
+    public String visualizeSingleRequest(Model model, @RequestParam int id)
+    {
+    	RentRequest request = rentRequestService.find(id);
+    	if(request == null)
+    		return "redirect:/cliente/visualize-rent-requests";
+    	model.addAttribute("request", request);
+        return "cliente/visualize-single-request";
     }
 
     @GetMapping("/cliente/visualize-rent-requests/pdf")
-    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException
+    public String exportToPDF(HttpServletResponse response, Model model, Pageable page) throws DocumentException, IOException
     {
-
+        model.addAttribute("requests", rentRequestService.listByUser(SecurityContextHolder.getContext().getAuthentication().getName()));
+        return "/cliente/visualize-rent-requests/pdf";
     }
 
     // Necesito un GetMapping para /cliente/visualize-single-request

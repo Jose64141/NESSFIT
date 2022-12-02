@@ -31,16 +31,12 @@ public interface RentRequestRepository extends JpaRepository<RentRequest, Intege
             "AND r.deportive_center_name = ?1", nativeQuery = true)
     List<Date> findDeportiveCenterDates(String deportiveCenterName);
     
-    
+    /*
     @Query(value = "SELECT r.request_date, r.id, r.deportive_center_name, r.total_price, r.user_rut, u.name, r.request_status" +
+    		"FROM rent_requests r INNER JOIN users u ON r.user_rut = u.rut INNER JOIN deportive_centers c ON r.deportive_center_name = c.name " +
     		"FROM RentRequest r INNER JOIN User u ON r.user_rut = u.rut INNER JOIN DeportiveCenter c ON r.deportive_center_name = c.name " +
     		"AND r.user_rut = ?1", nativeQuery = true)
-	Page<RentRequest> findByName(String name, Pageable page);
-
-   
-   
-    
-    
-    
+    		*/
+	Page<RentRequest> findRentRequestByUserRut(String userRut, Pageable page); 
     
 }

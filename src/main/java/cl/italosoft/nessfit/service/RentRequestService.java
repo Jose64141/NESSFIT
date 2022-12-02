@@ -70,7 +70,7 @@ RentRequestService
     public void flush();
 
 
-    public Page<RentRequest> findByName(String deportiveCenterName, Pageable page);
+    public Page<RentRequest> findRentRequestByUser(String userRut, Pageable page);
 
     public List<RentRequest> list();
 
