@@ -72,26 +72,10 @@
                         <div class="center-name" th:text="${#dates.format(date, 'dd/MM/yyyy')}"></div>
                     </th:block>
                 </a>
-<!--                <form th:action="@{/cliente/visualize-single-request}" th:object="${request}" method="post">-->
-
-<!--                    <input class="information-form-control readonly-input-field" type="hidden" th:field="*{id}" readonly>-->
-<!--                    <input class="dates information-form-control readonly-input-field" type="hidden" th:field="*{status}" readonly>-->
-<!--                    <div th:replace="fragments/common :: modalButton(null, ~{::p})">-->
-<!--                        <p>¿Está seguro de realizar los cambios?</p>-->
-<!--                    </div>-->
-<!--                </form>-->
             </div>
         </div>
     </div>
     <div>
-<!--        <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"-->
-<!--                data-bs-target="#dataConfirmModal"  onclick="approveButton()">-->
-<!--            Aprobar-->
-<!--        </button>-->
-<!--        <button type="button" class="btn btn-secondary btn-send" data-bs-toggle="modal"-->
-<!--                data-bs-target="#dataConfirmModal" onclick="rejectButton()">-->
-<!--            Rechazar-->
-<!--        </button>-->
         <a th:href="@{/cliente/visualize-rent-requests}">
             <button type="button" class="btn btn-tertiary btn-send">
                 Volver
@@ -101,6 +85,5 @@
 </section>
 
 <div th:replace="fragments/common :: common-body"></div>
-<script th:src="@{/js/visualize-single-request.js}"></script>
 </body>
 </html>
