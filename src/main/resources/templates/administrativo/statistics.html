@@ -19,7 +19,6 @@
 
 		<div th:replace="~{fragments/common::common-body}"></div>
         
-        <div class = "container">
 	        <div class = "labels">
 	        	<h1>Estadísticas</h1>
         	</div>
@@ -90,13 +89,55 @@
 				
 				}); // end am5.ready()
 			</script>
-			<div id="chartdiv"></div>
-			<h2 th:if="${solicitudes.size() == 0}">No hay solicitudes que mostrar.</h2>
-    	<div th:if="${solicitudes.size() > 0}" class="centers-container">
-    		<div class="center-entry center-entry-header">
-      			<div class="center-name-header">Centro</div>
-     	 		<div class="center-type-header">Tipo</div>
-    	</div> 
-    	</div>
+										<hr>
+										<div class="clearfix"></div>
+
+										<div class="row invoice-info">
+											<div id="chartdiv"></div>
+
+										</div>
+										<hr>
+										<div class="clearfix"></div>
+
+										<!-- Table row -->
+										<h4>Días solicitados</h4>
+										<div class="row">
+											<div class="  table">
+												<table class="table">
+													<thead>
+														<tr>
+															<th>Fecha</th>
+															<th>Id</th>
+															<th>Centro Deportivo</th>
+															<th>Costo total</th>
+															<th>Rut Cliente</th>
+															<th>Nombre Cliente</th>
+															<th>Estado</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:if="${solicitudes.isEmpty()}">
+															<th colspan="5" class="text-center">Sin solicitudes dentro del periodo seleccionado</th>
+														</tr>
+														<tr th:unless="${solicitudes.isEmpty()}"
+															th:each="solicitud : ${solicitudes}">
+															<th
+																th:text="${#dates.format(solicitud.requestDate, 'dd-MM-yyyy')}"
+																scope="row">1</th>
+															<td th:text="${solicitud.id}">Mark</td>
+															<td th:text="${solicitud.deportiveCenter.name}">Otto</td>
+															<td th:text="${solicitud.totalPrice}">Otto</td>
+															<td th:text="${solicitud.user.rut}">Otto</td>
+															<td
+																th:text="${solicitud.user.name + ' ' + solicitud.user.firstLastName}">Otto</td>
+															<td th:if="${solicitud.status == 'pendiente'}" class="text-warning">Pendiente</td>
+															<td>
+														</tr>
+													</tbody>
+												</table>
+
+											</div>
+										</div>
+
     </body>
 </html>
