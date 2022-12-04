@@ -37,9 +37,9 @@
           </div>
           <th:block th:each="center : ${centers}">
             <a class="center-entry link-dark" th:href="@{/cliente/rent(id=${center.name})}" th:classappend="${(param.id ne null) ? (param.id[0] == center.name) : false}? 'selection'">
-              <div class="center-name" th:text="${center.name}"></div>
+              <div class="center-name" th:text="${#strings.toUpperCase(center.name)}"></div>
               <div class="center-cost" th:text="${'$'+center.costPerDay}"></div>
-              <div class="center-type" th:text="${center.type.name}"></div>
+              <div class="center-type" th:text="${#strings.capitalizeWords(center.type.name)}"></div>
             </a>
           </th:block>
         </div>

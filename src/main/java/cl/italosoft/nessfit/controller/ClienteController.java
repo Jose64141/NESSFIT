@@ -156,7 +156,7 @@ public class ClienteController
     public String visualizeRentRequests(Model model,@PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String deportivename)
     {
         model.addAttribute("requests", rentRequestService.findRentRequestByUser(SecurityContextHolder.getContext().getAuthentication().getName(), page));
-        return "cliente/visualize-rent-requests";
+        return "/cliente/visualize-rent-requests";
     }
     
     @GetMapping("/cliente/visualize-single-request")
@@ -166,7 +166,7 @@ public class ClienteController
     	if(request == null)
     		return "redirect:/cliente/visualize-rent-requests";
     	model.addAttribute("request", request);
-        return "cliente/visualize-single-request";
+        return "/cliente/visualize-single-request";
     }
 
     @GetMapping("/cliente/visualize-rent-requests/pdf")
@@ -176,7 +176,6 @@ public class ClienteController
         return "/cliente/visualize-rent-requests/pdf";
     }
 
-    // Necesito un GetMapping para /cliente/visualize-single-request
 
 }
 

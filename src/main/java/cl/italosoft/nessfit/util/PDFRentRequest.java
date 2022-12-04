@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
 
@@ -20,13 +22,36 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import cl.italosoft.nessfit.model.RentRequest;
+import cl.italosoft.nessfit.service.RentRequestService;
 
-@Component("/cliente/visualize-rent-requests")
+
+
+@Component("/cliente/visualize-rent-requests/pdf")
 public class PDFRentRequest extends AbstractPdfView{
 
+    @Autowired
+    private RentRequestService rentRequestService;
+    
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		List<RentRequest> listrequestuser = (List<RentRequest>) model.get("requests");
+		PdfPTable tabla = new PdfPTable(6);
+		
+		listrequestuser.forEach(rentrequest ->{
+			tabla.addCell(String.valueOf(rentrequest.getId()));
+			tabla.addCell(rentrequest.getDeportiveCenter().getName());
+			tabla.addCell(String.valueOf(rentrequest.getTotalPrice()));
+			tabla.addCell(rentrequest.getUser().getRut());
+			tabla.addCell(rentrequest.getUser().getName());
+			tabla.addCell(rentrequest.getStatus());
+			
+		});
+		
+		document.add(tabla);
+	
+		/*
 		
 		@SuppressWarnings("unchecked")
 		List<RentRequest> Listrentrequest = (List<RentRequest>) model.get("rentRequest");
@@ -95,12 +120,11 @@ public class PDFRentRequest extends AbstractPdfView{
 			tablerentrequest.addCell(RentRequest.getStatus());
 
 		});
-	*/	
 		
-		document.add(tablerentrequesttitle);
+    	document.add(tablerentrequesttitle);
 		document.add(tablerentrequest);
+		*/
 	}
-
 }
 
     

@@ -26,7 +26,7 @@
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <th:block sec:authorize="hasRole('ADMINISTRADOR')">
+                            <th:block sec:authorize="hasRole('administrador')">
                                 <li class="nav-item">
                                     <a class="nav-link" th:href="@{/administrador/manage-administrative}">
                                         Editar Administrativos
@@ -44,7 +44,7 @@
                                 </li>
                             </th:block>
 
-                            <th:block sec:authorize="hasRole('ADMINISTRATIVO')">
+                            <th:block sec:authorize="hasRole('administrativo')">
                                 <li class="nav-item">
                                     <a class="nav-link" th:href="@{/administrativo/add-deportive-center}">Agregar Recinto</a>
                                 </li>
@@ -65,12 +65,12 @@
                                 </li>
                             </th:block>
 
-                            <th:block sec:authorize="hasRole('CLIENTE')">
+                            <th:block sec:authorize="hasRole('cliente')">
                                 <li class="nav-item">
                                     <a class="nav-link" th:href="@{/cliente/rent}">Arrendar</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Mis Solicitudes</a>
+                                    <a class="nav-link" th:href="@{cliente/visualize-rent-requests}">Mis Solicitudes</a>
                                 </li>
                             </th:block>
 
