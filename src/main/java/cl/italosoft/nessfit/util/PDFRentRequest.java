@@ -7,8 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
 
@@ -22,108 +20,93 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import cl.italosoft.nessfit.model.RentRequest;
-import cl.italosoft.nessfit.service.RentRequestService;
-
-
 
 @Component("/cliente/visualize-rent-requests/pdf")
 public class PDFRentRequest extends AbstractPdfView{
-
-    @Autowired
-    private RentRequestService rentRequestService;
-    
+  
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		List<RentRequest> listrequestuser = (List<RentRequest>) model.get("requests");
-		PdfPTable tabla = new PdfPTable(6);
-		
-		listrequestuser.forEach(rentrequest ->{
-			tabla.addCell(String.valueOf(rentrequest.getId()));
-			tabla.addCell(rentrequest.getDeportiveCenter().getName());
-			tabla.addCell(String.valueOf(rentrequest.getTotalPrice()));
-			tabla.addCell(rentrequest.getUser().getRut());
-			tabla.addCell(rentrequest.getUser().getName());
-			tabla.addCell(rentrequest.getStatus());
-			
-		});
-		
-		document.add(tabla);
-	
-		/*
-		
 		@SuppressWarnings("unchecked")
-		List<RentRequest> Listrentrequest = (List<RentRequest>) model.get("rentRequest");
-			
-		
+		List<RentRequest> listrequestuser = (List<RentRequest>) model.get("requests");
+
+		Font fonttitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16, Color.black);
+		Font fonttitlecolumns = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, Color.blue);
 		
 		document.setPageSize(PageSize.LETTER.rotate());
-		document.setMargins(-20, -20, 40, 20);
+		document.setMargins(-20, -20, 30, 20);
 		document.open();
+		PdfPCell cell = null;		
 		
 		PdfPTable tablerentrequesttitle = new PdfPTable(1);
-		PdfPCell celda = null;
 		
-		Font fonttitle = FontFactory.getFont("Arial",16, Color.black);
+		cell = new PdfPCell(new Phrase("Listado de solicitudes de ".concat(listrequestuser.get(0).getUser().getName() +" "+
+				listrequestuser.get(0).getUser().getFirstLastName() +" "+ listrequestuser.get(0).getUser().getSecondLastName() ), fonttitle));
+		cell.setBorder(0);
+		cell.setBackgroundColor(new Color(40,190,138));
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setVerticalAlignment(Element.ALIGN_CENTER);
+		cell.setPadding(30);
 		
-		celda = new PdfPCell(new Phrase("LISTADO DE SOLICITUDES CLIENTE", fonttitle));
-		celda.setBorder(0);
-		celda.setBackgroundColor(new Color(40,190,138));
-		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
-		celda.setVerticalAlignment(Element.ALIGN_CENTER);
-		celda.setPadding(30);
-		
-		tablerentrequesttitle.addCell(celda);
+		tablerentrequesttitle.addCell(cell);
 		tablerentrequesttitle.setSpacingAfter(30);
 		
-		PdfPTable tablerentrequest = new PdfPTable(5);
-	
+		PdfPTable table = new PdfPTable(6);
+		table.setWidths(new float[] {0.8f,2.8f, 2.0f, 1.5f, 3.0f, 1.5f});
+		cell = new PdfPCell(new Phrase("ID" ,fonttitlecolumns));
+		cell.setBackgroundColor(Color.lightGray);
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setVerticalAlignment(Element.ALIGN_CENTER);
+		cell.setPadding(10);
+		table.addCell(cell);
 		
-		for (RentRequest rentrequest : Listrentrequest) {
-			
-			celda = new PdfPCell(new Phrase(rentrequest.getDates().toString()));
-			celda.setPadding(5);
-			tablerentrequest.addCell(celda);
-			
-			celda = new PdfPCell(new Phrase(rentrequest.getId()));
-			celda.setPadding(5);
-			tablerentrequest.addCell(celda);
-			
-			celda = new PdfPCell(new Phrase(rentrequest.getDeportiveCenter().getName()));
-			celda.setPadding(5);
-			tablerentrequest.addCell(celda);
-			
-			celda = new PdfPCell(new Phrase(rentrequest.getTotalPrice()));
-			celda.setPadding(5);
-			tablerentrequest.addCell(celda);
-			
-			celda = new PdfPCell(new Phrase(rentrequest.getStatus()));
-			celda.setPadding(5);
-			tablerentrequest.addCell(celda);
-			
-		}
+		cell = new PdfPCell(new Phrase("Centro Deportivo" ,fonttitlecolumns));
+		cell.setBackgroundColor(Color.lightGray);
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setVerticalAlignment(Element.ALIGN_CENTER);
+		cell.setPadding(10);
+		table.addCell(cell);
 		
-/*
-		Listrentrequest.forEach(RentRequest ->{
+		cell = new PdfPCell(new Phrase("Monto Total" ,fonttitlecolumns));
+		cell.setBackgroundColor(Color.lightGray);
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setVerticalAlignment(Element.ALIGN_CENTER);
+		cell.setPadding(10);
+		table.addCell(cell);
+		
+		cell = new PdfPCell(new Phrase("Rut" ,fonttitlecolumns));
+		cell.setBackgroundColor(Color.lightGray);
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setVerticalAlignment(Element.ALIGN_CENTER);
+		cell.setPadding(10);
+		table.addCell(cell);
+		
+		cell = new PdfPCell(new Phrase("Nombre Cliente" ,fonttitlecolumns));
+		cell.setBackgroundColor(Color.lightGray);
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setVerticalAlignment(Element.ALIGN_CENTER);
+		cell.setPadding(10);
+		table.addCell(cell);
+		
+		cell = new PdfPCell(new Phrase("Estado" ,fonttitlecolumns));
+		cell.setBackgroundColor(Color.lightGray);
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setVerticalAlignment(Element.ALIGN_CENTER);
+		cell.setPadding(10);
+		table.addCell(cell);
+		
+		listrequestuser.forEach(rentrequest ->{
+			table.addCell(String.valueOf(rentrequest.getId()));
+			table.addCell(rentrequest.getDeportiveCenter().getName());
+			table.addCell(String.valueOf(rentrequest.getTotalPrice()));
+			table.addCell(rentrequest.getUser().getRut());
+			table.addCell(rentrequest.getUser().getName() +" "+ rentrequest.getUser().getFirstLastName() +" "+ rentrequest.getUser().getSecondLastName());
+			table.addCell(rentrequest.getStatus());
 			
-			int id = RentRequest.getId();
-			String id2 = Integer.toString(id);
-			int totalprice = RentRequest.getId();
-			String totalprice2 = Integer.toString(totalprice);
-			
-			
-			tablerentrequest.addCell(RentRequest.getDates().toString());			
-			tablerentrequest.addCell(id2);
-			tablerentrequest.addCell(RentRequest.getDeportiveCenter().getName());
-			tablerentrequest.addCell(totalprice2);
-			tablerentrequest.addCell(RentRequest.getStatus());
-
 		});
-		
-    	document.add(tablerentrequesttitle);
-		document.add(tablerentrequest);
-		*/
+		document.add(tablerentrequesttitle);
+		document.add(table);
 	}
 }
 
