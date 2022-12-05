@@ -170,7 +170,7 @@ public class ClienteController
     }
 
     @GetMapping("/cliente/visualize-rent-requests/pdf")
-    public String exportToPDF(HttpServletResponse response, Model model, Pageable page) throws DocumentException, IOException
+    public String exportToPdf(HttpServletResponse response, Model model, Pageable page) throws DocumentException, IOException
     {
         model.addAttribute("requests", rentRequestService.listByUser(SecurityContextHolder.getContext().getAuthentication().getName()));
         return "/cliente/visualize-rent-requests/pdf";

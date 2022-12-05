@@ -22,90 +22,90 @@ import com.lowagie.text.pdf.PdfWriter;
 import cl.italosoft.nessfit.model.RentRequest;
 
 @Component("/cliente/visualize-rent-requests/pdf")
-public class PDFRentRequest extends AbstractPdfView{
+public class RentRequestPdf extends AbstractPdfView{
   
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		@SuppressWarnings("unchecked")
-		List<RentRequest> listrequestuser = (List<RentRequest>) model.get("requests");
+		List<RentRequest> rentRequestList = (List<RentRequest>) model.get("requests");
 
-		Font fonttitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16, Color.black);
-		Font fonttitlecolumns = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, Color.blue);
+		Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16, Color.black);
+		Font columnTitleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, Color.blue);
 		
 		document.setPageSize(PageSize.LETTER.rotate());
 		document.setMargins(-20, -20, 30, 20);
 		document.open();
 		PdfPCell cell = null;		
 		
-		PdfPTable tablerentrequesttitle = new PdfPTable(1);
+		PdfPTable rentRequestTableTitle = new PdfPTable(1);
 		
-		cell = new PdfPCell(new Phrase("Listado de solicitudes de ".concat(listrequestuser.get(0).getUser().getName() +" "+
-				listrequestuser.get(0).getUser().getFirstLastName() +" "+ listrequestuser.get(0).getUser().getSecondLastName() ), fonttitle));
+		cell = new PdfPCell(new Phrase("Listado de solicitudes de ".concat(rentRequestList.get(0).getUser().getName() +" "+
+				rentRequestList.get(0).getUser().getFirstLastName() +" "+ rentRequestList.get(0).getUser().getSecondLastName() ), titleFont));
 		cell.setBorder(0);
 		cell.setBackgroundColor(new Color(40,190,138));
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(30);
 		
-		tablerentrequesttitle.addCell(cell);
-		tablerentrequesttitle.setSpacingAfter(30);
+		rentRequestTableTitle.addCell(cell);
+		rentRequestTableTitle.setSpacingAfter(30);
 		
 		PdfPTable table = new PdfPTable(6);
 		table.setWidths(new float[] {0.8f,2.8f, 2.0f, 1.5f, 3.0f, 1.5f});
-		cell = new PdfPCell(new Phrase("ID" ,fonttitlecolumns));
+		cell = new PdfPCell(new Phrase("ID" ,columnTitleFont));
 		cell.setBackgroundColor(Color.lightGray);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Centro Deportivo" ,fonttitlecolumns));
+		cell = new PdfPCell(new Phrase("Centro Deportivo" ,columnTitleFont));
 		cell.setBackgroundColor(Color.lightGray);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Monto Total" ,fonttitlecolumns));
+		cell = new PdfPCell(new Phrase("Monto Total" ,columnTitleFont));
 		cell.setBackgroundColor(Color.lightGray);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Rut" ,fonttitlecolumns));
+		cell = new PdfPCell(new Phrase("Rut" ,columnTitleFont));
 		cell.setBackgroundColor(Color.lightGray);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Nombre Cliente" ,fonttitlecolumns));
+		cell = new PdfPCell(new Phrase("Nombre Cliente" ,columnTitleFont));
 		cell.setBackgroundColor(Color.lightGray);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Estado" ,fonttitlecolumns));
+		cell = new PdfPCell(new Phrase("Estado" ,columnTitleFont));
 		cell.setBackgroundColor(Color.lightGray);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
 		
-		listrequestuser.forEach(rentrequest ->{
-			table.addCell(String.valueOf(rentrequest.getId()));
-			table.addCell(rentrequest.getDeportiveCenter().getName());
-			table.addCell(String.valueOf(rentrequest.getTotalPrice()));
-			table.addCell(rentrequest.getUser().getRut());
-			table.addCell(rentrequest.getUser().getName() +" "+ rentrequest.getUser().getFirstLastName() +" "+ rentrequest.getUser().getSecondLastName());
-			table.addCell(rentrequest.getStatus());
+		rentRequestList.forEach(rentRequest ->{
+			table.addCell(String.valueOf(rentRequest.getId()));
+			table.addCell(rentRequest.getDeportiveCenter().getName());
+			table.addCell(String.valueOf(rentRequest.getTotalPrice()));
+			table.addCell(rentRequest.getUser().getRut());
+			table.addCell(rentRequest.getUser().getName() +" "+ rentRequest.getUser().getFirstLastName() +" "+ rentRequest.getUser().getSecondLastName());
+			table.addCell(rentRequest.getStatus());
 			
 		});
-		document.add(tablerentrequesttitle);
+		document.add(rentRequestTableTitle);
 		document.add(table);
 	}
 }
