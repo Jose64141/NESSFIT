@@ -89,55 +89,65 @@
 				
 				}); // end am5.ready()
 			</script>
-										<hr>
-										<div class="clearfix"></div>
+			
+			
+			<form method="get" th:action="@{/administrativo/statistics}">
+					<div class="row invoice-info">
+						<div class="col-sm-5 invoice-col">
+							<label class="form-label">Fecha Inicio:</label> <input
+								class="form-control" type="date" name="inicio">
+						</div>
+						<div class="col-sm-5 invoice-col">
+							<label class="form-label">Fecha Término:</label> <input
+								class="form-control" type="date" name="fin"> 
+						</div>
+						<div class="col-sm-2 invoice-col">
+							<label class="form-label"></label>
+								<input type="submit" value="seleccionar" class="form-control btn btn-success">
+				  		</div>
+					</div>
+					</form>
+					<hr>
+					<div class="clearfix"></div>
 
-										<div class="row invoice-info">
-											<div id="chartdiv"></div>
+					<div class="row invoice-info">
+						<div id="chartdiv"></div>
+					</div>
+					<hr>
+					<div class="clearfix"></div>
 
-										</div>
-										<hr>
-										<div class="clearfix"></div>
-
-										<!-- Table row -->
-										<h4>Días solicitados</h4>
-										<div class="row">
-											<div class="  table">
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Fecha</th>
-															<th>Id</th>
-															<th>Centro Deportivo</th>
-															<th>Costo total</th>
-															<th>Rut Cliente</th>
-															<th>Nombre Cliente</th>
-															<th>Estado</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr th:if="${solicitudes.isEmpty()}">
-															<th colspan="5" class="text-center">Sin solicitudes dentro del periodo seleccionado</th>
-														</tr>
-														<tr th:unless="${solicitudes.isEmpty()}"
-															th:each="solicitud : ${solicitudes}">
-															<th
-																th:text="${#dates.format(solicitud.requestDate, 'dd-MM-yyyy')}"
-																scope="row">1</th>
-															<td th:text="${solicitud.id}">Mark</td>
-															<td th:text="${solicitud.deportiveCenter.name}">Otto</td>
-															<td th:text="${solicitud.totalPrice}">Otto</td>
-															<td th:text="${solicitud.user.rut}">Otto</td>
-															<td
-																th:text="${solicitud.user.name + ' ' + solicitud.user.firstLastName}">Otto</td>
-															<td th:if="${solicitud.status == 'pendiente'}" class="text-warning">Pendiente</td>
-															<td>
-														</tr>
-													</tbody>
-												</table>
-
-											</div>
-										</div>
-
+					<h4>Días solicitados</h4>
+							<div class="table">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Fecha</th>
+											<th>Id</th>
+											<th>Centro Deportivo</th>
+											<th>Costo total</th>
+											<th>Rut Cliente</th>
+											<th>Nombre Cliente</th>
+											<th>Estado</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:if="${solicitudes.isEmpty()}">
+											<th colspan="5" class="text-center">Sin solicitudes dentro del periodo seleccionado</th>
+										</tr>
+										<tr th:unless="${solicitudes.isEmpty()}"
+											th:each="solicitud : ${solicitudes}">
+												<th th:text="${#dates.format(solicitud.requestDate, 'dd-MM-yyyy')}" scope="row"></th>
+													<td th:text="${solicitud.id}"></td>
+													<td th:text="${solicitud.deportiveCenter.name}"></td>
+													<td th:text="${solicitud.totalPrice}"></td>
+													<td th:text="${solicitud.user.rut}"></td>
+													<td th:text="${solicitud.user.name + ' ' + solicitud.user.firstLastName}"></td>
+													<td th:text="${solicitud.status}"></td>
+													<td>
+										</tr>
+									</tbody>
+								</table>
+							
+							</div>
     </body>
 </html>
