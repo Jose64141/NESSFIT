@@ -6,16 +6,7 @@ body {
   width: 100%;
   height: 500px;
 }
-.container
-{
-    padding: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
-}
+
 .labels
 {
     position: relative;
@@ -33,7 +24,7 @@ h1
     margin: 0;
 }
 h4{
-	margin: 100px auto;
+	margin: 10px auto;
 	width: 250px;
 }
 .table{
@@ -43,6 +34,55 @@ h4{
 table{
 	background-color: white;
 	text-align: left;
-	width: 100%;
+	width: 150%;
 }
 
+.table-section{
+	box-sizing: border-box;
+    background-color: #20c67a;
+    border: 2px solid #000;
+    border-radius: 5px;
+    width: 1000px;
+    height: 400px auto;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    justify-content: space-between;
+    flex-direction: column;;
+    display: flex;
+}
+thead{
+	background-color: #3f8880;
+	color: white;
+}
+tr:nth-child(even){
+	background-color: #ddd;
+}
+
+.column {
+	float: left;
+  	width: 100%;
+  	padding: 10px;
+}
+.left{
+	width: 30%;
+	position: relative;
+  	left: 90px;
+  	top:150px
+}
+.right{
+	width:70%;
+	position: relative;
+	left: 50px;
+}
+.col-sm-5{
+	margin: auto;
+	width: 200px;
+}
+.col-sm-2 {
+	margin: auto;
+	width: 200px;
+}
