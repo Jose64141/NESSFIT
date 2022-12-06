@@ -16,18 +16,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -304,35 +300,35 @@ public class AdministrativoController
 
    
     @GetMapping("/administrativo/statistics")
-    public String viewStatistics(Model model, @RequestParam(name = "inicio", required = false, defaultValue = "1900-01-01") String beginning, @RequestParam(name = "fin", required = false, defaultValue = "2999-01-01") String end)throws ParseException {
+    public String viewStatistics(Model model, @RequestParam(name = "start", required = false, defaultValue = "1900-01-01") String start, @RequestParam(name = "end", required = false, defaultValue = "2999-01-01") String end)throws ParseException {
     	
     	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    	Date beginningdate = new Date((formatter.parse(beginning)).getTime());
-    	Date enddate = new Date((formatter.parse(end)).getTime());
-    	int contCancha = 0;
-    	int contGimnasio = 0;
-    	int contPiscina = 0;
-    	int contQuincho = 0;
-    	int contEstadio = 0;
+    	Date startDate = new Date((formatter.parse(start)).getTime());
+    	Date endDate = new Date((formatter.parse(end)).getTime());
+    	int canchaCounter = 0;
+    	int gimnasioCounter = 0;
+    	int piscinaCounter = 0;
+    	int quinchoCounter = 0;
+    	int estadioCounter = 0;
     	
-    	List<RentRequest> requests = rentRequestService.findByDateBetween(beginningdate, enddate);
+    	List<RentRequest> requests = rentRequestService.findByDateBetween(startDate, endDate);
     	
-    	for (RentRequest rentrequest : requests) {
-    		switch ( rentrequest.getDeportiveCenter().getType().getName() ) {			
+    	for (RentRequest rentRequest : requests) {
+    		switch ( rentRequest.getDeportiveCenter().getType().getName() ) {
     		case "cancha": 
-    			contCancha++;
+    			canchaCounter++;
     			break;
     		case "gimnasio": 
-    			contGimnasio++;
+    			gimnasioCounter++;
     			break;
     		case "piscina": 
-    			contPiscina++;
+    			piscinaCounter++;
     			break;
     		case "quincho": 
-    			contQuincho++;
+    			quinchoCounter++;
     			break;
     		case "estadio": 
-    			contEstadio++;
+    			estadioCounter++;
     			break;
     		default: 
     			break;
@@ -340,14 +336,18 @@ public class AdministrativoController
     	}
     	
     	model.addAttribute("solicitudes", requests);
-    	model.addAttribute("CantidadCancha", contCancha);
-    	model.addAttribute("CantidadGimnasio", contGimnasio);
-    	model.addAttribute("CantidadPiscina", contPiscina);
-    	model.addAttribute("CantidadQuincho", contQuincho);
-    	model.addAttribute("CantidadEstadio", contEstadio);
-    	
-    	model.addAttribute("inicio", beginning);
-    	model.addAttribute("fin", end);
+    	model.addAttribute("canchaQty", canchaCounter);
+    	model.addAttribute("gimnasioQty", gimnasioCounter);
+    	model.addAttribute("piscinaQty", piscinaCounter);
+    	model.addAttribute("quinchoQty", quinchoCounter);
+    	model.addAttribute("estadioQty", estadioCounter);
+
+        if(start.equals("1900-01-01"))
+            start = null;
+        if(end.equals("2999-01-01"))
+            end = null;
+    	model.addAttribute("start", start);
+    	model.addAttribute("end", end);
     	
     	return "administrativo/statistics";
     }

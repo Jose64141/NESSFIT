@@ -70,19 +70,19 @@
 				// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
 				series.data.setAll([{
 				  category: "Cancha",
-				  value: [[${CantidadCancha}]]
+				  value: [[${canchaQty}]]
 				}, {
 				  category: "Gimnasio",
-				  value: [[${CantidadGimnasio}]]
+				  value: [[${gimnasioQty}]]
 				}, {
 				  category: "Piscina",
-				  value: [[${CantidadPiscina}]]
+				  value: [[${piscinaQty}]]
 				}, {
 				  category: "Quincho",
-				  value: [[${CantidadQuincho}]]
+				  value: [[${quinchoQty}]]
 				}, {
 				  category: "Estadio",
-				  value: [[${CantidadEstadio}]]
+				  value: [[${estadioQty}]]
 				}]);
 				
 				series.appear(1000, 100);
@@ -96,11 +96,11 @@
 					<div class="row invoice-info">
 						<div class="col-sm-5 invoice-col">
 							<label class="form-label">Fecha Inicio:</label> <input
-								class="form-control" type="date" name="inicio">
+								class="form-control" type="date" name="start" th:value="${start}">
 						</div>
 						<div class="col-sm-5 invoice-col">
 							<label class="form-label">Fecha Término:</label> <input
-								class="form-control" type="date" name="fin"> 
+								class="form-control" type="date" name="end" th:value="${end}">
 						</div>
 						<div class="col-sm-2 invoice-col">
 							<label class="form-label"></label>
