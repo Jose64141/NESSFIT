@@ -1,49 +1,55 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-#chartdiv {
-  width: 100%;
-  height: 500px;
-}
-
-.labels
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+*
 {
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin: auto;
-    color: #000000;
+    font-family: "Poppins", sans-serif;
 }
+
+#chartdiv
+{
+    display: block;
+    width: auto;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+}
+
+
+.refresh-icon
+{
+    width: 28px;
+    height: 28px;
+}
+
 h1
 {
-    font-size: 4em;
+    text-align: center;
+    margin: 15px auto 0;
     padding: 0;
-    margin: 0;
-}
-h4{
-	margin: 10px auto;
-	width: 250px;
-}
-.table{
-	margin: 100px auto;
-	width: 900px;
-}
-table{
-	background-color: white;
-	text-align: left;
-	width: 150%;
 }
 
-.table-section{
+.table-title
+{
+    margin: 40px auto 0;
+    width: 250px;
+}
+.table{
+	margin: 50px auto;
+	width: 900px;
+}
+table
+{
+    background-color: white;
+    text-align: left;
+    width: 150%;
+}
+
+.table-section
+{
 	box-sizing: border-box;
     background-color: #20c67a;
     border: 2px solid #000;
     border-radius: 5px;
     width: 1000px;
-    height: 400px auto;
     margin: auto;
     top: 0;
     left: 0;
@@ -54,35 +60,13 @@ table{
     flex-direction: column;;
     display: flex;
 }
-thead{
+
+thead
+{
 	background-color: #3f8880;
 	color: white;
 }
-tr:nth-child(even){
+tr:nth-child(even)
+{
 	background-color: #ddd;
-}
-
-.column {
-	float: left;
-  	width: 100%;
-  	padding: 10px;
-}
-.left{
-	width: 30%;
-	position: relative;
-  	left: 90px;
-  	top:150px
-}
-.right{
-	width:70%;
-	position: relative;
-	left: 50px;
-}
-.col-sm-5{
-	margin: auto;
-	width: 200px;
-}
-.col-sm-2 {
-	margin: auto;
-	width: 200px;
 }
