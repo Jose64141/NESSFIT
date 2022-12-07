@@ -31,6 +31,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -300,11 +301,38 @@ public class AdministrativoController
 
    
     @GetMapping("/administrativo/statistics")
-    public String viewStatistics(Model model, @RequestParam(name = "start", required = false, defaultValue = "1900-01-01") String start, @RequestParam(name = "end", required = false, defaultValue = "2999-01-01") String end)throws ParseException {
-    	
+    public String viewStatistics(Model model, @RequestParam(name = "start", required = false, defaultValue = "") String start, @RequestParam(name = "end", required = false, defaultValue = "") String end)throws ParseException
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
     	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    	Date startDate = new Date((formatter.parse(start)).getTime());
-    	Date endDate = new Date((formatter.parse(end)).getTime());
+        Date endDate;
+        if (end.isBlank())
+        {
+            endDate = new Date(cal.getTimeInMillis());
+            end = formatter.format(endDate);
+        }
+        else
+            endDate = new Date((formatter.parse(end)).getTime());
+        Date startDate;
+        if (start.isBlank())
+        {
+            cal.add(Calendar.DAY_OF_MONTH,-7);
+            startDate = new Date(cal.getTimeInMillis());
+            start = formatter.format(startDate);
+        }
+        else
+            startDate = new Date((formatter.parse(start)).getTime());
+        if (endDate.before(startDate))
+        {
+            end = start;
+            endDate = startDate;
+        }
+
     	int canchaCounter = 0;
     	int gimnasioCounter = 0;
     	int piscinaCounter = 0;
@@ -342,10 +370,6 @@ public class AdministrativoController
     	model.addAttribute("quinchoQty", quinchoCounter);
     	model.addAttribute("estadioQty", estadioCounter);
 
-        if(start.equals("1900-01-01"))
-            start = null;
-        if(end.equals("2999-01-01"))
-            end = null;
     	model.addAttribute("start", start);
     	model.addAttribute("end", end);
     	
