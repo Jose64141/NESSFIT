@@ -29,16 +29,18 @@
                         class="form-control" type="date" name="start" th:value="${start}">
                 </div>
                 <!-- FECHA TÉRMINO -->
-                <div>
+                <div class="end-date-input">
                     <label class="form-label">Fecha Término:</label> <input
                         class="form-control" type="date" name="end" th:value="${end}">
                 </div>
                 <!-- BOTÓN BUSCAR Y REFRESCAR -->
                 <label class="form-label"></label>
-                <input type="submit" value="Buscar" class="form-control btn btn-success">
-                <a th:href="@{/administrativo/statistics}">
-                    <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
-                </a>
+                <div class="buttons-grid">
+                    <input type="submit" value="Buscar" class="form-control btn btn-success btn-width button-flex">
+                    <a th:href="@{/administrativo/statistics}" class="button-flex">
+                        <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
+                    </a>
+                </div>
             </form>
             <!-- ---------------------------- -->
         </div>
@@ -48,7 +50,7 @@
             <h4 class="table-title">Lista de solicitudes</h4>
             <!-- Distribución tabla -->
             <table class="request-table">
-                <thead>
+                <thead class="request-tuple">
                 <tr>
                     <th>Fecha</th>
                     <th>ID</th>
