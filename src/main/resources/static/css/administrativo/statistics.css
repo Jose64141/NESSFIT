@@ -15,7 +15,7 @@ h1
 {
     display: block;
     width: auto;
-    height: 100px;
+    height: 300px;
     margin: 0;
     padding: 0;
 }
@@ -66,4 +66,32 @@ thead
 tr:nth-child(even)
 {
 	background-color: #ddd;
+}
+
+
+.info-container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-container
+{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-auto-rows: minmax(200px, auto);
+    align-items: center;
+    min-height: 100vh;
+}
+
+.table-grid-element
+{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.request-tuple
+{
+    height: 30px;
 }

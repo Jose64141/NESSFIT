@@ -17,19 +17,19 @@
 <div th:replace="~{fragments/navigation::shortcuts}"></div>
 <div th:replace="~{fragments/common::common-body}"></div>
 <h1>Estadísticas</h1>
-
-<div class="row-statistics">
-    <div class="Test1">
-        <!-- FORM ENVÍO DE FECHAS -->
-        <form method="get" th:action="@{/administrativo/statistics}">
-            <!-- SELECCIÓN DE FECHAS -->
+<div class="info-container">
+    <div class="grid-container">
+        <div class="info-container">
+            <!-- FORM ENVÍO DE FECHAS -->
+            <form method="get" th:action="@{/administrativo/statistics}">
+                <!-- SELECCIÓN DE FECHAS -->
                 <!-- FECHA INICIO -->
-                <div class="col-sm-5 invoice-col">
+                <div>
                     <label class="form-label">Fecha Inicio:</label> <input
                         class="form-control" type="date" name="start" th:value="${start}">
                 </div>
                 <!-- FECHA TÉRMINO -->
-                <div class="col-sm-5 invoice-col">
+                <div>
                     <label class="form-label">Fecha Término:</label> <input
                         class="form-control" type="date" name="end" th:value="${end}">
                 </div>
@@ -39,45 +39,44 @@
                 <a th:href="@{/administrativo/statistics}">
                     <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
                 </a>
-        </form>
-        <!-- ---------------------------- -->
+            </form>
+            <!-- ---------------------------- -->
+        </div>
+        <div id="chartdiv"></div>
+        <!-- Fondo verde solicitudes -->
+        <div class="table-section table-grid-element">
+            <h4 class="table-title">Lista de solicitudes</h4>
+            <!-- Distribución tabla -->
+            <table class="request-table">
+                <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>ID</th>
+                    <th>Recinto</th>
+                    <th>Costo total</th>
+                    <th>Rut Cliente</th>
+                    <th>Nombre Cliente</th>
+                    <th>Estado</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${solicitudes.isEmpty()}">
+                    <th colspan="7" class="text-center">Sin solicitudes dentro del periodo seleccionado</th>
+                </tr>
+                <tr class="request-tuple" th:unless="${solicitudes.isEmpty()}"
+                    th:each="solicitud : ${solicitudes}">
+                    <th th:text="${#dates.format(solicitud.requestDate, 'dd-MM-yyyy')}" scope="row"></th>
+                    <td th:text="${'#' + solicitud.id}"></td>
+                    <td th:text="${#strings.toUpperCase(solicitud.deportiveCenter.name)}"></td>
+                    <td th:text="${'$' + solicitud.totalPrice}"></td>
+                    <td th:text="${solicitud.user.rut}"></td>
+                    <td th:text="${#strings.capitalizeWords(solicitud.user.name)  + ' ' +  #strings.capitalizeWords(solicitud.user.firstLastName)}"></td>
+                    <td th:text="${#strings.capitalizeWords(solicitud.status)}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <div id="chartdiv"></div>
-
-</div>
-<!-- Fondo verde solicitudes -->
-<div class="table-section">
-    <h4 class="table-title">Lista de solicitudes</h4>
-    <!-- Distribución tabla -->
-    <table class="request-table">
-        <thead>
-        <tr>
-            <th>Fecha</th>
-            <th>ID</th>
-            <th>Recinto</th>
-            <th>Costo total</th>
-            <th>Rut Cliente</th>
-            <th>Nombre Cliente</th>
-            <th>Estado</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${solicitudes.isEmpty()}">
-            <th colspan="7" class="text-center">Sin solicitudes dentro del periodo seleccionado</th>
-        </tr>
-        <tr th:unless="${solicitudes.isEmpty()}"
-            th:each="solicitud : ${solicitudes}">
-            <th th:text="${#dates.format(solicitud.requestDate, 'dd-MM-yyyy')}" scope="row"></th>
-            <td th:text="${'#' + solicitud.id}"></td>
-            <td th:text="${#strings.toUpperCase(solicitud.deportiveCenter.name)}"></td>
-            <td th:text="${'$' + solicitud.totalPrice}"></td>
-            <td th:text="${solicitud.user.rut}"></td>
-            <td th:text="${#strings.capitalizeWords(solicitud.user.name)  + ' ' +  #strings.capitalizeWords(solicitud.user.firstLastName)}"></td>
-            <td th:text="${#strings.capitalizeWords(solicitud.status)}"></td>
-        </tr>
-        </tbody>
-    </table>
 </div>
 <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
