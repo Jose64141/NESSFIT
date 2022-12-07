@@ -1,6 +1,10 @@
 package cl.italosoft.nessfit.repository;
 
 import cl.italosoft.nessfit.model.RentRequest;
+import cl.italosoft.nessfit.model.User;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -35,4 +39,7 @@ public interface RentRequestRepository extends JpaRepository<RentRequest, Intege
      * @return Page of rent requests
      */
     Page<RentRequest> findByStatusOrderByRequestDateAsc(String status, Pageable page);
+
+	Page<RentRequest> findRentRequestByUserRut(String userRut, Pageable page);
+
 }

@@ -7,6 +7,9 @@ import cl.italosoft.nessfit.service.DeportiveCenterService;
 import cl.italosoft.nessfit.service.RentRequestService;
 import cl.italosoft.nessfit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -16,8 +19,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.lowagie.text.DocumentException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -144,4 +151,32 @@ public class ClienteController
         attr.addFlashAttribute("successMsg","La solicitud se ha procesado con éxito.");
         return "redirect:/cliente/rent";
     }
+
+    @GetMapping("/cliente/visualize-rent-requests")
+    public String visualizeRentRequests(Model model,@PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String deportivename)
+    {
+        model.addAttribute("requests", rentRequestService.findRentRequestByUser(SecurityContextHolder.getContext().getAuthentication().getName(), page));
+        return "/cliente/visualize-rent-requests";
+    }
+    
+    @GetMapping("/cliente/visualize-single-request")
+    public String visualizeSingleRequest(Model model, @RequestParam int id)
+    {
+    	RentRequest request = rentRequestService.find(id);
+    	if(request == null)
+    		return "redirect:/cliente/visualize-rent-requests";
+    	model.addAttribute("request", request);
+        return "/cliente/visualize-single-request";
+    }
+
+    @GetMapping("/cliente/visualize-rent-requests/pdf")
+    public String exportToPdf(HttpServletResponse response, Model model, Pageable page) throws DocumentException, IOException
+    {
+        model.addAttribute("requests", rentRequestService.listByUser(SecurityContextHolder.getContext().getAuthentication().getName()));
+        return "/cliente/visualize-rent-requests/pdf";
+    }
+
+
 }
+
+

@@ -1,6 +1,8 @@
 package cl.italosoft.nessfit.service;
 
+import cl.italosoft.nessfit.model.DeportiveCenter;
 import cl.italosoft.nessfit.model.RentRequest;
+import cl.italosoft.nessfit.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -58,7 +60,6 @@ RentRequestService
      */
     public List<RentRequest> listByUser(String userRut);
 
-
     public List<RentRequest> listByDeportiveCenter(String deportiveCenterName);
     /**
      * Returns all dates of rent request records associated to the given deportive center, in the next 7 days from current date.
@@ -67,11 +68,15 @@ RentRequestService
      * @return a list containing the records.
      */
     public List<Date> listDeportiveCenterDates(String deportiveCenterName);
-    
+
     public List<RentRequest> findAll();
 
     /**
      * Flushes all the changes to the database.
      */
     public void flush();
+
+
+    public Page<RentRequest> findRentRequestByUser(String userRut, Pageable page);
+
 }

@@ -5,6 +5,7 @@ import cl.italosoft.nessfit.repository.RentRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -97,10 +98,17 @@ public class RentRequestServiceImpl implements RentRequestService
     public void flush() { rentRequestRepository.flush(); }
 
     /**
-     * Returns all rent requests 
+     * Returns all rent requests
      *
      * @return a list containing all rent requests.
      */
 	@Override
 	public List<RentRequest> findAll() { return this.rentRequestRepository.findAll();}
+
+	@Override
+	public Page<RentRequest> findRentRequestByUser(String userRut, Pageable page)
+	{
+		return this.rentRequestRepository.findRentRequestByUserRut(userRut, page);
+	}
+
 }
