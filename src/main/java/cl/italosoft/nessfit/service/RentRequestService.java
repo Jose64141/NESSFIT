@@ -60,6 +60,7 @@ RentRequestService
      */
     public List<RentRequest> listByUser(String userRut);
 
+
     public List<RentRequest> listByDeportiveCenter(String deportiveCenterName);
     /**
      * Returns all dates of rent request records associated to the given deportive center, in the next 7 days from current date.
@@ -68,6 +69,8 @@ RentRequestService
      * @return a list containing the records.
      */
     public List<Date> listDeportiveCenterDates(String deportiveCenterName);
+
+    public List<RentRequest> findByDateBetween(Date beginningdate, Date enddate);
 
     public List<RentRequest> findAll();
 

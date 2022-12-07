@@ -1,34 +1,120 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+*
+{
+    font-family: "Poppins", sans-serif;
 }
 
-#chartdiv {
-  width: 100%;
-  height: 500px;
-}
-.container
-{
-    padding: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
-}
-.labels
-{
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin: auto;
-    color: #000000;
-}
 h1
 {
-    font-size: 4em;
+    font-size: 3em;
+    text-align: center;
+    margin: 15px auto 0;
     padding: 0;
-    margin: 0;
 }
+
+#chartdiv
+{
+    display: block;
+    width: auto;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+}
+
+.end-date-input
+{
+    margin: 10px 0 0;
+    padding: 0;
+}
+
+.refresh-icon
+{
+    width: 28px;
+    height: 28px;
+}
+
+.table-title
+{
+    margin: 40px auto 0;
+    width: 250px;
+}
+.request-table
+{
+    background-color: white;
+	margin: 50px auto;
+	width: 900px;
+    text-align: left;
+    border: #000000 1px solid;
+}
+
+
+.table-section
+{
+	box-sizing: border-box;
+    background-color: #20c67a;
+    border: 2px solid #000;
+    border-radius: 5px;
+    width: 1000px;
+    margin: 0 0 30px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    justify-content: space-between;
+    flex-direction: column;;
+    display: flex;
+}
+
+thead
+{
+	background-color: #3f8880;
+	color: white;
+}
+tr:nth-child(even)
+{
+	background-color: #ddd;
+}
+
+.info-container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons-grid
+{
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-flex
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-container
+{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-auto-rows: minmax(200px, auto);
+    align-items: center;
+    min-height: 100vh;
+}
+
+.table-grid-element
+{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.request-tuple
+{
+    height: 40px;
+}
+

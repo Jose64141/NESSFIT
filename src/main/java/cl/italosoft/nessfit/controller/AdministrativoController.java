@@ -16,22 +16,23 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -353,5 +354,81 @@ public class AdministrativoController
         rentRequestService.saveAndFlush(rentRequest);
         attr.addFlashAttribute("successMsg",response);
         return "redirect:/administrativo/manage-rent-requests";
+    }
+
+    @GetMapping("/administrativo/statistics")
+    public String viewStatistics(Model model, @RequestParam(name = "start", required = false, defaultValue = "") String start, @RequestParam(name = "end", required = false, defaultValue = "") String end)throws ParseException
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date endDate;
+        if (end.isBlank())
+        {
+            endDate = new Date(cal.getTimeInMillis());
+            end = formatter.format(endDate);
+        }
+        else
+            endDate = new Date((formatter.parse(end)).getTime());
+        Date startDate;
+        if (start.isBlank())
+        {
+            cal.add(Calendar.DAY_OF_MONTH,-7);
+            startDate = new Date(cal.getTimeInMillis());
+            start = formatter.format(startDate);
+        }
+        else
+            startDate = new Date((formatter.parse(start)).getTime());
+        if (endDate.before(startDate))
+        {
+            end = start;
+            endDate = startDate;
+        }
+
+    	int canchaCounter = 0;
+    	int gimnasioCounter = 0;
+    	int piscinaCounter = 0;
+    	int quinchoCounter = 0;
+    	int estadioCounter = 0;
+
+    	List<RentRequest> requests = rentRequestService.findByDateBetween(startDate, endDate);
+
+    	for (RentRequest rentRequest : requests) {
+    		switch ( rentRequest.getDeportiveCenter().getType().getName() ) {
+    		case "cancha":
+    			canchaCounter++;
+    			break;
+    		case "gimnasio":
+    			gimnasioCounter++;
+    			break;
+    		case "piscina":
+    			piscinaCounter++;
+    			break;
+    		case "quincho":
+    			quinchoCounter++;
+    			break;
+    		case "estadio":
+    			estadioCounter++;
+    			break;
+    		default:
+    			break;
+			}
+    	}
+
+    	model.addAttribute("solicitudes", requests);
+    	model.addAttribute("canchaQty", canchaCounter);
+    	model.addAttribute("gimnasioQty", gimnasioCounter);
+    	model.addAttribute("piscinaQty", piscinaCounter);
+    	model.addAttribute("quinchoQty", quinchoCounter);
+    	model.addAttribute("estadioQty", estadioCounter);
+
+    	model.addAttribute("start", start);
+    	model.addAttribute("end", end);
+
+    	return "administrativo/statistics";
     }
 }

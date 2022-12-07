@@ -98,12 +98,15 @@ public class RentRequestServiceImpl implements RentRequestService
     public void flush() { rentRequestRepository.flush(); }
 
     /**
-     * Returns all rent requests
+     * Returns all rent requests 
      *
      * @return a list containing all rent requests.
      */
 	@Override
 	public List<RentRequest> findAll() { return this.rentRequestRepository.findAll();}
+
+	@Override
+	public List<RentRequest> findByDateBetween(Date beginning, Date end){ return rentRequestRepository.findByRequestDateBetween(beginning, end);}
 
 	@Override
 	public Page<RentRequest> findRentRequestByUser(String userRut, Pageable page)

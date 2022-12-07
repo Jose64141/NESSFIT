@@ -3,38 +3,147 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-     <head th:replace="fragments/common :: head('Estadísticas', ~{::link})">
-        <link rel="stylesheet" th:href="@{/css/administrativo/statistics.css}">
-        <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
-        <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
-        <link rel="stylesheet" th:href="@{/css/form-icons.css}">
-        <link rel="stylesheet" th:href="@{/css/background-font-style.css}">      
-    </head>
-    
-    <body>
-    	<nav th:replace="~{fragments/navigation::navbar}"></nav>
+<head th:replace="fragments/common :: head('Estadísticas', ~{::link})">
+    <link rel="stylesheet" th:href="@{/css/administrativo/statistics.css}">
+    <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
+    <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
+    <link rel="stylesheet" th:href="@{/css/form-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/background-font-style.css}">
 
-        <div th:replace="~{fragments/navigation::shortcuts}"></div>
+</head>
 
-		<div th:replace="~{fragments/common::common-body}"></div>
-        
-        <div class = "container">
-	        <div class = "labels">
-	        	<h1>Estadísticas</h1>
-        	</div>
-	        <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-	       	<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-	       	<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-	       	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-	       	<script src="https://www.amcharts.com/lib/3/serial.js"></script>
-	      	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-	        
-	       
-	       
-	       	<div id="chartdiv"></div>
-	       	
-	        <script th:src="@{/js/statistics.js}"></script>
+<body>
+<nav th:replace="~{fragments/navigation::navbar}"></nav>
+<div th:replace="~{fragments/navigation::shortcuts}"></div>
+<div th:replace="~{fragments/common::common-body}"></div>
+<h1>Estadísticas</h1>
+<div class="info-container">
+    <div class="grid-container">
+        <div class="info-container">
+            <!-- FORM ENVÍO DE FECHAS -->
+            <form method="get" th:action="@{/administrativo/statistics}">
+                <!-- SELECCIÓN DE FECHAS -->
+                <!-- FECHA INICIO -->
+                <div>
+                    <label class="form-label">Fecha Inicio</label> <input
+                        class="form-control" type="date" name="start" th:value="${start}">
+                </div>
+                <!-- FECHA TÉRMINO -->
+                <div class="end-date-input">
+                    <label class="form-label">Fecha Término</label> <input
+                        class="form-control" type="date" name="end" th:value="${end}">
+                </div>
+                <!-- BOTÓN BUSCAR Y REFRESCAR -->
+                <label class="form-label"></label>
+                <div class="buttons-grid">
+                    <input type="submit" value="Buscar" class="form-control btn btn-success btn-width button-flex">
+                    <a th:href="@{/administrativo/statistics}" class="button-flex">
+                        <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
+                    </a>
+                </div>
+            </form>
+            <!-- ---------------------------- -->
+        </div>
+        <div id="chartdiv"></div>
+        <!-- Fondo verde solicitudes -->
+        <div class="table-section table-grid-element">
+            <h4 class="table-title">Lista de solicitudes</h4>
+            <!-- Distribución tabla -->
+            <table class="request-table">
+                <thead class="request-tuple">
+                <tr>
+                    <th>Fecha</th>
+                    <th>ID</th>
+                    <th>Recinto</th>
+                    <th>Costo total</th>
+                    <th>Rut Cliente</th>
+                    <th>Nombre Cliente</th>
+                    <th>Estado</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${solicitudes.isEmpty()}">
+                    <th colspan="7" class="text-center">Sin solicitudes dentro del periodo seleccionado</th>
+                </tr>
+                <tr class="request-tuple" th:unless="${solicitudes.isEmpty()}"
+                    th:each="solicitud : ${solicitudes}">
+                    <th th:text="${#dates.format(solicitud.requestDate, 'dd-MM-yyyy')}" scope="row"></th>
+                    <td th:text="${'#' + solicitud.id}"></td>
+                    <td th:text="${#strings.toUpperCase(solicitud.deportiveCenter.name)}"></td>
+                    <td th:text="${'$' + solicitud.totalPrice}"></td>
+                    <td th:text="${solicitud.user.rut}"></td>
+                    <td th:text="${#strings.capitalizeWords(solicitud.user.name)  + ' ' +  #strings.capitalizeWords(solicitud.user.firstLastName)}"></td>
+                    <td th:text="${#strings.capitalizeWords(solicitud.status)}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script>
+    console.log([[${CantidadPiscina}]]);
+    am5.ready(function () {
 
-    	</div> 
-    </body>
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new("chartdiv");
+
+        // Set themes
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([
+            am5themes_Animated.new(root)
+        ]);
+
+        // Create chart
+        // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+        var chart = root.container.children.push(
+            am5percent.PieChart.new(root, {
+                endAngle: 270
+            })
+        );
+
+        // Create series
+        // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+        var series = chart.series.push(
+            am5percent.PieSeries.new(root, {
+                valueField: "value",
+                categoryField: "category",
+                endAngle: 270
+            })
+        );
+
+        series.states.create("hidden", {
+            endAngle: -90
+        });
+
+        // Set data
+        // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+        series.data.setAll([{
+            category: "Cancha",
+            value: [[${canchaQty}]]
+        }, {
+            category: "Gimnasio",
+            value: [[${gimnasioQty}]]
+        }, {
+            category: "Piscina",
+            value: [[${piscinaQty}]]
+        }, {
+            category: "Quincho",
+            value: [[${quinchoQty}]]
+        }, {
+            category: "Estadio",
+            value: [[${estadioQty}]]
+        }]);
+
+        series.appear(1000, 100);
+
+    }); // end am5.ready()
+</script>
+</body>
 </html>
