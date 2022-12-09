@@ -174,7 +174,7 @@ public class ClienteController
     { 
     	List<RentRequest> request = rentRequestService.listByUser(SecurityContextHolder.getContext().getAuthentication().getName());
     	if(request == null) {
-    		return "/cliente/visualize-rent-requests";
+    		return "redirect:/cliente/visualize-rent-requests";
     	}  	
         model.addAttribute("requests", rentRequestService.listByUser(SecurityContextHolder.getContext().getAuthentication().getName()));
         return "/cliente/visualize-rent-requests/pdf";
