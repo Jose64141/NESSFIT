@@ -15,7 +15,8 @@
 
 <h1>Mis Solicitudes</h1>
 
-<div class="pdf-icon-container">
+<!-- PDF -->
+<div class="pdf-icon-container" th:if="${requests.totalPages > 0}">
   <a th:href="@{/cliente/visualize-rent-requests/pdf/?format=pdf}" target="_blank" >
     <img class = "pdf-icon" th:src="@{/images/pdf-icon.png}" alt = "PDF Icon">
   </a>
