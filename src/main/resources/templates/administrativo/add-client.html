@@ -28,7 +28,9 @@
                             <img class = "attribute-logo" th:src="@{/images/rut-logo.png}">
                             <label>RUT</label>
                             <label class="input-box">
-                                <input class="information-form-control" type="text" th:field="*{rut}" placeholder="10123123K" th:errorclass="border-danger">
+                                <input class="information-form-control" type="text" th:field="*{rut}"
+                                       placeholder="10123123k" th:errorclass="border-danger" data-bs-toggle="tooltip"
+                                       data-bs-placement="top" data-bs-title="Debe ir sin puntos ni guión. La contraseña del cliente será su RUT">
                                 <div th:if="${#fields.hasErrors('rut')}" th:class="${#fields.hasErrors('rut')}? 'text-danger'" th:text="${#fields.errors('rut')[0]}"></div>
                             </label>
                         </div>

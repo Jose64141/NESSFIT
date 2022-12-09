@@ -20,7 +20,8 @@
 <div class="input-container">
 
   <div  class="user-search-container">
-      <div th:if="${RUT} ne null">
+      <div th:if="${RUT} ne null" data-bs-toggle="tooltip" data-bs-placement="bottom"
+           data-bs-title="Deshabilitar un usuario implica que este no podrá iniciar sesión">
         <p th:text="'Nombre Completo: '+${name}+' '+${firstLastName}
       +' '+${secondLastName}"></p>
         <p th:text="'Estado: ' +${isEnabled}">
