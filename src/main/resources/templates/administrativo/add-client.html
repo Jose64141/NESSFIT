@@ -71,9 +71,8 @@
                     <label class="input-box">
                         <input class="information-form-control" type="tel" onkeydown="return onlyNumberInput(event)"
                                th:field="*{phoneNumber}" placeholder="912345678" th:errorclass="border-danger"
-                               data-bs-toggle="tooltip"
-                               data-bs-placement="top"
-                               data-bs-title="Ingrese su teléfono móvil o fijo de máximo 9 dígitos. Sólo puede ingresar números">
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Ingrese su teléfono móvil o fijo de 9 dígitos. Sólo puede ingresar números">
                         <div th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger"
                              th:errors="*{phoneNumber}"></div>
                     </label>

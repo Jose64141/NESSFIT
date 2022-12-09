@@ -34,7 +34,7 @@
           <label>RUT</label>
           <label class="input-box">
             <input class="information-form-control" type="text" th:field="*{rut}" placeholder="10123123k" data-bs-toggle="tooltip"
-                   data-bs-placement="top" data-bs-title="Debe ir sin puntos ni guión. La contraseña del cliente será su RUT" th:errorclass="border-danger">
+                   data-bs-placement="top" data-bs-title="Debe ir sin puntos ni guión. La contraseña del administrativo será su RUT" th:errorclass="border-danger">
             <div th:if="${#fields.hasErrors('rut')}" th:class="${#fields.hasErrors('rut')}? 'text-danger'" th:text="${#fields.errors('rut')[0]}"></div>
           </label>
         </div>
@@ -67,7 +67,9 @@
           <label>Número de teléfono</label>
           <label class="input-box">
             <input class="information-form-control" type="tel" onkeydown="return onlyNumberInput(event)"
-                   th:field="*{phoneNumber}" placeholder="912345678" th:errorclass="border-danger">
+                   th:field="*{phoneNumber}" placeholder="912345678" th:errorclass="border-danger"
+                   data-bs-toggle="tooltip" data-bs-placement="top"
+                   data-bs-title="Ingrese su teléfono móvil o fijo de 9 dígitos. Sólo puede ingresar números">
             <div th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></div>
           </label>
         </div>
@@ -86,21 +88,28 @@
       </form>
     </div>
   </div>
-  <div>
-    <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
-            data-bs-target="#dataConfirmModal">
-      Registrar
-    </button>
-    <a th:href="@{/home}">
-    <button type="button" class="btn btn-tertiary btn-send">
-      Volver
-    </button>
-    </a>
-  </div>
+    <div>
+        <div class="btn-tooltip-container" data-bs-toggle="tooltip"
+             data-bs-placement="top" data-bs-title="Registra el Administrativo">
+            <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
+                    data-bs-target="#dataConfirmModal">
+                Registrar
+            </button>
+        </div>
+
+        <div class="btn-tooltip-container" data-bs-toggle="tooltip"
+             data-bs-placement="top" data-bs-title="Volver al inicio">
+            <a th:href="@{/home}">
+                <button type="button" class="btn btn-tertiary btn-send">
+                    Volver
+                </button>
+            </a>
+        </div>
+    </div>
 </section>
 
 <div th:replace="fragments/common :: common-body"></div>
 
-</script>
+
 </body>
 </html>
