@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments/common :: head('Visualizar Solicitud de Arriendo', ~{::link})">
+<head th:replace="fragments/common :: head('Visualizar Solicitud', ~{::link})">
     <link rel="stylesheet" th:href="@{/css/cliente/visualize-single-request.css}">
     <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
     <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
@@ -16,7 +16,7 @@
 
 <div th:replace="~{fragments/navigation::shortcuts}"></div>
 
-<h1>Visualizar Solicitud de Arriendo</h1>
+<h1>Visualizar Solicitud</h1>
 <section class="form-section">
     <div class="form-container">
         <div class="content m-5">

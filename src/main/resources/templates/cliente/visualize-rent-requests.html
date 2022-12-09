@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments/common :: head('Visualizar Solicitudes', ~{::link})">
+<head th:replace="fragments/common :: head('Mis Solicitudes', ~{::link})">
   <link rel="stylesheet" th:href="@{/css/cliente/visualize-rent-requests.css}">
   <link rel="stylesheet" th:href="@{/css/shortcut-logos.css}">
   <link rel="stylesheet" th:href="@{/css/nav-bar.css}">
@@ -13,7 +13,7 @@
 <nav th:replace="~{fragments/navigation::navbar}"></nav>
 <div th:replace="~{fragments/navigation::shortcuts}"></div>
 
-<h1>Visualizar Solicitudes de Arriendo</h1>
+<h1>Mis Solicitudes</h1>
 
 <div class="pdf-icon-container">
   <a th:href="@{/cliente/visualize-rent-requests/pdf/?format=pdf}" target="_blank" >
@@ -56,7 +56,7 @@
       <a class="user-entry link-dark"  th:id="${request.id}" onmouseover="nameFocus(this.id)" onmouseleave="nameUnFocus(this.id)" th:href="@{/cliente/visualize-single-request(id=${request.id})}">
         <div class="grid-item" th:text="${request.requestDate}"></div>
         <div class="grid-item" th:text="${request.id}"></div>
-        <div class="grid-item" th:text="${#strings.capitalizeWords(request.deportiveCenter.name)}"></div>
+        <div class="grid-item" th:text="${#strings.toUpperCase(request.deportiveCenter.name)}"></div>
         <div class="grid-item" th:text="${'$' + request.totalPrice}"></div>
         <div class="grid-item" th:text="${request.user.rut}"></div>
         <div class="grid-item">
