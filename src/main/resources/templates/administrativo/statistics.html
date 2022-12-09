@@ -25,20 +25,25 @@
                 <!-- SELECCIÓN DE FECHAS -->
                 <!-- FECHA INICIO -->
                 <div>
-                    <label class="form-label">Fecha Inicio</label> <input
-                        class="form-control" type="date" name="start" th:value="${start}">
+                    <label class="form-label">Fecha Inicio</label>
+                    <input class="form-control" type="date" name="start" th:value="${start}" data-bs-toggle="tooltip"
+                           data-bs-placement="left" data-bs-title="Fecha de inicio para buscar solicitudes">
                 </div>
                 <!-- FECHA TÉRMINO -->
                 <div class="end-date-input">
-                    <label class="form-label">Fecha Término</label> <input
-                        class="form-control" type="date" name="end" th:value="${end}">
+                    <label class="form-label">Fecha Término</label>
+                    <input class="form-control" type="date" name="end" th:value="${end}" data-bs-toggle="tooltip"
+                           data-bs-placement="left" data-bs-title="Fecha de término para buscar solicitudes">
                 </div>
                 <!-- BOTÓN BUSCAR Y REFRESCAR -->
                 <label class="form-label"></label>
                 <div class="buttons-grid">
-                    <input type="submit" value="Buscar" class="form-control btn btn-success btn-width button-flex">
+                    <input type="submit" value="Buscar" class="form-control btn btn-success btn-width button-flex"
+                           data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           data-bs-title="Buscar solicitudes dentro del rango seleccionado">
                     <a th:href="@{/administrativo/statistics}" class="button-flex">
-                        <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
+                        <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" data-bs-toggle="tooltip"
+                             data-bs-placement="right" data-bs-title="Refrescar">
                     </a>
                 </div>
             </form>
