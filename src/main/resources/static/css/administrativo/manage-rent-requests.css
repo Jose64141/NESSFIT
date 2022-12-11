@@ -213,5 +213,12 @@ h1
 {
     --bs-alert-margin-bottom: 0;
     --bs-alert-margin-top: 5px;
+}
 
+.btn-tooltip-container
+{
+    margin: 0;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
 }
