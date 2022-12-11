@@ -114,4 +114,15 @@ public class RentRequestServiceImpl implements RentRequestService
 		return this.rentRequestRepository.findRentRequestByUserRut(userRut, page);
 	}
 
+    @Override
+    public Page<RentRequest> findRentRequestByUser(String userRut, String status, Pageable page) {
+        return this.rentRequestRepository.findRentRequestByUserRutContainingAndStatusOrderByRequestDateAsc(userRut,status,page);
+    }
+
+    @Override
+    public Page<RentRequest> findRentRequestByDeportiveCenterAndUser(String userRut, String deportiveCenterName, String status, Pageable page) {
+        return this.rentRequestRepository.findRentRequestByDeportiveCenterNameContainingAndStatusAndUserRutOrderByRequestDateAsc(deportiveCenterName,status,userRut,page);
+    }
+
+
 }

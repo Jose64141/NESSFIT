@@ -153,9 +153,12 @@ public class ClienteController
     }
 
     @GetMapping("/cliente/visualize-rent-requests")
-    public String visualizeRentRequests(Model model,@PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String deportivename)
+    public String visualizeRentRequests(Model model,@PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String deportiveCenterName)
     {
-        model.addAttribute("requests", rentRequestService.findRentRequestByUser(SecurityContextHolder.getContext().getAuthentication().getName(), page));
+        if(deportiveCenterName != null)
+            model.addAttribute("requests",rentRequestService.findRentRequestByDeportiveCenterAndUser(SecurityContextHolder.getContext().getAuthentication().getName(),deportiveCenterName,"pendiente",page));
+        else
+            model.addAttribute("requests", rentRequestService.findRentRequestByUser(SecurityContextHolder.getContext().getAuthentication().getName(), page));
         return "/cliente/visualize-rent-requests";
     }
     

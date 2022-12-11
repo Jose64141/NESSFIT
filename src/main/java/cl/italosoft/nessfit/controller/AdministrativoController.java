@@ -301,10 +301,13 @@ public class AdministrativoController
     }
 
     @GetMapping("administrativo/manage-rent-requests")
-    public String manageRentRequests(Model model, @PageableDefault(value = 5) Pageable page)
+    public String manageRentRequests(Model model, @PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String rut)
     {
-        model.addAttribute("requests",rentRequestService.findByStatus("pendiente",page));
-    	return "administrativo/manage-rent-requests";
+        if(rut != null)
+            model.addAttribute("requests",rentRequestService.findRentRequestByUser(rut,"pendiente",page));
+    	else
+            model.addAttribute("requests",rentRequestService.findByStatus("pendiente",page));
+        return "administrativo/manage-rent-requests";
     }
 
     /**
