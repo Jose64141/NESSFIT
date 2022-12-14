@@ -15,22 +15,25 @@
         <div th:replace="~{fragments/navigation::shortcuts}"></div>
 
         <h1>Editar Administrativo</h1>
-
         <section class="flex-container">
             <!-- RUT FINDER -->
             <form th:action="@{/administrador/manage-administrative}" method="get" class="user-finder">
                 <label>Ingrese RUT para búsqueda</label>
                 <input type="text" id="rut" name="rut" placeholder="10123123K" th:value="${param.rut}" data-bs-toggle="tooltip" data-bs-placement="bottom"
                        data-bs-title="Ingrese el RUT del administrativo que desea buscar. Debe ir sin puntos ni guión">
-                <button type="submit">
+                <button type="submit" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Buscar">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                          class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
                 </button>
-                <a th:href="@{/administrador/manage-administrative}">
-                    <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
-                </a>
+                <div class="btn-tooltip-container" data-bs-toggle="tooltip"
+                     data-bs-placement="bottom" data-bs-title="Recarga la página">
+                    <a th:href="@{/administrador/manage-administrative}">
+                        <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
+                    </a>
+                </div>
             </form>
             <!-- ADMINISTRATIVOS TABLE -->
             <h2 th:if="${users.totalPages == 0}">No hay usuarios que mostrar.</h2>
@@ -40,8 +43,9 @@
                     <div class="user-name-header"><b>Nombre</b></div>
                 </div>
                 <th:block th:each="user : ${users.content}">
-
-                    <a class="user-entry link-dark" th:href="@{/administrador/edit-administrative(rut=${user.rut})}">
+                    <a class="user-entry link-dark" th:href="@{/administrador/edit-administrative(rut=${user.rut})}"
+                       data-bs-toggle="tooltip" data-bs-placement="top"
+                       data-bs-title="Click para editar este administrativo">
                         <div class="user-rut" th:text="${user.rut}"></div>
                         <div class="user-name" th:text="${ #strings.capitalizeWords(user.name)  + ' ' +
                         #strings.capitalizeWords(user.firstLastName)  + ' ' +
