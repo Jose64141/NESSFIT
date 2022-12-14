@@ -127,6 +127,14 @@
             endAngle: -90
         });
 
+        series.get("colors").set("colors", [
+            am5.color(0xa0fb0e),
+            am5.color(0x20c67a),
+            am5.color(0x3f8880),
+            am5.color(0x9dc09d),
+            am5.color(0xffffff)
+        ]);
+
         // Set data
         // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
         series.data.setAll([{
@@ -145,6 +153,11 @@
             category: "Estadio",
             value: [[${estadioQty}]]
         }]);
+
+        series.slices.template.setAll({
+            stroke: am5.color(0x000000),
+            strokeWidth: 1
+        });
 
         series.appear(1000, 100);
 
