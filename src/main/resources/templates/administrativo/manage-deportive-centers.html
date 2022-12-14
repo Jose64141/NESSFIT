@@ -20,7 +20,7 @@
   <!-- CENTER FINDER -->
   <form th:action="@{/administrativo/manage-deportive-centers}" method="get" class="center-finder">
     <label>Ingrese nombre para búsqueda</label>
-    <input type="text" id="name" name="name">
+    <input type="text" id="name" name="name" th:value="${param.name}">
     <button type="submit">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
            class="bi bi-search" viewBox="0 0 16 16">
@@ -49,19 +49,19 @@
   <nav class = "page-selector" th:if="${centers.totalPages > 0}">
     <ul class="pagination ">
       <li class="page-item" th:classappend="${centers.number == 0 ? 'disabled' : ''}">
-        <a th:href="@{/administrativo/manage-deportive-centers(page=${centers.number - 1})}"
+        <a th:href="@{/administrativo/manage-deportive-centers(name=${param.name},page=${centers.number - 1})}"
            class="page-link">Anterior</a>
       </li>
       <li class="page-item"
           th:classappend="${i eq centers.number + 1} ? 'active'"
           th:each="i : ${#numbers.sequence( 1, centers.totalPages, 1)}">
         <a class="page-link"
-           th:href="@{/administrativo/manage-deportive-centers?page={tmpPag} (tmpPag=${i-1}) }"
-           th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+           th:href="@{/administrativo/manage-deportive-centers(name=${param.name},page=${i-1})}"
+           th:text="${i}" th:title="${'Página '+ i}" data-toggle="tooltip"></a>
       </li>
       <li class="page-item"
           th:classappend="${centers.number == (centers.totalPages - 1) ? 'disabled' : ''}">
-        <a th:href="@{/administrativo/manage-deportive-centers(page=${centers.number + 1})}"
+        <a th:href="@{/administrativo/manage-deportive-centers(name=${param.name},page=${centers.number + 1})}"
            class="page-link">Siguiente</a>
       </li>
     </ul>
