@@ -29,7 +29,9 @@
                     <img class = "attribute-logo" th:src="@{/images/rut-logo.png}">
                     <label>Nombre del recinto</label>
                     <label class="input-box">
-                        <input class="information-form-control  readonly-input-field" type="text" th:field="*{name}" readonly>
+                        <input class="information-form-control  readonly-input-field" type="text" th:field="*{name}" readonly
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                         <div th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}"></div>
                     </label>
                 </div>
@@ -37,7 +39,9 @@
                     <img class = "attribute-logo" th:src="@{/images/address-icon.png}">
                     <label>Dirección</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field" type="text" th:field="*{address}" readonly>
+                        <input class="information-form-control readonly-input-field" type="text" th:field="*{address}" readonly
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                         <div th:if="${#fields.hasErrors('address')}" th:errorclass="text-danger" th:errors="*{address}">
                         </div>
                     </label>
@@ -56,7 +60,8 @@
                     <label>Costo de arriendo (por día)</label>
                     <label class="input-box">
                         <input class="information-form-control" type="text" inputmode="numeric" onkeydown="return onlyNumberInput(event)"
-                               th:field="*{costPerDay}">
+                               th:field="*{costPerDay} " data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Ingrese el costo por día. Sólo puede ingresar números">
                         <div th:if="${#fields.hasErrors('costPerDay')}" th:errorclass="text-danger" th:errors="*{costPerDay}">
                         </div>
                     </label>
@@ -79,15 +84,21 @@
         </div>
     </div>
     <div>
-        <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
-                data-bs-target="#dataConfirmModal">
-            Editar
-        </button>
-        <a th:href="@{/administrativo/manage-deportive-centers}">
-            <button type="button" class="btn btn-tertiary btn-send">
-                Volver
+        <div class="btn-tooltip-container" data-bs-toggle="tooltip"
+             data-bs-placement="top" data-bs-title="Aplicar cambios">
+            <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
+                    data-bs-target="#dataConfirmModal">
+                Editar
             </button>
-        </a>
+        </div>
+        <div class="btn-tooltip-container" data-bs-toggle="tooltip"
+             data-bs-placement="top" data-bs-title="Volver a la selección">
+            <a th:href="@{/administrativo/manage-deportive-centers}">
+                <button type="button" class="btn btn-tertiary btn-send">
+                    Volver
+                </button>
+            </a>
+        </div>
     </div>
 </section>
 

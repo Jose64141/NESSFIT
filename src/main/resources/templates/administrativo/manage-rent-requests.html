@@ -10,87 +10,89 @@
 
 </head>
 <body>
-    <nav th:replace="~{fragments/navigation::navbar}"></nav>
-    <div th:replace="~{fragments/navigation::shortcuts}"></div>
+<nav th:replace="~{fragments/navigation::navbar}"></nav>
+<div th:replace="~{fragments/navigation::shortcuts}"></div>
 
-    <h1>Administrar Solicitudes de Arriendo</h1>
+<h1>Administrar Solicitudes de Arriendo</h1>
 
-    <section class="flex-container">
-        <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
-            <label th:text="${successMsg}"></label>
+<section class="flex-container">
+    <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
+        <label th:text="${successMsg}"></label>
+    </div>
+    <!-- DEPORTIVE CENTER FINDER -->
+    <form th:action="@{/administrativo/manage-rent-requests}" method="get" class="user-finder">
+        <label>Ingrese RUT de cliente para búsqueda</label>
+        <input type="text" id="rut" name="rut" placeholder="10123123K" th:value="${param.rut}" data-bs-toggle="tooltip"
+               data-bs-placement="top" data-bs-title="Ingrese RUT sin puntos ni guión.">
+        <button type="submit" data-bs-toggle="tooltip"
+                data-bs-placement="top" data-bs-title="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+        </button>
+        <a th:href="@{/administrativo/manage-rent-requests}" data-bs-toggle="tooltip" data-bs-placement="top"
+           data-bs-title="Refrescar búsquedas">
+            <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
+        </a>
+    </form>
+    <!-- REQUESTS TABLE -->
+    <h2 th:if="${requests.totalPages == 0}">No hay solicitudes que mostrar.</h2>
+    <div th:if="${requests.totalPages > 0}" class="users-container">
+        <div class="user-entry user-entry-header">
+            <div class="page-header grid-item"><b>Fecha</b></div>
+            <div class="page-header grid-item"><b>ID</b></div>
+            <div class="page-header grid-item"><b>Nombre Centro Deportivo</b></div>
+            <div class="page-header grid-item"><b>Costo Total</b></div>
+            <div class="page-header grid-item"><b>RUT Cliente</b></div>
+            <div class="page-header grid-item"><b>Nombre Cliente</b></div>
+            <div class="page-header grid-item"><b>Estado</b></div>
         </div>
-        <!-- DEPORTIVE CENTER FINDER -->
-        <form th:action="@{/administrativo/manage-rent-requests}" method="get" class="user-finder">
-            <label>Ingrese RUT de cliente para búsqueda</label>
-            <input type="text" id="rut" name="rut" placeholder="10123123K" th:value="${param.rut}" data-bs-toggle="tooltip"
-                   data-bs-placement="top" data-bs-title="Ingrese RUT sin puntos ni guión.">
-            <button type="submit" data-bs-toggle="tooltip"
-                    data-bs-placement="top" data-bs-title="Buscar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-            </button>
-            <a th:href="@{/administrativo/manage-rent-requests}">
-                <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
-            </a>
-        </form>
-        <!-- REQUESTS TABLE -->
-        <h2 th:if="${requests.totalPages == 0}">No hay solicitudes que mostrar.</h2>
-        <div th:if="${requests.totalPages > 0}" class="users-container">
-            <div class="user-entry user-entry-header">
-                <div class="page-header grid-item"><b>Fecha</b></div>
-                <div class="page-header grid-item"><b>ID</b></div>
-                <div class="page-header grid-item"><b>Nombre Centro Deportivo</b></div>
-                <div class="page-header grid-item"><b>Costo Total</b></div>
-                <div class="page-header grid-item"><b>RUT Cliente</b></div>
-                <div class="page-header grid-item"><b>Nombre Cliente</b></div>
-                <div class="page-header grid-item"><b>Estado</b></div>
-            </div>
-            <th:block th:each="request : ${requests.content}">
+        <th:block th:each="request : ${requests.content}">
 
-                <a class="user-entry link-dark"  th:id="${request.id}" onmouseover="nameFocus(this.id)" onmouseleave="nameUnFocus(this.id)" th:href="@{/administrativo/review-rent-request(id=${request.id})}">
-                    <div class="grid-item" th:text="${request.requestDate}"></div>
-                    <div class="grid-item" th:text="${'#' + request.id}"></div>
-                    <div class="grid-item" th:text="${#strings.toUpperCase(request.deportiveCenter.name)}"></div>
-                    <div class="grid-item" th:text="${'$' + request.totalPrice}"></div>
-                    <div class="grid-item" th:text="${request.user.rut}"></div>
-                    <div class="grid-item">
-                        <div th:id="${'mini-grid' + request.id}" class="mini-grid link-dark">
-                            <div class="grid-item" th:text="${#strings.capitalizeWords(request.user.name)}"></div>
-                            <div class="grid-item" th:text="${#strings.capitalizeWords(' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}"></div>
-                        </div>
+            <a class="user-entry link-dark" th:id="${request.id}" onmouseover="nameFocus(this.id)"
+               onmouseleave="nameUnFocus(this.id)" th:href="@{/administrativo/review-rent-request(id=${request.id})}">
+                <div class="grid-item" th:text="${request.requestDate}"></div>
+                <div class="grid-item" th:text="${'#' + request.id}"></div>
+                <div class="grid-item" th:text="${#strings.toUpperCase(request.deportiveCenter.name)}"></div>
+                <div class="grid-item" th:text="${'$' + request.totalPrice}"></div>
+                <div class="grid-item" th:text="${request.user.rut}"></div>
+                <div class="grid-item">
+                    <div th:id="${'mini-grid' + request.id}" class="mini-grid link-dark">
+                        <div class="grid-item" th:text="${#strings.capitalizeWords(request.user.name)}"></div>
+                        <div class="grid-item"
+                             th:text="${#strings.capitalizeWords(' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}"></div>
                     </div>
-                    <div class="grid-item" th:text="${#strings.capitalizeWords(request.status)}"></div>
-                </a>
-            </th:block>
-        </div>
-        <!--  PAGE SELECTOR -->
-        <nav class = "page-selector" th:if="${requests.totalPages > 0}">
-            <ul class="pagination ">
-                <li class="page-item" th:classappend="${requests.number == 0 ? 'disabled' : ''}">
-                    <a th:href="@{/administrativo/manage-rent-requests(rut=${param.rut},page=${requests.number - 1})}"
-                       class="page-link">Anterior</a>
-                </li>
-                <li class="page-item"
-                    th:classappend="${i eq requests.number + 1} ? 'active'"
-                    th:each="i : ${#numbers.sequence( 1, requests.totalPages, 1)}">
-                    <a class="page-link"
-                    th:href="@{/administrativo/manage-rent-requests(rut=${param.rut},page=${i-1})}"
-                    th:text="${i}" th:title="${'Página '+ i}" data-toggle="tooltip"></a>
-                </li>
-                <li class="page-item"
-                    th:classappend="${requests.number == (requests.totalPages - 1) ? 'disabled' : ''}">
-                    <a th:href="@{/administrativo/manage-rent-requests(rut=${param.rut},page=${requests.number + 1})}"
-                       class="page-link">Siguiente</a>
-                </li>
-            </ul>
-        </nav>
-    </section>
+                </div>
+                <div class="grid-item" th:text="${#strings.capitalizeWords(request.status)}"></div>
+            </a>
+        </th:block>
+    </div>
+    <!--  PAGE SELECTOR -->
+    <nav class="page-selector" th:if="${requests.totalPages > 0}">
+        <ul class="pagination ">
+            <li class="page-item" th:classappend="${requests.number == 0 ? 'disabled' : ''}">
+                <a th:href="@{/administrativo/manage-rent-requests(rut=${param.rut},page=${requests.number - 1})}"
+                   class="page-link">Anterior</a>
+            </li>
+            <li class="page-item"
+                th:classappend="${i eq requests.number + 1} ? 'active'"
+                th:each="i : ${#numbers.sequence( 1, requests.totalPages, 1)}">
+                <a class="page-link"
+                   th:href="@{/administrativo/manage-rent-requests(rut=${param.rut},page=${i-1})}"
+                   th:text="${i}" th:title="${'Página '+ i}" data-toggle="tooltip"></a>
+            </li>
+            <li class="page-item"
+                th:classappend="${requests.number == (requests.totalPages - 1) ? 'disabled' : ''}">
+                <a th:href="@{/administrativo/manage-rent-requests(rut=${param.rut},page=${requests.number + 1})}"
+                   class="page-link">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+</section>
 
 
-
-    <div th:replace="fragments/common :: common-body"></div>
-    <script th:src="@{/js/manage-rent-request.js}"></script>
+<div th:replace="fragments/common :: common-body"></div>
+<script th:src="@{/js/manage-rent-request.js}"></script>
 </body>
 </html>
