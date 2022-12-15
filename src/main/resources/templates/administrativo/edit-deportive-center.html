@@ -27,7 +27,7 @@
             <form th:action="@{/administrativo/edit-deportive-center}" th:object="${deportiveCenter}" method="post">
                 <div class="input-item">
                     <img class = "attribute-logo" th:src="@{/images/rut-logo.png}">
-                    <label>Nombre de la instalación</label>
+                    <label>Nombre del recinto</label>
                     <label class="input-box">
                         <input class="information-form-control  readonly-input-field" type="text" th:field="*{name}" readonly>
                         <div th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}"></div>

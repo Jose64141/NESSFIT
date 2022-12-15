@@ -17,7 +17,9 @@
 
     <script th:src="@{/js/rent.js}"></script>
     <h1>Arrendar</h1>
-
+    <div class="no-centers-container">
+      <div th:if="${centers.size() == 0}" class="no-centers-text"><b>No hay recintos disponibles</b></div>
+    </div>
     <div class="content mt-5">
       <div th:if="${errorMsg} ne null" class="alert alert-danger w-25" role="alert">
         <label th:text="${errorMsg}"></label>
@@ -26,7 +28,6 @@
         <label class= "success-message" th:text="${successMsg}"></label>
       </div>
 
-      <h3 th:if="${centers.size() == 0}">No hay centros disponibles</h3>
       <div th:if="${centers.size() ne 0}" class="me-5 w-25 start-0">
         <h2>Por favor, seleccione un centro</h2>
         <div class="center-selection-container">

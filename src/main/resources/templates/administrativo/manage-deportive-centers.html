@@ -19,8 +19,8 @@
 <section class="flex-container">
   <!-- CENTER FINDER -->
   <form th:action="@{/administrativo/manage-deportive-centers}" method="get" class="center-finder">
-    <label>Ingrese nombre para búsqueda</label>
-    <input type="text" id="name" name="name" th:value="${param.name}">
+    <label>Ingrese nombre del recinto</label>
+    <input type="text" id="name" name="name" th:value="${param.name}" placeholder="(Ej: TATIO SPORT)">
     <button type="submit">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
            class="bi bi-search" viewBox="0 0 16 16">
@@ -35,7 +35,7 @@
   <h2 th:if="${centers.totalPages == 0}">No hay recintos que mostrar.</h2>
   <div th:if="${centers.totalPages > 0}" class="centers-container">
     <div class="center-entry center-entry-header">
-      <div class="center-name-header">Centro</div>
+      <div class="center-name-header">Recinto</div>
       <div class="center-type-header">Tipo</div>
     </div>
     <th:block th:each="center : ${centers.content}">

@@ -51,7 +51,7 @@
 
                 <a class="user-entry link-dark"  th:id="${request.id}" onmouseover="nameFocus(this.id)" onmouseleave="nameUnFocus(this.id)" th:href="@{/administrativo/review-rent-request(id=${request.id})}">
                     <div class="grid-item" th:text="${request.requestDate}"></div>
-                    <div class="grid-item" th:text="${request.id}"></div>
+                    <div class="grid-item" th:text="${'#' + request.id}"></div>
                     <div class="grid-item" th:text="${#strings.toUpperCase(request.deportiveCenter.name)}"></div>
                     <div class="grid-item" th:text="${'$' + request.totalPrice}"></div>
                     <div class="grid-item" th:text="${request.user.rut}"></div>
