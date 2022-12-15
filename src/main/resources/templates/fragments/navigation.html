@@ -3,93 +3,97 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <body>
-        <th:block th:fragment="common">
-            <li class="nav-item mt-5">
-                <a class="nav-link" th:href="@{/account-settings}">Editar datos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/logout}">Cerrar Sesión</a>
-            </li>
-        </th:block>
+<body>
+<th:block th:fragment="common">
+    <li class="nav-item mt-5">
+        <a class="nav-link" th:href="@{/account-settings}">Editar datos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" th:href="@{/logout}">Cerrar Sesión</a>
+    </li>
+</th:block>
 
-        <nav class="navbar fixed-top" th:fragment="navbar">
-            <div class="container-fluid">
-                <button class="navbar-toggler position-absolute top-50 start-0 border border-0 m-3 p-2" type="button"
-                        data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title mt-3" id="offcanvasNavbarLabel">NESSFIT</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <th:block sec:authorize="hasRole('administrador')">
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/administrador/manage-administrative}">
-                                        Editar Administrativos
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/administrador/add-administrative}">
-                                        Agregar Administrativos
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/administrador/manage-clients}">
-                                        Administrar Usuarios
-                                    </a>
-                                </li>
-                            </th:block>
-
-                            <th:block sec:authorize="hasRole('administrativo')">
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/administrativo/add-deportive-center}">Agregar Recinto</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/administrativo/add-client}">Agregar Cliente</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/administrativo/manage-deportive-centers}">Administrar Recintos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/administrativo/manage-clients}">Administrar Clientes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/administrativo/manage-rent-requests}">Administrar Solicitudes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/administrativo/statistics}">Estadísticas</a>
-                                </li>
-                            </th:block>
-
-                            <th:block sec:authorize="hasRole('cliente')">
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/cliente/rent}">Arrendar</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/cliente/visualize-rent-requests}">Mis Solicitudes</a>
-                                </li>
-                            </th:block>
-
-                            <th:block th:replace="::common"></th:block>
-                        </ul>
-                    </div>
-                </div>
+<nav class="navbar fixed-top" th:fragment="navbar">
+    <div class="container-fluid">
+        <button class="navbar-toggler position-absolute top-50 start-0 border border-0 m-3 p-2" type="button"
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+             aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title mt-3" id="offcanvasNavbarLabel">NESSFIT</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-        </nav>
-        <div class="shortcuts-logo-container" th:fragment="shortcuts">
-            <a th:href="@{/home}">
-                <img class="logos" th:src="@{/images/home-logo.png}" alt="Inicio">
-            </a>
-            <a th:href="@{/account-settings}">
-                <img class="logos" th:src="@{/images/settings-logo.png}" alt="Editar datos">
-            </a>
-            <a th:href="@{/logout}">
-                <img class="logos" th:src="@{/images/logout-logo.png}" alt="Cerrar sesión">
-            </a>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <th:block sec:authorize="hasRole('administrador')">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/administrador/manage-administrative}">
+                                Editar Administrativos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/administrador/add-administrative}">
+                                Agregar Administrativos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/administrador/manage-clients}">
+                                Administrar Usuarios
+                            </a>
+                        </li>
+                    </th:block>
+
+                    <th:block sec:authorize="hasRole('administrativo')">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/administrativo/add-deportive-center}">Agregar Recinto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/administrativo/add-client}">Agregar Cliente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/administrativo/manage-deportive-centers}">Administrar
+                                Recintos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/administrativo/manage-clients}">Administrar Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/administrativo/manage-rent-requests}">Administrar
+                                Solicitudes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/administrativo/statistics}">Estadísticas</a>
+                        </li>
+                    </th:block>
+
+                    <th:block sec:authorize="hasRole('cliente')">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/cliente/rent}">Arrendar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/cliente/visualize-rent-requests}">Mis Solicitudes</a>
+                        </li>
+                    </th:block>
+
+                    <th:block th:replace="::common"></th:block>
+                </ul>
+            </div>
         </div>
-    </body>
+    </div>
+</nav>
+<div class="shortcuts-logo-container" th:fragment="shortcuts">
+    <a th:href="@{/home}" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Inicio">
+        <img class="logos" th:src="@{/images/home-logo.png}" alt="Inicio">
+    </a>
+    <a th:href="@{/account-settings}" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Editar Datos">
+        <img class="logos" th:src="@{/images/settings-logo.png}" alt="Editar datos">
+    </a>
+    <a th:href="@{/logout}">
+        <img class="logos" th:src="@{/images/logout-logo.png}" alt="Cerrar sesión" data-bs-toggle="tooltip"
+             data-bs-placement="right" data-bs-title="Cerrar Sesión">
+    </a>
+</div>
+</body>
 </html>
