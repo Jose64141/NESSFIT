@@ -22,36 +22,19 @@
   <div  class="user-search-container">
       <div th:if="${RUT} ne null" data-bs-toggle="tooltip" data-bs-placement="bottom"
            data-bs-title="Deshabilitar un usuario implica que este no podrá iniciar sesión">
-        <p th:text="'Nombre Completo: '+${name}+' '+${firstLastName}
-      +' '+${secondLastName}"></p>
-        <p th:text="'Estado: ' +${isEnabled}">
-        </p>
+        <div th:text="'Nombre Completo: '+${name}+' '+${firstLastName}
+      +' '+${secondLastName}"></div>
+        <div th:text="'Estado: ' +${isEnabled}">
+        </div>
         <form th:action="@{/administrativo/manage-clients} " method="post" class="form-container">
           <input type="hidden" name="rut" th:value="${RUT}" />
           <div class="change-status-submit-button">
             <button type="button"  class="btn btn-primary enable-disable" th:text="${actionName}" data-bs-toggle="modal"
-                    data-bs-target="#confirmModal"></button>
+                    data-bs-target="#dataConfirmModal"></button>
           </div>
           <!-- MODAL -->
-          <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
-               aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="confirmModalLabel">Confirmar</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"
-                          aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <p>¿Está seguro de realizar los cambios?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary"
-                          data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" class="btn btn-primary">Aplicar</button>
-                </div>
-              </div>
-            </div>
+          <div th:replace="fragments/common :: modalButton(null, ~{::p})">
+            <p>¿Está seguro de realizar los cambios?</p>
           </div>
         </form>
 
