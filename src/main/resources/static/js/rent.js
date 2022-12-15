@@ -4,6 +4,8 @@ const selectedDates = Array(allDates.length).fill(false);
 function dateButton(event, id)
 {
     let buttonNumber = parseInt(event.currentTarget.id);
+    // let tooltip = bootstrap.Tooltip.getInstance(event.trigger) // Returns a Bootstrap tooltip instance
+
     selectedDates[buttonNumber] = !selectedDates[buttonNumber];
     if(selectedDates[buttonNumber])
     {
@@ -11,6 +13,8 @@ function dateButton(event, id)
         event.currentTarget.firstElementChild.className = "btn btn-primary h-100 w-100";
         document.getElementById("send-button").className = "send-button-active" +
             " position-absolute bottom-0 end-0 m-5";
+        // tooltip.setContent({ '.tooltip-inner': 'Remover este día' })
+        //document.getElementById(id).dataset.bsTitle = "Remover este día";
     }
     else
     {
@@ -21,6 +25,8 @@ function dateButton(event, id)
         }
         document.getElementById("send-button").className = "send-button-inactive" +
             " position-absolute bottom-0 end-0 m-5";
+        // tooltip.setContent({ '.tooltip-inner': 'Seleccionar este día' })
+        //document.getElementById(id).dataset.bsTitle = "Seleccionar este día";
     }
 
 }

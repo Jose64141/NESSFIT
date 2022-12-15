@@ -17,41 +17,51 @@
 
 <h1>Administrar Usuarios</h1>
 <div class="input-container">
-
-  <div  class="user-search-container">
-    <div th:if="${RUT} ne null">
-      <div th:text="'Nombre Completo: '+${name}+' '+${firstLastName}
-      +' '+${secondLastName}"></div>
-      <div th:text="'Estado: ' +${isEnabled}">
-      </div>
-      <form th:action="@{/administrador/manage-clients} " method="post" class="form-container">
-        <input type="hidden" name="rut" th:value="${RUT}" />
-        <div class="change-status-submit-button">
-          <button type="button"  class="btn btn-primary enable-disable" th:text="${actionName}" data-bs-toggle="modal"
-                  data-bs-target="#dataConfirmModal"></button>
-        </div>
-        <!-- MODAL -->
-        <div th:replace="fragments/common :: modalButton(null, ~{::p})">
-          <p>¿Está seguro de realizar los cambios?</p>
-        </div>
-      </form>
-
-    </div>
-    <div th:unless="${RUT} ne null">
-      <p  class="initial-message" th:text="${nullMessage}"></p>
-    </div>
-  </div>
   <form class="form-container" th:action="@{/administrador/manage-clients}">
     <div class="rut-input">
-      <label>Ingrese RUT del usuario a buscar
-        <input th:if="${RUT} ne null" name="rut" type="text" placeholder="RUT (Ej: 20123123K)" th:value="${RUT}">
-        <input th:unless="${RUT} ne null" name="rut" type="text" placeholder="RUT (Ej: 20123123K)">
+      <label>Ingrese RUT del cliente a buscar
+        <input th:if="${RUT} ne null" name="rut" type="text" placeholder="RUT (Ej: 20123123K)"
+               th:value="${RUT}" data-bs-toggle="tooltip"
+               data-bs-placement="top" data-bs-title="Debe ir sin puntos ni guión">
+        <input th:unless="${RUT} ne null" name="rut" type="text" placeholder="RUT (Ej: 20123123K)" data-bs-toggle="tooltip"
+               data-bs-placement="top" data-bs-title="Debe ir sin puntos ni guión">
       </label>
     </div>
     <div class="search-submit-button">
-      <button type="submit" class="btn search-button">Buscar</button>
+      <div data-bs-toggle="tooltip"
+           data-bs-placement="top" data-bs-title="Buscar al usuario">
+        <button type="submit" class="btn search-button">Buscar</button>
+      </div>
     </div>
   </form>
+  <div class="user-search-container">
+    <form th:action="@{/administrador/manage-clients}" method="post" class="form-container">
+      <div th:unless="${RUT} ne null">
+        <p class="initial-message" th:text="${nullMessage}"></p>
+      </div>
+      <div th:if="${RUT} ne null">
+        <div th:text="'Nombre Completo: '+${name}+' '+${firstLastName}
+      +' '+${secondLastName}"></div>
+        <div th:text="'Estado: ' +${isEnabled}"></div>
+        <input type="hidden" name="rut" th:value="${RUT}"/>
+        <div class="btn-tooltip-container" data-bs-toggle="tooltip"
+             data-bs-placement="bottom"
+             data-bs-title="Deshabilitar un usuario implica que ya no podrá iniciar sesión">
+          <div class="change-status-submit-button">
+            <button type="button" class="btn btn-primary enable-disable" th:text="${actionName}"
+                    data-bs-toggle="modal"
+                    data-bs-target="#dataConfirmModal"></button>
+          </div>
+        </div>
+      </div>
+      <!-- MODAL -->
+      <div th:replace="fragments/common :: modalButton(null, ~{::p})">
+        <p>¿Está seguro de realizar los cambios?</p>
+      </div>
+    </form>
+
+
+  </div>
 
 </div>
 <div th:replace="fragments/common :: common-body"></div>

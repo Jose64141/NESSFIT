@@ -97,3 +97,16 @@ h1
     /* Color borde mientras está siendo clickeado*/
     --bs-btn-active-border-color: #b4b2a6;
 }
+
+.tooltip-container
+{
+    height: fit-content;
+}
+
+.btn-tooltip-container
+{
+    margin: 20px 10px 20px;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+}
