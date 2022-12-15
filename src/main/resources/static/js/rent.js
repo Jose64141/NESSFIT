@@ -4,29 +4,29 @@ const selectedDates = Array(allDates.length).fill(false);
 function dateButton(event, id)
 {
     let buttonNumber = parseInt(event.currentTarget.id);
-    // let tooltip = bootstrap.Tooltip.getInstance(event.trigger) // Returns a Bootstrap tooltip instance
+    let tooltip = bootstrap.Tooltip.getInstance("[id='"+id+"']");
 
     selectedDates[buttonNumber] = !selectedDates[buttonNumber];
     if(selectedDates[buttonNumber])
     {
         // https://www.delftstack.com/howto/javascript/change-the-class-of-an-element-with-javascript/#:~:text=Change%20the%20Class%20of%20an%20HTML%20Element%20With,Been%20Used%20in%20an%20Element%20in%20JavaScript%20
         event.currentTarget.firstElementChild.className = "btn btn-primary h-100 w-100";
+        tooltip.setContent({ '.tooltip-inner': 'Remover este día' })
+
         document.getElementById("send-button").className = "send-button-active" +
             " position-absolute bottom-0 end-0 m-5";
-        // tooltip.setContent({ '.tooltip-inner': 'Remover este día' })
-        //document.getElementById(id).dataset.bsTitle = "Remover este día";
     }
     else
     {
         event.currentTarget.firstElementChild.className = "btn btn-light h-100 w-100";
+        tooltip.setContent({ '.tooltip-inner': 'Seleccionar este día' })
         for (const date of selectedDates)
         {
             if(date) return;
         }
         document.getElementById("send-button").className = "send-button-inactive" +
             " position-absolute bottom-0 end-0 m-5";
-        // tooltip.setContent({ '.tooltip-inner': 'Seleccionar este día' })
-        //document.getElementById(id).dataset.bsTitle = "Seleccionar este día";
+
     }
 
 }
