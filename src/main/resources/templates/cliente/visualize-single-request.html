@@ -22,65 +22,84 @@
         <div class="content m-5">
             <div class="user-info">
                 <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/request-date-icon.png}">
+                    <img class="attribute-logo" th:src="@{/images/request-date-icon.png}">
                     <label>Fecha de solicitud</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field" th:value="${#dates.format(request.requestDate, 'dd/MM/yyyy')}" readonly>
+                        <input class="information-form-control readonly-input-field"
+                               th:value="${#dates.format(request.requestDate, 'dd/MM/yyyy')}" readonly
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                     </label>
                 </div>
                 <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/request-id-icon.png}">
+                    <img class="attribute-logo" th:src="@{/images/request-id-icon.png}">
                     <label>ID</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field" th:value="${'#' + request.id}" readonly>
+                        <input class="information-form-control readonly-input-field" th:value="${'#' + request.id}"
+                               readonly data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                     </label>
                 </div>
                 <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
+                    <img class="attribute-logo" th:src="@{/images/name-logo.png}">
                     <label>Nombre Recinto</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field"  th:value="${#strings.capitalizeWords(request.deportiveCenter.name)}" readonly>
+                        <input class="information-form-control readonly-input-field"
+                               th:value="${#strings.capitalizeWords(request.deportiveCenter.name)}" readonly
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                     </label>
                 </div>
                 <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/cost-icon.png}">
+                    <img class="attribute-logo" th:src="@{/images/cost-icon.png}">
                     <label>Costo Total</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field"  th:value="${'$' + request.totalPrice}" readonly>
+                        <input class="information-form-control readonly-input-field"
+                               th:value="${'$' + request.totalPrice}" readonly data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                     </label>
                 </div>
                 <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/rut-logo.png}">
+                    <img class="attribute-logo" th:src="@{/images/rut-logo.png}">
                     <label>RUT Cliente</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field"  th:value="${request.user.rut}" readonly>
+                        <input class="information-form-control readonly-input-field" th:value="${request.user.rut}"
+                               readonly data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                     </label>
                 </div>
                 <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
+                    <img class="attribute-logo" th:src="@{/images/last-name-icon.png}">
                     <label>Nombre Cliente</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field"  th:value="${#strings.capitalizeWords(request.user.name
-                        + ' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}" readonly>
+                        <input class="information-form-control readonly-input-field" th:value="${#strings.capitalizeWords(request.user.name
+                        + ' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}" readonly data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                     </label>
                 </div>
 
-                <img class = "attribute-logo" th:src="@{/images/dates-icon.png}">
+                <img class="attribute-logo" th:src="@{/images/dates-icon.png}">
                 <label>Fechas de arriendo</label>
                 <a class="dates">
                     <th:block th:each="date : ${request.dates}">
-                        <div class="center-name" th:text="${#dates.format(date, 'dd/MM/yyyy')}"></div>
+                        <div class="center-name" th:text="${#dates.format(date, 'dd/MM/yyyy')}"
+                             data-bs-toggle="tooltip" data-bs-placement="top"
+                             data-bs-title="Sólo lectura"></div>
                     </th:block>
                 </a>
             </div>
         </div>
     </div>
     <div>
-        <a th:href="@{/cliente/visualize-rent-requests}">
-            <button type="button" class="btn btn-tertiary btn-send">
-                Volver
-            </button>
-        </a>
+        <div class="btn-tooltip-container" data-bs-toggle="tooltip"
+             data-bs-placement="top" data-bs-title="Volver a la selección">
+            <a th:href="@{/cliente/visualize-rent-requests}">
+                <button type="button" class="btn btn-tertiary btn-send">
+                    Volver
+                </button>
+            </a>
+        </div>
+
     </div>
 </section>
 

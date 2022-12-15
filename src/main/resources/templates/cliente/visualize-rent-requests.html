@@ -17,7 +17,8 @@
 
 <!-- PDF -->
 <div class="pdf-icon-container" th:if="${requests.totalPages > 0}">
-  <a th:href="@{/cliente/visualize-rent-requests/pdf/?format=pdf}" target="_blank" >
+  <a th:href="@{/cliente/visualize-rent-requests/pdf/?format=pdf}" target="_blank"
+     data-bs-toggle="tooltip" data-bs-placement="left"  data-bs-title="Imprimir solicitudes">
     <img class = "pdf-icon" th:src="@{/images/pdf-icon.png}" alt = "PDF Icon">
   </a>
 </div>
@@ -30,14 +31,17 @@
   <form th:action="@{/cliente/visualize-rent-requests}" method="get" class="user-finder">
     <label>Ingrese nombre recinto para búsqueda</label>
     <input type="text" id="deportiveCenterName" name="deportiveCenterName" placeholder="TATIO SPORT"
-           th:value="${param.deportiveCenterName}">
-    <button type="submit">
+           th:value="${param.deportiveCenterName}" data-bs-toggle="tooltip"
+           data-bs-placement="top" data-bs-title="Ingrese nombre recinto">
+    <button type="submit" data-bs-toggle="tooltip"
+            data-bs-placement="top" data-bs-title="Buscar">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
            class="bi bi-search" viewBox="0 0 16 16">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
       </svg>
     </button>
-    <a th:href="@{/cliente/visualize-rent-requests}">
+    <a th:href="@{/cliente/visualize-rent-requests}" data-bs-toggle="tooltip" data-bs-placement="top"
+       data-bs-title="Refrescar búsquedas">
       <img class="refresh-icon" th:src="@{/images/refresh-icon.png}" alt="Refrescar">
     </a>
   </form>
@@ -55,7 +59,9 @@
     </div>
     <th:block th:each="request : ${requests.content}">
 
-      <a class="user-entry link-dark"  th:id="${request.id}" onmouseover="nameFocus(this.id)" onmouseleave="nameUnFocus(this.id)" th:href="@{/cliente/visualize-single-request(id=${request.id})}">
+      <a class="user-entry link-dark"  th:id="${request.id}" onmouseover="nameFocus(this.id)"
+         onmouseleave="nameUnFocus(this.id)" th:href="@{/cliente/visualize-single-request(id=${request.id})}"
+         data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Click para visualizar esta solicitud">
         <div class="grid-item" th:text="${request.requestDate}"></div>
         <div class="grid-item" th:text="${'#' + request.id}"></div>
         <div class="grid-item" th:text="${#strings.toUpperCase(request.deportiveCenter.name)}"></div>
