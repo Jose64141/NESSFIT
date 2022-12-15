@@ -77,7 +77,6 @@ h1
 
 .btn-send
 {
-    margin: 20px 10px 20px;
     width: 100px;
 }
 
@@ -123,4 +122,12 @@ h1
     margin: 0;
     font-size: 1rem;
     color: black;
+}
+
+.btn-tooltip-container
+{
+    margin: 20px 10px 20px;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
 }

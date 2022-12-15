@@ -22,61 +22,83 @@
         <div class="content m-5">
             <div class="user-info">
                 <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/request-date-icon.png}">
+                    <img class="attribute-logo" th:src="@{/images/request-date-icon.png}">
                     <label>Fecha de solicitud</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field" th:value="${#dates.format(request.requestDate, 'dd/MM/yyyy')}" readonly>
+                        <input class="information-form-control readonly-input-field"
+                               th:value="${#dates.format(request.requestDate, 'dd/MM/yyyy')}" readonly
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                     </label>
                 </div>
                 <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/request-id-icon.png}">
+                    <img class="attribute-logo" th:src="@{/images/request-id-icon.png}">
                     <label>ID</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field" th:value="${'#' + request.id}" readonly>
+                        <input class="information-form-control readonly-input-field" th:value="${'#' + request.id}"
+                               readonly
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                     </label>
                 </div>
                 <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/name-logo.png}">
+                    <img class="attribute-logo" th:src="@{/images/name-logo.png}">
                     <label>Nombre Recinto</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field"  th:value="${#strings.capitalizeWords(request.deportiveCenter.name)}" readonly>
+                        <input class="information-form-control readonly-input-field"
+                               th:value="${#strings.capitalizeWords(request.deportiveCenter.name)}" readonly
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                     </label>
                 </div>
                 <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/cost-icon.png}">
+                    <img class="attribute-logo" th:src="@{/images/cost-icon.png}">
                     <label>Costo Total</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field"  th:value="${'$' + request.totalPrice}" readonly>
+                        <input class="information-form-control readonly-input-field"
+                               th:value="${'$' + request.totalPrice}" readonly
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                     </label>
                 </div>
                 <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/rut-logo.png}">
+                    <img class="attribute-logo" th:src="@{/images/rut-logo.png}">
                     <label>RUT Cliente</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field"  th:value="${request.user.rut}" readonly>
+                        <input class="information-form-control readonly-input-field" th:value="${request.user.rut}"
+                               readonly
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                     </label>
                 </div>
                 <div class="input-item">
-                    <img class = "attribute-logo" th:src="@{/images/last-name-icon.png}">
+                    <img class="attribute-logo" th:src="@{/images/last-name-icon.png}">
                     <label>Nombre Cliente</label>
                     <label class="input-box">
-                        <input class="information-form-control readonly-input-field"  th:value="${#strings.capitalizeWords(request.user.name
-                        + ' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}" readonly>
+                        <input class="information-form-control readonly-input-field" th:value="${#strings.capitalizeWords(request.user.name
+                        + ' '+ request.user.firstLastName + ' ' + request.user.secondLastName)}" readonly
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Sólo lectura">
                     </label>
                 </div>
 
-                <img class = "attribute-logo" th:src="@{/images/dates-icon.png}">
+                <img class="attribute-logo" th:src="@{/images/dates-icon.png}">
                 <label>Fechas de arriendo</label>
                 <a class="dates">
-                <th:block th:each="date : ${request.dates}">
-                        <div class="center-name" th:text="${#dates.format(date, 'dd/MM/yyyy')}"></div>
-                </th:block>
+                    <th:block th:each="date : ${request.dates}">
+                        <div class="center-name" th:text="${#dates.format(date, 'dd/MM/yyyy')}" data-bs-toggle="tooltip"
+                             data-bs-placement="top"
+                             data-bs-title="Sólo lectura">>
+                        </div>
+                    </th:block>
                 </a>
 
                 <form th:action="@{/administrativo/review-rent-request}" th:object="${request}" method="post">
 
-                    <input class="information-form-control readonly-input-field" type="hidden" th:field="*{id}" readonly>
-                    <input class="dates information-form-control readonly-input-field" type="hidden" th:field="*{status}" readonly>
+                    <input class="information-form-control readonly-input-field" type="hidden" th:field="*{id}"
+                           readonly>
+                    <input class="dates information-form-control readonly-input-field" type="hidden"
+                           th:field="*{status}" readonly>
                     <div th:replace="fragments/common :: modalButton(null, ~{::p})">
                         <p>¿Está seguro de realizar los cambios?</p>
                     </div>
@@ -85,19 +107,28 @@
         </div>
     </div>
     <div>
-        <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
-                data-bs-target="#dataConfirmModal"  onclick="approveButton()">
-            Aprobar
-        </button>
-        <button type="button" class="btn btn-secondary btn-send" data-bs-toggle="modal"
-                data-bs-target="#dataConfirmModal" onclick="rejectButton()">
-            Rechazar
-        </button>
-        <a th:href="@{/administrativo/manage-rent-requests}">
-            <button type="button" class="btn btn-tertiary btn-send">
-                Volver
+        <div class="btn-tooltip-container" data-bs-toggle="tooltip"
+             data-bs-placement="top" data-bs-title="Aprobar solicitud">
+            <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
+                    data-bs-target="#dataConfirmModal" onclick="approveButton()">
+                Aprobar
             </button>
-        </a>
+        </div>
+        <div class="btn-tooltip-container" data-bs-toggle="tooltip"
+             data-bs-placement="top" data-bs-title="Rechazar solicitud">
+            <button type="button" class="btn btn-secondary btn-send" data-bs-toggle="modal"
+                    data-bs-target="#dataConfirmModal" onclick="rejectButton()">
+                Rechazar
+            </button>
+        </div>
+        <div class="btn-tooltip-container" data-bs-toggle="tooltip"
+             data-bs-placement="top" data-bs-title="Volver a la selección">
+            <a th:href="@{/administrativo/manage-rent-requests}">
+                <button type="button" class="btn btn-tertiary btn-send">
+                    Volver
+                </button>
+            </a>
+        </div>
     </div>
 </section>
 

@@ -49,9 +49,10 @@
             <div class="page-header grid-item"><b>Estado</b></div>
         </div>
         <th:block th:each="request : ${requests.content}">
-
             <a class="user-entry link-dark" th:id="${request.id}" onmouseover="nameFocus(this.id)"
-               onmouseleave="nameUnFocus(this.id)" th:href="@{/administrativo/review-rent-request(id=${request.id})}">
+               onmouseleave="nameUnFocus(this.id)" th:href="@{/administrativo/review-rent-request(id=${request.id})}"
+               data-bs-toggle="tooltip" data-bs-placement="top"
+               data-bs-title="Click para administrar esta solicitud">
                 <div class="grid-item" th:text="${request.requestDate}"></div>
                 <div class="grid-item" th:text="${'#' + request.id}"></div>
                 <div class="grid-item" th:text="${#strings.toUpperCase(request.deportiveCenter.name)}"></div>
