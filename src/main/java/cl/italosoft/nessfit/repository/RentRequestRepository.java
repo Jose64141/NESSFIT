@@ -43,6 +43,8 @@ public interface RentRequestRepository extends JpaRepository<RentRequest, Intege
 
 	Page<RentRequest> findRentRequestByUserRut(String userRut, Pageable page);
     Page<RentRequest> findRentRequestByUserRutContainingAndStatusOrderByRequestDateAsc(String userRut, String status, Pageable page);
+    Page<RentRequest> findRentRequestByDeportiveCenterNameContainingAndUserRutOrderByRequestDateAsc(String deportiveCenterName, String userRut, Pageable page);
+
     Page<RentRequest> findRentRequestByDeportiveCenterNameContainingAndStatusAndUserRutOrderByRequestDateAsc(String deportiveCenterName, String status, String userRut, Pageable page);
 
 

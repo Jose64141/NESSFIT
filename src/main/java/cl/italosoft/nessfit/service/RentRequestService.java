@@ -85,5 +85,5 @@ RentRequestService
 
     public Page<RentRequest> findRentRequestByDeportiveCenterAndUser(String userRut,String deportiveCenterName, String status, Pageable page);
 
-
+    public Page<RentRequest> findRentRequestByDeportiveCenterAndUser(String userRut, String deportiveCenterName, Pageable page);
 }

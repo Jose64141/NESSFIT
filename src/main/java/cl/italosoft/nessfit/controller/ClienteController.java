@@ -156,7 +156,7 @@ public class ClienteController
     public String visualizeRentRequests(Model model,@PageableDefault(value = 5) Pageable page, @RequestParam(required = false) String deportiveCenterName)
     {
         if(deportiveCenterName != null)
-            model.addAttribute("requests",rentRequestService.findRentRequestByDeportiveCenterAndUser(SecurityContextHolder.getContext().getAuthentication().getName(),deportiveCenterName,"pendiente",page));
+            model.addAttribute("requests",rentRequestService.findRentRequestByDeportiveCenterAndUser(SecurityContextHolder.getContext().getAuthentication().getName(),deportiveCenterName,page));
         else
             model.addAttribute("requests", rentRequestService.findRentRequestByUser(SecurityContextHolder.getContext().getAuthentication().getName(), page));
         return "/cliente/visualize-rent-requests";
