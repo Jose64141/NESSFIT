@@ -53,7 +53,7 @@
                onmouseleave="nameUnFocus(this.id)" th:href="@{/administrativo/review-rent-request(id=${request.id})}"
                data-bs-toggle="tooltip" data-bs-placement="top"
                data-bs-title="Click para administrar esta solicitud">
-                <div class="grid-item" th:text="${request.requestDate}"></div>
+                <div class="grid-item" th:text="${#dates.format(request.requestDate, 'dd/MM/yyyy')}"></div>
                 <div class="grid-item" th:text="${'#' + request.id}"></div>
                 <div class="grid-item" th:text="${#strings.toUpperCase(request.deportiveCenter.name)}"></div>
                 <div class="grid-item" th:text="${'$' + request.totalPrice}"></div>
