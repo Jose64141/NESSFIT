@@ -37,7 +37,11 @@
             <div class="center-type-header"><b>Tipo</b></div>
           </div>
           <th:block th:each="center : ${centers}">
-            <a class="center-entry link-dark" th:href="@{/cliente/rent(id=${center.name})}" th:classappend="${(param.id ne null) ? (param.id[0] == center.name) : false}? 'selection'">
+            <a class="center-entry link-dark"
+               data-bs-toggle="tooltip" data-bs-placement="top"
+               data-bs-title="Click para seleccionar este recinto "
+               th:href="@{/cliente/rent(id=${center.name})}"
+               th:classappend="${(param.id ne null) ? (param.id[0] == center.name) : false}? 'selection'" >
               <div class="center-name" th:text="${#strings.toUpperCase(center.name)}"></div>
               <div class="center-cost" th:text="${'$'+center.costPerDay}"></div>
               <div class="center-type" th:text="${#strings.capitalizeWords(center.type.name)}"></div>
@@ -59,7 +63,9 @@
           </tr>
           <tr class="ms-3 me-3">
             <th:block th:each="date : ${avaliable}">
-              <td class="date-button" onclick="dateButton(event)" th:if="${date}" th:id="${dateStat.index}">
+              <td class="date-button" onclick="dateButton(event, this.id)" th:if="${date}" th:id="${dateStat.index}"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="bottom" data-bs-title="Seleccionar este día">
                 <button type="button" class="btn btn-light h-100 w-100">‎
                   <img class = "available-icon" th:src="@{/images/available-icon.png}" alt = "Disponible">
                 </button>
@@ -78,7 +84,9 @@
       <input type="hidden" name="dates" id="dates" value="">
       <input type="hidden" name="total" id="total" value="">
 
-      <div class="send-button-inactive position-absolute bottom-0 end-0 m-5" id="send-button">
+      <div class="send-button-inactive position-absolute bottom-0 end-0 m-5" id="send-button"
+           data-bs-toggle="tooltip"
+           data-bs-placement="top" data-bs-title="Arrendar recinto">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#dataConfirmModal" onclick="confirmButton()">
           Arrendar

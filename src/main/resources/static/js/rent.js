@@ -1,7 +1,7 @@
 let allDates = document.getElementsByClassName("date-label");
 const selectedDates = Array(allDates.length).fill(false);
 
-function dateButton(event)
+function dateButton(event, id)
 {
     let buttonNumber = parseInt(event.currentTarget.id);
     selectedDates[buttonNumber] = !selectedDates[buttonNumber];
