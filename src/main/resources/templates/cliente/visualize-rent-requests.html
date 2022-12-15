@@ -42,7 +42,7 @@
     </a>
   </form>
   <!-- REQUESTS TABLE -->
-  <h2 th:if="${requests.totalPages == 0}">No hay solicitudes que mostrar.</h2>
+  <h2 th:if="${requests.totalPages == 0}">No hay solicitudes que mostrar</h2>
   <div th:if="${requests.totalPages > 0}" class="users-container">
     <div class="user-entry user-entry-header">
       <div class="page-header grid-item"><b>Fecha</b></div>
@@ -57,7 +57,7 @@
 
       <a class="user-entry link-dark"  th:id="${request.id}" onmouseover="nameFocus(this.id)" onmouseleave="nameUnFocus(this.id)" th:href="@{/cliente/visualize-single-request(id=${request.id})}">
         <div class="grid-item" th:text="${request.requestDate}"></div>
-        <div class="grid-item" th:text="${request.id}"></div>
+        <div class="grid-item" th:text="${'#' + request.id}"></div>
         <div class="grid-item" th:text="${#strings.toUpperCase(request.deportiveCenter.name)}"></div>
         <div class="grid-item" th:text="${'$' + request.totalPrice}"></div>
         <div class="grid-item" th:text="${request.user.rut}"></div>
