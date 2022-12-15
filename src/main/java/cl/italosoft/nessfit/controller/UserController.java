@@ -104,24 +104,24 @@ public class UserController
                 if(!passwordEncoder.matches(actualPassword, user.getPassword()))
                 {
                     // send error // change active tab
-                    attr.addFlashAttribute("passwordErrorMsg","La contraseña actual es incorrecta.");
+                    attr.addFlashAttribute("actualPasswordErrorMsg","La contraseña actual es incorrecta.");
                     break;
                 }
                 String newPassword = formBody.getFirst("newPassword");
                 String confirmNewPassword = formBody.getFirst("confirmNewPassword");
                 if(newPassword.equals(actualPassword))
                 {
-                    attr.addFlashAttribute("passwordErrorMsg","La contraseña nueva debe ser distinta a la actual.");
+                    attr.addFlashAttribute("newPasswordErrorMsg","La contraseña nueva debe ser distinta a la actual.");
                     break;
                 }
                 if(!newPassword.equals(confirmNewPassword))
                 {
-                    attr.addFlashAttribute("passwordErrorMsg","Las contraseñas no coinciden.");
+                    attr.addFlashAttribute("confirmNewPasswordErrorMsg","Las contraseñas no coinciden.");
                     break;
                 }
                 if (newPassword.length() < 10 || 15 < newPassword.length())
                 {
-                    attr.addFlashAttribute("passwordErrorMsg","El largo de la contraseña debe estar entre 10 y 15 caracteres.");
+                    attr.addFlashAttribute("newPasswordErrorMsg","El largo de la contraseña debe estar entre 10 y 15 caracteres.");
                     break;
                 }
                 String newPasswordHash = passwordEncoder.encode(formBody.getFirst("newPassword"));
