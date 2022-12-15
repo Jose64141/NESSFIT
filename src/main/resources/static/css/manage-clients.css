@@ -41,6 +41,10 @@
     background-color: #ffffff;
     text-align: center;
 }
+#dataConfirmModal
+{
+    text-align: left;
+}
 
 .rut-input
 {

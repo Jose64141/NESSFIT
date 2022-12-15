@@ -106,25 +106,27 @@
 
                 <!-- Password -->
                 <div class="tab-pane fade" th:classappend="(${showPassword} ?: false) ? ' show active'" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab" tabindex="0">
-                    <div th:if="${passwordErrorMsg} ne null" class="alert alert-danger" role="alert">
-                        <label th:text="${passwordErrorMsg}"></label>
-                    </div>
                     <form th:action="@{/account-settings/change-password}" method="post">
                         <div class="mb-3">
                             <img class = "attribute-logo" th:src="@{/images/current-password-icon.png}">
                             <label for="actualPassword" class="col-form-label">Contraseña actual:</label>
-                            <input type="password" class="form-control" id="actualPassword" name="actualPassword">
+                            <input type="password" class="form-control" id="actualPassword" name="actualPassword"
+                                   th:classappend="${actualPasswordErrorMsg}? 'border-danger'" >
+                            <div th:if="${actualPasswordErrorMsg ne null}" class="text-danger" th:text="${actualPasswordErrorMsg}"></div>
                         </div>
                         <div class="mb-3">
                             <img class = "attribute-logo" th:src="@{/images/new-password-icon.png}">
                             <label for="newPassword" class="col-form-label">Contraseña nueva:</label>
-                            <input type="password" class="form-control" id="newPassword" name="newPassword">
+                            <input type="password" class="form-control" id="newPassword" name="newPassword"
+                                   th:classappend="${newPasswordErrorMsg}? 'border-danger'" >
+                            <div th:if="${newPasswordErrorMsg ne null}" class="text-danger" th:text="${newPasswordErrorMsg}"></div>
                         </div>
                         <div class="mb-3">
                             <img class = "attribute-logo" th:src="@{/images/confirm-new-password-icon.png}">
                             <label for="confirmNewPassword" class="col-form-label">Confirmar contraseña nueva:</label>
                             <input type="password" class="form-control" id="confirmNewPassword"
-                                   name="confirmNewPassword">
+                                   name="confirmNewPassword" th:classappend="${confirmNewPasswordErrorMsg}? 'border-danger'" >
+                            <div th:if="${confirmNewPasswordErrorMsg ne null}" class="text-danger" th:text="${confirmNewPasswordErrorMsg}"></div>
                         </div>
 
                         <div th:replace="fragments/common :: modalButton('confirmModal', ~{::p#passwdMsg})">
