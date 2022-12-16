@@ -83,7 +83,9 @@
                                 <label>Número de teléfono</label>
                                 <label class="input-box">
                                     <input class="information-form-control" type="tel" onkeydown="return onlyNumberInput(event)"
-                                           th:field="*{phoneNumber}" th:value="${user.phoneNumber}" th:errorclass="border-danger" >
+                                           th:field="*{phoneNumber}" th:value="${user.phoneNumber}" th:errorclass="border-danger"
+                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                           data-bs-title="Ingrese el teléfono móvil o fijo de 9 dígitos. Sólo puede ingresar números">
                                     <div th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></div>
                                 </label>
                             </div>
@@ -118,14 +120,18 @@
                             <img class = "attribute-logo" th:src="@{/images/new-password-icon.png}">
                             <label for="newPassword" class="col-form-label">Contraseña nueva:</label>
                             <input type="password" class="form-control" id="newPassword" name="newPassword"
-                                   th:classappend="${newPasswordErrorMsg}? 'border-danger'" >
+                                   th:classappend="${newPasswordErrorMsg}? 'border-danger'"
+                                   data-bs-toggle="tooltip" data-bs-placement="top"
+                                   data-bs-title="La contraseña nueva debe tener entre 10 a 15 caracteres">
                             <div th:if="${newPasswordErrorMsg ne null}" class="text-danger" th:text="${newPasswordErrorMsg}"></div>
                         </div>
                         <div class="mb-3">
                             <img class = "attribute-logo" th:src="@{/images/confirm-new-password-icon.png}">
                             <label for="confirmNewPassword" class="col-form-label">Confirmar contraseña nueva:</label>
                             <input type="password" class="form-control" id="confirmNewPassword"
-                                   name="confirmNewPassword" th:classappend="${confirmNewPasswordErrorMsg}? 'border-danger'" >
+                                   name="confirmNewPassword" th:classappend="${confirmNewPasswordErrorMsg}? 'border-danger'"
+                                   data-bs-toggle="tooltip" data-bs-placement="top"
+                                   data-bs-title="Debe ser igual a la contraseña nueva">
                             <div th:if="${confirmNewPasswordErrorMsg ne null}" class="text-danger" th:text="${confirmNewPasswordErrorMsg}"></div>
                         </div>
 
@@ -143,22 +149,30 @@
             <!-- info buttons -->
 
             <div class="data-buttons" th:classappend="(${showPassword} ?: false) ? 'd-none'">
-                <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
-                        data-bs-target="#dataConfirmModal">
-                    Editar
-                </button>
-                <a th:href="@{/home}">
+                <span class="btn-tooltip-container" data-bs-toggle="tooltip"
+                     data-bs-placement="top" data-bs-title="Aplicar cambios">
+                    <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
+                            data-bs-target="#dataConfirmModal">
+                        Editar
+                    </button>
+                </span>
+                <a th:href="@{/home}" data-bs-toggle="tooltip"
+                   data-bs-placement="top" data-bs-title="Volver a inicio">
                     <button type="button" class="btn btn-tertiary btn-send">
                         Volver
                     </button>
                 </a>
             </div>
             <div class="password-buttons" th:classappend="not (${showPassword} ?: false) ? 'd-none'">
-                <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
-                        data-bs-target="#confirmModal">
-                    Aplicar
-                </button>
-                <a th:href="@{/home}">
+                <span class="btn-tooltip-container" data-bs-toggle="tooltip"
+                      data-bs-placement="top" data-bs-title="Aplicar cambios">
+                    <button type="button" class="btn btn-primary btn-send" data-bs-toggle="modal"
+                            data-bs-target="#dataConfirmModal">
+                        Aplicar
+                    </button>
+                </span>
+                <a th:href="@{/home}"  data-bs-toggle="tooltip"
+                   data-bs-placement="top" data-bs-title="Volver a inicio">
                     <button type="button" class="btn btn-tertiary btn-send">
                         Volver
                     </button>
