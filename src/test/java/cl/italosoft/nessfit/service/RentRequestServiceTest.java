@@ -102,7 +102,7 @@ class RentRequestServiceTest {
         rentDates.add(new Date(122,10,13));
         RentRequest testRentRequest2 = new RentRequest(testUser, testDeportiveCenter,
                 "PENDIENTE",45000, rentDates, new Date(2022,11,12));
-        when(rentRequestRepository.findByUser_Rut(testUser.getRut()))
+        when(rentRequestRepository.findByUserRutOrderByRequestDateAsc(testUser.getRut()))
                 .thenReturn(List.of(testRentRequest,testRentRequest2));
         List<RentRequest> found = service.listByUser(testUser.getRut());
 
