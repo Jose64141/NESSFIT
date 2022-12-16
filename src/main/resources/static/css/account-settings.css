@@ -105,12 +105,6 @@ h1
     padding: 0;
 }
 
-.btn-send
-{
-    margin: 20px 10px 20px;
-    width: 100px;
-}
-
 .btn-tertiary
 {
     --bs-btn-color: #fff;
@@ -124,4 +118,30 @@ h1
     --bs-btn-active-bg: #565e64;
     --bs-btn-active-border-color: #51585e;
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.btn-tooltip-container
+{
+    margin: 0;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+}
+
+.refresh-icon
+{
+    width: 35px;
+    height: 35px;
+}
+
+.btn-tooltip-container
+{
+    margin: 20px 10px 20px;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+}
+.btn-send
+{
+    width: 100px;
 }
