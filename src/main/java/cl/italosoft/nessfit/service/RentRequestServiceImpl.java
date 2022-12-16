@@ -71,7 +71,7 @@ public class RentRequestServiceImpl implements RentRequestService
      * @return a list containing the records.
      */
     @Override
-    public List<RentRequest> listByUser(String userRut) { return this.rentRequestRepository.findByUser_Rut(userRut); }
+    public List<RentRequest> listByUser(String userRut) { return this.rentRequestRepository.findByUserRutOrderByRequestDateAsc(userRut); }
 
     /**
      * Returns all rent request records associated to the given deportive center.

@@ -1,6 +1,7 @@
 package cl.italosoft.nessfit.util;
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public class RentRequestPdf extends AbstractPdfView{
 		Color c5 = new Color(254,246,205);   // #fef6cd 
 		
 		Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16, Color.black);
-		Font columnTitleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, c5);
+		Font columnTitleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, Color.black);
 		Font titlecell = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10, Color.black);
 		
 		document.setPageSize(PageSize.LETTER.rotate());
@@ -49,8 +50,8 @@ public class RentRequestPdf extends AbstractPdfView{
 		
 		PdfPTable rentRequestTableTitle = new PdfPTable(1);
 		
-		cell = new PdfPCell(new Phrase("Listado de solicitudes de ".concat(rentRequestList.get(0).getUser().getName() +" "+
-				rentRequestList.get(0).getUser().getFirstLastName() +" "+ rentRequestList.get(0).getUser().getSecondLastName() ), titleFont));
+		cell = new PdfPCell(new Phrase("Listado de solicitudes de ".concat(Util.capitelizeEachWord(rentRequestList.get(0).getUser().getName() +" "+
+				rentRequestList.get(0).getUser().getFirstLastName() +" "+ rentRequestList.get(0).getUser().getSecondLastName()) ), titleFont));
 		cell.setBorder(0);
 		cell.setBackgroundColor(c2);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -64,74 +65,76 @@ public class RentRequestPdf extends AbstractPdfView{
 		table.setWidths(new float[] {1.1f,0.8f,2.4f, 1.5f, 1.7f, 2.6f, 1.3f});
 		
 		cell = new PdfPCell(new Phrase("Fecha" ,columnTitleFont));
-		cell.setBackgroundColor(c4);
+		cell.setBackgroundColor(c3);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
 		
 		cell = new PdfPCell(new Phrase("ID" ,columnTitleFont));
-		cell.setBackgroundColor(c4);
+		cell.setBackgroundColor(c3);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
-		
-		cell = new PdfPCell(new Phrase("Recinto" ,columnTitleFont));
-		cell.setBackgroundColor(c4);
+
+		cell = new PdfPCell(new Phrase("Nombre Centro Deportivo" ,columnTitleFont));
+		cell.setBackgroundColor(c3);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
 		
 		cell = new PdfPCell(new Phrase("Costo Total" ,columnTitleFont));
-		cell.setBackgroundColor(c4);
+		cell.setBackgroundColor(c3);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Rut Cliente" ,columnTitleFont));
-		cell.setBackgroundColor(c4);
+		cell = new PdfPCell(new Phrase("RUT Cliente" ,columnTitleFont));
+		cell.setBackgroundColor(c3);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
 		
 		cell = new PdfPCell(new Phrase("Nombre Cliente" ,columnTitleFont));
-		cell.setBackgroundColor(c4);
+		cell.setBackgroundColor(c3);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
 		
 		cell = new PdfPCell(new Phrase("Estado" ,columnTitleFont));
-		cell.setBackgroundColor(c4);
+		cell.setBackgroundColor(c3);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
 		cell.setPadding(10);
 		table.addCell(cell);
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		
 		for(RentRequest rentRequest : rentRequestList) {
-			cell = new PdfPCell(new Phrase(String.valueOf(rentRequest.getRequestDate()), titlecell));
+			cell = new PdfPCell(new Phrase(formatter.format(rentRequest.getRequestDate()), titlecell));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setVerticalAlignment(Element.ALIGN_CENTER);
 			cell.setPadding(5);
 			table.addCell(cell);
 			
-			cell = new PdfPCell(new Phrase(String.valueOf("#"+rentRequest.getId()), titlecell));
+			cell = new PdfPCell(new Phrase("#"+rentRequest.getId(), titlecell));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setVerticalAlignment(Element.ALIGN_CENTER);
 			cell.setPadding(5);
 			table.addCell(cell);
 			
-			cell = new PdfPCell(new Phrase(Util.capitelizeEachWord(rentRequest.getDeportiveCenter().getName()), titlecell));
+			cell = new PdfPCell(new Phrase(rentRequest.getDeportiveCenter().getName().toUpperCase(), titlecell));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setVerticalAlignment(Element.ALIGN_CENTER);
 			cell.setPadding(5);
 			table.addCell(cell);
 			
-			cell = new PdfPCell(new Phrase(String.valueOf(rentRequest.getTotalPrice()), titlecell));
+			cell = new PdfPCell(new Phrase("$"+rentRequest.getTotalPrice(), titlecell));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setVerticalAlignment(Element.ALIGN_CENTER);
 			cell.setPadding(5);

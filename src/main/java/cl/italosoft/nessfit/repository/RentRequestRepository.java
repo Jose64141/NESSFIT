@@ -18,7 +18,7 @@ import java.util.List;
  */
 public interface RentRequestRepository extends JpaRepository<RentRequest, Integer>
 {
-    List<RentRequest> findByUser_Rut(String userRut);
+    List<RentRequest> findByUserRutOrderByRequestDateAsc(String userRut);
     List<RentRequest> findByDeportiveCenter(String deportiveCenterName);
     List<RentRequest> findByRequestDateBetween(Date dateBeginning, Date dateEnd);
 

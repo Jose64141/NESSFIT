@@ -179,7 +179,7 @@ public class ClienteController
     	if(request == null) {
     		return "redirect:/cliente/visualize-rent-requests";
     	}  	
-        model.addAttribute("requests", rentRequestService.listByUser(SecurityContextHolder.getContext().getAuthentication().getName()));
+        model.addAttribute("requests", request);
         return "/cliente/visualize-rent-requests/pdf";
     }
 
