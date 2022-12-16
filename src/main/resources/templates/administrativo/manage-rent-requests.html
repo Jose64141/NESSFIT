@@ -23,7 +23,7 @@
     <form th:action="@{/administrativo/manage-rent-requests}" method="get" class="user-finder">
         <label>Ingrese RUT de cliente para búsqueda</label>
         <input type="text" id="rut" name="rut" placeholder="10123123K" th:value="${param.rut}" data-bs-toggle="tooltip"
-               data-bs-placement="top" data-bs-title="Ingrese nombre de recinto">
+               data-bs-placement="top" data-bs-title="Ingrese RUT sin puntos ni guión">
         <button type="submit" data-bs-toggle="tooltip"
                 data-bs-placement="top" data-bs-title="Buscar">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

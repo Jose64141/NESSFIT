@@ -300,7 +300,7 @@ public class AdministrativoController
         deportiveCenterService.saveAndFlush(completeCenter);
         attr.addFlashAttribute("successMsg","Los cambios se han realizado con éxito.");
 
-        return "redirect:/administrativo/edit-deportive-center?name="+name;
+        return "redirect:/administrativo/edit-deportive-center?name="+name+"&successMsg="+"Los cambios se han realizado con éxito.";
     }
 
     @GetMapping("administrativo/manage-rent-requests")

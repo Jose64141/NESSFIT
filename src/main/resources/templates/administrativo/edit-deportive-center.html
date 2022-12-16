@@ -21,8 +21,9 @@
 <section class="form-section">
     <div class="form-container">
         <div class="m-5">
-            <div th:if="${successMsg} ne null" class="alert alert-success" role="alert">
-                <label th:text="${successMsg}"></label>
+
+            <div th:if="${param.successMsg} ne null" class="alert alert-success" role="alert">
+                <label th:text="${param.successMsg}"></label>
             </div>
             <form th:action="@{/administrativo/edit-deportive-center}" th:object="${deportiveCenter}" method="post">
                 <div class="input-item">
