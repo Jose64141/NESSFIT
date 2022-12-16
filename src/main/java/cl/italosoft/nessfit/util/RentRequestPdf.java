@@ -78,7 +78,7 @@ public class RentRequestPdf extends AbstractPdfView{
 		cell.setPadding(10);
 		table.addCell(cell);
 
-		cell = new PdfPCell(new Phrase("Nombre Centro Deportivo" ,columnTitleFont));
+		cell = new PdfPCell(new Phrase("Nombre Recinto" ,columnTitleFont));
 		cell.setBackgroundColor(c3);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell.setVerticalAlignment(Element.ALIGN_CENTER);
