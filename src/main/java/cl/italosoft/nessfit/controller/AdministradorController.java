@@ -63,13 +63,15 @@ public class AdministradorController
             {
                 if(user.getRole().getId() != 1)
                 {
+                    boolean isEnabled = user.isEnabled();
                     model.addAttribute("RUT",rut);
                     model.addAttribute("name",capitelizeEachWord(user.getName()));
                     model.addAttribute("firstLastName",capitelizeEachWord(user.getFirstLastName()));
                     model.addAttribute("secondLastName",capitelizeEachWord(user.getSecondLastName()));
-                    model.addAttribute("isEnabled",user.isEnabled() ? "Habilitado" : "Deshabilitado");
-                    model.addAttribute("actionName",user.isEnabled() ? "Deshabilitar" : "Habilitar");
-                }
+                    model.addAttribute("isEnabled",isEnabled ? "Habilitado" : "Deshabilitado");
+                    model.addAttribute("actionName",isEnabled ? "Deshabilitar" : "Habilitar");
+                    model.addAttribute("tooltip",isEnabled ? "Deshabilitar un usuario implica que ya no podrá iniciar sesión"
+                            : "Habilitar un usuario implica que ya podrá iniciar sesión");}
                 else
                 {
                     model.addAttribute("nullMessage","No se han encontrado coincidencias");

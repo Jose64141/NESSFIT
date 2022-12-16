@@ -47,7 +47,7 @@
                 <input type="hidden" name="rut" th:value="${RUT}"/>
                 <div class="btn-tooltip-container" data-bs-toggle="tooltip"
                      data-bs-placement="bottom"
-                     data-bs-title="Deshabilitar un usuario implica que ya no podrá iniciar sesión">
+                     th:data-bs-title="${tooltip}">
                     <div class="change-status-submit-button">
                         <button type="button" class="btn btn-primary enable-disable" th:text="${actionName}"
                                 data-bs-toggle="modal"
